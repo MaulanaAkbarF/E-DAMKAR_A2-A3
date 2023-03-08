@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:edamkar_1/resetpass.dart';
-import 'package:edamkar_1/signup.dart';
+import 'package:edamkar_1/pages/resetpass.dart';
+import 'package:edamkar_1/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
