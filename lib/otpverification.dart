@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:edamkar_1/resetpass.dart';
-import 'package:edamkar_1/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
