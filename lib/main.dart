@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/emergencyCall.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SignInPage(),
+      home: const EmergencyCall(),
     );
   }
 }
