@@ -38,9 +38,9 @@ class EmergencyCall extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: paddingVertical1),
+            
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1, vertical: paddingVertical2),
               child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -66,9 +66,7 @@ class EmergencyCall extends StatelessWidget {
                         ],
                       ))),
             ),
-            SizedBox(
-              height: paddingHorozontal1,
-            ),
+          
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: ElevatedButton(
@@ -101,8 +99,8 @@ class EmergencyCall extends StatelessWidget {
                       ))),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: SizeConfig.blockSizeHorizontal! * 2),
+              padding: EdgeInsets.only(
+                  top: paddingVertical3, bottom: paddingVertical2),
               child: const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -115,8 +113,17 @@ class EmergencyCall extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                child: Text('Masuk'))
+                style: ElevatedButton.styleFrom(
+                    primary: white,
+                    onPrimary: red1,
+                    padding: EdgeInsets.symmetric(vertical: paddingVertical2),
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(width: 2, color: red1),
+                        borderRadius: BorderRadius.circular(8))),
+                child: const Text(
+                  'Masuk',
+                  style: medium,
+                ))
           ],
         ),
       )),
