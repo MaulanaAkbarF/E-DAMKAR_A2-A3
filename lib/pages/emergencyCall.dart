@@ -1,7 +1,7 @@
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';git c
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EmergencyCall extends StatelessWidget {
   const EmergencyCall({super.key});

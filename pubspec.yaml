@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   fluttertoast: ^8.1.3
   pin_code_fields: ^7.4.0
+  flutter_svg: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -59,9 +60,27 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
   assets:
     - semuaAset/
     - semuaAset/gambar/
+  
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: semuaAset/font/inter_regular.ttf
+          weight: 400
+        - asset: semuaAset/font/inter_medium.ttf
+          weight: 500
+        - asset: semuaAset/font/inter_semibold.ttf
+          weight: 600
+        - asset: SemuaAset/font/inter_bold.ttf
+          weight: 700
+        - asset: SemuaAset/font/inter_extrabold.ttf
+          weight: 800
+        - asset: semuaAset/font/inter_black.ttf
+          weight: 900
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -93,3 +112,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+dependency_overrides:
+  firebase_messaging_platform_interface: 3.1.6
+  firebase_storage_platform_interface: 4.0.14
+  cloud_functions_platform_interface: 5.0.21
+  cloud_firestore_platform_interface: 5.4.13
+  firebase_auth_platform_interface: 6.1.11
+  firebase_database_platform_interface: 0.2.0+5
