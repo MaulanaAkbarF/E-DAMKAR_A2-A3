@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:edamkar_1/RemakePass.dart';
 import 'package:edamkar_1/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -140,7 +141,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                                 splashColor: Colors.red.shade700,
                                 highlightColor: Colors.red.shade900,
                                 onTap: (){
-
+                                  navToRemakePassPage(context);
                                 },
                                 child: Container(
                                   height: 50,
@@ -172,6 +173,28 @@ void navToResetPassPage(BuildContext context) {
   Timer(Duration(seconds: 0), () {
     Navigator.push(context, PageRouteBuilder(
       pageBuilder: (_, __, ___) => ResetPassPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(-1, 0),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            ),
+          ),
+          child: child,
+        );
+      },
+    ));
+  });
+}
+
+void navToRemakePassPage(BuildContext context) {
+  Timer(Duration(seconds: 0), () {
+    Navigator.push(context, PageRouteBuilder(
+      pageBuilder: (_, __, ___) => RemakePassPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
           position: Tween<Offset>(
