@@ -1,24 +1,24 @@
 import 'dart:async';
 
-import 'package:edamkar_1/otpverification.dart';
-import 'package:edamkar_1/signin.dart';
+import 'package:edamkar_1/pages/otpverification.dart';
+import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 
-class RemakePassPage extends StatefulWidget {
-  const RemakePassPage({Key? key}) : super(key: key);
+class ResetPassPage extends StatefulWidget {
+  const ResetPassPage({Key? key}) : super(key: key);
 
   @override
-  State<RemakePassPage> createState() => _RemakePassPageState();
+  State<ResetPassPage> createState() => _ResetPassPageState();
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
-final List<Map> teksRemakePass = [{
+final List<Map> teksResetPass = [{
   'Header': 'Lupa Kata Sandi',
-  'SubHeader': 'Silahkan masukan kata sandi baru untuk akun anda yang sudah terdaftar di E-Damkar!',
-  'Password1': 'Kata Sandi',
-  'Password2': 'Ulangi Kata Sandi',
+  'SubHeader': 'Masukan kata sandi akun anda yang sudah terdaftar di aplikasi E-Damkar!',
+  'Email': 'E-Mail',
+  'EmailHint': 'E-Mail Kamu',
   'ButtonLogin': 'Konfirmasi'
 }
 ].cast<Map<String, String>>();
@@ -26,7 +26,7 @@ final List<Map> teksRemakePass = [{
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur style teks
 
-final List<Map> teksStyleRemakePass = [{
+final List<Map> teksStyleResetPass = [{
   'Bold1': const TextStyle(fontFamily: "font/inter_black.ttf", color: Colors.black, fontSize: (32), fontWeight: FontWeight.w700),
   'SemiBold1': const TextStyle(fontFamily: "font/inter_bold.ttf", color: Colors.black45, fontSize: (16)),
   'SemiBold2': const TextStyle(fontFamily: "font/inter_extrabold.ttf", color: Colors.blueAccent, fontSize: (18), fontWeight: FontWeight.w500),
@@ -36,7 +36,7 @@ final List<Map> teksStyleRemakePass = [{
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _RemakePassPageState extends State<RemakePassPage> {
+class _ResetPassPageState extends State<ResetPassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +45,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              for (final teks in teksRemakePass) for (final teksStyle in teksStyleRemakePass)
+              for (final teks in teksResetPass) for (final teksStyle in teksStyleResetPass)
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -84,8 +84,8 @@ class _RemakePassPageState extends State<RemakePassPage> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(teks['Password1'],overflow: TextOverflow.ellipsis, maxLines: 1, style: teksStyle['Thin1']),
+                            padding: EdgeInsets.only(top: 30),
+                            child: Text(teks['Email'],overflow: TextOverflow.ellipsis, maxLines: 1, style: teksStyle['Thin1']),
                           ),
                         ),
                         Align(
@@ -96,47 +96,16 @@ class _RemakePassPageState extends State<RemakePassPage> {
                               width: double.infinity,
                               margin: EdgeInsets.all(2),
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade100, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 1.2)),
-                              child: TextField(
-                                // controller: pass,
-                                obscureText: true,
-                                cursorColor: Colors.black,
-                                style: teksStyle['SemiBold1'],
-                                decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.lock),
-                                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                                    suffixIconColor: Colors.black,
-                                    contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                    border: InputBorder.none),
+                                  color: Colors.grey.shade100, borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.grey.shade300, width: 1.2)
                               ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: FractionalOffset.topLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(teks['Password2'],overflow: TextOverflow.ellipsis, maxLines: 1, style: teksStyle['Thin1']),
-                          ),
-                        ),
-                        Align(
-                          alignment: FractionalOffset.topLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Container(
-                              width: double.infinity,
-                              margin: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade100, borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey.shade300, width: 1.2)),
                               child: TextField(
                                 // controller: pass,
-                                obscureText: true,
                                 cursorColor: Colors.black,
                                 style: teksStyle['SemiBold1'],
                                 decoration: InputDecoration(
-                                    prefixIcon: Icon(Icons.lock),
-                                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                                    suffixIconColor: Colors.black,
+                                    hintText: teks['EmailHint'],
+                                    prefixIcon: Icon(Icons.mail),
                                     contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                                     border: InputBorder.none),
                               ),

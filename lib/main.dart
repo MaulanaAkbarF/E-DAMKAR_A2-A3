@@ -1,4 +1,4 @@
-import 'package:edamkar_1/signin.dart';
+import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 
 void main() {
