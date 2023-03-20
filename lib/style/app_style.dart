@@ -25,6 +25,7 @@ const red1 = Color(0xfff05252);
 const green1 = Color(0xffbcf0da);
 const green2 = Color(0xff128C7E);
 const grey1 = Color(0xffD9D9D9);
+final grey2 = Colors.grey.shade200;
 const black = Colors.black;
 const orange1 = Color(0xffF33C04);
 const white = Colors.white;

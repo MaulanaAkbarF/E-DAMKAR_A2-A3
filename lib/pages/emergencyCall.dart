@@ -112,7 +112,9 @@ class EmergencyCall extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signin');
+                },
                 style: ElevatedButton.styleFrom(
                     primary: white,
                     onPrimary: red1,

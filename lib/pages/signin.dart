@@ -212,7 +212,7 @@ class _SignInPageState extends State<SignInPage> {
                     Text(teks['Footer'], style: teksStyle['SemiBold3']),
                     GestureDetector(
                       onTap: (){
-                        navToSignUpPage(context);
+                        Navigator.pushNamed(context, '/signup', );
                       },
                       child: Text(teks['FooterButton'], style: teksStyle['SemiBold2']),
                     )
@@ -226,6 +226,8 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+
+
 
 // fungsi
 void navToSignUpPage(BuildContext context) {
