@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/RemakePass.dart';
 import 'package:edamkar_1/pages/emergencyCall.dart';
 import 'package:edamkar_1/pages/otpverification.dart';
@@ -14,6 +15,7 @@ void main() {
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
     ),
+    initialRoute: '/signin',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
@@ -21,6 +23,7 @@ void main() {
       '/remakepass': (context) => RemakePassPage(),
       '/resetpass': (context) => ResetPassPage(),
       '/otp': (context) => OtpVerificationPage(),
+      '/homepage':(context) => HomePage()
     },
   ));
 }
