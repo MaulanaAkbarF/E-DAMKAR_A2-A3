@@ -2,34 +2,26 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class LoginModel {
+  bool kondisi;
+  String? email;
+  String? namaLengkap;
 
-  String kondisi;
-  String username;
-  String namaLengkap;
-  String email;
-  String noTelp;
-
-  LoginModel(
-      {required this.kondisi,
-      required this.username,
-      required this.namaLengkap,
-      required this.email,
-      required this.noTelp});
+  LoginModel({required this.kondisi, this.email, this.namaLengkap});
 
   factory LoginModel.createResult(Map<String, dynamic> object) {
+    print('berhasil di set');
     return LoginModel(
         kondisi: object['kondisi'],
-        username: object['username'],
-        namaLengkap: object['nama_lengkap'],
-        email: object['email'], 
-        noTelp: object['notelp']);
+        email: object['email'],
+        namaLengkap: object['namaLengkap']);
   }
 
-  static Future<LoginModel> postData(String username, String pass) async {
-    String url = 'http://188.10.10.254:8080/belajarphp/login.php';
+  static Future<LoginModel> postData(String email, String pass) async {
+    String url = 'http://188.10.10.253:8080/belajarphp/login.php';
     Uri ur = Uri.parse(url);
-    var result = await http.post(ur, body: {"username": username, "pass": pass});
+    var result = await http.post(ur, body: {"email": email, "password": pass});
     var jsonobj = json.decode(result.body);
+    print('berhasil melakukan post');
     return LoginModel.createResult(jsonobj);
   }
 }

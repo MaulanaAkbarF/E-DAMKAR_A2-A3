@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage('semuaAset/gambar/chefCat.jpg'),
+                    // backgroundImage: AssetImage('semuaAset/gambar/chefCat.jpg'),
                   )
                 ],
               ),

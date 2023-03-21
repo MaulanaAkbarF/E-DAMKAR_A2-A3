@@ -73,54 +73,51 @@ final List<Map> teksStyleSignIn = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class _SignInPageState extends State<SignInPage> {
-  final TextEditingController username = TextEditingController();
+  final TextEditingController email = TextEditingController();
   final TextEditingController pass = TextEditingController();
 
   LoginModel? lgmod;
 
-  void getLoginCondition() async {
-    LoginModel.postData(username.text, pass.text).then((value) {
+  void postLogin() async {
+    LoginModel.postData('mirda@gmail.com', 'superone').then((value) {
       lgmod = value;
+      checkLoginCondition();
     });
-    if (lgmod != null) {
-      if (lgmod!.kondisi == 'true') {
+  }
+
+  void checkLoginCondition(){
+     if (lgmod != null) {
+      if (lgmod!.kondisi) {
         Navigator.pushNamed(
           context,
           '/homepage',
         );
       } else {
-        show('data anda tidak tersedia');
+        debugPrint('account not found');
       }
     } else {
-      show('terdapat kesalahan');
+      debugPrint('error');
     }
   }
 
+  @override
   void dispose() {
     super.dispose();
-    username.dispose();
+    email.dispose();
     pass.dispose();
   }
 
-  void show(String? message) {
-    Fluttertoast.showToast(
-        msg: message!,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.white,
-        textColor: Colors.black);
-  }
+  
 
-  void navigate(BuildContext context) {
-    if (username.text == 'akhdan' && pass.text == "super123") {
-      show("Berhasil Login");
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SignUpPage()));
-    } else {
-      show("username atau password yang anda masukkan salah");
-    }
-  }
+  // void navigate(BuildContext context) {
+  //   if (email.text == 'akhdan' && pass.text == "super123") {
+  //     show("Berhasil Login");
+  //     Navigator.of(context)
+  //         .push(MaterialPageRoute(builder: (context) => SignUpPage()));
+  //   } else {
+  //     show("email atau password yang anda masukkan salah");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +174,7 @@ class _SignInPageState extends State<SignInPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextField(
-                                  controller: username,
+                                  controller: email,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -257,8 +254,8 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    getLoginCondition();
+                                  onTap: () async {
+                                    postLogin();
                                   },
                                   child: Container(
                                     height: 50,
