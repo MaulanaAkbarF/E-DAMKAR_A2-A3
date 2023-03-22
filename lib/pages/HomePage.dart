@@ -1,3 +1,4 @@
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var userName = "Akeon";
+  var userName = 'Akeon';
+
+  void getUserData() async {
+    var data = DataUser().getnama();
+    data.then((value) {
+      setState(() {
+        userName = value.toString();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {

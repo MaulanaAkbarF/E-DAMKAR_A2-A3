@@ -103,7 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
         show('registrasi gagal');
       }
     } else {
-      // show('terdapat permasalahan pada Post API');
+      show('terdapat permasalahan pada Post API');
       debugPrint('err on api');
     }
   }

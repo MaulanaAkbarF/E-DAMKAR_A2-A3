@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:edamkar_1/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -77,6 +79,7 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController pass = TextEditingController();
 
   LoginModel? lgmod;
+  SharedPreferences? prefs;
 
   void postLogin() async {
     LoginModel.postData('mirda@gmail.com', 'superone').then((value) {
@@ -85,13 +88,14 @@ class _SignInPageState extends State<SignInPage> {
     });
   }
 
-  void checkLoginCondition(){
-     if (lgmod != null) {
+  void checkLoginCondition() {
+    if (lgmod != null) {
       if (lgmod!.kondisi) {
         Navigator.pushNamed(
           context,
           '/homepage',
         );
+        DataUser().addUser(lgmod!.kondisi, lgmod!.email.toString(), lgmod!.namaLengkap.toString());
       } else {
         debugPrint('account not found');
       }
@@ -100,14 +104,14 @@ class _SignInPageState extends State<SignInPage> {
     }
   }
 
+ 
+
   @override
   void dispose() {
     super.dispose();
     email.dispose();
     pass.dispose();
   }
-
-  
 
   // void navigate(BuildContext context) {
   //   if (email.text == 'akhdan' && pass.text == "super123") {

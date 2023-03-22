@@ -13,7 +13,7 @@ const reguler =
 const medium =
     TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500, fontSize: 15);
 const semibold =
-    TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 20);
+    TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w600, fontSize: 18);
 const bold =
     TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w700, fontSize: 20);
 const extrabold =
