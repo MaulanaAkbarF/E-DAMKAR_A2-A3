@@ -77,9 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
   RegisterModel? regis;
 
   void postRegister() {

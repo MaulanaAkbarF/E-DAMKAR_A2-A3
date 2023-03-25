@@ -12,7 +12,7 @@ class RegisterModel {
 
   static Future<RegisterModel> postRegister(
       String email, String password, String nama) async {
-    String url = 'http://188.10.10.253:8080/belajarphp/register.php';
+    String url = 'http://188.10.10.253/MobileAPI/E_DamkarRestAPI/register.php';
     Uri ur = Uri.parse(url);
     var result = await http.post(ur,
         body: {"email": email, "password": password, "namaLengkap": nama});

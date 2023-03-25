@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:edamkar_1/pages/signup.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +74,7 @@ final List<Map> teksStyleSignIn = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController pass = TextEditingController();
 
@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
   SharedPreferences? prefs;
 
   void postLogin() async {
-    LoginModel.postData('mirda@gmail.com', 'superone').then((value) {
+    LoginModel.postData(email.text, pass.text).then((value) {
       lgmod = value;
       checkLoginCondition();
     });
@@ -95,22 +95,32 @@ class _SignInPageState extends State<SignInPage> {
           context,
           '/homepage',
         );
-        DataUser().addUser(lgmod!.kondisi, lgmod!.email.toString(), lgmod!.namaLengkap.toString());
+        debugPrint(lgmod!.namaLengkap.toString());
+        DataUser().addUser(lgmod!.kondisi, lgmod!.email.toString(),
+            lgmod!.namaLengkap.toString());
       } else {
-        debugPrint('account not found');
+        show('Login gagal, cek kembali email dan password anda');
       }
     } else {
       debugPrint('error');
     }
   }
 
- 
-
   @override
   void dispose() {
     super.dispose();
     email.dispose();
     pass.dispose();
+  }
+
+    void show(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black);
   }
 
   // void navigate(BuildContext context) {
@@ -126,7 +136,9 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+        body: Form(
+      key: _formKey,
+      child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -177,8 +189,13 @@ class _SignInPageState extends State<SignInPage> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextField(
+                                child: TextFormField(
                                   controller: email,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Email tidak boleh kosong';
+                                    }
+                                  },
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -214,8 +231,17 @@ class _SignInPageState extends State<SignInPage> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextField(
+                                child: TextFormField(
                                   controller: pass,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'password tidak boleh kosong';
+                                    } else if (value.length > 20) {
+                                      return 'password terlalu panjang';
+                                    } else if (value.length < 8) {
+                                      return 'password terlalu pendek';
+                                    }
+                                  },
                                   obscureText: true,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
@@ -259,7 +285,9 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () async {
-                                    postLogin();
+                                    if (_formKey.currentState!.validate()) {
+                                      postLogin();
+                                    }
                                   },
                                   child: Container(
                                     height: 50,
@@ -305,7 +333,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
 
