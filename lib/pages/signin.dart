@@ -78,33 +78,6 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController pass = TextEditingController();
 
-  LoginModel? lgmod;
-  SharedPreferences? prefs;
-
-  void postLogin() async {
-    LoginModel.postData(email.text, pass.text).then((value) {
-      lgmod = value;
-      checkLoginCondition();
-    });
-  }
-
-  void checkLoginCondition() {
-    if (lgmod != null) {
-      if (lgmod!.kondisi) {
-        Navigator.pushNamed(
-          context,
-          '/homepage',
-        );
-        debugPrint(lgmod!.namaLengkap.toString());
-        DataUser().addUser(lgmod!.kondisi, lgmod!.email.toString(),
-            lgmod!.namaLengkap.toString());
-      } else {
-        show('Login gagal, cek kembali email dan password anda');
-      }
-    } else {
-      debugPrint('error');
-    }
-  }
 
   @override
   void dispose() {
@@ -284,10 +257,8 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      postLogin();
-                                    }
+                                  onTap: () {
+                                    print('berhaisl');
                                   },
                                   child: Container(
                                     height: 50,

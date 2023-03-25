@@ -1,25 +1,50 @@
+
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
+
+// String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
-  bool kondisi;
-  String? email;
-  String? namaLengkap;
+    LoginModel({
+        this.kondisi,
+        this.data,
+    });
 
-  LoginModel({required this.kondisi, this.email, this.namaLengkap});
+    bool? kondisi;
+    Data? data;
 
-  factory LoginModel.createResult(Map<String, dynamic> object) {
-    return LoginModel(
-        kondisi: object['kondisi'],
-        email: object['email'],
-        namaLengkap: object['namaLengkap']);
-  }
+    factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+        kondisi: json["kondisi"],
+        data: Data.fromJson(json["data"]),
+    );
 
-  static Future<LoginModel> postData(String email, String pass) async {
-    String url = 'http://188.10.10.253/MobileAPI/E_DamkarRestAPI/Login.php';
-    Uri ur = Uri.parse(url);
-    var result = await http.post(ur, body: {"email": email, "password": pass});
-    var jsonobj = json.decode(result.body);
-    return LoginModel.createResult(jsonobj);
-  }
+    // Map<String, dynamic> toJson() => {
+    //     "kondisi": kondisi,
+    //     "data": data!.toJson(),
+    // };
+}
+
+class Data {
+    Data({
+        this.id,
+        this.email,
+        this.namaLengkap,
+    });
+
+    int? id;
+    String? email;
+    String? namaLengkap;
+
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
+        email: json["email"],
+        namaLengkap: json["namaLengkap"],
+    );
+
+    // Map<String, dynamic> toJson() => {
+    //     "id": id,
+    //     "email": email,
+    //     "namaLengkap": namaLengkap,
+    // };
 }
