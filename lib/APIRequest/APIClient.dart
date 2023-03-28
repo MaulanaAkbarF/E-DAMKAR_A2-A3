@@ -31,9 +31,20 @@ class APIClient {
     }
   }
 
-  Future<dynamic> putData(String api) async {
+  Future<dynamic> putData(String api, dynamic object) async {
     var url = Uri.parse(_baseUrl + api + ".php");
-    var response = await client.put(url);
+    var response = await client.put(url, body: object);
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception();
+    }
+  }
+
+  Future<dynamic> deleteData(String api) async {
+    var url = Uri.parse(_baseUrl + api + ".php");
+    var response = await client.delete(url);
 
     if (response.statusCode == 200) {
       return response.body;
