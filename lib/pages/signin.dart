@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
@@ -78,6 +79,22 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController pass = TextEditingController();
 
+  LoginPost() async {
+    var result = await APIClient().postData('Login',
+        {"email": email.text, "password": pass.text}).catchError((err) {});
+    if (result != null) {
+      var data = loginModelFromJson(result);
+      if (data.kondisi) {
+        await DataUser().addUser(data.kondisi, data.data!.id!.toInt(),
+            data.data!.email.toString(), data.data!.namaLengkap.toString());
+        Navigator.pushNamed(context, '/homepage');
+      } else {
+        show("Cek Kembali Email dan Password anda");
+      }
+    } else {
+      print('gagal');
+    }
+  }
 
   @override
   void dispose() {
@@ -86,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
     pass.dispose();
   }
 
-    void show(String message) {
+  void show(String message) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
@@ -95,16 +112,6 @@ class _SignInPageState extends State<SignInPage> {
         backgroundColor: Colors.white,
         textColor: Colors.black);
   }
-
-  // void navigate(BuildContext context) {
-  //   if (email.text == 'akhdan' && pass.text == "super123") {
-  //     show("Berhasil Login");
-  //     Navigator.of(context)
-  //         .push(MaterialPageRoute(builder: (context) => SignUpPage()));
-  //   } else {
-  //     show("email atau password yang anda masukkan salah");
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +265,7 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    print('berhaisl');
+                                    LoginPost();
                                   },
                                   child: Container(
                                     height: 50,

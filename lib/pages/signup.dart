@@ -4,6 +4,7 @@ import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../APIRequest/APIClient.dart';
 import '../models/RegisterModel.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -78,33 +79,26 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  RegisterModel? regis;
+  
 
-  void postRegister() {
-    RegisterModel.postRegister(email.text, password.text, namalengkap.text)
-        .then((value) {
-      regis = value;
-      checkRegisterCondition();
-    });
-  }
-
-  void checkRegisterCondition() {
-    if (regis != null) {
-      if (regis!.kondisi) {
-        show('registrasi berhasil');
-        Navigator.pushNamed(
-          context,
-          '/signin',
-        );
-        show('registrasi berhasil');
+  
+  RegisterPost() async {
+    var result = await APIClient().postData('register',
+        {"email": email.text, "password": password.text, "namaLengkap": namalengkap.text}).catchError((err) {});
+    if (result != null) {
+      var data = registerFromJson(result);
+      if (data.kondisi) {
+        show('Registrasi Berhasil');
+        Navigator.pushNamed(context, '/homepage');
       } else {
-        show('registrasi gagal');
+        show("Cek Kembali Email dan Password anda");
       }
     } else {
-      show('terdapat permasalahan pada Post API');
-      debugPrint('err on api');
+      print('something error on code');
     }
   }
+
+
 
   void show(String message) {
     Fluttertoast.showToast(
@@ -341,7 +335,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
-                                      postRegister();
+                                      RegisterPost();
                                     }
                                   },
                                   child: Container(

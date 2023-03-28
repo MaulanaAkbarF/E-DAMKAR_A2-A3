@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   var userName = 'Akeon';
 
   void getUserData() async {
-    var data = DataUser().getnama();
+    var data = DataUser().getNama();
     data.then((value) {
       setState(() {
         userName = value.toString();
