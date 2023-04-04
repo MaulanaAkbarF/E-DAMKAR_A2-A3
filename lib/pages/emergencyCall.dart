@@ -6,10 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 class EmergencyCall extends StatelessWidget {
   const EmergencyCall({super.key});
 
-  void DataChek() async {
-
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -42,13 +38,11 @@ class EmergencyCall extends StatelessWidget {
                 ),
               ),
             ),
-            
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1, vertical: paddingVertical2),
+              padding: EdgeInsets.symmetric(
+                  horizontal: paddingHorozontal1, vertical: paddingVertical2),
               child: ElevatedButton(
-                  onPressed: () {
-                    DataChek();
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     primary: red1,
                   ),
@@ -72,7 +66,6 @@ class EmergencyCall extends StatelessWidget {
                         ],
                       ))),
             ),
-          
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: ElevatedButton(

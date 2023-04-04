@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:http/http.dart' as http;
 
-const String _baseUrl = 'http://188.10.10.253/MobileAPI/E_DamkarRestAPI/';
+const String _baseUrl = 'http://188.10.10.254:8080/MobileAPI/E_DamkarRestAPI/';
 
 class APIClient {
   var client = http.Client();
@@ -28,6 +28,7 @@ class APIClient {
       return response.body;
     } else {
       print("post data err");
+      return null;
     }
   }
 

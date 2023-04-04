@@ -15,7 +15,7 @@ void main() {
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
     ),
-    initialRoute: '/signin',
+    initialRoute: '/',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
