@@ -79,17 +79,18 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  
 
-  
   RegisterPost() async {
-    var result = await APIClient().postData('register',
-        {"email": email.text, "password": password.text, "namaLengkap": namalengkap.text}).catchError((err) {});
+    var result = await APIClient().postData('register', {
+      "email": email.text,
+      "password": password.text,
+      "namaLengkap": namalengkap.text
+    }).catchError((err) {});
     if (result != null) {
       var data = registerFromJson(result);
       if (data.kondisi) {
         show('Registrasi Berhasil');
-        Navigator.pushNamed(context, '/homepage');
+        Navigator.pushNamed(context, '/riwayatlapp');
       } else {
         show("Cek Kembali Email dan Password anda");
       }
@@ -97,8 +98,6 @@ class _SignUpPageState extends State<SignUpPage> {
       print('something error on code');
     }
   }
-
-
 
   void show(String message) {
     Fluttertoast.showToast(

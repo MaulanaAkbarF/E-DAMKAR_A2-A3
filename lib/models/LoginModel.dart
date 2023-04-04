@@ -3,7 +3,6 @@ import 'dart:convert';
 LoginModel loginModelFromJson(String str) =>
     LoginModel.fromJson(json.decode(str));
 
-
 class LoginModel {
   bool kondisi;
   Data? data;
@@ -15,10 +14,8 @@ class LoginModel {
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         kondisi: json["kondisi"],
-        data: Data.fromJson(json["data"]),
+        data: Data.fromJson(json["Data"]),
       );
-
-
 }
 
 class Data {

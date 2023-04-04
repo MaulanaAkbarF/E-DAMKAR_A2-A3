@@ -5,16 +5,22 @@ import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:edamkar_1/pages/signup.dart';
+import 'package:edamkar_1/pages/RiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  
+    // final List<String>.generate(10000, (i) => 'Item $i');
   runApp(MaterialApp(
     title: 'E-Damkar',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
+      // items : List<String>.generate(10000, (i) => 'Item $i'),
     ),
+   
+    
     initialRoute: '/signin',
     routes: {
       '/': (context) => EmergencyCall(),
@@ -23,7 +29,9 @@ void main() {
       '/remakepass': (context) => RemakePassPage(),
       '/resetpass': (context) => ResetPassPage(),
       '/otp': (context) => OtpVerificationPage(),
-      '/homepage':(context) => HomePage()
+      '/homepage':(context) => HomePage(),
+      '/riwayatlapp' :(context) => RiwayatLaporan()
+      
     },
   ));
 }
