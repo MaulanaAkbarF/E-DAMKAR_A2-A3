@@ -91,6 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
       if (data.kondisi) {
         show('Registrasi Berhasil');
         Navigator.pushNamed(context, '/riwayatlapp');
+
       } else {
         show("Cek Kembali Email dan Password anda");
       }

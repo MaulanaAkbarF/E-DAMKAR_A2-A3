@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:edamkar_1/SharedPreferences/laporanData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/main.dart';
 import 'package:edamkar_1/models/datacoba.dart';
+import 'package:edamkar_1/models/DataPelaporan.dart';
 
 class RiwayatLaporan extends StatefulWidget {
   const RiwayatLaporan({super.key});
@@ -45,7 +48,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
           ),
         ),
         body: ListView.builder(
-            itemCount: cobaList.length,
+            itemCount: json.encode(value),
             itemBuilder: (context, index) {
               cobadata cobaDatax = cobaList[index];
               return Padding(

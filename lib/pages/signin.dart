@@ -7,7 +7,6 @@ import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:edamkar_1/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -76,23 +75,25 @@ final List<Map> teksStyleSignIn = [
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController pass = TextEditingController();
+  final email = TextEditingController();
+  final pass = TextEditingController();
 
   LoginPost() async {
-    var result = await APIClient().postData('Login',
-        {"email": email.text, "password": pass.text}).catchError((err) {});
-    if (result != null) {
-      var data = loginModelFromJson(result);
-      if (data.kondisi) {
-        await DataUser().addUser(data.kondisi, data.data!.id!.toInt(),
-            data.data!.email.toString(), data.data!.namaLengkap.toString());
-        Navigator.pushNamed(context, '/homepage');
+    if (_formKey.currentState!.validate()) {
+      var result = await APIClient().postData('Login',
+          {"email": email.text, "password": pass.text}).catchError((err) {});
+      if (result != null) {
+        var data = loginModelFromJson(result);
+        if (data.kondisi) {
+          await DataUser().addUser(data.kondisi, data.data!.id!.toInt(),
+              data.data!.email.toString(), data.data!.namaLengkap.toString());
+          Navigator.pushNamed(context, '/homepage');
+        } else {
+          show("Cek Kembali Email dan Password anda");
+        }
       } else {
         show("Cek Kembali Email dan Password anda");
       }
-    } else {
-      print('gagal');
     }
   }
 

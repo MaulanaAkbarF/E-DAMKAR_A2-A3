@@ -19,9 +19,7 @@ void main() {
       brightness: Brightness.light,
       // items : List<String>.generate(10000, (i) => 'Item $i'),
     ),
-   
-    
-    initialRoute: '/signin',
+    initialRoute: '/riwayatlapp',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
