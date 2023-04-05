@@ -6,7 +6,7 @@
 Aplikasi E-Damkar adalah aplikasi Mobile cross-platform yang dibuat untuk memudahkan Pemadam Kebakaran ketika menjalankan tugasnya.
 
 <p align="center">
-  <a href="https://github.com/MaulanaAkbarF/E-DAMKAR_A2-A3"><img title="Author" src="https://img.shields.io/badge/Author-Kelompok A2-A3.-purple.svg?style=for-the-badge&logo=github" /></a>
+  <a href="https://github.com/MaulanaAkbarF/E-DAMKAR_A2-A3"><img title="Author" src="https://img.shields.io/badge/Author-Maulana Akbar F.-purple.svg?style=for-the-badge&logo=github" /></a>
 </p>
 <p align="center">
   <a href="https://github.com/MaulanaAkbarF/E-DAMKAR_A2-A3"><img title="RATING" src="https://img.shields.io/badge/RATING SAAT INI-33%20%2F%20100-green?colorA=%23555555&colorB=%23FC5E00&style=for-the-badge"></a>
