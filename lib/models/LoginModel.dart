@@ -30,7 +30,7 @@ class Data {
         this.namaLengkap,
     });
 
-    int? id;
+    String? id;
     String? email;
     String? namaLengkap;
 

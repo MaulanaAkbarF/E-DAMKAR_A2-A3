@@ -12,8 +12,11 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
+        leading: IconButton(
+           icon:Icon(Icons.arrow_back_ios_new_outlined),
+           onPressed: (){},
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
@@ -23,8 +26,13 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
               color: Colors.black87,
             ),
           ),
+          
         ),
+        body: Scaffold(
+    
+        
       ),
+      
     );
   }
 }
