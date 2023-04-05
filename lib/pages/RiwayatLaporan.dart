@@ -18,12 +18,11 @@ class RiwayatLaporan extends StatefulWidget {
 }
 
 class _RiwayatLaporanState extends State<RiwayatLaporan> {
-
   List<DataPelaporanElement>? dataElement = [];
 
   PostDataRiwayat() async {
-    var result = await APIClient()
-        .postData('showPelaporan', {"userid": DataUser().getUserId()}).catchError((err) {});
+    var result = await APIClient().postData('showPelaporan',
+        {"userid": "17"}).catchError((err) {});
     if (result != null) {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.kondisi) {
@@ -70,6 +69,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
   void initState() {
     super.initState();
     PostDataRiwayat();
+    debugPrint(DataUser().getUserId().toString());
   }
 
   @override

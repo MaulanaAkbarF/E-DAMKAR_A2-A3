@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 const String _baseUrl ='http://192.168.137.1:8080/percobaanv2/E_DamkarRestAPI/';
@@ -25,7 +27,7 @@ class APIClient {
       return response.body;
     } else {
       print("post data err");
-      return null;
+      return false;
     }
   }
 

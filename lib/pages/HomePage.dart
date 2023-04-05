@@ -90,7 +90,9 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(
                   horizontal: paddingHorozontal1, vertical: paddingVertical1),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/riwayatlapp');
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: red1,
                       shape: RoundedRectangleBorder(
