@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/SharedPreferences/laporanData.dart';
+import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:edamkar_1/main.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 
 import '../APIRequest/APIClient.dart';
@@ -19,10 +15,28 @@ class RiwayatLaporan extends StatefulWidget {
 
 class _RiwayatLaporanState extends State<RiwayatLaporan> {
   List<DataPelaporanElement>? dataElement = [];
+  var userid = "17";
+
+  @override
+  void initState() {
+    super.initState();
+    // await getUserIdRiwayat();
+    // debugPrint(userid);
+    PostDataRiwayat();
+  }
+
+  getUserIdRiwayat() async {
+    var data = DataUser().getUserId();
+    data.then((value) {
+      setState(() {
+        userid = value.toString();
+      });
+    });
+  }
 
   PostDataRiwayat() async {
-    var result = await APIClient().postData('showPelaporan',
-        {"userid": "17"}).catchError((err) {});
+    var result = await APIClient()
+        .postData('showPelaporan', {"userid": "17"}).catchError((err) {});
     if (result != null) {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.kondisi) {
@@ -65,12 +79,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
     return "bulan";
   }
 
-  @override
-  void initState() {
-    super.initState();
-    PostDataRiwayat();
-    debugPrint(DataUser().getUserId().toString());
-  }
+  
 
   @override
   Widget build(BuildContext context) {
