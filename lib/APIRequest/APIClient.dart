@@ -1,10 +1,7 @@
-import 'dart:convert';
-
-import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:http/http.dart' as http;
 
 const String _baseUrl =
-    'http://192.168.18.74:8080/percobaanv2/E_DamkarRestAPI/';
+    'http://172.16.106.67:8080/MobileAPI/E_DamkarRestAPI/';
 
 class APIClient {
   var client = http.Client();
@@ -28,9 +25,8 @@ class APIClient {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      return null;
       print("post data err");
-     
+      return null;
     }
   }
 
