@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://github.com/MaulanaAkbarF/gambar/blob/main/BannerGithub%204K%20E-Damkar.png" alt="E-Damkar" width="1920" />
 
-# V-Angkringan
+# E-Damkar
 
 Aplikasi E-Damkar adalah aplikasi Mobile cross-platform yang dibuat untuk memudahkan Pemadam Kebakaran ketika menjalankan tugasnya.
 
@@ -47,13 +47,13 @@ Aplikasi E-Damkar adalah aplikasi Mobile cross-platform yang dibuat untuk memuda
 </div>
   
 Download Project :
-* [V-Angkringan Project](https://github.com/MaulanaAkbarF/E-DAMKAR_A2-A3/archive/refs/heads/master.zip) (Zip File)
+* [E-Damkar Project](https://github.com/MaulanaAkbarF/E-DAMKAR_A2-A3/archive/refs/heads/master.zip) (Zip File)
 
 Download File PHP Android :
-* [PHP File](https://drive.google.com/u/0/uc?id=11h6oQHsUf-QGoUYWs73gcigfoU7tslfb&export=download) (Zip File)
+* [PHP File](https://github.com/Akhdanre/E_DamkarRestAPI) (Github Link)
 
 Download File SQL Database :
-* [Database SQL](https://drive.google.com/u/0/uc?id=1mLuBao8P3TtiEsorhz62XpGuHOzdsumo&export=download) (SQL File)
+* [Database SQL](https://drive.google.com/u/0/uc?id=1GTI9BuBDdr1LD3ziq0egesIjGV0ZeV0g&export=download) (SQL File)
 
 # Minimum Developers Spesification
 * CPU Passmark 3000+
