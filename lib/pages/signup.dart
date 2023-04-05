@@ -90,8 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
       var data = registerFromJson(result);
       if (data.kondisi) {
         show('Registrasi Berhasil');
-        Navigator.pushNamed(context, '/riwayatlapp');
-
+        Navigator.pushNamed(context, '/signin');
       } else {
         show("Cek Kembali Email dan Password anda");
       }

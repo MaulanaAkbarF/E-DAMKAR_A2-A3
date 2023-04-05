@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
     if (_formKey.currentState!.validate()) {
       var result = await APIClient().postData('Login',
           {"email": email.text, "password": pass.text}).catchError((err) {});
-      if (result != null) {
+      if (result != null && result != false) {
         var data = loginModelFromJson(result);
         if (data.kondisi) {
           await DataUser().addUser(data.kondisi, data.data!.id!.toInt(),
@@ -92,7 +92,7 @@ class _SignInPageState extends State<SignInPage> {
           show("Cek Kembali Email dan Password anda");
         }
       } else {
-        show("Cek Kembali Email dan Password anda");
+        show("mengalami permasalahan call api");
       }
     }
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 const String _baseUrl =
@@ -26,7 +28,7 @@ class APIClient {
       return response.body;
     } else {
       print("post data err");
-      return null;
+      return false;
     }
   }
 
