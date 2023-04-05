@@ -9,17 +9,14 @@ import 'package:edamkar_1/pages/RiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  
-    // final List<String>.generate(10000, (i) => 'Item $i');
   runApp(MaterialApp(
     title: 'E-Damkar',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
-      // items : List<String>.generate(10000, (i) => 'Item $i'),
     ),
-    initialRoute: '/riwayatlapp',
+    initialRoute: '/',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
@@ -27,9 +24,8 @@ void main() {
       '/remakepass': (context) => RemakePassPage(),
       '/resetpass': (context) => ResetPassPage(),
       '/otp': (context) => OtpVerificationPage(),
-      '/homepage':(context) => HomePage(),
-      '/riwayatlapp' :(context) => RiwayatLaporan()
-      
+      '/homepage': (context) => HomePage(),
+      '/riwayatlapp': (context) => RiwayatLaporan()
     },
   ));
 }
