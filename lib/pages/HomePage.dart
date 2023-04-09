@@ -1,3 +1,4 @@
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -159,6 +160,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       )),
+      bottomNavigationBar: AppMenu(),
     );
   }
 }
