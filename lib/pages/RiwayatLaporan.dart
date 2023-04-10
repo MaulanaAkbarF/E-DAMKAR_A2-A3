@@ -36,7 +36,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
 
   PostDataRiwayat() async {
     var result = await APIClient()
-        .postData('showPelaporan', {"userid": "17"}).catchError((err) {});
+        .postData('showPelaporan', {"userid": "33"}).catchError((err) {});
     if (result != null) {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.kondisi) {

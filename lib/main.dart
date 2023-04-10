@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/Artikel.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
 import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/RemakePass.dart';
@@ -28,7 +29,8 @@ void main() {
       '/otp': (context) => OtpVerificationPage(),
       '/homepage': (context) => HomePage(),
       '/riwayatlapp': (context) => RiwayatLaporan(),
-      // '/detailriwayat':(context) => DetailRiwayatLengkap()
+      // '/detailriwayat': (context) => DetailRiwayatLengkap()
+      '/artikel': (context) => Artikel()
     },
   ));
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailRiwayatLengkap extends StatefulWidget {
-  const DetailRiwayatLengkap({super.key});
+  const DetailRiwayatLengkap(String string, {super.key});
 
   @override
   State<DetailRiwayatLengkap> createState() => _DetailRiwayatLengkapState();
