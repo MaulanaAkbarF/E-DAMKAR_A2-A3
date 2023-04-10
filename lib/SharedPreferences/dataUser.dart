@@ -7,7 +7,6 @@ class DataUser {
 
   Future<void> addUser(
       bool kondisi, String? userid, String email, String nama) async {
-        
     final SharedPreferences prefs = await _prefs;
     await prefs.setBool('kondisi', kondisi);
     await prefs.setInt('userId', int.parse(userid.toString()));
@@ -31,5 +30,9 @@ class DataUser {
     return _prefs.then((SharedPreferences pref) {
       return pref.getString('nama') ?? '';
     });
+  }
+
+  Future<String> getIdLap() async {
+    return _prefs.then((SharedPreferences pref) {});
   }
 }
