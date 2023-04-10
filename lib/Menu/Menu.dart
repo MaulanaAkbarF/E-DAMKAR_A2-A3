@@ -12,6 +12,9 @@ class _AppMenuState extends State<AppMenu> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.black.withOpacity(.30),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -20,6 +23,10 @@ class _AppMenuState extends State<AppMenu> {
         BottomNavigationBarItem(
           icon: Icon(Icons.history),
           label: 'Riwayat',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit_document),
+          label: 'Laporan',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.edit_document),

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 const String _baseUrl =
-    'http://172.16.106.67:8080/MobileAPI/E_DamkarRestAPI/';
+    'http://172.16.106.161:8080/MobileAPI/E_DamkarRestAPI/';
 
 class APIClient {
   var client = http.Client();

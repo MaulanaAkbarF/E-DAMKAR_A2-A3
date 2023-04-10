@@ -12,9 +12,9 @@ class DataUser {
     await prefs.setString('nama', nama);
   }
 
-  Future<String> getUserId() async {
+  Future<int> getUserId() async {
     return _prefs.then((SharedPreferences pref) {
-      return pref.getString('userId') ?? '';
+      return pref.getInt('userId') ?? 0;
     });
   }
 

@@ -12,11 +12,17 @@ class DataPelaporan {
   bool kondisi;
   List<DataPelaporanElement>? dataPelaporan;
 
-  factory DataPelaporan.fromJson(Map<String, dynamic> json) => DataPelaporan(
+  factory DataPelaporan.fromJson(Map<String, dynamic> json) {
+    if (json["dataPelaporan"]?.isEmpty ?? true) {
+      return DataPelaporan(kondisi: json["kondisi"]);
+    } else {
+      return DataPelaporan(
         kondisi: json["kondisi"],
         dataPelaporan: List<DataPelaporanElement>.from(
             json["dataPelaporan"].map((x) => DataPelaporanElement.fromJson(x))),
       );
+    }
+  }
 }
 
 class DataPelaporanElement {
