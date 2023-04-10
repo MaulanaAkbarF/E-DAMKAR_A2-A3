@@ -35,7 +35,7 @@ class DataPelaporanElement {
   });
 
   String? idLap;
-  int? riwayatIduser;
+  String? riwayatIduser;
   String? tglLap;
   String? namaKategori;
   String? namaStatus;

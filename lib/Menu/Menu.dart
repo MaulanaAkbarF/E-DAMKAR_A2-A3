@@ -49,7 +49,7 @@ class _AppMenuState extends State<AppMenu> {
           Navigator.pushNamed(context, '/riwayatlapp');
           break;
         case 2:
-          Navigator.pushNamed(context, '/homepage');
+          Navigator.pushNamed(context, '/artikel');
           break;
         default:
           Navigator.pushNamed(context, '/homepage');

@@ -85,7 +85,7 @@ class _SignInPageState extends State<SignInPage> {
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
         if (data.kondisi) {
-          await DataUser().addUser(data.kondisi, data.data!.id!.toInt(),
+          await DataUser().addUser(data.kondisi, data.data!.id!.toString(),
               data.data!.email.toString(), data.data!.namaLengkap.toString());
           Navigator.pushNamed(context, '/homepage');
         } else {
