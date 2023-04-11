@@ -1,3 +1,5 @@
+import 'package:edamkar_1/pages/Artikel.dart';
+import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
 import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/RemakePass.dart';
 import 'package:edamkar_1/pages/emergencyCall.dart';
@@ -6,6 +8,7 @@ import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:edamkar_1/pages/signup.dart';
 import 'package:edamkar_1/pages/RiwayatLaporan.dart';
+import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,7 +28,9 @@ void main() {
       '/resetpass': (context) => ResetPassPage(),
       '/otp': (context) => OtpVerificationPage(),
       '/homepage': (context) => HomePage(),
-      '/riwayatlapp': (context) => RiwayatLaporan()
+      '/riwayatlapp': (context) => RiwayatLaporan(),
+      // '/detailriwayat': (context) => DetailRiwayatLengkap()
+      '/artikel': (context) => Artikel()
     },
   ));
 }
