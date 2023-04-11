@@ -1,18 +1,11 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:file_picker/file_picker.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-import '../APIRequest/APIClient.dart';
-import '../models/RegisterModel.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class BuatLaporan extends StatefulWidget {
@@ -137,61 +130,6 @@ class _BuatLaporanState extends State<BuatLaporan> {
       print('no image selected');
     }
   }
-
-  // Future uploadFile() async {
-  //   var dio = Dio();
-
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-  //   if (result != null) {
-  //     File file = File(result.files.single.path ?? " ");
-
-  //     String filename = file.path.split('/').last;
-
-  //     String filepath = file.path;
-
-  //     FormData data = FormData.fromMap({
-  //       'key': '04b75a4aa8a6e4e3c7d0eb6236f1eae4',
-  //       'image': await MultipartFile.fromFile(filepath, filename: filename)
-  //     });
-
-  //     var response = await dio.post("https://api.imgbb.com/1/upload",
-  //         data: data, onSendProgress: (int sent, int total) {
-  //       print('$sent, $total');
-  //     });
-
-  //     print(response.data);
-  //   } else {
-  //     print("Result is null");
-  //   }
-  // }
-
-  // Future<void> uploadImage() async {
-  //   setState(() {
-  //     showSpinner = true;
-  //   });
-
-  //   var stream = new http.ByteStream(image!.openRead());
-  //   stream.cast();
-  //   var length = await image!.length();
-  //   var uri = Uri.parse("https://fakestoreapi.com/products");
-
-  //   var request = new http.MultipartRequest('POST', uri);
-  //   request.fields['title'] = "Static title";
-  //   var multiport = new http.MultipartFile('image', stream, length);
-  //   request.files.add(multiport);
-  //   var response = await request.send();
-  //   print(response
-  //     ..stream
-  //     ..toString());
-  //   if (response.statusCode == 200) {
-  //     showSpinner = false;
-  //     print('image uploaded');
-  //   } else {
-  //     print('image failed');
-  //     showSpinner = false;
-  //   }
-  // }
 
   Future<void> uploadImage() async {
     setState(() {
