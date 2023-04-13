@@ -2,6 +2,7 @@ import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class LaporanPage extends StatefulWidget {
   const LaporanPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class LaporanPage extends StatefulWidget {
 
 final List<Map> teksLaporan = [
   {
-    'Header': 'Kirimkan laporan anda!',
+    'Header': 'Laporan',
     'judulLaporan': 'Laporan Bencana Alam',
     'deskripsiLaporan': 'Salah satu layanan dari E-Damkar ',
     'namaBencanaHint': 'contoh: Tsunami, Banjir, Kebakaran, dll',
@@ -36,7 +37,7 @@ final List<Map> teksStyleLaporan = [
   {
     'Bold1': const TextStyle(
         fontFamily: "font/inter_black.ttf",
-        color: Colors.black,
+        color: Colors.black87,
         fontSize: (32),
         fontWeight: FontWeight.w700),
     'SemiBold1': const TextStyle(
@@ -82,6 +83,18 @@ class _LaporanPageState extends State<LaporanPage> {
       body: SafeArea(
         child: Column(
           children: [
+            for (final teks in teksLaporan)
+              for (final teksStyle in teksStyleLaporan)
+                Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                    child: Text(teks['Header'],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 4,
+                        style: teksStyle['Bold1']),
+                  ),
+                ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.all(16),

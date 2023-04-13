@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -83,8 +85,8 @@ class _BuatLaporanState extends State<BuatLaporan> {
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Future _kirimLaporan() async {
-    return await http.post(
+  Future<bool> _kirimLaporan() async {
+    var res = await http.post(
       Uri.parse("http://172.16.109.108/flutter_api/submit"),
       body: {
         "gambar": imageName,
@@ -93,13 +95,40 @@ class _BuatLaporanState extends State<BuatLaporan> {
         "deskripsi": deskripsiCon.text,
       },
     );
+    var resp = res.body;
+    Map<String, dynamic> status = jsonDecode(resp);
+    bool statusKirim = status["success"];
+    if (statusKirim == true) {
+      return true;
+    }
+    return false;
   }
 
   void _onConfirm(context) async {
     await uploadImage();
-    await _kirimLaporan();
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    var statusUpload = await _kirimLaporan();
+    if (statusUpload == true) {
+      final snackBar = SnackBar(
+        /// need to set following properties for best effect of awesome_snackbar_content
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'On Snap!',
+          message:
+              'This is an example error message that will be shown in the body of snackbar!',
+
+          /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+          contentType: ContentType.failure,
+        ),
+      );
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(snackBar);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    }
   }
 
   void show(String message) {
