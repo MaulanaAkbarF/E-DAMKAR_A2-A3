@@ -1,4 +1,5 @@
 import 'package:edamkar_1/pages/Artikel.dart';
+import 'package:edamkar_1/pages/DetailArtikel.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
 import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/RemakePass.dart';
@@ -19,7 +20,7 @@ void main() {
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
     ),
-    initialRoute: '/',
+    initialRoute: '/riwayatlapp',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
@@ -30,7 +31,8 @@ void main() {
       '/homepage': (context) => HomePage(),
       '/riwayatlapp': (context) => RiwayatLaporan(),
       // '/detailriwayat': (context) => DetailRiwayatLengkap()
-      '/artikel': (context) => Artikel()
+      '/artikel': (context) => Artikel(),
+      '/detailartikel': (context) => DetailArtikel("")
     },
   ));
 }

@@ -32,7 +32,7 @@ class DataUser {
     });
   }
 
-  Future<String> getIdLap() async {
-    return _prefs.then((SharedPreferences pref) {});
-  }
+  // Future<String> getIdLap() async {
+  //   return _prefs.then((SharedPreferences pref) {});
+  // }
 }

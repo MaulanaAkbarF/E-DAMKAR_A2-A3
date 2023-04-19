@@ -67,6 +67,7 @@ flutter:
   assets:
     - semuaAset/
     - semuaAset/gambar/
+    - semuaAset/icon/
   
   fonts:
     - family: Inter

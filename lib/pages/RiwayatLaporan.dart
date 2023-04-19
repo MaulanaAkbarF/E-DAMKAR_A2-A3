@@ -1,10 +1,12 @@
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
+import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 
 import '../APIRequest/APIClient.dart';
+import '../Menu/Menu.dart';
 
 class RiwayatLaporan extends StatefulWidget {
   const RiwayatLaporan({super.key});
@@ -88,6 +90,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          elevation: 0,
           title: Center(
             child: Text(
               "Riwayat Laporan ",
@@ -97,7 +100,12 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
             ),
           ),
         ),
-        body: ListView.builder(
+        body: SafeArea(
+          
+          
+          child:
+              
+            ListView.builder(
             itemCount: dataElement!.length,
             itemBuilder: (context, index) {
               var date = dataElement![index].tglLap.toString();
@@ -146,8 +154,17 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
                   ),
                 ),
               );
-            }),
-      ),
-    );
+            },
+            ),
+        )
+      )
+        );
+      
+        
+      
+        
+
+        
+   
   }
 }
