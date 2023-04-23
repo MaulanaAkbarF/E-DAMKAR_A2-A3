@@ -1,5 +1,5 @@
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
@@ -17,28 +17,27 @@ class RiwayatLaporan extends StatefulWidget {
 
 class _RiwayatLaporanState extends State<RiwayatLaporan> {
   List<DataPelaporanElement>? dataElement = [];
-  var userid = "17";
 
-  @override
-  void initState() {
-    super.initState();
-    // await getUserIdRiwayat();
-    debugPrint(userid);
-    PostDataRiwayat();
-  }
-
-  getUserIdRiwayat() async {
+  void getUserIdRiwayat() async {
     var data = DataUser().getUserId();
     data.then((value) {
       setState(() {
-        userid = value.toString();
+        PostDataRiwayat(value.toString());
       });
     });
   }
 
-  PostDataRiwayat() async {
+  @override
+  void initState() {
+    super.initState();
+    getUserIdRiwayat();
+  }
+
+  PostDataRiwayat(String id) async {
     var result = await APIClient()
-        .postData('showPelaporan', {"userid": "33"}).catchError((err) {});
+
+        .postData('showPelaporan', {"userid": id}).catchError((err) {});
+
     if (result != null) {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.kondisi) {
@@ -81,31 +80,36 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
     return "bulan";
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Center(
-            child: Text(
-              "Riwayat Laporan ",
-              style: TextStyle(
-                color: Colors.black87,
-              ),
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        title: Center(
+          child: Text(
+            "Riwayat Laporan ",
+            style: TextStyle(
+              color: Colors.black87,
             ),
           ),
         ),
-        body: SafeArea(
-          
-          
-          child:
-              
-            ListView.builder(
+      ),
+      body: isRiwayatNull(),
+      bottomNavigationBar: AppMenu(),
+    );
+  }
+
+  Widget isRiwayatNull() {
+    return dataElement!.isEmpty
+        ? Align(
+            alignment: Alignment.center,
+            child: Text("Anda belum pernah melakukan pelaporan"),
+          )
+        : ListView.builder(
+
             itemCount: dataElement!.length,
             itemBuilder: (context, index) {
               var date = dataElement![index].tglLap.toString();
@@ -154,17 +158,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
                   ),
                 ),
               );
-            },
-            ),
-        )
-      )
-        );
-      
-        
-      
-        
 
-        
-   
+            });
   }
 }

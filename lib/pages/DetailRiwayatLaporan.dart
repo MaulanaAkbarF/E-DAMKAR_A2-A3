@@ -8,12 +8,18 @@ class DetailRiwayatLengkap extends StatefulWidget {
 }
 
 class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
+  var judul;
+  var alamat;
+  var tanggal;
+  var deksripsi;
+  var kondisi;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Riwayat Laporan",
           style: TextStyle(
             color: Colors.black,
@@ -23,26 +29,26 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
         brightness: Brightness.light,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
         ),
       ),
       body: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
               children: <Widget>[
                 Text(
-                  "Bantuan Evakuasi Kebakaranasdhkashdjkahsdkjahsdjkashdkajsdhkjasdh",
+                  judul,
                   textAlign: TextAlign.justify,
                   maxLines: 3,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 51, 51, 51),
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -51,27 +57,27 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                     // color: Colors.amberAccent,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/Rectangle 18045.jpg'),
                       ),
                     )),
-                SizedBox(
+               const SizedBox(
                   height: 20,
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   width: 500,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                          color: Color.fromARGB(255, 156, 163, 175), width: 1)),
+                          color: const Color.fromARGB(255, 156, 163, 175), width: 1)),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Icon(Icons.location_city_outlined),
                           Padding(padding: EdgeInsets.only(right: 10)),
-                          Text("Desa Aru Rt5, Rw.1 Kecamatan Sumeru")
+                          Text(alamat)
                         ],
                       ),
                       SizedBox(
@@ -81,7 +87,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                         children: [
                           Icon(Icons.date_range_outlined),
                           Padding(padding: EdgeInsets.only(right: 10)),
-                          Text("2 Maret 2023"),
+                          Text(tanggal),
                         ],
                       ),
                       SizedBox(
@@ -96,7 +102,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                         height: 5,
                       ),
                       Text(
-                        "Deskripsi yang adaajshdkajshdkajsdhkasjdhkajdhquwjbqbakjbdjhwpqdbasdijkbapdfbqiwbekajbdsfifoquwbdjabsdiquwbdkbqdiubakjsbdouqhwbdkjbasidbaiusbdia",
+                       deksripsi,
                         maxLines: 10,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(),
@@ -134,7 +140,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                       ),
                     ),
                     child: Text(
-                      "Menunggu",
+                      kondisi,
                       style: TextStyle(
                           color: Color.fromARGB(255, 55, 65, 81),
                           fontSize: 20,
