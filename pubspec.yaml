@@ -46,7 +46,6 @@ dependencies:
   dio: ^5.1.1
   path_provider: ^2.0.14
   file_picker: ^5.2.7
-  awesome_notifications: ^0.7.4+1
   awesome_snackbar_content: ^0.1.2
 
 dev_dependencies:
