@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-const String _baseUrl =
-    'http://172.16.106.161:8080/MobileAPI/E_DamkarRestAPI/';
+const String _baseUrl = 'http://192.168.1.16/E_DamkarRestAPI/';
 
 class APIClient {
   var client = http.Client();

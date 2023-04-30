@@ -1,4 +1,5 @@
 import 'package:edamkar_1/Menu/Menu.dart';
+import 'package:edamkar_1/pages/profil.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -58,6 +59,10 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
+                  GestureDetector(onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  }),
                   CircleAvatar(
                     radius: 30,
                     // backgroundImage: AssetImage('semuaAset/gambar/chefCat.jpg'),
