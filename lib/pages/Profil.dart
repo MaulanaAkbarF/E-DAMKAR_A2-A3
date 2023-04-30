@@ -80,16 +80,6 @@ class _ProfilePageState extends State<Profile> {
               ),
             ],
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: Text(
-          //     "Profil",
-          //     style: TextStyle(
-          //         fontSize: 30,
-          //         fontWeight: FontWeight.w500,
-          //         fontFamily: "font/inter_bold.ttf"),
-          //   ),
-          // ),
           SizedBox(
             height: 20,
           ),
