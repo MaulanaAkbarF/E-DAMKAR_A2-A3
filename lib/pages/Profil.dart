@@ -1,5 +1,6 @@
 import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/signin.dart';
+import 'package:edamkar_1/pages/TentangKami.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -47,7 +48,7 @@ class _ProfilePageState extends State<Profile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: 50,
           ),
           Row(
             children: [
@@ -81,7 +82,7 @@ class _ProfilePageState extends State<Profile> {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 18,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -127,19 +128,51 @@ class _ProfilePageState extends State<Profile> {
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.person),
-              title: Text("Profil Saya"),
-              horizontalTitleGap: 5,
-              trailing: Icon(Icons.chevron_right),
+              title: TextButton(
+                  onPressed: () {},
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Profil Saya",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
+              horizontalTitleGap: 0,
+              trailing: GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.chevron_right),
+              ),
             ),
           ),
-          Divider(),
+          Divider(
+            thickness: 1,
+          ),
           Container(
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.lock),
-              title: Text("Ubah Kata Sandi"),
-              horizontalTitleGap: 5,
-              trailing: Icon(Icons.chevron_right),
+              title: TextButton(
+                  onPressed: () {},
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Ubah Kata Sandi",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
+              horizontalTitleGap: 0,
+              trailing: GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.chevron_right),
+              ),
             ),
           ),
           Divider(
@@ -162,19 +195,51 @@ class _ProfilePageState extends State<Profile> {
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.notifications),
-              title: Text("Notifikasi"),
-              horizontalTitleGap: 5,
-              trailing: Icon(Icons.chevron_right),
+              title: TextButton(
+                  onPressed: () {},
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Notifikasi",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
+              horizontalTitleGap: 0,
+              trailing: GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.chevron_right),
+              ),
             ),
           ),
-          Divider(),
+          Divider(
+            thickness: 1,
+          ),
           Container(
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.book),
-              title: Text("Preferensi Baca"),
-              horizontalTitleGap: 5,
-              trailing: Icon(Icons.chevron_right),
+              title: TextButton(
+                  onPressed: () {},
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Preferensi Baca",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
+              horizontalTitleGap: 0,
+              trailing: GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.chevron_right),
+              ),
             ),
           ),
           Divider(
@@ -197,16 +262,38 @@ class _ProfilePageState extends State<Profile> {
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.help),
-              title: Text("Tentang Kami"),
-              horizontalTitleGap: 5,
-              trailing: Icon(Icons.chevron_right),
+              title: TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TentangKami()));
+                  },
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Tentang Kami",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
+              horizontalTitleGap: 0,
+              trailing: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TentangKami()));
+                },
+                child: Icon(Icons.chevron_right),
+              ),
+              //trailing: Icon(Icons.chevron_right),
             ),
           ),
           Divider(
             thickness: 5,
           ),
           SizedBox(
-            height: 10,
+            height: 100,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
