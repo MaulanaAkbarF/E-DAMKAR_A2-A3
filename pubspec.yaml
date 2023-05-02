@@ -47,7 +47,8 @@ dependencies:
   path_provider: ^2.0.14
   file_picker: ^5.2.7
   awesome_notifications: ^0.7.4+1
-  awesome_snackbar_content: ^0.1.2
+  awesome_snackbar_content: ^0.1.1
+  
 
 dev_dependencies:
   flutter_test:

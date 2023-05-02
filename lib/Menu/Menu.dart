@@ -40,16 +40,13 @@ class _AppMenuState extends State<AppMenu> {
           label: 'Laporan',
         ),
         BottomNavigationBarItem(
-<<<<<<< HEAD
+
           icon: Icon(
             Icons.article_rounded,
             color: black2,
           ),
           label: 'Artikel',
-=======
-          icon: Icon(Icons.edit_document),
-          label: 'Laporan',
->>>>>>> 11e2a4cf41204a433f832cc13e930a203854785c
+
         ),
       ],
       currentIndex: _selectedIndex,
