@@ -71,12 +71,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            ColoredBox(
-              color: grey2,
-              child: SizedBox(
-                height: paddingVertical1,
-              ),
-            ),
+            // ColoredBox(
+            //   color: grey2,
+            //   child: SizedBox(
+            //     height: paddingVertical1,
+            //   ),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(
                 vertical: paddingVertical2,

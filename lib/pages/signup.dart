@@ -87,21 +87,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
+  final TextEditingController notelp = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   RegisterPost() async {
     var result = await APIClient().postData('register', {
       "email": email.text,
       "password": password.text,
-      "namaLengkap": namalengkap.text
+      "namaLengkap": namalengkap.text,
+      "noHp": notelp.text
     }).catchError((err) {});
     if (result != null) {
-      var data = registerFromJson(result);
-      if (data.kondisi) {
+      var data = registerModelFromJson(result);
+      if (data.kondisi != null && data.kondisi!) {
         show('Registrasi Berhasil');
         Navigator.pushNamed(context, '/signin');
-      } else {
-        show("Cek Kembali Email dan Password anda");
+      } else if (data.message!.isNotEmpty) {
+        show(data.message!);
       }
     } else {
       print('something error on code');
@@ -122,10 +125,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.all(16),
+            child: Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Expanded(
           child: Column(
             children: [
               for (final teks in teksSignUp)
@@ -227,6 +231,52 @@ class _SignUpPageState extends State<SignUpPage> {
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       hintText: teks['EmailHint'],
+                                      prefixIcon: Icon(Icons.mail),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Text("No Telepon",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: teksStyle['Thin1']),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Container(
+                                width: double.infinity,
+                                margin: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: Colors.grey.shade300,
+                                        width: 1.2)),
+                                child: TextFormField(
+                                  controller: notelp,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Nomer Telepon tidak boleh kosong';
+                                    } else if (value.length > 13) {
+                                      return 'no telepon terlalu panjang';
+                                    } else if (value.length < 9) {
+                                      return 'no telepon terlalu pendek';
+                                    }
+                                  },
+                                  cursorColor: Colors.black,
+                                  style: teksStyle['SemiBold1'],
+                                  decoration: InputDecoration(
+                                      hintText: "No Telp kamu",
                                       prefixIcon: Icon(Icons.mail),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -409,7 +459,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    ));
+    )));
   }
 }
 

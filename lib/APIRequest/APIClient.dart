@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-const String _baseUrl = 'http://172.17.202.131:8000/api/';
+const String _baseUrl = 'http://172.16.104.177:8000/api/';
 
 class APIClient {
   var client = http.Client();

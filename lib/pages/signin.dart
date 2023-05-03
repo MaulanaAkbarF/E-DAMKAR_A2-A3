@@ -85,7 +85,7 @@ class _SignInPageState extends State<SignInPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  loginPost() async {   
+  loginPost() async {
     if (_formKey.currentState!.validate()) {
       var result = await APIClient().postData('login',
           {"email": email.text, "password": pass.text}).catchError((err) {});
