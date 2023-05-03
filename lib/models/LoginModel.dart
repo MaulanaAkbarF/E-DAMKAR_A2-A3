@@ -6,38 +6,56 @@ import 'dart:convert';
 
 LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
 
+String loginModelToJson(LoginModel data) => json.encode(data.toJson());
+
 class LoginModel {
+    String token;
+    Data data;
+
     LoginModel({
-        required this.kondisi,
-        this.data,
+        required this.token,
+        required this.data,
     });
 
-    bool kondisi;
-    Data? data;
-
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        kondisi: json["kondisi"],
+        token: json["token"],
         data: Data.fromJson(json["data"]),
     );
 
-    
+    Map<String, dynamic> toJson() => {
+        "token": token,
+        "data": data.toJson(),
+    };
 }
 
 class Data {
-    Data({
-        this.id,
-        this.email,
-        this.namaLengkap,
-    });
+    int id;
+    String email;
+    String password;
+    String namaLengkap;
+    String noHp;
 
-    String? id;
-    String? email;
-    String? namaLengkap;
+    Data({
+        required this.id,
+        required this.email,
+        required this.password,
+        required this.namaLengkap,
+        required this.noHp,
+    });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         email: json["email"],
+        password: json["password"],
         namaLengkap: json["namaLengkap"],
+        noHp: json["noHp"],
     );
 
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "email": email,
+        "password": password,
+        "namaLengkap": namaLengkap,
+        "noHp": noHp,
+    };
 }

@@ -87,7 +87,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://172.16.109.108/flutter_api/submit"),
+      Uri.parse("http://192.168.1.217/flutter_api/submit"),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,
@@ -111,15 +111,15 @@ class _BuatLaporanState extends State<BuatLaporan> {
       final snackBar = SnackBar(
         /// need to set following properties for best effect of awesome_snackbar_content
         elevation: 0,
-        behavior: SnackBarBehavior.floating,
+        padding: EdgeInsets.all(16),
+        behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
-          title: 'On Snap!',
-          message:
-              'This is an example error message that will be shown in the body of snackbar!',
+          title: 'Laporan berhasil terkirim!',
+          message: 'Laporan Anda akan segera kami tangani, lihat status untuk!',
 
           /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-          contentType: ContentType.failure,
+          contentType: ContentType.success,
         ),
       );
 
@@ -180,10 +180,8 @@ class _BuatLaporanState extends State<BuatLaporan> {
     final response = await request.send();
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
-      showSpinner = false;
     } else {
       print(response.statusCode);
-      showSpinner = false;
     }
   }
 

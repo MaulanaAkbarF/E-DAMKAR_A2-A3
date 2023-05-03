@@ -40,13 +40,11 @@ class _AppMenuState extends State<AppMenu> {
           label: 'Laporan',
         ),
         BottomNavigationBarItem(
-
           icon: Icon(
             Icons.article_rounded,
             color: black2,
           ),
           label: 'Artikel',
-
         ),
       ],
       currentIndex: _selectedIndex,
@@ -65,7 +63,7 @@ class _AppMenuState extends State<AppMenu> {
           Navigator.pushNamed(context, '/riwayatlapp');
           break;
         case 2:
-          Navigator.pushNamed(context, '/artikel');
+          Navigator.pushNamed(context, '/laporanpage');
           break;
         case 3:
           Navigator.pushNamed(context, '/artikel');

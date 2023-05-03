@@ -8,6 +8,7 @@ import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:edamkar_1/models/ArtikelModel.dart';
+import 'package:edamkar_1/models/HardArtikel.dart';
 
 import '../APIRequest/APIClient.dart';
 
@@ -37,23 +38,23 @@ class _ArtikelState extends State<Artikel> {
   @override
   void initState() {
     super.initState();
-    PostDataArtikel();
+    // PostDataArtikel();
   }
 
-  PostDataArtikel() async {
-    var result = await APIClient().getData('showArtikel').catchError((err) {});
-    if (result != null) {
-      var data_artikel = dataArtikelFromJson(result);
-      if (data_artikel.kondisi) {
-        setState(() {
-          artikelElement = data_artikel.dataArtikel;
-        });
-      }
-    } else {
-      debugPrint("kosong");
-      print("Data Kosong !");
-    }
-  }
+  // PostDataArtikel() async {
+  //   var result = await APIClient().getData('showArtikel').catchError((err) {});
+  //   if (result != null) {
+  //     var data_artikel = dataArtikelFromJson(result);
+  //     if (data_artikel.kondisi) {
+  //       setState(() {
+  //         artikelElement = data_artikel.dataArtikel;
+  //       });
+  //     }
+  //   } else {
+  //     debugPrint("kosong");
+  //     print("Data Kosong !");
+  //   }
+  // }
 
   List<String> Kat = ["Edukasi", "Berita", "Agenda", "Edukasi"];
   List<String> judul = [
@@ -201,20 +202,20 @@ class _ArtikelState extends State<Artikel> {
           Container(
             height: 400,
             child: ListView.separated(
-              itemCount: artikelElement!.length,
+              itemCount: hardArtikelList.length,
               itemBuilder: (context, index) {
                 return Container(
                   child: ListTile(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DetailArtikel(
-                              artikelElement![index].idArtikel.toString())));
+                              hardArtikelList![index].idArtikel.toString())));
                     },
                     title: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          artikelElement![index].namaArtikel.toString(),
+                          hardArtikelList![index].namaArtikel.toString(),
                           maxLines: 1,
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -224,7 +225,7 @@ class _ArtikelState extends State<Artikel> {
                           ),
                         ),
                         Text(
-                          artikelElement![index].judulArtikel.toString(),
+                          hardArtikelList![index].judulArtikel.toString(),
                           maxLines: 3,
                           style: TextStyle(
                             color: black3,
@@ -236,10 +237,10 @@ class _ArtikelState extends State<Artikel> {
                     subtitle: Row(
                       children: [
                         Text(
-                          artikelElement![index].namaLengkapDamkar.toString(),
+                          hardArtikelList![index].namaLengkapDamkar.toString(),
                         ),
                         Text(
-                          artikelElement![index].artikelTgl.toString(),
+                          hardArtikelList![index].artikelTgl.toString(),
                         )
                       ],
                     ),

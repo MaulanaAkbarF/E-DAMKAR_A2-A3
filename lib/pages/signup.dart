@@ -14,6 +14,15 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
+bool _passwordVisible = true;
+bool _passwordVisible1 = true;
+
+@override
+void initState() {
+  _passwordVisible = true;
+  _passwordVisible1 = true;
+}
+
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -260,13 +269,24 @@ class _SignUpPageState extends State<SignUpPage> {
                                       return 'password terlalu pendek';
                                     }
                                   },
-                                  obscureText: true,
+                                  obscureText: _passwordVisible,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
-                                      suffixIcon:
-                                          Icon(Icons.remove_red_eye_outlined),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible =
+                                                !_passwordVisible;
+                                          });
+                                        },
+                                        icon: Icon(_passwordVisible
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined),
+                                        color:
+                                            Color.fromARGB(255, 143, 143, 143),
+                                      ),
                                       suffixIconColor: Colors.black,
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -306,13 +326,24 @@ class _SignUpPageState extends State<SignUpPage> {
                                       return 'validasi password tidak sesuai dengan password';
                                     }
                                   },
-                                  obscureText: true,
+                                  obscureText: _passwordVisible1,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
-                                      suffixIcon:
-                                          Icon(Icons.remove_red_eye_outlined),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible1 =
+                                                !_passwordVisible1;
+                                          });
+                                        },
+                                        icon: Icon(_passwordVisible1
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined),
+                                        color:
+                                            Color.fromARGB(255, 143, 143, 143),
+                                      ),
                                       suffixIconColor: Colors.black,
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),

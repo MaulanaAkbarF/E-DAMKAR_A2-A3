@@ -1,12 +1,15 @@
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
-import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
+import 'package:edamkar_1/style/app_style.dart';
 
+import 'package:edamkar_1/style/size_config.dart';
 import '../APIRequest/APIClient.dart';
 import '../Menu/Menu.dart';
+import 'package:edamkar_1/models/HardLaporan.dart';
+import 'package:edamkar_1/models/HardListStatus.dart';
 
 class RiwayatLaporan extends StatefulWidget {
   const RiwayatLaporan({super.key});
@@ -18,37 +21,36 @@ class RiwayatLaporan extends StatefulWidget {
 class _RiwayatLaporanState extends State<RiwayatLaporan> {
   List<DataPelaporanElement>? dataElement = [];
 
-  void getUserIdRiwayat() async {
-    var data = DataUser().getUserId();
-    data.then((value) {
-      setState(() {
-        PostDataRiwayat(value.toString());
-      });
-    });
-  }
+  // void getUserIdRiwayat() async {
+  //   var data = DataUser().getUserId();
+  //   data.then((value) {
+  //     setState(() {
+  //       PostDataRiwayat(value.toString());
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getUserIdRiwayat();
+    // getUserIdRiwayat();
   }
 
-  PostDataRiwayat(String id) async {
-    var result = await APIClient()
+  // PostDataRiwayat(String id) async {
+  //   var result = await APIClient()
+  //       .postData('showPelaporan', {"userid": id}).catchError((err) {});
 
-        .postData('showPelaporan', {"userid": id}).catchError((err) {});
-
-    if (result != null) {
-      var dataRiwayat = dataPelaporanFromJson(result);
-      if (dataRiwayat.kondisi) {
-        setState(() {
-          dataElement = dataRiwayat.dataPelaporan;
-        });
-      }
-    } else {
-      print("data kosong");
-    }
-  }
+  //   if (result != null) {
+  //     var dataRiwayat = dataPelaporanFromJson(result);
+  //     if (dataRiwayat.kondisi) {
+  //       setState(() {
+  //         dataElement = dataRiwayat.dataPelaporan;
+  //       });
+  //     }
+  //   } else {
+  //     print("data kosong");
+  //   }
+  // }
 
   String monthString(String month) {
     switch (month) {
@@ -82,7 +84,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
 
   @override
   Widget build(BuildContext context) {
-
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -97,68 +99,172 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
           ),
         ),
       ),
-      body: isRiwayatNull(),
+      body: isRiwayatNull(
+          // child: Column(
+          //   children: <Widget>[
+          //     Container(
+          //       child: Column(
+          //         children: [
+          //           Expanded(
+          //             child: ListView.builder(
+          //               shrinkWrap: true,
+          //               scrollDirection: Axis.horizontal,
+          //               itemCount: hardStatusList.length,
+          //               itemBuilder: (context, index) {
+          //                 return Padding(
+          //                   padding: EdgeInsets.all(10),
+          //                   child: ListTile(
+          //                       title: Column(
+          //                     crossAxisAlignment: CrossAxisAlignment.center,
+          //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //                     children: [
+          //                       Text("Semua"),
+          //                       Text("Menunggu"),
+          //                       Text("Selesai"),
+          //                       Text("Ditolak"),
+          //                     ],
+          //                   )),
+          //                 );
+          //               },
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          ),
+      // SingleChildScrollView(
+      //   child: isRiwayatNull(),
+      // )
+      //   ],
+      // ),
+      // ),
       bottomNavigationBar: AppMenu(),
     );
   }
 
   Widget isRiwayatNull() {
-    return dataElement!.isEmpty
+    return cobaList.isEmpty
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
-
-            itemCount: dataElement!.length,
+            shrinkWrap: true,
+            itemCount: cobaList.length,
             itemBuilder: (context, index) {
-              var date = dataElement![index].tglLap.toString();
+              var date = cobaList[index].tanggal.toString();
               final splitDate = date.split('-');
               return Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
+                padding: EdgeInsets.all(
+                  20,
                 ),
                 child: ListTile(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailRiwayatLengkap(
-                            dataElement![index].idLap.toString())));
+                            cobaList[index].idLap.toString())));
                   },
-                  leading: Column(
-                    children: [
-                      Text(
-                        splitDate[2],
-                        style: const TextStyle(
-                          fontSize: 15,
+                  leading: Container(
+                    width: 70,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              splitDate[2],
+                              style: TextStyle(
+                                fontFamily: "font/inter_semibold.tff",
+                                fontWeight: FontWeight.w600,
+                                // fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              monthString(splitDate[1]),
+                              style: TextStyle(
+                                  // fontSize: 15,
+                                  fontFamily: "$thin1"),
+                            ),
+                            Text(
+                              splitDate[0],
+                              style: TextStyle(
+                                  // fontSize: 15,
+                                  fontFamily: "$thin1"),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        monthString(splitDate[1]),
-                        style: const TextStyle(
-                          fontSize: 15,
+                        SizedBox(
+                          width: 20,
                         ),
-                      ),
-                      Text(
-                        splitDate[0],
-                        style: const TextStyle(
-                          fontSize: 15,
+                        Container(
+                          width: 5,
+                          // color: Colors.black38,
+                          decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        )
+                      ],
+                    ),
+                  ),
+                  title: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black26,
                         ),
-                      ),
-                    ],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          cobaList[index].title.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: "$black2",
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.location_on_outlined),
+                            Flexible(
+                              child: Text(
+                                cobaList[index].alamat.toString(),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                // softWrap: false,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          child: Text(
+                            cobaList[index].status.toString(),
+                            textAlign: TextAlign.end,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  title: Text(
-                    dataElement![index].namaKategori.toString(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    dataElement![index].namaStatus.toString(),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  // title: Text(
+                  //   cobaList[index].alamat.toString(),
+                  //   maxLines: 1,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
+                  // subtitle: Text(
+                  //   cobaList[index].deskripsi.toString(),
+                  //   maxLines: 2,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
                 ),
               );
-
             });
   }
 }

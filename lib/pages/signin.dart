@@ -15,6 +15,13 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
+bool _passwordVisible = true;
+
+@override
+void initState() {
+  _passwordVisible = true;
+}
+
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -78,16 +85,19 @@ class _SignInPageState extends State<SignInPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  LoginPost() async {
+  loginPost() async {   
     if (_formKey.currentState!.validate()) {
-      var result = await APIClient().postData('Login',
+      var result = await APIClient().postData('login',
           {"email": email.text, "password": pass.text}).catchError((err) {});
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
-        if (data.kondisi) {
-          await DataUser().addUser(data.kondisi, data.data!.id!.toString(),
-              data.data!.email.toString(), data.data!.namaLengkap.toString());
-          Navigator.pushNamed(context, '/homepage');
+        if (data.token.isNotEmpty) {
+          await DataUser().addUser(
+              data.data.id.toString(),
+              data.data.email.toString(),
+              data.data.namaLengkap.toString(),
+              data.token.toString());
+          Navigator.pushNamed(context, '/riwayatlapp');
         } else {
           show("Cek Kembali Email dan Password anda");
         }
@@ -223,14 +233,25 @@ class _SignInPageState extends State<SignInPage> {
                                       return 'password terlalu pendek';
                                     }
                                   },
-                                  obscureText: true,
+                                  obscureText: _passwordVisible,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       hintText: teks['PasswordHint'],
                                       prefixIcon: Icon(Icons.lock),
-                                      suffixIcon:
-                                          Icon(Icons.remove_red_eye_outlined),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible =
+                                                !_passwordVisible;
+                                          });
+                                        },
+                                        icon: Icon(_passwordVisible
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined),
+                                        color:
+                                            Color.fromARGB(255, 143, 143, 143),
+                                      ),
                                       suffixIconColor: Colors.black,
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -266,7 +287,7 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    LoginPost();
+                                    loginPost();
                                   },
                                   child: Container(
                                     height: 50,

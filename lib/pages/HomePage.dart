@@ -1,4 +1,5 @@
 import 'package:edamkar_1/Menu/Menu.dart';
+import 'package:edamkar_1/pages/profil.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var userName = 'Akeon';
+  var userName = '';
 
   void getUserData() async {
     var data = DataUser().getNama();
@@ -50,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'Selamat datang $userName',
+                        maxLines: 1,
                         style: semibold,
                       ),
                       const Text(
@@ -58,6 +60,10 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
+                  GestureDetector(onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  }),
                   CircleAvatar(
                     radius: 30,
                     // backgroundImage: AssetImage('semuaAset/gambar/chefCat.jpg'),
