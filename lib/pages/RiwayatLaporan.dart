@@ -244,12 +244,16 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          child: Text(
-                            cobaList[index].status.toString(),
-                            textAlign: TextAlign.end,
-                          ),
-                        )
+                        Card(
+                          
+                            color: Colors.greenAccent,
+                            elevation: 10,
+                            child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  cobaList[index].status.toString(),
+                                  textAlign: TextAlign.end,
+                                )))
                       ],
                     ),
                   ),

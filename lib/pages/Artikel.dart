@@ -213,9 +213,10 @@ class _ArtikelState extends State<Artikel> {
                     },
                     title: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          hardArtikelList![index].namaArtikel.toString(),
+                          hardArtikelList[index].namaArtikel.toString(),
                           maxLines: 1,
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -224,13 +225,22 @@ class _ArtikelState extends State<Artikel> {
                             color: black2,
                           ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           hardArtikelList![index].judulArtikel.toString(),
                           maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: black3,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                             fontFamily: "$semibold",
                           ),
+                        ),
+                        SizedBox(
+                          height: 15,
                         ),
                       ],
                     ),
@@ -239,12 +249,23 @@ class _ArtikelState extends State<Artikel> {
                         Text(
                           hardArtikelList![index].namaLengkapDamkar.toString(),
                         ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          size: 5,
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
                         Text(
                           hardArtikelList![index].artikelTgl.toString(),
                         )
                       ],
                     ),
                     trailing: Container(
+                      alignment: Alignment.topCenter,
                       height: paddingVertical4,
                       width: paddingHorozontal4,
                       // color: clr[index],
@@ -270,4 +291,3 @@ class _ArtikelState extends State<Artikel> {
     );
   }
 }
-
