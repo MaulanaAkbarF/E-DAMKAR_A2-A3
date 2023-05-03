@@ -245,7 +245,6 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
                           height: 10,
                         ),
                         Card(
-                          
                             color: Colors.greenAccent,
                             elevation: 10,
                             child: Padding(
