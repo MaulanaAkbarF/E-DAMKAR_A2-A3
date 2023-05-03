@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:edamkar_1/pages/LokasiKejadian.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
+import 'LokasiKejadian.dart';
 
 class BuatLaporan extends StatefulWidget {
   const BuatLaporan({Key? key}) : super(key: key);
@@ -187,6 +190,9 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   @override
   Widget build(BuildContext context) {
+    // final lokasiKejadianProvider = context.read<LokasiKejadianProvider>();
+    // final lokasiKejadianData = lokasiKejadianProvider.lokasiKejadianData;
+
     return ModalProgressHUD(
         inAsyncCall: showSpinner,
         progressIndicator: CircularProgressIndicator(),
