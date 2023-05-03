@@ -1,3 +1,5 @@
+import 'package:edamkar_1/pages/Artikel.dart';
+import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class AppMenu extends StatefulWidget {
@@ -17,20 +19,32 @@ class _AppMenuState extends State<AppMenu> {
       unselectedItemColor: Colors.black.withOpacity(.30),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'beranda',
+          icon: Icon(
+            Icons.home_filled,
+            color: black2,
+          ),
+          label: 'Beranda',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.history),
+          icon: Icon(
+            Icons.history,
+            color: black2,
+          ),
           label: 'Riwayat',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.edit_document),
+          icon: Icon(
+            Icons.edit_document,
+            color: black2,
+          ),
           label: 'Laporan',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.edit_document),
-          label: 'Laporan',
+          icon: Icon(
+            Icons.article_rounded,
+            color: black2,
+          ),
+          label: 'Artikel',
         ),
       ],
       currentIndex: _selectedIndex,
@@ -49,6 +63,9 @@ class _AppMenuState extends State<AppMenu> {
           Navigator.pushNamed(context, '/riwayatlapp');
           break;
         case 2:
+          Navigator.pushNamed(context, '/laporanpage');
+          break;
+        case 3:
           Navigator.pushNamed(context, '/artikel');
           break;
         default:

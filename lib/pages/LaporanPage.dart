@@ -2,7 +2,7 @@ import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+// import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class LaporanPage extends StatefulWidget {
   const LaporanPage({Key? key}) : super(key: key);

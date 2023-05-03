@@ -26,7 +26,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
           ),
         ),
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
+        // brightness: Brightness.light,
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),

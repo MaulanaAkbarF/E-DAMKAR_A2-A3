@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var userName = 'Akeon';
+  var userName = '';
 
   void getUserData() async {
     var data = DataUser().getNama();
@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'Selamat datang $userName',
+                        maxLines: 1,
                         style: semibold,
                       ),
                       const Text(
