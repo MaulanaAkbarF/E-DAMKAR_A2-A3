@@ -75,11 +75,14 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
   final TextEditingController jalanCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void _kirimButtonPressed(BuildContext context) {
+  void kirimButtonPressed(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const BuatLaporan()),
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => BuatLaporan(
+                kecamatan: kecamatanCon.text,
+                desa: desaCon.text,
+                jalan: jalanCon.text)),
       );
     }
   }
@@ -255,7 +258,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                   child: InkWell(
                                     splashColor: Colors.red.shade700,
                                     highlightColor: Colors.red.shade900,
-                                    onTap: () => _kirimButtonPressed(context),
+                                    onTap: () => kirimButtonPressed(context),
                                     child: Container(
                                       height: 50,
                                       child: Row(
