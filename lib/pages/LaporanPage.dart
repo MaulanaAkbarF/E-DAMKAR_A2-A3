@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/LokasiKejadian.dart';
 import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +112,7 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BuatLaporan()),
+                                  builder: (context) => LokasiKejadian()),
                             );
                           },
                           child: Container(
@@ -174,7 +175,7 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BuatLaporan()),
+                                  builder: (context) => LokasiKejadian()),
                             );
                           },
                           child: Container(
@@ -237,7 +238,7 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BuatLaporan()),
+                                  builder: (context) => LokasiKejadian()),
                             );
                           },
                           child: Container(
@@ -300,7 +301,7 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BuatLaporan()),
+                                  builder: (context) => LokasiKejadian()),
                             );
                           },
                           child: Container(
