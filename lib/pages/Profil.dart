@@ -1,4 +1,5 @@
 import 'package:edamkar_1/pages/HomePage.dart';
+import 'package:edamkar_1/pages/UbahSandi.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:edamkar_1/pages/TentangKami.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +157,10 @@ class _ProfilePageState extends State<Profile> {
             child: ListTile(
               leading: Icon(Icons.lock),
               title: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UbahSandi(1)));
+                  },
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -170,7 +174,10 @@ class _ProfilePageState extends State<Profile> {
                   )),
               horizontalTitleGap: 0,
               trailing: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UbahSandi(1)));
+                },
                 child: Icon(Icons.chevron_right),
               ),
             ),
@@ -181,70 +188,70 @@ class _ProfilePageState extends State<Profile> {
           SizedBox(
             height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Pengaturan Aplikasi",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "font/inter_bold.ttf"),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Icon(Icons.notifications),
-              title: TextButton(
-                  onPressed: () {},
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Notifikasi",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                  )),
-              horizontalTitleGap: 0,
-              trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Icon(Icons.book),
-              title: TextButton(
-                  onPressed: () {},
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Preferensi Baca",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                  )),
-              horizontalTitleGap: 0,
-              trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Divider(
-            thickness: 5,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+          //   child: Text(
+          //     "Pengaturan Aplikasi",
+          //     style: TextStyle(
+          //         fontSize: 25,
+          //         fontWeight: FontWeight.w500,
+          //         fontFamily: "font/inter_bold.ttf"),
+          //   ),
+          // ),
+          // Container(
+          //   width: double.infinity,
+          //   child: ListTile(
+          //     leading: Icon(Icons.notifications),
+          //     title: TextButton(
+          //         onPressed: () {},
+          //         child: Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             "Notifikasi",
+          //             style: TextStyle(
+          //                 color: Colors.black87,
+          //                 fontWeight: FontWeight.normal,
+          //                 fontSize: 16),
+          //             textAlign: TextAlign.left,
+          //           ),
+          //         )),
+          //     horizontalTitleGap: 0,
+          //     trailing: GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Divider(
+          //   thickness: 1,
+          // ),
+          // Container(
+          //   width: double.infinity,
+          //   child: ListTile(
+          //     leading: Icon(Icons.book),
+          //     title: TextButton(
+          //         onPressed: () {},
+          //         child: Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             "Preferensi Baca",
+          //             style: TextStyle(
+          //                 color: Colors.black87,
+          //                 fontWeight: FontWeight.normal,
+          //                 fontSize: 16),
+          //             textAlign: TextAlign.left,
+          //           ),
+          //         )),
+          //     horizontalTitleGap: 0,
+          //     trailing: GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Divider(
+          //   thickness: 5,
+          // ),
           SizedBox(
             height: 10,
           ),
