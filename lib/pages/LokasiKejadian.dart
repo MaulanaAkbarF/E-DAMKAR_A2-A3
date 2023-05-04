@@ -36,6 +36,7 @@ final List<Map> teksStyleLokasiKejadian = [
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
+        height: 1.4,
         fontSize: (16)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
@@ -80,9 +81,14 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
       Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => BuatLaporan(
-                kecamatan: kecamatanCon.text,
-                desa: desaCon.text,
-                jalan: jalanCon.text)),
+                  kecamatan: kecamatanCon.text,
+                  desa: desaCon.text,
+                  jalan: jalanCon.text,
+                  kota: 'Nganjuk',
+                  kodepos: '',
+                  latitude: 0.0,
+                  longitude: 0.0,
+                )),
       );
     }
   }
@@ -90,6 +96,21 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Tentukan Lokasi Kejadian",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -103,19 +124,19 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Align(
-                              alignment: FractionalOffset.topLeft,
-                              child: Text(
-                                teks['Header'],
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: teksStyle['Bold1'],
-                              ),
-                            ),
+                            // Align(
+                            //   alignment: FractionalOffset.topLeft,
+                            //   child: Text(
+                            //     teks['Header'],
+                            //     overflow: TextOverflow.ellipsis,
+                            //     maxLines: 1,
+                            //     style: teksStyle['Bold1'],
+                            //   ),
+                            // ),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: EdgeInsets.only(top: 0),
                                 child: Text(teks['SubHeader'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
