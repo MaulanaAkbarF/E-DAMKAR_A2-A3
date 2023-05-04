@@ -53,174 +53,190 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
             },
           ),
           Positioned(
-            right: 16,
-            bottom: 316,
-            child: FloatingActionButton(
-              onPressed: () async {
-                Position position = await _determinePosition();
-                googleMapController.animateCamera(
-                    CameraUpdate.newCameraPosition(CameraPosition(
-                        target: LatLng(position.latitude, position.longitude),
-                        zoom: 14)));
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 24, right: 16),
+                  child: FloatingActionButton(
+                    onPressed: () async {
+                      Position position = await _determinePosition();
+                      googleMapController.animateCamera(
+                          CameraUpdate.newCameraPosition(CameraPosition(
+                              target:
+                                  LatLng(position.latitude, position.longitude),
+                              zoom: 18)));
 
-                markers.clear();
+                      markers.clear();
 
-                markers.add(Marker(
-                    markerId: const MarkerId('currentLocation'),
-                    position: LatLng(position.latitude, position.longitude)));
+                      markers.add(Marker(
+                          markerId: const MarkerId('currentLocation'),
+                          position:
+                              LatLng(position.latitude, position.longitude)));
 
-                List<Placemark> placemarks = await placemarkFromCoordinates(
-                    position.latitude, position.longitude);
-                Placemark place = placemarks[0];
-                setState(() {
-                  latitude = position.latitude;
-                  longitude = position.longitude;
-                  address =
-                      "${place.name}, ${place.street}, ${place.locality}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}";
-                });
-              },
-              child: SvgPicture.asset(
-                'semuaAset/icon/Discovery.svg',
-                width: 24,
-                height: 24,
-                color: white,
-              ),
-              backgroundColor: Colors.red.shade400,
-              elevation: 0,
-              splashColor: Colors.red.shade800,
+                      List<Placemark> placemarks =
+                          await placemarkFromCoordinates(
+                              position.latitude, position.longitude);
+                      Placemark place = placemarks[0];
+                      setState(() {
+                        latitude = position.latitude;
+                        longitude = position.longitude;
+                        address =
+                            "${place.name}, ${place.street}, ${place.locality}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}";
+                      });
+                    },
+                    child: SvgPicture.asset(
+                      'semuaAset/icon/Discovery.svg',
+                      width: 24,
+                      height: 24,
+                      color: white,
+                    ),
+                    backgroundColor: Colors.red.shade400,
+                    elevation: 0,
+                    splashColor: Colors.red.shade800,
+                  ),
+                ),
+                Card(
+                  margin: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24.0),
+                          topRight: Radius.circular(24.0)),
+                      boxShadow: [
+                        // BoxShadow(
+                        //   color: Colors.grey.withOpacity(0.5),
+                        //   spreadRadius: 2,
+                        //   blurRadius: 20,
+                        //   offset: Offset(0, 10),
+                        // ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 20),
+                          child: Text(
+                            'Alamat Lokasi Kejadian',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "font/inter_bold.ttf",
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 8),
+                          child: Text(
+                            'Alamat: $address',
+                            style: TextStyle(
+                              fontSize: 16,
+                              height: 1.4,
+                              fontFamily: "font/inter_bold.ttf",
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding:
+                                EdgeInsets.only(top: 32, left: 16, right: 16),
+                            child: Material(
+                              color: Colors.red.shade400,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              borderRadius: BorderRadius.circular(8),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red.shade400,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 0,
+                                  minimumSize: Size.fromHeight(50),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                ),
+                                onPressed: () {},
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Ya, Lokasi Saya Sudah Sesuai',
+                                      style: TextStyle(
+                                        // Properti gaya teks
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 16, left: 16, right: 16, bottom: 24),
+                            child: Material(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              borderRadius: BorderRadius.circular(8),
+                              child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                      color: Colors.grey.shade300, width: 1.5),
+                                  backgroundColor: Colors.grey.shade100,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 0,
+                                  minimumSize: Size.fromHeight(50),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                ),
+                                onPressed: () {},
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Tidak ketemu? Isi alamat secara manual',
+                                      style: TextStyle(
+                                        // Properti gaya teks
+                                        color: Colors.black54,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
-          ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.38,
-            minChildSize: 0.2,
-            maxChildSize: 0.8,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(24.0),
-                      topRight: Radius.circular(24.0)),
-                  boxShadow: [
-                    // BoxShadow(
-                    //   color: Colors.grey.withOpacity(0.5),
-                    //   spreadRadius: 2,
-                    //   blurRadius: 20,
-                    //   offset: Offset(0, 10),
-                    // ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 20),
-                      child: Text(
-                        'Alamat Lokasi Kejadian',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "font/inter_bold.ttf",
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, right: 16, top: 8),
-                      child: Text(
-                        'Alamat: $address',
-                        style: TextStyle(
-                          fontSize: 16,
-                          height: 1.4,
-                          fontFamily: "font/inter_bold.ttf",
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 32, left: 16, right: 16),
-                        child: Material(
-                          color: Colors.red.shade400,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          borderRadius: BorderRadius.circular(8),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red.shade400,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              elevation: 0,
-                              minimumSize: Size.fromHeight(50),
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Ya, Lokasi Saya Sudah Sesuai',
-                                  style: TextStyle(
-                                    // Properti gaya teks
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                        child: Material(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          borderRadius: BorderRadius.circular(8),
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              side: BorderSide(
-                                  color: Colors.grey.shade300, width: 1.5),
-                              backgroundColor: Colors.grey.shade100,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              elevation: 0,
-                              minimumSize: Size.fromHeight(50),
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                            ),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Tidak ketemu? Isi alamat secara manual',
-                                  style: TextStyle(
-                                    // Properti gaya teks
-                                    color: Colors.black54,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          )
         ],
       ),
     );
