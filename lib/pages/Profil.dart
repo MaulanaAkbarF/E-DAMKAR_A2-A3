@@ -96,8 +96,7 @@ class _ProfilePageState extends State<Profile> {
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage:
-                      AssetImage("semuaAset/gambar/logodamkarsatu.png"),
+                  backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
                   backgroundColor: Colors.white,
                 ),
                 title: Text("$userName"),

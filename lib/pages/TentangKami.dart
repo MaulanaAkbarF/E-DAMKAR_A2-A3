@@ -37,7 +37,7 @@ class _TentangKamiPageState extends State<TentangKami> {
         color: Colors.white,
         child: Column(children: [
           SizedBox(
-            height: 95,
+            height: 84,
           ),
           Align(
             alignment: Alignment.center,
@@ -51,7 +51,7 @@ class _TentangKamiPageState extends State<TentangKami> {
             height: 15,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 45),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
