@@ -1,7 +1,9 @@
+import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
   const CurrentLocationScreen({Key? key}) : super(key: key);
@@ -25,7 +27,19 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("User current location"),
+        backgroundColor: white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Tentukan Lokasi Kejadian",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -65,8 +79,15 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
                       "${place.name}, ${place.street}, ${place.locality}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}";
                 });
               },
-              child: Icon(Icons.add),
-              backgroundColor: Colors.blue,
+              child: SvgPicture.asset(
+                'semuaAset/icon/Discovery.svg',
+                width: 24,
+                height: 24,
+                color: white,
+              ),
+              backgroundColor: Colors.red.shade400,
+              elevation: 0,
+              splashColor: Colors.red.shade800,
             ),
           ),
           DraggableScrollableSheet(
@@ -78,15 +99,15 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0)),
+                      topLeft: Radius.circular(24.0),
+                      topRight: Radius.circular(24.0)),
                   boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 20,
-                      offset: Offset(0, 10),
-                    ),
+                    // BoxShadow(
+                    //   color: Colors.grey.withOpacity(0.5),
+                    //   spreadRadius: 2,
+                    //   blurRadius: 20,
+                    //   offset: Offset(0, 10),
+                    // ),
                   ],
                 ),
                 child: Column(
