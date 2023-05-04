@@ -45,9 +45,9 @@ class _UbahSandiPageState extends State<UbahSandi> {
     final response = await http.post(
       Uri.parse('https://http://192.168.1.16:8000/api/changePassword'),
       body: {
-        'user_id': widget.userId.toString(),
-        'old_password': _oldPasswordController.text,
-        'new_password': _newPasswordController.text,
+        'id': widget.userId.toString(),
+        'password_lama': _oldPasswordController.text,
+        'password_baru': _newPasswordController.text,
         'confirm_password': _confirmPasswordController.text,
       },
     );
