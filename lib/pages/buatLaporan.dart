@@ -98,7 +98,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://192.168.137.1/flutter_api/submit"),
+      Uri.parse("http://172.16.110.35/flutter_api/submit"),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,
