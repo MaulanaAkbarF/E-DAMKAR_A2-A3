@@ -37,7 +37,7 @@ class _TentangKamiPageState extends State<TentangKami> {
         color: Colors.white,
         child: Column(children: [
           SizedBox(
-            height: 84,
+            height: 70,
           ),
           Align(
             alignment: Alignment.center,
