@@ -97,10 +97,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: paddingHorozontal2,
-                      vertical: paddingHorozontal4),
+                    horizontal: paddingHorozontal2,
+                  ),
                   child: Align(
                     alignment: FractionalOffset.topLeft,
                     child: Padding(
