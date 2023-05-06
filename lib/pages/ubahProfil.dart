@@ -98,7 +98,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: paddingHorozontal2),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: paddingHorozontal2,
+                      vertical: paddingHorozontal4),
                   child: Align(
                     alignment: FractionalOffset.topLeft,
                     child: Padding(
@@ -109,8 +111,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: paddingHorozontal2,
-                      vertical: paddingHorozontal4),
+                    horizontal: paddingHorozontal2,
+                  ),
                   child: Align(
                     alignment: FractionalOffset.topLeft,
                     child: Padding(
