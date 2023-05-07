@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/Artikel.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,8 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:edamkar_1/style/app_style.dart';
 
 class DetailArtikel extends StatefulWidget {
-
-  const DetailArtikel(String string,{super.key});
+  const DetailArtikel(String string, {super.key});
 
   @override
   State<DetailArtikel> createState() => _DetailArtikelState();
@@ -24,6 +24,29 @@ class _DetailArtikelState extends State<DetailArtikel> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          leading: Material(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            borderRadius: BorderRadius.circular(8),
+            child: InkWell(
+              splashColor: Colors.grey.shade400,
+              highlightColor: Colors.grey.shade600,
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Artikel()));
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.black87,
+                  ),  
+                ),
+              ),
+            ),
+          ),
           centerTitle: true,
           elevation: 0,
           title: Text(
