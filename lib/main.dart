@@ -41,7 +41,7 @@ void main() {
       '/profil': (context) => Profile(),
       '/tentangkami': (context) => TentangKami(),
       '/laporanpage': (context) => LaporanPage(),
-      '/buatlaporan': (context) => BuatLaporan()
+      // '/buatlaporan': (context) => BuatLaporan()
     },
   ));
 }

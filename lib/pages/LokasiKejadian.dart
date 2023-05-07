@@ -1,3 +1,4 @@
+import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
@@ -12,15 +13,15 @@ class LokasiKejadian extends StatefulWidget {
 
 final List<Map> teksLokasiKejadian = [
   {
-    'Header': 'Kirimkan laporan anda!',
-    'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
+    'Header': 'Tentukan Lokasi Kejadian!',
+    'SubHeader':
+        'Jangan khawatir! kami tidak akan berbagi dengan siapapun tentang informasi pribadimu',
     'namaKecamatan': 'Kecamatan',
-    'NamaKecamatanHint': 'Masukkan lokasi kecamatan',
+    'namaKecamatanHint': 'Masukkan lokasi kecamatan',
     'namaDesa': 'Desa',
     'namaDesaHint': 'Masukkan lokasi desa',
     'namaJalan': 'Nama jalan',
-    'namaJalanHint':
-        '(opsional) Jelaskan secara singkat kejadian yang sedang terjadi',
+    'namaJalanHint': 'Alamat jalan kejadian',
     'buttonKirim': 'Kirim'
   }
 ].cast<Map<String, String>>();
@@ -35,6 +36,7 @@ final List<Map> teksStyleLokasiKejadian = [
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
+        height: 1.4,
         fontSize: (16)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
@@ -64,15 +66,51 @@ final List<Map> teksStyleLokasiKejadian = [
   }
 ];
 
+class MyClass {
+  String namaKecamatan = 'Hello world!';
+}
+
 class _LokasiKejadianState extends State<LokasiKejadian> {
   final TextEditingController kecamatanCon = TextEditingController();
   final TextEditingController desaCon = TextEditingController();
   final TextEditingController jalanCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  void kirimButtonPressed(BuildContext context) {
+    if (_formKey.currentState?.validate() == true) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => BuatLaporan(
+                  kecamatan: kecamatanCon.text,
+                  desa: desaCon.text,
+                  jalan: jalanCon.text,
+                  kota: 'Nganjuk',
+                  kodepos: '',
+                  latitude: 0.0,
+                  longitude: 0.0,
+                )),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Tentukan Lokasi Kejadian",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -86,64 +124,174 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            // Align(
+                            //   alignment: FractionalOffset.topLeft,
+                            //   child: Text(
+                            //     teks['Header'],
+                            //     overflow: TextOverflow.ellipsis,
+                            //     maxLines: 1,
+                            //     style: teksStyle['Bold1'],
+                            //   ),
+                            // ),
                             Align(
                               alignment: FractionalOffset.topLeft,
-                              child: Text(
-                                teks['Header'],
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: teksStyle['Bold1'],
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0),
+                                child: Text(teks['SubHeader'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: teksStyle['SemiBold1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Text(teks['namaKecamatan'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
                               ),
                             ),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
                                 padding: EdgeInsets.only(top: 8),
-                                child: Text(teks['Subheader'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 4,
-                                    style: teksStyle['Semibold1']),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: kecamatanCon,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Kecamatan tidak boleh kosong';
+                                      }
+                                    },
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['namaKecamatanHint'],
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                  padding: EdgeInsets.only(top: 32),
-                                  child: Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: Colors.grey.shade300,
-                                            width: 1.2)),
-                                    child: TextFormField(
-                                      controller: kecamatanCon,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Kecamatan tidak boleh kosong';
-                                        }
-                                      },
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['Semibold1'],
-                                      decoration: InputDecoration(
-                                          hintText: teks['namaKecamatan'],
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    ),
-                                  )),
                             ),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
                                 padding: EdgeInsets.only(top: 16),
-                                child: Text(
-                                  teks['namaDesa'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1'],
+                                child: Text(teks['namaDesa'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: desaCon,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Desa tidak boleh kosong';
+                                      }
+                                    },
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['namaDesaHint'],
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Text(teks['namaJalan'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 6,
+                                    controller: jalanCon,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Jalan tidak boleh kosong';
+                                      }
+                                    },
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['Semibold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['namaJalanHint'],
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 40),
+                                child: Material(
+                                  color: Colors.red.shade400,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: InkWell(
+                                    splashColor: Colors.red.shade700,
+                                    highlightColor: Colors.red.shade900,
+                                    onTap: () => kirimButtonPressed(context),
+                                    child: Container(
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(teks['buttonKirim'],
+                                              style: teksStyle['Thin2']),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             )

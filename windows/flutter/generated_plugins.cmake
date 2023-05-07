@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  awesome_notifications
+  geolocator_windows
   modal_progress_hud_nsn
 )
 
