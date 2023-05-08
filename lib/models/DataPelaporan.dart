@@ -1,51 +1,50 @@
+// To parse this JSON data, do
+//
+//     final dataPelaporan = dataPelaporanFromJson(jsonString);
+
 import 'dart:convert';
 
 DataPelaporan dataPelaporanFromJson(String str) =>
     DataPelaporan.fromJson(json.decode(str));
 
 class DataPelaporan {
+  List<Datum> data;
+
   DataPelaporan({
-    required this.kondisi,
-    this.dataPelaporan,
+    required this.data,
   });
 
-  bool kondisi;
-  List<DataPelaporanElement>? dataPelaporan;
-
-  factory DataPelaporan.fromJson(Map<String, dynamic> json) {
-    if (json["dataPelaporan"]?.isEmpty ?? true) {
-      return DataPelaporan(kondisi: json["kondisi"]);
-    } else {
-      return DataPelaporan(
-        kondisi: json["kondisi"],
-        dataPelaporan: List<DataPelaporanElement>.from(
-            json["dataPelaporan"].map((x) => DataPelaporanElement.fromJson(x))),
+  factory DataPelaporan.fromJson(Map<String, dynamic> json) => DataPelaporan(
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
-    }
-  }
 }
 
-class DataPelaporanElement {
-  DataPelaporanElement({
-    this.idLap,
-    this.riwayatIduser,
-    this.tglLap,
-    this.namaKategori,
-    this.namaStatus,
+class Datum {
+  int idLaporan;
+  String statusRiwayat;
+  String kategoriLaporan;
+  String tanggal;
+  String deskripsi;
+  String imageUrl;
+  String alamat;
+
+  Datum({
+    required this.idLaporan,
+    required this.statusRiwayat,
+    required this.kategoriLaporan,
+    required this.tanggal,
+    required this.deskripsi,
+    required this.imageUrl,
+    required this.alamat,
   });
 
-  String? idLap;
-  String? riwayatIduser;
-  String? tglLap;
-  String? namaKategori;
-  String? namaStatus;
-
-  factory DataPelaporanElement.fromJson(Map<String, dynamic> json) =>
-      DataPelaporanElement(
-        idLap: json["id_lap"],
-        riwayatIduser: json["riwayat_iduser"],
-        tglLap: json["tgl_lap"],
-        namaKategori: json["nama_kategori"],
-        namaStatus: json["nama_status"],
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        idLaporan: json["idLaporan"],
+        statusRiwayat: json["Status_riwayat"],
+        kategoriLaporan: json["kategori_laporan"],
+        tanggal: json["tanggal"],
+        deskripsi: json["deskripsi"],
+        imageUrl: json["image_url"],
+        alamat: json["alamat"],
       );
 }

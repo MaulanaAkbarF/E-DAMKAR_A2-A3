@@ -1,18 +1,49 @@
+import 'dart:ffi';
+
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/SharedPreferences/laporanData.dart';
+import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:flutter/material.dart';
 
 class DetailRiwayatLengkap extends StatefulWidget {
-  const DetailRiwayatLengkap(String string, {super.key});
+  const DetailRiwayatLengkap(int idLaporan, {super.key});
 
   @override
   State<DetailRiwayatLengkap> createState() => _DetailRiwayatLengkapState();
 }
 
 class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
-  var judul;
-  var alamat;
-  var tanggal;
-  var deksripsi;
-  var kondisi;
+  List<Datum>? dataElement = [];
+  void getIdLaporan() async {
+    var data = laporanData().getIdLap();
+    data.then((value) {
+      setState(() {
+        postDetailRiwayat(value.toString());
+      });
+    });
+    // var dataId =
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getIdLaporan();
+  }
+
+  postDetailRiwayat(String id) async {
+    var result = await APIClient().getData('getPelaporan' + id);
+
+    if (result != null) {
+      var detailRiwayat = dataPelaporanFromJson(result);
+      if (detailRiwayat.data.isNotEmpty) {
+        setState(() {
+          dataElement = detailRiwayat.data;
+        });
+      }
+    } else {
+      print("Data Kosong");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +60,8 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
         // brightness: Brightness.light,
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+              color: Colors.black),
         ),
       ),
       body: Column(
@@ -39,7 +71,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
             child: Column(
               children: <Widget>[
                 Text(
-                  judul,
+                  "judul",
                   textAlign: TextAlign.justify,
                   maxLines: 3,
                   style: const TextStyle(
@@ -61,7 +93,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                         image: AssetImage('assets/Rectangle 18045.jpg'),
                       ),
                     )),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -70,14 +102,15 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                          color: const Color.fromARGB(255, 156, 163, 175), width: 1)),
+                          color: const Color.fromARGB(255, 156, 163, 175),
+                          width: 1)),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Icon(Icons.location_city_outlined),
                           Padding(padding: EdgeInsets.only(right: 10)),
-                          Text(alamat)
+                          Text("alamat")
                         ],
                       ),
                       SizedBox(
@@ -87,7 +120,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                         children: [
                           Icon(Icons.date_range_outlined),
                           Padding(padding: EdgeInsets.only(right: 10)),
-                          Text(tanggal),
+                          Text(""),
                         ],
                       ),
                       SizedBox(
@@ -102,7 +135,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                         height: 5,
                       ),
                       Text(
-                       deksripsi,
+                        "",
                         maxLines: 10,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(),
@@ -140,7 +173,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                       ),
                     ),
                     child: Text(
-                      kondisi,
+                      "kondisi",
                       style: TextStyle(
                           color: Color.fromARGB(255, 55, 65, 81),
                           fontSize: 20,
