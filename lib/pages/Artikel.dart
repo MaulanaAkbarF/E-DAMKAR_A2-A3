@@ -160,134 +160,131 @@ class _ArtikelState extends State<Artikel> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return MaterialApp(
-      home: Scaffold(
-        body: Column(children: [
-          CarouselSlider(
-            items: imageSliders,
-            carouselController: _controller,
-            options: CarouselOptions(
-                height: 350,
-                autoPlay: true,
-                // enlargeCenterPage: true,
-                viewportFraction: 1,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ),
-          // SizedBox(
-          //   height: 20,
-          // ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _controller.animateToPage(entry.key),
-                child: Container(
-                  width: 8.0,
-                  height: 8.0,
-                  margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+    return Scaffold(
+      body: Column(children: [
+        CarouselSlider(
+          items: imageSliders,
+          carouselController: _controller,
+          options: CarouselOptions(
+              height: 350,
+              autoPlay: true,
+              // enlargeCenterPage: true,
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _current = index;
+                });
+              }),
+        ),
+        // SizedBox(
+        //   height: 20,
+        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: imgList.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _controller.animateToPage(entry.key),
+              child: Container(
+                width: 8.0,
+                height: 8.0,
+                margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black)
+                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+              ),
+            );
+          }).toList(),
+        ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: hardArtikelList.length,
+            itemBuilder: (context, index) {
+              return Container(
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DetailArtikel(
+                            hardArtikelList![index].idArtikel.toString())));
+                  },
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        hardArtikelList[index].namaArtikel.toString(),
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontFamily: "$thin1",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: black2,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        hardArtikelList![index].judulArtikel.toString(),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: black3,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "$semibold",
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Text(
+                        hardArtikelList![index].namaLengkapDamkar.toString(),
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Icon(
+                        Icons.circle,
+                        size: 5,
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        hardArtikelList![index].artikelTgl.toString(),
+                      )
+                    ],
+                  ),
+                  trailing: Container(
+                    alignment: Alignment.topCenter,
+                    height: paddingVertical4,
+                    width: paddingHorozontal4,
+                    // color: clr[index],
+                    decoration: BoxDecoration(color: clr[index]
+                        // borderRadius: BorderRadius.circular(10),
+                        // image: DecorationImage(
+                        //   image: AssetImage(img[index]))
+                        ),
+                  ),
                 ),
               );
-            }).toList(),
+            },
+            separatorBuilder: (context, index) {
+              return Divider(
+                color: Colors.black38,
+              );
+            },
           ),
-          Container(
-            height: 400,
-            child: ListView.separated(
-              itemCount: hardArtikelList.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => DetailArtikel(
-                              hardArtikelList![index].idArtikel.toString())));
-                    },
-                    title: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          hardArtikelList[index].namaArtikel.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontFamily: "$thin1",
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: black2,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          hardArtikelList![index].judulArtikel.toString(),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: black3,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "$semibold",
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                      ],
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Text(
-                          hardArtikelList![index].namaLengkapDamkar.toString(),
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Icon(
-                          Icons.circle,
-                          size: 5,
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          hardArtikelList![index].artikelTgl.toString(),
-                        )
-                      ],
-                    ),
-                    trailing: Container(
-                      alignment: Alignment.topCenter,
-                      height: paddingVertical4,
-                      width: paddingHorozontal4,
-                      // color: clr[index],
-                      decoration: BoxDecoration(color: clr[index]
-                          // borderRadius: BorderRadius.circular(10),
-                          // image: DecorationImage(
-                          //   image: AssetImage(img[index]))
-                          ),
-                    ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  color: Colors.black38,
-                );
-              },
-            ),
-          )
-        ]),
-        // bottomNavigationBar: AppMenu(),
-      ),
+        )
+      ]),
+      bottomNavigationBar: AppMenu(),
     );
   }
 }

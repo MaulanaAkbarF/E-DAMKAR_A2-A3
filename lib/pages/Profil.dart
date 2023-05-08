@@ -1,9 +1,12 @@
 import 'package:edamkar_1/pages/HomePage.dart';
+import 'package:edamkar_1/pages/UbahSandi.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:edamkar_1/pages/TentangKami.dart';
+import 'package:edamkar_1/pages/ubahProfil.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/style/app_style.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -43,6 +46,7 @@ class _ProfilePageState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,14 +99,18 @@ class _ProfilePageState extends State<Profile> {
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage:
-                      AssetImage("semuaAset/gambar/logodamkarsatu.png"),
+                  backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
                   backgroundColor: Colors.white,
                 ),
                 title: Text("$userName"),
                 subtitle: Text("$emailnya"),
                 trailing: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfilePage()));
+                  },
                   child: Text(
                     "Ubah",
                     style: TextStyle(color: Colors.blue),
@@ -124,39 +132,42 @@ class _ProfilePageState extends State<Profile> {
                   fontFamily: "font/inter_bold.ttf"),
             ),
           ),
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Icon(Icons.person),
-              title: TextButton(
-                  onPressed: () {},
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Profil Saya",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                  )),
-              horizontalTitleGap: 0,
-              trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Divider(
-            thickness: 1,
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   child: ListTile(
+          //     leading: Icon(Icons.person),
+          //     title: TextButton(
+          //         onPressed: () {},
+          //         child: Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             "Profil Saya",
+          //             style: TextStyle(
+          //                 color: Colors.black87,
+          //                 fontWeight: FontWeight.normal,
+          //                 fontSize: 16),
+          //             textAlign: TextAlign.left,
+          //           ),
+          //         )),
+          //     horizontalTitleGap: 0,
+          //     trailing: GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Divider(
+          //   thickness: 1,
+          // ),
           Container(
             width: double.infinity,
             child: ListTile(
               leading: Icon(Icons.lock),
               title: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UbahSandi(1)));
+                  },
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -170,7 +181,10 @@ class _ProfilePageState extends State<Profile> {
                   )),
               horizontalTitleGap: 0,
               trailing: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UbahSandi(1)));
+                },
                 child: Icon(Icons.chevron_right),
               ),
             ),
@@ -181,70 +195,70 @@ class _ProfilePageState extends State<Profile> {
           SizedBox(
             height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Pengaturan Aplikasi",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "font/inter_bold.ttf"),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Icon(Icons.notifications),
-              title: TextButton(
-                  onPressed: () {},
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Notifikasi",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                  )),
-              horizontalTitleGap: 0,
-              trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Divider(
-            thickness: 1,
-          ),
-          Container(
-            width: double.infinity,
-            child: ListTile(
-              leading: Icon(Icons.book),
-              title: TextButton(
-                  onPressed: () {},
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Preferensi Baca",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                  )),
-              horizontalTitleGap: 0,
-              trailing: GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Divider(
-            thickness: 5,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+          //   child: Text(
+          //     "Pengaturan Aplikasi",
+          //     style: TextStyle(
+          //         fontSize: 25,
+          //         fontWeight: FontWeight.w500,
+          //         fontFamily: "font/inter_bold.ttf"),
+          //   ),
+          // ),
+          // Container(
+          //   width: double.infinity,
+          //   child: ListTile(
+          //     leading: Icon(Icons.notifications),
+          //     title: TextButton(
+          //         onPressed: () {},
+          //         child: Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             "Notifikasi",
+          //             style: TextStyle(
+          //                 color: Colors.black87,
+          //                 fontWeight: FontWeight.normal,
+          //                 fontSize: 16),
+          //             textAlign: TextAlign.left,
+          //           ),
+          //         )),
+          //     horizontalTitleGap: 0,
+          //     trailing: GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Divider(
+          //   thickness: 1,
+          // ),
+          // Container(
+          //   width: double.infinity,
+          //   child: ListTile(
+          //     leading: Icon(Icons.book),
+          //     title: TextButton(
+          //         onPressed: () {},
+          //         child: Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             "Preferensi Baca",
+          //             style: TextStyle(
+          //                 color: Colors.black87,
+          //                 fontWeight: FontWeight.normal,
+          //                 fontSize: 16),
+          //             textAlign: TextAlign.left,
+          //           ),
+          //         )),
+          //     horizontalTitleGap: 0,
+          //     trailing: GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Divider(
+          //   thickness: 5,
+          // ),
           SizedBox(
             height: 10,
           ),
@@ -292,11 +306,12 @@ class _ProfilePageState extends State<Profile> {
           Divider(
             thickness: 5,
           ),
-          SizedBox(
-            height: 100,
-          ),
+          // SizedBox(
+          //   height: 50,
+          // ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(
+                vertical: paddingVertical4, horizontal: paddingHorozontal1),
             child: ElevatedButton(
                 onPressed: () {
                   showLogoutDialog(context);
