@@ -101,9 +101,38 @@ class _BuatLaporanState extends State<BuatLaporan> {
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://172.16.110.68/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    // Data yang akan dikirim
+    var data = {
+      "desa": widget.desa,
+      "jalan": widget.jalan,
+      "kecamatan": widget.kecamatan,
+      "kota": widget.kota,
+      "kodepos": widget.kodepos,
+      "latitude": widget.latitude.toString(),
+      "longitude": widget.longitude.toString(),
+      "noTelp": noTelpCon.text.toString(),
+      "namaBencana": namaBencanaCon.text,
+    };
+
+    // Mengirim data ke server menggunakan metode POST
+    var response = await http.post(url, body: data);
+
+    // Menerima dan memproses respons dari server
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://172.16.110.35/flutter_api/submit"),
+      Uri.parse("http://172.16.110.68/flutter_api/submit.php"),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,
@@ -128,6 +157,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
       var statusUpload = await _kirimLaporan();
       if (statusUpload == true) {
         await uploadImage();
+        _kirimNotifikasi();
         final snackBar = SnackBar(
           /// need to set following properties for best effect of awesome_snackbar_content
           elevation: 0,

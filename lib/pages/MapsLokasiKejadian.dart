@@ -17,7 +17,7 @@ class MapsLokasiKejadian extends StatefulWidget {
 class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
   late GoogleMapController googleMapController;
   static const CameraPosition initialCameraPosition =
-      CameraPosition(target: LatLng(-7.5947464, 111.8952029), zoom: 14);
+      CameraPosition(target: LatLng(-7.2232139, 112.6226935), zoom: 15);
 
   Set<Marker> markers = {};
 
@@ -97,7 +97,7 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                         kota = "${place.subAdministrativeArea}";
                         kodepos = "${place.postalCode}";
                         address =
-                            "${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.postalCode}";
+                            "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.postalCode}";
                       });
                     },
                     child: SvgPicture.asset(
