@@ -85,7 +85,7 @@ class _SignInPageState extends State<SignInPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  loginPost() async {   
+  loginPost() async {
     if (_formKey.currentState!.validate()) {
       var result = await APIClient().postData('login',
           {"email": email.text, "password": pass.text}).catchError((err) {});
@@ -96,8 +96,9 @@ class _SignInPageState extends State<SignInPage> {
               data.data.id.toString(),
               data.data.email.toString(),
               data.data.namaLengkap.toString(),
+              data.data.noHp.toString(),
               data.token.toString());
-          Navigator.pushNamed(context, '/riwayatlapp');
+          Navigator.pushNamed(context, '/profil');
         } else {
           show("Cek Kembali Email dan Password anda");
         }
