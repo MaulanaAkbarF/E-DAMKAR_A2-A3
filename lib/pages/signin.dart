@@ -97,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
               data.data.email.toString(),
               data.data.namaLengkap.toString(),
               data.token.toString());
-          Navigator.pushNamed(context, '/riwayatlapp');
+          Navigator.pushNamed(context, '/homepage');
         } else {
           show("Cek Kembali Email dan Password anda");
         }
