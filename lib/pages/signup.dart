@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:math';
+import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,6 +36,8 @@ final List<Map> teksSignUp = [
     'NamaHint': 'Nama Kamu',
     'Email': 'E-Mail',
     'EmailHint': 'E-Mail Kamu',
+    'Telepon': 'No. Telp (Whatsapp)',
+    'TeleponHint': '08....',
     'Password1': 'Kata Sandi',
     'Password2': 'Ulangi Kata Sandi',
     'LupaPass': 'Lupa Kata Sandi?',
@@ -87,25 +90,58 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
+  final TextEditingController notelp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  RegisterPost() async {
+  RegisterPost(BuildContext context) async {
     var result = await APIClient().postData('register', {
       "email": email.text,
       "password": password.text,
-      "namaLengkap": namalengkap.text
-    }).catchError((err) {});
+      "namaLengkap": namalengkap.text,
+      "noHp": notelp.text,
+      "kodeOtp": randomNumber.toString(),
+      "status": 'Unverified'
+    }).catchError((err) {
+      return null;
+    });
+
     if (result != null) {
+      print(result);
       var data = registerFromJson(result);
       if (data.kondisi) {
-        show('Registrasi Berhasil');
-        Navigator.pushNamed(context, '/signin');
+        showSnackBar(context, 'Registrasi Berhasil');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationPage(noHp: notelp.text),
+          ),
+        );
       } else {
-        show("Cek Kembali Email dan Password anda");
+        showSnackBar(context, "Cek Kembali Email dan Password anda");
       }
     } else {
       print('something error on code');
+      print(result);
     }
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  void initState() {
+    random();
+    super.initState();
+  }
+
+  int randomNumber = 100000;
+  void random() {
+    setState(() {
+      Random random = new Random();
+      randomNumber = random.nextInt(1000000);
+    });
   }
 
   void show(String message) {
@@ -134,6 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          Text("random: $randomNumber"),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Text(teks['Header'],
@@ -228,6 +265,48 @@ class _SignUpPageState extends State<SignUpPage> {
                                   decoration: InputDecoration(
                                       hintText: teks['EmailHint'],
                                       prefixIcon: Icon(Icons.mail),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Text(teks['Telepon'],
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: teksStyle['Thin1']),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Container(
+                                width: double.infinity,
+                                margin: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: Colors.grey.shade300,
+                                        width: 1.2)),
+                                child: TextFormField(
+                                  controller: notelp,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'No. Telp (whatsapp) tidak boleh kosong';
+                                    }
+                                  },
+                                  cursorColor: Colors.black,
+                                  style: teksStyle['SemiBold1'],
+                                  decoration: InputDecoration(
+                                      hintText: teks['TeleponHint'],
+                                      prefixIcon: Icon(Icons.phone),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
                                       border: InputBorder.none),
@@ -365,7 +444,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
-                                      RegisterPost();
+                                      RegisterPost(context);
                                     }
                                   },
                                   child: Container(
