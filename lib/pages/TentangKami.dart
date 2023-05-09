@@ -21,8 +21,7 @@ class _TentangKamiPageState extends State<TentangKami> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Profile()));
+            Navigator.pop(context);
           },
         ),
         centerTitle: true,

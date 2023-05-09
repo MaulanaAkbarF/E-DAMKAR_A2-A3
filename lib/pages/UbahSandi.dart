@@ -43,30 +43,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
   final _confirmPasswordController = TextEditingController();
   String _message = '';
 
-  // Future<void> _changePassword() async {
-  //   final response = await http.post(
-  //     Uri.parse('https://http://192.168.1.16:8000/api/changePassword'),
-  //     body: {
-  //       'id': widget.userId.toString(),
-  //       'password_lama': _oldPasswordController.text,
-  //       'password_baru': _newPasswordController.text,
-  //       'confirm_password': _confirmPasswordController.text,
-  //     },
-  //   );
-
-  //   final responseData = json.decode(response.body);
-
-  //   if (response.statusCode == 200) {
-  //     setState(() {
-  //       _message = responseData['message'];
-  //     });
-  //   } else {
-  //     setState(() {
-  //       _message = responseData['error'];
-  //     });
-  //   }
-  // }
-
   @override
   void dispose() {
     _oldPasswordController.dispose();
@@ -75,37 +51,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
     super.dispose();
   }
 
-  // final TextEditingController password = TextEditingController();
-  // final TextEditingController password1 = TextEditingController();
-  // final _formKey = GlobalKey<FormState>();
-
-  // SimpanPost() async {
-  //   var result = await APIClient().postData('register', {
-  //     "password": password.text,
-  //     "password1": password1.text,
-  //   }).catchError((err) {});
-  //   if (result != null) {
-  //     var data = registerFromJson(result);
-  //     if (data.kondisi) {
-  //       show('Ubah Kata Sandi Berhasil');
-  //       //Navigator.pushNamed(context, '/signin');
-  //     } else {
-  //       show("Cek Kembali Email dan Password anda");
-  //     }
-  //   } else {
-  //     print('something error on code');
-  //   }
-  // }
-
-  // void show(String message) {
-  //   Fluttertoast.showToast(
-  //       msg: message,
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.BOTTOM,
-  //       timeInSecForIosWeb: 1,
-  //       backgroundColor: Colors.white,
-  //       textColor: Colors.black);
-  // }
 
   toss(BuildContext context) {
     final snackBar = SnackBar(
@@ -130,6 +75,27 @@ class _UbahSandiPageState extends State<UbahSandi> {
       context,
       MaterialPageRoute(builder: (context) => Profile()),
     );
+  }
+
+  gagal(BuildContext context) {
+    final snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      padding: EdgeInsets.all(16),
+      behavior: SnackBarBehavior.fixed,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: 'Kata Sandi Gagal Di Ubah',
+        message: 'Diteliti Lagi Dong..!!!!',
+
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: ContentType.failure,
+      ),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   @override
@@ -202,11 +168,11 @@ class _UbahSandiPageState extends State<UbahSandi> {
                     controller: _oldPasswordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'password tidak boleh kosong';
+                        return 'password lama tidak boleh kosong';
                       } else if (value.length > 20) {
-                        return 'password terlalu panjang';
+                        return 'password lama terlalu panjang';
                       } else if (value.length < 8) {
-                        return 'password terlalu pendek';
+                        return 'password lama terlalu pendek';
                       }
                     },
                     obscureText: _passwordVisible,
@@ -261,11 +227,11 @@ class _UbahSandiPageState extends State<UbahSandi> {
                     controller: _newPasswordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'password tidak boleh kosong';
+                        return 'password baru tidak boleh kosong';
                       } else if (value.length > 20) {
-                        return 'password terlalu panjang';
+                        return 'password baru terlalu panjang';
                       } else if (value.length < 8) {
-                        return 'password terlalu pendek';
+                        return 'password baru terlalu pendek';
                       }
                     },
                     obscureText: _passwordVisible2,
@@ -322,8 +288,8 @@ class _UbahSandiPageState extends State<UbahSandi> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Validasi password tidak boleh kosong';
-                      } else if (value != _confirmPasswordController.text) {
-                        return 'validasi password tidak sesuai dengan password';
+                      } else if (value != _newPasswordController.text) {
+                        return 'validasi password tidak sesuai dengan password baru';
                       }
                     },
                     obscureText: _passwordVisible1,
@@ -365,16 +331,19 @@ class _UbahSandiPageState extends State<UbahSandi> {
                     highlightColor: Colors.red.shade900,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        //SimpanPost();
-                        //_changePassword();
-                        Update.ubahSandi(
-                                widget.userId.toString(),
-                                _oldPasswordController.text,
-                                _newPasswordController.text)
-                            .then((value) => {
-                                  if (value.kode.toString() == "200")
-                                    {toss(context)}
-                                });
+                        if (_newPasswordController.text ==
+                            _confirmPasswordController.text) {
+                          Update.ubahSandi(
+                                  widget.userId.toString(),
+                                  _oldPasswordController.text,
+                                  _newPasswordController.text)
+                              .then((value) => {
+                                    if (value.kode.toString() == "200")
+                                      {toss(context)}
+                                  });
+                        } else {
+                          gagal(context);
+                        }
                       }
                     },
                     child: Container(
