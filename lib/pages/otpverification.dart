@@ -97,33 +97,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              // Material(
-                              //   clipBehavior: Clip.antiAliasWithSaveLayer,
-                              //   borderRadius: BorderRadius.circular(8),
-                              //   child: InkWell(
-                              //     splashColor: Colors.grey.shade400,
-                              //     highlightColor: Colors.grey.shade600,
-                              //     onTap: () {
-                              //       navToResetPassPage(context);
-                              //     },
-                              //     child: Padding(
-                              //       padding: EdgeInsets.only(right: 10),
-                              //       child: Container(
-                              //         width: 40,
-                              //         height: 40,
-                              //         child: Icon(Icons.arrow_back_ios_new),
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-                              // Text(teks['Header'],
-                              //     overflow: TextOverflow.ellipsis,
-                              //     maxLines: 1,
-                              //     style: teksStyle['Bold1']),
-                            ],
-                          ),
+                          Text('noHp: ${widget.noHp}'),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(

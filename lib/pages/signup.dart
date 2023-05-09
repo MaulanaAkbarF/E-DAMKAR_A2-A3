@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
 
 import '../APIRequest/APIClient.dart';
 import '../models/RegisterModel.dart';
@@ -93,7 +96,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController notelp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  RegisterPost(BuildContext context) async {
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://192.168.0.104/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": randomNumber.toString(),
+      "noHp": notelp.text,
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
+  void RegisterPost(context) async {
     var result = await APIClient().postData('register', {
       "email": email.text,
       "password": password.text,
@@ -106,19 +126,15 @@ class _SignUpPageState extends State<SignUpPage> {
     });
 
     if (result != null) {
-      print(result);
-      var data = registerFromJson(result);
-      if (data.kondisi) {
-        showSnackBar(context, 'Registrasi Berhasil');
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OtpVerificationPage(noHp: notelp.text),
-          ),
-        );
-      } else {
-        showSnackBar(context, "Cek Kembali Email dan Password anda");
-      }
+      print("kondisi berhasil dijalankan");
+      _kirimNotifikasi();
+      showSnackBar(context, 'Registrasi Berhasil');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OtpVerificationPage(noHp: notelp.text),
+        ),
+      );
     } else {
       print('something error on code');
       print(result);
