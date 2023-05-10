@@ -25,7 +25,7 @@ void main() {
     ),
     initialRoute: '/',
     routes: {
-      '/': (context) => SignUpPage(),
+      '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
       '/signup': (context) => SignUpPage(),
       '/remakepass': (context) => RemakePassPage(),

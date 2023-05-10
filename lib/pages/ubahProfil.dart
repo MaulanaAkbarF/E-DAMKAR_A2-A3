@@ -30,48 +30,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
     getUserData();
   }
-  
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        title: Text(
+          "Ubah Profil",
+          style: TextStyle(color: Colors.black87, fontSize: 20),
+        ),
+      ),
       body: Form(
         key: _formKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
-            height: 50,
-          ),
-          Row(
-            children: [
-              Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                borderRadius: BorderRadius.circular(8),
-                child: InkWell(
-                  splashColor: Colors.grey.shade400,
-                  highlightColor: Colors.grey.shade600,
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      child: Icon(Icons.arrow_back_ios_new),
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "Ubah Profil",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "font/inter_bold.ttf"),
-              ),
-            ],
+            height: 15,
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: paddingVertical4),
@@ -135,10 +121,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           child: TextFormField(
                             //controller: email
                             //readOnly: true,
-      
+
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
-                              
                                 hintText: '$Name',
                                 prefixIcon: Icon(Icons.person),
                                 contentPadding:
@@ -151,7 +136,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: paddingHorozontal4),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: paddingHorozontal4),
                     child: Align(
                       alignment: Alignment.center,
                       child: Padding(

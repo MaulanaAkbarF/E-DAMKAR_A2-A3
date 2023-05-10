@@ -51,7 +51,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
     super.dispose();
   }
 
-
   toss(BuildContext context) {
     final snackBar = SnackBar(
       /// need to set following properties for best effect of awesome_snackbar_content
@@ -101,271 +100,254 @@ class _UbahSandiPageState extends State<UbahSandi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          title: Text(
+            "Ubah Kata Sandi",
+            style: TextStyle(color: Colors.black87, fontSize: 20),
+          ),
+        ),
         body: Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 50,
-          ),
-          Row(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                borderRadius: BorderRadius.circular(8),
-                child: InkWell(
-                  splashColor: Colors.grey.shade400,
-                  highlightColor: Colors.grey.shade600,
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text("Masukan Kata Sandi Lama"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 5),
                     child: Container(
-                      width: 40,
-                      height: 40,
-                      child: Icon(Icons.arrow_back_ios_new),
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                "Ubah Kata Sandi",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "font/inter_bold.ttf"),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text("Masukan Kata Sandi Lama"),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1.2)),
-                  child: TextFormField(
-                    controller: _oldPasswordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'password lama tidak boleh kosong';
-                      } else if (value.length > 20) {
-                        return 'password lama terlalu panjang';
-                      } else if (value.length < 8) {
-                        return 'password lama terlalu pendek';
-                      }
-                    },
-                    obscureText: _passwordVisible,
-                    cursorColor: Colors.black,
-                    style: TextStyle(),
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
-                          },
-                          icon: Icon(_passwordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined),
-                          color: Color.fromARGB(255, 143, 143, 143),
-                        ),
-                        suffixIconColor: Colors.black,
-                        contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
-                        border: InputBorder.none),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text("Masukan Kata Sandi Baru"),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1.2)),
-                  child: TextFormField(
-                    controller: _newPasswordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'password baru tidak boleh kosong';
-                      } else if (value.length > 20) {
-                        return 'password baru terlalu panjang';
-                      } else if (value.length < 8) {
-                        return 'password baru terlalu pendek';
-                      }
-                    },
-                    obscureText: _passwordVisible2,
-                    cursorColor: Colors.black,
-                    style: TextStyle(),
-                    decoration: InputDecoration(
-                        hintText: 'Minimal 8 Karakter',
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible2 = !_passwordVisible2;
-                            });
-                          },
-                          icon: Icon(_passwordVisible2
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined),
-                          color: Color.fromARGB(255, 143, 143, 143),
-                        ),
-                        suffixIconColor: Colors.black,
-                        contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
-                        border: InputBorder.none),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text("Ulangi Kata Sandi Baru"),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: FractionalOffset.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1.2)),
-                  child: TextFormField(
-                    controller: _confirmPasswordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Validasi password tidak boleh kosong';
-                      } else if (value != _newPasswordController.text) {
-                        return 'validasi password tidak sesuai dengan password baru';
-                      }
-                    },
-                    obscureText: _passwordVisible1,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                        hintText: 'Minimal 8 Karakter',
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible1 = !_passwordVisible1;
-                            });
-                          },
-                          icon: Icon(_passwordVisible1
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined),
-                          color: Color.fromARGB(255, 143, 143, 143),
-                        ),
-                        suffixIconColor: Colors.black,
-                        contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
-                        border: InputBorder.none),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(top: 40),
-                child: Material(
-                  color: Colors.red.shade400,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  borderRadius: BorderRadius.circular(8),
-                  child: InkWell(
-                    splashColor: Colors.red.shade700,
-                    highlightColor: Colors.red.shade900,
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        if (_newPasswordController.text ==
-                            _confirmPasswordController.text) {
-                          Update.ubahSandi(
-                                  widget.userId.toString(),
-                                  _oldPasswordController.text,
-                                  _newPasswordController.text)
-                              .then((value) => {
-                                    if (value.kode.toString() == "200")
-                                      {toss(context)}
-                                  });
-                        } else {
-                          gagal(context);
-                        }
-                      }
-                    },
-                    child: Container(
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Simpan',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      width: double.infinity,
+                      margin: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                              color: Colors.grey.shade300, width: 1.2)),
+                      child: TextFormField(
+                        controller: _oldPasswordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'password lama tidak boleh kosong';
+                          } else if (value.length > 20) {
+                            return 'password lama terlalu panjang';
+                          } else if (value.length < 8) {
+                            return 'password lama terlalu pendek';
+                          }
+                        },
+                        obscureText: _passwordVisible,
+                        cursorColor: Colors.black,
+                        style: TextStyle(),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                              icon: Icon(_passwordVisible
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined),
+                              color: Color.fromARGB(255, 143, 143, 143),
+                            ),
+                            suffixIconColor: Colors.black,
+                            contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
+                            border: InputBorder.none),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
-      ),
-    ));
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text("Masukan Kata Sandi Baru"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                              color: Colors.grey.shade300, width: 1.2)),
+                      child: TextFormField(
+                        controller: _newPasswordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'password baru tidak boleh kosong';
+                          } else if (value.length > 20) {
+                            return 'password baru terlalu panjang';
+                          } else if (value.length < 8) {
+                            return 'password baru terlalu pendek';
+                          }
+                        },
+                        obscureText: _passwordVisible2,
+                        cursorColor: Colors.black,
+                        style: TextStyle(),
+                        decoration: InputDecoration(
+                            hintText: 'Minimal 8 Karakter',
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible2 = !_passwordVisible2;
+                                });
+                              },
+                              icon: Icon(_passwordVisible2
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined),
+                              color: Color.fromARGB(255, 143, 143, 143),
+                            ),
+                            suffixIconColor: Colors.black,
+                            contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text("Ulangi Kata Sandi Baru"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                              color: Colors.grey.shade300, width: 1.2)),
+                      child: TextFormField(
+                        controller: _confirmPasswordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Validasi password tidak boleh kosong';
+                          } else if (value != _newPasswordController.text) {
+                            return 'validasi password tidak sesuai dengan password baru';
+                          }
+                        },
+                        obscureText: _passwordVisible1,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                            hintText: 'Minimal 8 Karakter',
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible1 = !_passwordVisible1;
+                                });
+                              },
+                              icon: Icon(_passwordVisible1
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined),
+                              color: Color.fromARGB(255, 143, 143, 143),
+                            ),
+                            suffixIconColor: Colors.black,
+                            contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 40),
+                    child: Material(
+                      color: Colors.red.shade400,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      borderRadius: BorderRadius.circular(8),
+                      child: InkWell(
+                        splashColor: Colors.red.shade700,
+                        highlightColor: Colors.red.shade900,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            if (_newPasswordController.text ==
+                                _confirmPasswordController.text) {
+                              Update.ubahSandi(
+                                      widget.userId.toString(),
+                                      _oldPasswordController.text,
+                                      _newPasswordController.text)
+                                  .then((value) => {
+                                        if (value.kode.toString() == "200")
+                                          {toss(context)}
+                                      });
+                            } else {
+                              gagal(context);
+                            }
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Simpan',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 
   void show(String message) {

@@ -18,8 +18,9 @@ class _TentangKamiPageState extends State<TentangKami> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -36,7 +37,7 @@ class _TentangKamiPageState extends State<TentangKami> {
         color: Colors.white,
         child: Column(children: [
           SizedBox(
-            height: 70,
+            height: 50,
           ),
           Align(
             alignment: Alignment.center,
