@@ -1,16 +1,22 @@
 import 'dart:convert';
 
-Register registerFromJson(String str) => Register.fromJson(json.decode(str));
+RegisterModel registerModelFromJson(String str) =>
+    RegisterModel.fromJson(json.decode(str));
 
-class Register {
-    Register({
-      required this.kondisi,
-    });
+class RegisterModel {
+  bool? kondisi;
+  String? message;
+  // Errors? errors;
 
-    bool kondisi;
+  RegisterModel({
+    this.kondisi,
+    this.message,
+    // this.errors,
+  });
 
-    factory Register.fromJson(Map<String, dynamic> json) => Register(
+  factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
         kondisi: json["kondisi"],
-    );
-
+        message: json["message"],
+        // errors: json["errors"].isEmpty ? {json} : Errors.fromJson(json["errors"]),
+      );
 }

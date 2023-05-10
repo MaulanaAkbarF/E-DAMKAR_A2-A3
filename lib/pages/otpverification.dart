@@ -1,13 +1,19 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
+import 'package:edamkar_1/pages/verificationSuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'RemakePass.dart';
+import 'package:http/http.dart' as http;
 
 class OtpVerificationPage extends StatefulWidget {
-  String noHp;
+  String noHp, kodeOtp;
 
-  OtpVerificationPage({Key? key, required this.noHp}) : super(key: key);
+  OtpVerificationPage({Key? key, required this.noHp, required this.kodeOtp})
+      : super(key: key);
 
   @override
   State<OtpVerificationPage> createState() => _OtpVerificationPageState();
@@ -65,9 +71,44 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-
 class _OtpVerificationPageState extends State<OtpVerificationPage> {
+  final TextEditingController kodeotptxt = TextEditingController();
+  late String otpRegister;
+  late String noHp;
+  void initState() {
+    super.initState();
+    otpRegister = widget.kodeOtp;
+    noHp = widget.noHp;
+  }
+
+  void verifyCode() {
+    if (otpRegister.toString() == kodeotptxt.text) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => VerificationSuccess()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Kode verifikasi tidak cocok")),
+      );
+    }
+  }
+
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://192.168.137.1/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": otpRegister.toString(),
+      "noHp": noHp.toString(),
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +138,9 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text('noHp: ${widget.noHp}'),
+                          // Text('noHp: ${(widget.noHp)}'),
+                          // Text('otp: $otpRegister'),
+                          // Text('Verification code: $verificationCode'),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
@@ -123,6 +166,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
+                                controller: kodeotptxt,
                                 appContext: context,
                                 length: 6, // panjang kode OTP
                                 onChanged: (value) {
@@ -153,8 +197,13 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             children: [
                               Text(teks['SendCodeText'],
                                   style: teksStyle['SemiBold3']),
-                              Text(teks['SendCodeButton'],
-                                  style: teksStyle['SemiBold2']),
+                              InkWell(
+                                child: Text(teks['SendCodeButton'],
+                                    style: teksStyle['SemiBold2']),
+                                onTap: () {
+                                  _kirimNotifikasi();
+                                },
+                              ),
                             ],
                           ),
                           Align(
@@ -169,7 +218,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    navToRemakePassPage(context);
+                                    verifyCode();
                                   },
                                   child: Container(
                                     height: 50,

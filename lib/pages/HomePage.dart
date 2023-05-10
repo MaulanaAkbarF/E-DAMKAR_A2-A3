@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var userName = '';
+  var url_photo;
 
   void getUserData() async {
     var data = DataUser().getNama();
@@ -31,6 +32,13 @@ class _HomePageState extends State<HomePage> {
     getUserData();
   }
 
+  Image image(String? url) {
+    if (url != null) {
+      return Image(image: NetworkImage(url.toString()));
+    }
+    return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -45,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(vertical: paddingVertical2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -60,14 +68,16 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  GestureDetector(onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
-                  }),
-                  CircleAvatar(
-                    radius: 30,
-                    // backgroundImage: AssetImage('semuaAset/gambar/chefCat.jpg'),
-                  )
+                  GestureDetector(
+                      child: CircleAvatar(
+                        radius: 30,
+                        child: image(url_photo),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      }),
+                  //
                 ],
               ),
             ),

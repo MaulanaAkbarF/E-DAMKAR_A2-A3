@@ -34,9 +34,7 @@ void main() {
       '/riwayatlapp': (context) => RiwayatLaporan(),
       // '/detailriwayat': (context) => DetailRiwayatLengkap()
       '/artikel': (context) => Artikel(),
-
       '/detailartikel': (context) => DetailArtikel(""),
-
       '/profil': (context) => Profile(),
       '/tentangkami': (context) => TentangKami(),
       '/laporanpage': (context) => LaporanPage(),
