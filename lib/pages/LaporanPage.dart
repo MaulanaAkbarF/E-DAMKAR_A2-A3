@@ -1,4 +1,3 @@
-
 import 'package:edamkar_1/Menu/Menu.dart';
 
 import 'package:edamkar_1/pages/LokasiKejadian.dart';
@@ -152,7 +151,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Bencana Alam",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -214,8 +213,9 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    padding: EdgeInsets.only(
+                                        top: 16, left: 16, right: 16),
+                                    child: Text("Laporan Kebakaran",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -278,7 +278,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Hewan Buas",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -341,7 +341,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Penyelamatan",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),

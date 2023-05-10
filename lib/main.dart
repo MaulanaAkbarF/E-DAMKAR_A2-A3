@@ -30,7 +30,6 @@ void main() {
       '/signup': (context) => SignUpPage(),
       '/remakepass': (context) => RemakePassPage(),
       '/resetpass': (context) => ResetPassPage(),
-      '/otp': (context) => OtpVerificationPage(),
       '/homepage': (context) => HomePage(),
       '/riwayatlapp': (context) => RiwayatLaporan(),
       // '/detailriwayat': (context) => DetailRiwayatLengkap()

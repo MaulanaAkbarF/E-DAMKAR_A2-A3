@@ -311,7 +311,7 @@ class _ProfilePageState extends State<Profile> {
           // ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: paddingVertical4, horizontal: paddingHorozontal1),
+                vertical: 85, horizontal: paddingHorozontal2),
             child: ElevatedButton(
                 onPressed: () {
                   showLogoutDialog(context);
@@ -338,13 +338,16 @@ class _ProfilePageState extends State<Profile> {
       content: Text("Apakah Kamu Yakin Akan Keluar?"),
       actions: [
         TextButton(
-          child: Text("Tidak"),
+          child: Text("Tidak", style: TextStyle(color: Colors.black)),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: Text("Ya"),
+          child: Text(
+            "Ya",
+            style: TextStyle(color: Colors.black),
+          ),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => SignInPage()));

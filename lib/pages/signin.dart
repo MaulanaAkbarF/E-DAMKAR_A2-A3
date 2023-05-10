@@ -96,6 +96,7 @@ class _SignInPageState extends State<SignInPage> {
               data.data.id.toString(),
               data.data.email.toString(),
               data.data.namaLengkap.toString(),
+              data.data.noHp.toString(),
               data.token.toString());
           Navigator.pushNamed(context, '/homepage');
         } else {

@@ -1,8 +1,12 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'dart:math';
+import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
 
 import '../APIRequest/APIClient.dart';
 import '../models/RegisterModel.dart';
@@ -35,6 +39,8 @@ final List<Map> teksSignUp = [
     'NamaHint': 'Nama Kamu',
     'Email': 'E-Mail',
     'EmailHint': 'E-Mail Kamu',
+    'Telepon': 'No. Telp (Whatsapp)',
+    'TeleponHint': '08....',
     'Password1': 'Kata Sandi',
     'Password2': 'Ulangi Kata Sandi',
     'LupaPass': 'Lupa Kata Sandi?',
@@ -88,27 +94,74 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
   final TextEditingController notelp = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
-  RegisterPost() async {
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://192.168.137.1/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": randomNumber.toString(),
+      "noHp": notelp.text,
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
+  void RegisterPost(context) async {
     var result = await APIClient().postData('register', {
       "email": email.text,
       "password": password.text,
       "namaLengkap": namalengkap.text,
-      "noHp": notelp.text
-    }).catchError((err) {});
+      "noHp": notelp.text,
+      "kodeOtp": randomNumber.toString(),
+      "status": 'Unverified'
+    }).catchError((err) {
+      return null;
+    });
+
     if (result != null) {
-      var data = registerModelFromJson(result);
-      if (data.kondisi != null && data.kondisi!) {
-        show('Registrasi Berhasil');
-        Navigator.pushNamed(context, '/signin');
-      } else if (data.message!.isNotEmpty) {
-        show(data.message!);
-      }
+      print("kondisi berhasil dijalankan");
+      _kirimNotifikasi();
+      showSnackBar(context, 'Registrasi Berhasil');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OtpVerificationPage(
+            noHp: notelp.text,
+            kodeOtp: randomNumber.toString(),
+          ),
+        ),
+      );
     } else {
       print('something error on code');
+      print(result);
     }
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  void initState() {
+    random();
+    super.initState();
+  }
+
+  int randomNumber = 100000;
+
+  void random() {
+    setState(() {
+      Random random = new Random();
+      randomNumber = random.nextInt(900000) + 100000;
+    });
   }
 
   void show(String message) {
@@ -138,6 +191,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          Text("random: $randomNumber"),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Text(teks['Header'],
@@ -243,7 +297,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
                               padding: EdgeInsets.only(top: 20),
-                              child: Text("No Telepon",
+                              child: Text(teks['Telepon'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: teksStyle['Thin1']),
@@ -266,7 +320,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   controller: notelp,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Nomer Telepon tidak boleh kosong';
+                                      return 'No. Telp (whatsapp) tidak boleh kosong';
                                     } else if (value.length > 13) {
                                       return 'no telepon terlalu panjang';
                                     } else if (value.length < 9) {
@@ -276,8 +330,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
-                                      hintText: "No Telp kamu",
-                                      prefixIcon: Icon(Icons.mail),
+                                      hintText: teks['TeleponHint'],
+                                      prefixIcon: Icon(Icons.phone),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
                                       border: InputBorder.none),
@@ -415,7 +469,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
-                                      RegisterPost();
+                                      RegisterPost(context);
                                     }
                                   },
                                   child: Container(

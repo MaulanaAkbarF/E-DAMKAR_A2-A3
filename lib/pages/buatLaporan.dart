@@ -103,7 +103,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.16.110.68/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.137.59/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
 
     // Data yang akan dikirim
     var data = {
@@ -132,7 +132,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://172.16.110.68/flutter_api/submit.php"),
+      Uri.parse("http://192.168.137.59/flutter_api/submit.php"),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,
