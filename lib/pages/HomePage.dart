@@ -15,20 +15,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var userName = '';
+  var url_photo; 
 
   void getUserData() async {
     var data = DataUser().getNama();
     data.then((value) {
-      setState(() {
-        userName = value.toString();
-      });
+      userName = value.toString();
     });
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
     getUserData();
+  }
+
+  Image image(String? url){
+  if(url != null){
+    return Image(image: NetworkImage(url.toString())); 
+  }
+  return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
   }
 
   @override
@@ -39,7 +46,134 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: paddingHorozontal1, vertical: paddingVertical1),
-        // child: ,
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: paddingVertical2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Selamat datang $userName',
+                        maxLines: 1,
+                        style: semibold,
+                      ),
+                      const Text(
+                        'Lorem Ipsum Dolor set amet',
+                        style: medium,
+                      )
+                    ],
+                  ),
+                  GestureDetector(
+                      child: CircleAvatar(
+                        radius: 30,
+                        child: image(url_photo),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      }),
+                  //
+                ],
+              ),
+            ),
+            ColoredBox(
+              color: grey2,
+              child: SizedBox(
+                height: paddingVertical1,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: paddingVertical2,
+              ),
+              child: const Text('Panggilan Darurat',
+                  textAlign: TextAlign.center, style: bold),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: paddingVertical1,
+              ),
+              child: const Text(
+                  'Panggilan darurat ini digunakan untuk panggilan mendesak saja. Kemudian sertakan foto dari tempat kejadian !',
+                  textAlign: TextAlign.justify,
+                  style: medium),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: paddingHorozontal1, vertical: paddingVertical1),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/riwayatlapp');
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: red1,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: paddingVertical2),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('semuaAset/gambar/EmeCall.svg'),
+                          // SizedBox(height: paddingHorozontal1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Panggilan Darurat',
+                                style: medium,
+                              ),
+                              SvgPicture.asset(
+                                  'semuaAset/gambar/ArrowRight2.svg')
+                            ],
+                          ),
+                        ],
+                      ))),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+              child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      primary: green1,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: paddingVertical2),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('semuaAset/gambar/WA.svg'),
+                          // SizedBox(height: paddingHorozontal1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Whatsapp',
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    color: green2,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15),
+                              ),
+                              SvgPicture.asset(
+                                  'semuaAset/gambar/ArrowRight.svg')
+                            ],
+                          ),
+                        ],
+                      ))),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: paddingVertical2,
+              ),
+              child: const Text('Laporkan kendala anda',
+                  textAlign: TextAlign.start, style: semibold),
+            ),
+          ],
+        ),
       )),
       bottomNavigationBar: AppMenu(),
     );

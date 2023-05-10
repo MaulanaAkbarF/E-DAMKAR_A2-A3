@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-const String _baseUrl = 'http://172.16.110.72:8000/api/';
+const String _baseUrl = 'http://172.16.106.111:8000/api/';
 
 class APIClient {
   var client = http.Client();
@@ -24,7 +24,6 @@ class APIClient {
     var response = await client.post(url, body: object);
 
     if (response.statusCode == 200) {
-      print(" tes = " + response.body);
       return response.body;
     } else {
       return false;

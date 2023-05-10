@@ -23,7 +23,7 @@ void main() {
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
     ),
-    initialRoute: '/',
+    initialRoute: '/homepage',
     routes: {
       '/': (context) => EmergencyCall(),
       '/signin': (context) => SignInPage(),
