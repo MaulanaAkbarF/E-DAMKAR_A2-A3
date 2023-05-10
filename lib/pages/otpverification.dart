@@ -1,13 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'RemakePass.dart';
+import 'package:http/http.dart' as http;
 
 class OtpVerificationPage extends StatefulWidget {
-  String noHp;
+  String noHp, kodeOtp;
 
-  OtpVerificationPage({Key? key, required this.noHp}) : super(key: key);
+  OtpVerificationPage({Key? key, required this.noHp, required this.kodeOtp})
+      : super(key: key);
 
   @override
   State<OtpVerificationPage> createState() => _OtpVerificationPageState();
@@ -65,9 +70,26 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-
 class _OtpVerificationPageState extends State<OtpVerificationPage> {
+  final TextEditingController kodeotptxt = TextEditingController();
+  late String otpRegister;
+  void initState() {
+    super.initState();
+    otpRegister = widget.kodeOtp;
+  }
+
+  void verifyCode() {
+    if (otpRegister.toString() == kodeotptxt.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Kode verifikasi cocok")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Kode verifikasi tidak cocok")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +119,9 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text('noHp: ${widget.noHp}'),
+                          Text('noHp: ${(widget.noHp)}'),
+                          Text('otp: $otpRegister'),
+                          // Text('Verification code: $verificationCode'),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
@@ -123,6 +147,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
+                                controller: kodeotptxt,
                                 appContext: context,
                                 length: 6, // panjang kode OTP
                                 onChanged: (value) {
@@ -169,7 +194,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    navToRemakePassPage(context);
+                                    verifyCode();
                                   },
                                   child: Container(
                                     height: 50,

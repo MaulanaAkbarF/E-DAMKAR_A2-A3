@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.0.104/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.137.1/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -132,7 +132,10 @@ class _SignUpPageState extends State<SignUpPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OtpVerificationPage(noHp: notelp.text),
+          builder: (context) => OtpVerificationPage(
+            noHp: notelp.text,
+            kodeOtp: randomNumber.toString(),
+          ),
         ),
       );
     } else {
@@ -153,10 +156,11 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   int randomNumber = 100000;
+
   void random() {
     setState(() {
       Random random = new Random();
-      randomNumber = random.nextInt(1000000);
+      randomNumber = random.nextInt(900000) + 100000;
     });
   }
 
