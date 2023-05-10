@@ -15,14 +15,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var userName = '';
-  var url_photo; 
+  var url_photo;
 
   void getUserData() async {
     var data = DataUser().getNama();
     data.then((value) {
-      userName = value.toString();
+      setState(() {
+        userName = value.toString();
+      });
     });
-    setState(() {});
   }
 
   @override
@@ -31,11 +32,11 @@ class _HomePageState extends State<HomePage> {
     getUserData();
   }
 
-  Image image(String? url){
-  if(url != null){
-    return Image(image: NetworkImage(url.toString())); 
-  }
-  return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
+  Image image(String? url) {
+    if (url != null) {
+      return Image(image: NetworkImage(url.toString()));
+    }
+    return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
   }
 
   @override

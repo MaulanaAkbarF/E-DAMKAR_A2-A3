@@ -91,16 +91,16 @@ class _SignInPageState extends State<SignInPage> {
           {"email": email.text, "password": pass.text}).catchError((err) {});
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
-        if (data.token.isNotEmpty) {
+        if (data.token!.isNotEmpty) {
           await DataUser().addUser(
-              data.data.id.toString(),
-              data.data.email.toString(),
-              data.data.namaLengkap.toString(),
-              data.data.noHp.toString(),
+              data.data!.id.toString(),
+              data.data!.email.toString(),
+              data.data!.namaLengkap.toString(),
+              data.data!.noHp.toString(),
               data.token.toString());
           Navigator.pushNamed(context, '/homepage');
         } else {
-          show("Cek Kembali Email dan Password anda");
+          show(data.data!.message.toString());
         }
       } else {
         show("mengalami permasalahan call api");
