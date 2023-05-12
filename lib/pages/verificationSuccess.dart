@@ -16,7 +16,7 @@ class VerificationSuccess extends StatelessWidget {
                 Lottie.asset("semuaAset/icon/success2.json",
                     width: 350, height: 230),
                 SizedBox(
-                  height: 42,
+                  height: 36,
                   child: Text(
                     'Verifikasi Berhasil!',
                     style: TextStyle(
@@ -33,6 +33,7 @@ class VerificationSuccess extends StatelessWidget {
                     style: TextStyle(
                         fontFamily: "font/inter_regular.ttf",
                         fontSize: 18,
+                        height: 1.4,
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center,
@@ -61,7 +62,7 @@ class VerificationSuccess extends StatelessWidget {
                         style: TextStyle(
                           // Properti gaya teks
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

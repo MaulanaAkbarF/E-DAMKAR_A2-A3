@@ -38,7 +38,7 @@ final List<Map> teksSignUp = [
     'Nama': 'Nama Lengkap',
     'NamaHint': 'Nama Kamu',
     'Email': 'E-Mail',
-    'EmailHint': 'E-Mail Kamu',
+    'EmailHint': 'emailkamu@gmail.com',
     'Telepon': 'No. Telp (Whatsapp)',
     'TeleponHint': '08....',
     'Password1': 'Kata Sandi',
@@ -62,8 +62,9 @@ final List<Map> teksStyleSignUp = [
         fontWeight: FontWeight.w700),
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
+        height: 1.4,
         color: Colors.black45,
-        fontSize: (16)),
+        fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
         color: Colors.blueAccent,
@@ -98,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.137.1/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -128,7 +129,11 @@ class _SignUpPageState extends State<SignUpPage> {
     if (result != null) {
       print("kondisi berhasil dijalankan");
       _kirimNotifikasi();
-      showSnackBar(context, 'Registrasi Berhasil');
+      SnackBar(
+          content: Text(
+        "Registrasi berhasil!",
+        textAlign: TextAlign.center,
+      ));
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -191,7 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text("random: $randomNumber"),
+                          // Text("random: $randomNumber"),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Text(teks['Header'],
@@ -202,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: 8),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
