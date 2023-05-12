@@ -13,12 +13,12 @@ import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'LokasiKejadian.dart';
 
-class LaporanBencanaAlam extends StatefulWidget {
+class LaporanHewanBuas extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanBencanaAlam(
+  LaporanHewanBuas(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -30,7 +30,7 @@ class LaporanBencanaAlam extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanBencanaAlam> createState() => _LaporanBencanaAlamState();
+  State<LaporanHewanBuas> createState() => _LaporanHewanBuasState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -39,8 +39,8 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Nama Bencana',
-    'namaBencanaHint': 'contoh: Tsunami, Banjir, Tanah Longsor, dll',
+    'namaBencana': 'Urgensi Hewan Buas',
+    'namaBencanaHint': 'Contoh: Buaya, Harimau, Macan Tutul, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -95,7 +95,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
+class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
