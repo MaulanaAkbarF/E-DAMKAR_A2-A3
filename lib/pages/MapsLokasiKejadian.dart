@@ -3,7 +3,6 @@ import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
 import 'package:edamkar_1/pages/LaporanKebakaran.dart';
 import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
 import 'package:edamkar_1/pages/LokasiKejadian.dart';
-import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -315,7 +314,9 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LokasiKejadian()),
+                                        builder: (context) => LokasiKejadian(
+                                              kategori: kategori,
+                                            )),
                                   );
                                 },
                                 child: Row(
