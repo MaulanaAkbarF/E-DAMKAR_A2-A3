@@ -1,4 +1,5 @@
 import 'package:edamkar_1/pages/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/pages/LaporanCustom.dart';
 import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
 import 'package:edamkar_1/pages/LaporanKebakaran.dart';
 import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
@@ -140,6 +141,19 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                     longitude: 0.0,
                   )),
         );
+      } else if (kategori == "custom") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanCustom(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
       }
     }
   }
@@ -175,7 +189,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text('Kategori: ${(widget.kategori)}'),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(

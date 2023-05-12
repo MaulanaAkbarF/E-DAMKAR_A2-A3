@@ -1,4 +1,5 @@
 import 'package:edamkar_1/pages/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/pages/LaporanCustom.dart';
 import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
 import 'package:edamkar_1/pages/LaporanKebakaran.dart';
 import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
@@ -259,6 +260,21 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               LaporanPenyelamatan(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
+                                    } else if (kategori == "custom") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => LaporanCustom(
                                             jalan: jalan,
                                             desa: desa,
                                             kecamatan: kecamatan,
