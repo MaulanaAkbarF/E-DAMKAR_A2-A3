@@ -8,7 +8,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MapsLokasiKejadian extends StatefulWidget {
-  const MapsLokasiKejadian({Key? key}) : super(key: key);
+  String kategori;
+  MapsLokasiKejadian({Key? key, required this.kategori}) : super(key: key);
 
   @override
   State<MapsLokasiKejadian> createState() => _MapsLokasiKejadian();
@@ -275,6 +276,7 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                             ),
                           ),
                         ),
+                        Text('Kategori: ${widget.kategori}')
                       ],
                     ),
                   ),

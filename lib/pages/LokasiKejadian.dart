@@ -124,15 +124,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            // Align(
-                            //   alignment: FractionalOffset.topLeft,
-                            //   child: Text(
-                            //     teks['Header'],
-                            //     overflow: TextOverflow.ellipsis,
-                            //     maxLines: 1,
-                            //     style: teksStyle['Bold1'],
-                            //   ),
-                            // ),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(

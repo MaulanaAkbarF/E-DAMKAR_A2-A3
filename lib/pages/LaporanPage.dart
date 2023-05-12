@@ -116,7 +116,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "bencanaalam")),
                             );
                           },
                           child: Container(
@@ -179,7 +180,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "kebakaran")),
                             );
                           },
                           child: Container(
@@ -243,7 +245,9 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                        kategori: "hewanbuas",
+                                      )),
                             );
                           },
                           child: Container(
@@ -306,7 +310,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "penyelamatan")),
                             );
                           },
                           child: Container(
