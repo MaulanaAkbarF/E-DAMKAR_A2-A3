@@ -5,6 +5,7 @@ import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +17,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var userName = '';
   var url_photo;
+  final String phoneNumber = "085708574368";
+
+  void emercall() async {
+    final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(phoneUrl);
+  }
 
   void getUserData() async {
     var data = DataUser().getNama();
@@ -107,9 +114,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(
                   horizontal: paddingHorozontal1, vertical: paddingVertical1),
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/riwayatlapp');
-                  },
+                  onPressed: emercall,
                   style: ElevatedButton.styleFrom(
                       primary: red1,
                       shape: RoundedRectangleBorder(
@@ -118,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical2),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/EmeCall.svg'),
+                          SvgPicture.asset('semuaAset/icon/EmeCall.svg'),
                           // SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -127,8 +132,7 @@ class _HomePageState extends State<HomePage> {
                                 'Panggilan Darurat',
                                 style: medium,
                               ),
-                              SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight2.svg')
+                              SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
@@ -146,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical2),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/WA.svg'),
+                          SvgPicture.asset('semuaAset/icon/WA.svg'),
                           // SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,12 +159,11 @@ class _HomePageState extends State<HomePage> {
                                 'Whatsapp',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
-                                    color: green2,
+                                    color: white,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15),
                               ),
-                              SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight.svg')
+                              SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],

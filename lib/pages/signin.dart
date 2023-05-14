@@ -287,7 +287,10 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: loginPost(email.text, pass.text),
+                                  onTap: () {
+                                    loginPost(email.text, pass.text);
+                                  },
+                        
                                   child: Container(
                                     height: 50,
                                     child: Row(

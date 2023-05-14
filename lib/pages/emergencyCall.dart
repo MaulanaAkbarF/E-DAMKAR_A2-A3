@@ -1,3 +1,4 @@
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class EmergencyCall extends StatelessWidget {
   const EmergencyCall({super.key});
 
   final String phoneNumber = "085708574368";
-
+  
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
@@ -78,7 +79,7 @@ class EmergencyCall extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/EmeCall.svg'),
+                          SvgPicture.asset('semuaAset/icon/EmeCall.svg'),
                           SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +89,7 @@ class EmergencyCall extends StatelessWidget {
                                 style: medium,
                               ),
                               SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight2.svg')
+                                  'semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
@@ -105,21 +106,17 @@ class EmergencyCall extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/WA.svg'),
+                          SvgPicture.asset('semuaAset/icon/WA.svg'),
                           SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
                                 'Whatsapp',
-                                style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    color: green2,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15),
+                                style: medium
                               ),
                               SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight.svg')
+                                  'semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
