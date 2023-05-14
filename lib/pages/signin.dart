@@ -85,10 +85,10 @@ class _SignInPageState extends State<SignInPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  loginPost() async {
+  loginPost(String email, String password) async {
     if (_formKey.currentState!.validate()) {
-      var result = await APIClient().postData('login',
-          {"email": email.text, "password": pass.text}).catchError((err) {});
+      var result = await APIClient().postData(
+          'login', {"email": email, "password": password}).catchError((err) {});
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
         if (data.token!.isNotEmpty) {
@@ -287,9 +287,7 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    loginPost();
-                                  },
+                                  onTap: loginPost(email.text, pass.text),
                                   child: Container(
                                     height: 50,
                                     child: Row(
