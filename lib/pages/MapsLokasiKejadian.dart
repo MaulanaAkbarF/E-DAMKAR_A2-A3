@@ -1,5 +1,9 @@
+import 'package:edamkar_1/pages/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/pages/LaporanCustom.dart';
+import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
+import 'package:edamkar_1/pages/LaporanKebakaran.dart';
+import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
 import 'package:edamkar_1/pages/LokasiKejadian.dart';
-import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,13 +12,20 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MapsLokasiKejadian extends StatefulWidget {
-  const MapsLokasiKejadian({Key? key}) : super(key: key);
+  String kategori;
+  MapsLokasiKejadian({Key? key, required this.kategori}) : super(key: key);
 
   @override
   State<MapsLokasiKejadian> createState() => _MapsLokasiKejadian();
 }
 
 class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
+  late String kategori;
+  void initState() {
+    super.initState();
+    kategori = widget.kategori;
+  }
+
   late GoogleMapController googleMapController;
   static const CameraPosition initialCameraPosition =
       CameraPosition(target: LatLng(-7.2232139, 112.6226935), zoom: 15);
@@ -195,21 +206,86 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                                       )),
                                     );
                                   } else {
-                                    // Navigasikan ke halaman BuatLaporan
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => BuatLaporan(
-                                          jalan: jalan,
-                                          desa: desa,
-                                          kecamatan: kecamatan,
-                                          kota: kota,
-                                          kodepos: kodepos,
-                                          latitude: latitude,
-                                          longitude: longitude,
+                                    if (kategori == "bencanaalam") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaporanBencanaAlam(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    } else if (kategori == "kebakaran") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaporanKebakaran(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
+                                    } else if (kategori == "hewanbuas") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaporanHewanBuas(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
+                                    } else if (kategori == "penyelamatan") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaporanPenyelamatan(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
+                                    } else if (kategori == "custom") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => LaporanCustom(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
                                 child: Row(
@@ -254,7 +330,9 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LokasiKejadian()),
+                                        builder: (context) => LokasiKejadian(
+                                              kategori: kategori,
+                                            )),
                                   );
                                 },
                                 child: Row(

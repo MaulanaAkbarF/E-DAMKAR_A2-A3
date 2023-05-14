@@ -6,7 +6,6 @@ import 'package:edamkar_1/pages/LaporanPage.dart';
 import 'package:edamkar_1/pages/Profil.dart';
 import 'package:edamkar_1/pages/RemakePass.dart';
 import 'package:edamkar_1/pages/TentangKami.dart';
-import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:edamkar_1/pages/emergencyCall.dart';
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/resetpass.dart';

@@ -1,11 +1,16 @@
-import 'package:edamkar_1/pages/buatLaporan.dart';
+import 'package:edamkar_1/pages/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/pages/LaporanCustom.dart';
+import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
+import 'package:edamkar_1/pages/LaporanKebakaran.dart';
+import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LokasiKejadian extends StatefulWidget {
-  const LokasiKejadian({Key? key}) : super(key: key);
+  String kategori;
+  LokasiKejadian({Key? key, required this.kategori}) : super(key: key);
 
   @override
   State<LokasiKejadian> createState() => _LokasiKejadianState();
@@ -76,20 +81,80 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
   final TextEditingController jalanCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  late String kategori;
+  void initState() {
+    super.initState();
+    kategori = widget.kategori;
+  }
+
   void kirimButtonPressed(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-            builder: (context) => BuatLaporan(
-                  kecamatan: kecamatanCon.text,
-                  desa: desaCon.text,
-                  jalan: jalanCon.text,
-                  kota: 'Nganjuk',
-                  kodepos: '',
-                  latitude: 0.0,
-                  longitude: 0.0,
-                )),
-      );
+      if (kategori == "bencanaalam") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanBencanaAlam(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
+      } else if (kategori == "kebakaran") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanKebakaran(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
+      } else if (kategori == "hewanbuas") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanHewanBuas(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
+      } else if (kategori == "penyelamatan") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanPenyelamatan(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
+      } else if (kategori == "custom") {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LaporanCustom(
+                    kecamatan: kecamatanCon.text,
+                    desa: desaCon.text,
+                    jalan: jalanCon.text,
+                    kota: 'Nganjuk',
+                    kodepos: '',
+                    latitude: 0.0,
+                    longitude: 0.0,
+                  )),
+        );
+      }
     }
   }
 
@@ -124,15 +189,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            // Align(
-                            //   alignment: FractionalOffset.topLeft,
-                            //   child: Text(
-                            //     teks['Header'],
-                            //     overflow: TextOverflow.ellipsis,
-                            //     maxLines: 1,
-                            //     style: teksStyle['Bold1'],
-                            //   ),
-                            // ),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(

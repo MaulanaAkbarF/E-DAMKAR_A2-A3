@@ -317,11 +317,12 @@ class _ProfilePageState extends State<Profile> {
                   showLogoutDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
+                    elevation: 0,
                     backgroundColor: Color.fromARGB(255, 250, 250, 250),
-                    minimumSize: Size.fromHeight(55),
+                    minimumSize: Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.red.shade500, width: 1),
-                        borderRadius: BorderRadiusDirectional.circular(20))),
+                        borderRadius: BorderRadiusDirectional.circular(100))),
                 child: Text(
                   "Keluar",
                   style: TextStyle(color: Colors.red.shade500),
@@ -349,7 +350,7 @@ class _ProfilePageState extends State<Profile> {
             style: TextStyle(color: Colors.black),
           ),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => SignInPage()));
           },
         ),

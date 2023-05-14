@@ -326,6 +326,7 @@ class _UbahSandiPageState extends State<UbahSandi> {
                             } else {
                               gagal(context);
                             }
+                            showLoadingDialog(context);
                           }
                         },
                         child: Container(
@@ -348,6 +349,8 @@ class _UbahSandiPageState extends State<UbahSandi> {
             ],
           ),
         ));
+
+        
   }
 
   void show(String message) {
@@ -359,4 +362,29 @@ class _UbahSandiPageState extends State<UbahSandi> {
         backgroundColor: Colors.white,
         textColor: Colors.black);
   }
+
+  showLoadingDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 50,
+            width: 50,
+            child: CircularProgressIndicator(),
+          )
+        ],
+      ),
+    );
+
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/resetpass.dart';
+import 'package:edamkar_1/pages/verificationSuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'RemakePass.dart';
@@ -73,20 +74,59 @@ final List<Map> teksStyleOtpVerification = [
 class _OtpVerificationPageState extends State<OtpVerificationPage> {
   final TextEditingController kodeotptxt = TextEditingController();
   late String otpRegister;
+  late String noHp;
   void initState() {
     super.initState();
     otpRegister = widget.kodeOtp;
+    noHp = widget.noHp;
   }
 
   void verifyCode() {
     if (otpRegister.toString() == kodeotptxt.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Kode verifikasi cocok")),
-      );
+      whenVerified();
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => VerificationSuccess()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Kode verifikasi tidak cocok")),
+        SnackBar(
+            content: Text(
+          "Kode verifikasi tidak sesuai!",
+          textAlign: TextAlign.center,
+        )),
       );
+    }
+  }
+
+  Future<void> whenVerified() async {
+    var result = await APIClient().postData('verification/$noHp', {
+      "noHp": noHp,
+      "kodeOtp": 'Null',
+      "status": 'Verified'
+    }).catchError((err) {
+      return null;
+    });
+    if (result != null) {
+      print("Nomor berhasil di verifikasi");
+    } else {
+      print('something error on code');
+      print(result);
+    }
+  }
+
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": otpRegister.toString(),
+      "noHp": noHp.toString(),
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
     }
   }
 
@@ -119,8 +159,8 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Text('noHp: ${(widget.noHp)}'),
-                          Text('otp: $otpRegister'),
+                          // Text('noHp: ${(widget.noHp)}'),
+                          // Text('otp: $noHp'),
                           // Text('Verification code: $verificationCode'),
                           Align(
                             alignment: FractionalOffset.topLeft,
@@ -178,8 +218,13 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             children: [
                               Text(teks['SendCodeText'],
                                   style: teksStyle['SemiBold3']),
-                              Text(teks['SendCodeButton'],
-                                  style: teksStyle['SemiBold2']),
+                              InkWell(
+                                child: Text(teks['SendCodeButton'],
+                                    style: teksStyle['SemiBold2']),
+                                onTap: () {
+                                  _kirimNotifikasi();
+                                },
+                              ),
                             ],
                           ),
                           Align(
