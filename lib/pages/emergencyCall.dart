@@ -44,7 +44,7 @@ class EmergencyCall extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: red1,
+                    primary: Color.fromARGB(255, 224, 36, 36),
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
@@ -71,13 +71,13 @@ class EmergencyCall extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    primary: green1,
+                    primary: Color.fromARGB(255, 37, 211, 102),
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/WA.svg'),
+                          SvgPicture.asset('semuaAset/gambar/VectorWA.svg'),
                           SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -86,12 +86,13 @@ class EmergencyCall extends StatelessWidget {
                                 'Whatsapp',
                                 style: TextStyle(
                                     fontFamily: 'Inter',
-                                    color: green2,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15),
                               ),
+                              SizedBox(width: 5,),
                               SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight.svg')
+                                  'semuaAset/gambar/VectorArrowRight.svg')
                             ],
                           ),
                         ],

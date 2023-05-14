@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     SizeConfig().init(context);
     return Scaffold(
       body: SafeArea(
-          child: Padding(
+        child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: paddingHorozontal1, vertical: paddingVertical1),
         child: ListView(

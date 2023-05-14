@@ -52,6 +52,7 @@ dependencies:
   geolocator: ^9.0.2
   geocoding: ^2.1.0
   latlng: ^1.0.0
+  card_slider: ^1.0.5
 
 dev_dependencies:
   flutter_test:

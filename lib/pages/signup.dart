@@ -184,7 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
-                                      hintText: teks['NamaHint'],
+                                      hintText: teks['cth. Nabil Kusuma'],
                                       prefixIcon: Icon(Icons.person),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -226,7 +226,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
-                                      hintText: teks['EmailHint'],
+                                      hintText: teks['Example@example.com'],
                                       prefixIcon: Icon(Icons.mail),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),

@@ -33,10 +33,10 @@ void main() {
       '/otp': (context) => OtpVerificationPage(),
       '/homepage': (context) => HomePage(),
       '/riwayatlapp': (context) => RiwayatLaporan(),
-      // '/detailriwayat': (context) => DetailRiwayatLengkap()
+      // '/detailriwayat': (context) => DetailRiwayatLengkap(),
       '/artikel': (context) => Artikel(),
 
-      '/detailartikel': (context) => DetailArtikel(""),
+      // '/detailartikel': (context) => DetailArtikel(),
 
       '/profil': (context) => Profile(),
       '/tentangkami': (context) => TentangKami(),
