@@ -63,8 +63,7 @@ class _ProfilePageState extends State<Profile> {
                   splashColor: Colors.grey.shade400,
                   highlightColor: Colors.grey.shade600,
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.pop(context);
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 10),
@@ -311,7 +310,7 @@ class _ProfilePageState extends State<Profile> {
           // ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: 85, horizontal: paddingHorozontal2),
+                vertical: paddingVertical4, horizontal: paddingHorozontal2),
             child: ElevatedButton(
                 onPressed: () {
                   showLogoutDialog(context);
