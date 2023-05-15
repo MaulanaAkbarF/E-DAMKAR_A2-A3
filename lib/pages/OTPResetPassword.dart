@@ -9,14 +9,14 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'RemakePass.dart';
 import 'package:http/http.dart' as http;
 
-class OtpVerificationPage extends StatefulWidget {
+class OTPResetPassword extends StatefulWidget {
   String noHp, kodeOtp;
 
-  OtpVerificationPage({Key? key, required this.noHp, required this.kodeOtp})
+  OTPResetPassword({Key? key, required this.noHp, required this.kodeOtp})
       : super(key: key);
 
   @override
-  State<OtpVerificationPage> createState() => _OtpVerificationPageState();
+  State<OTPResetPassword> createState() => _OTPResetPasswordState();
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ class OtpVerificationPage extends StatefulWidget {
 final List<Map> teksOtpVerification = [
   {
     'Header': 'Verifikasi Akun',
-    'SubHeader': 'Masukkan kode OTP yang telah dikirim ke nomor Whatsapp kamu',
+    'SubHeader': 'Masukkan kode OTP yang telah dikirim ke nomor WhatAapp kamu',
     'Email': 'Kode OTP',
     'EmailHint': 'E-Mail Kamu',
     'SendCodeText': 'Belum menerima kode?  ',
@@ -72,7 +72,7 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-class _OtpVerificationPageState extends State<OtpVerificationPage> {
+class _OTPResetPasswordState extends State<OTPResetPassword> {
   final TextEditingController kodeotptxt = TextEditingController();
   late String otpRegister;
   late String noHp;
@@ -116,7 +116,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://172.16.110.98/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": otpRegister.toString(),

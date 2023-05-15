@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:math';
+import 'package:edamkar_1/pages/OTPResetPassword.dart';
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
@@ -11,34 +12,24 @@ class ResetPassPage extends StatefulWidget {
   State<ResetPassPage> createState() => _ResetPassPageState();
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur teks yang akan ditampilkan
-
 final List<Map> teksResetPass = [
   {
     'Header': 'Lupa Kata Sandi',
     'SubHeader':
-        'Masukan kata sandi akun anda yang sudah terdaftar di aplikasi E-Damkar!',
-    'Email': 'E-Mail',
-    'EmailHint': 'E-Mail Kamu',
+        'Masukan nomor WhatsApp anda yang sudah terdaftar di aplikasi E-Damkar!',
+    'Email': 'Nomor WhatsApp',
+    'EmailHint': '08••••••••••',
     'ButtonLogin': 'Konfirmasi'
   }
 ].cast<Map<String, String>>();
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur style teks
-
 final List<Map> teksStyleResetPass = [
   {
-    'Bold1': const TextStyle(
-        fontFamily: "font/inter_black.ttf",
-        color: Colors.black,
-        fontSize: (32),
-        fontWeight: FontWeight.w700),
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
-        fontSize: (16)),
+        height: 1.4,
+        fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
         color: Colors.blueAccent,
@@ -57,181 +48,180 @@ final List<Map> teksStyleResetPass = [
   }
 ];
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-
 class _ResetPassPageState extends State<ResetPassPage> {
+  final TextEditingController notelp = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    random();
+    super.initState();
+  }
+
+  int randomNumber = 100000;
+
+  void random() {
+    setState(() {
+      Random random = new Random();
+      randomNumber = random.nextInt(900000) + 100000;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Lupa Kata Sandi",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              for (final teks in teksResetPass)
-                for (final teksStyle in teksStyleResetPass)
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Material(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.grey.shade400,
-                                  highlightColor: Colors.grey.shade600,
-                                  onTap: () {
-                                    navToSignInPage(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 10),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                for (final teks in teksResetPass)
+                  for (final teksStyle in teksStyleResetPass)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0),
+                                child: Text(teks['SubHeader'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: teksStyle['SemiBold1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 24),
+                                child: Text(teks['Email'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: notelp,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Nomor WhatsApp tidak boleh kosong';
+                                      } else if (value.length > 13) {
+                                        return 'no telepon terlalu panjang';
+                                      } else if (value.length < 9) {
+                                        return 'no telepon terlalu pendek';
+                                      }
+                                    },
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['EmailHint'],
+                                        prefixIcon: Icon(Icons.phone),
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 32),
+                                child: Material(
+                                  color: Colors.red.shade400,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: InkWell(
+                                    splashColor: Colors.red.shade700,
+                                    highlightColor: Colors.red.shade900,
+                                    onTap: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Timer(Duration(seconds: 0), () {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    OTPResetPassword(
+                                                  kodeOtp:
+                                                      randomNumber.toString(),
+                                                  noHp: notelp.text,
+                                                ),
+                                                transitionsBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child) {
+                                                  return SlideTransition(
+                                                    position: Tween<Offset>(
+                                                      begin: Offset(-1, 0),
+                                                      end: Offset.zero,
+                                                    ).animate(
+                                                      CurvedAnimation(
+                                                        parent: animation,
+                                                        curve: Curves.easeInOut,
+                                                      ),
+                                                    ),
+                                                    child: child,
+                                                  );
+                                                },
+                                              ));
+                                        });
+                                      }
+                                    },
                                     child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      child: Icon(Icons.arrow_back_ios_new),
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(teks['ButtonLogin'],
+                                              style: teksStyle['Thin2']),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                              Text(teks['Header'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Bold1']),
-                            ],
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 15),
-                              child: Text(teks['SubHeader'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  style: teksStyle['SemiBold1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 30),
-                              child: Text(teks['Email'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextField(
-                                  // controller: pass,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.mail),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 40),
-                              child: Material(
-                                color: Colors.red.shade400,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.red.shade700,
-                                  highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    navToOtpVerificationPage(context);
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(teks['ButtonLogin'],
-                                            style: teksStyle['Thin2']),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-}
-
-// fungsi
-void navToSignInPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => SignInPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(-1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
-
-void navToOtpVerificationPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    // Navigator.push(context, PageRouteBuilder(
-    //   pageBuilder: (_, __, ___) => OtpVerificationPage(),
-    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //     return SlideTransition(
-    //       position: Tween<Offset>(
-    //         begin: Offset(-1, 0),
-    //         end: Offset.zero,
-    //       ).animate(
-    //         CurvedAnimation(
-    //           parent: animation,
-    //           curve: Curves.easeInOut,
-    //         ),
-    //       ),
-    //       child: child,
-    //     );
-    //   },
-    // ));
-  });
 }
