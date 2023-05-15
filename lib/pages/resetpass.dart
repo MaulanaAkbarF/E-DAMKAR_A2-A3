@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/pages/OTPResetPassword.dart';
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ResetPassPage extends StatefulWidget {
   const ResetPassPage({Key? key}) : super(key: key);
@@ -55,16 +57,106 @@ class _ResetPassPageState extends State<ResetPassPage> {
   @override
   void initState() {
     random();
+    // getResponse();
     super.initState();
   }
 
   int randomNumber = 100000;
+  String noHP = '';
 
   void random() {
     setState(() {
       Random random = new Random();
       randomNumber = random.nextInt(900000) + 100000;
     });
+  }
+
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://172.17.202.12/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": randomNumber.toString(),
+      "noHp": notelp.text,
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
+  // void getResponse() async {
+  //   var apiUrl = Uri.parse('http://172.17.202.12:8000/api/getNoHp/$notelp');
+  //   var response = await http.get(apiUrl);
+  //   if (response.statusCode == 200) {
+  //     var jsonResponse = jsonDecode(response.body);
+  //     setState(() {
+  //       noHP = jsonResponse['data'][0]['noHP'];
+  //       print('kontollll');
+  //     });
+  //   } else {
+  //     print('Request failed with status: ${response.statusCode}.');
+  //   }
+  // }
+
+  Future<bool> validasiNomer(String noHP) async {
+    var apiUrl = Uri.parse('http://172.17.202.12:8000/api/getNoHp/$noHP');
+    var response = await http.get(apiUrl);
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+
+      if (jsonResponse['data'].isEmpty) {
+        print('Data is empty');
+        return false; // menambahkan return false
+      } else {
+        noHP = jsonResponse['data'][0]['noHP'];
+
+        return true; // menambahkan return true
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      return false; // menambahkan return false
+    }
+  }
+
+  void konfirmasiData() {
+    if (noHP != null) {
+      _kirimNotifikasi();
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => OTPResetPassword(
+              kodeOtp: randomNumber.toString(),
+              noHp: notelp.text,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: Offset(-1, 0),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeInOut,
+                  ),
+                ),
+                child: child,
+              );
+            },
+          ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(
+          "Nomor telepon tidak terdaftar!",
+          textAlign: TextAlign.center,
+        )),
+      );
+    }
   }
 
   @override
@@ -98,6 +190,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
+                            Text('Title : $noHP'),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
@@ -133,6 +226,19 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                           width: 1.2)),
                                   child: TextFormField(
                                     controller: notelp,
+                                    onChanged: (value) async {
+                                      bool isnumberValid =
+                                          await validasiNomer(value);
+                                      if (isnumberValid) {
+                                        setState(() {
+                                          noHP = value.toString();
+                                        });
+                                      } else {
+                                        setState(() {
+                                          noHP = "";
+                                        });
+                                      }
+                                    },
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Nomor WhatsApp tidak boleh kosong';
@@ -167,35 +273,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                     highlightColor: Colors.red.shade900,
                                     onTap: () {
                                       if (_formKey.currentState!.validate()) {
-                                        Timer(Duration(seconds: 0), () {
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                pageBuilder: (_, __, ___) =>
-                                                    OTPResetPassword(
-                                                  kodeOtp:
-                                                      randomNumber.toString(),
-                                                  noHp: notelp.text,
-                                                ),
-                                                transitionsBuilder: (context,
-                                                    animation,
-                                                    secondaryAnimation,
-                                                    child) {
-                                                  return SlideTransition(
-                                                    position: Tween<Offset>(
-                                                      begin: Offset(-1, 0),
-                                                      end: Offset.zero,
-                                                    ).animate(
-                                                      CurvedAnimation(
-                                                        parent: animation,
-                                                        curve: Curves.easeInOut,
-                                                      ),
-                                                    ),
-                                                    child: child,
-                                                  );
-                                                },
-                                              ));
-                                        });
+                                        // getResponse();
                                       }
                                     },
                                     child: Container(

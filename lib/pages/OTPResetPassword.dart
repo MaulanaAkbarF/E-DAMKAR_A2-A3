@@ -85,8 +85,8 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
   void verifyCode() {
     if (otpRegister.toString() == kodeotptxt.text) {
       whenVerified();
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => VerificationSuccess()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => RemakePassPage()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

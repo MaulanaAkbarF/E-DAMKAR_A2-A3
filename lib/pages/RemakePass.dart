@@ -30,11 +30,7 @@ String _message = '';
 void dispose() {
   _newPasswordController.dispose();
   _confirmPasswordController.dispose();
-  // super.dispose();
 }
-
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur teks yang akan ditampilkan
 
 final List<Map> teksRemakePass = [
   {
@@ -100,233 +96,189 @@ class _RemakePassPageState extends State<RemakePassPage> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              for (final teks in teksRemakePass)
-                for (final teksStyle in teksStyleRemakePass)
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Text(teks['SubHeader'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  style: teksStyle['SemiBold1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 24),
-                              child: Text(teks['Password1'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: _newPasswordController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'password baru tidak boleh kosong';
-                                    } else if (value.length > 20) {
-                                      return 'password baru terlalu panjang';
-                                    } else if (value.length < 8) {
-                                      return 'password baru terlalu pendek';
-                                    }
-                                  },
-                                  obscureText: _passwordVisible1,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.lock),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordVisible1 =
-                                                !_passwordVisible1;
-                                          });
-                                        },
-                                        icon: Icon(_passwordVisible1
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined),
-                                        color:
-                                            Color.fromARGB(255, 143, 143, 143),
-                                      ),
-                                      suffixIconColor: Colors.black,
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                for (final teks in teksRemakePass)
+                  for (final teksStyle in teksStyleRemakePass)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0),
+                                child: Text(teks['SubHeader'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: teksStyle['SemiBold1']),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 16),
-                              child: Text(teks['Password2'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: _confirmPasswordController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Validasi password tidak boleh kosong';
-                                    } else if (value !=
-                                        _newPasswordController.text) {
-                                      return 'validasi password tidak sesuai dengan password baru';
-                                    }
-                                  },
-                                  obscureText: _passwordVisible,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.lock),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordVisible =
-                                                !_passwordVisible;
-                                          });
-                                        },
-                                        icon: Icon(_passwordVisible
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined),
-                                        color:
-                                            Color.fromARGB(255, 143, 143, 143),
-                                      ),
-                                      suffixIconColor: Colors.black,
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 24),
+                                child: Text(teks['Password1'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 32),
-                              child: Material(
-                                color: Colors.red.shade400,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.red.shade700,
-                                  highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    //navToOtpVerificationPage(context);
-                                    if (_formKey.currentState!.validate()) {
-                                      if (_newPasswordController.text ==
-                                          _confirmPasswordController) {}
-                                    } else {}
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(teks['ButtonLogin'],
-                                            style: teksStyle['Thin2']),
-                                      ],
-                                    ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: _newPasswordController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'password baru tidak boleh kosong';
+                                      } else if (value.length > 20) {
+                                        return 'password baru terlalu panjang';
+                                      } else if (value.length < 8) {
+                                        return 'password baru terlalu pendek';
+                                      }
+                                    },
+                                    obscureText: _passwordVisible1,
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _passwordVisible1 =
+                                                  !_passwordVisible1;
+                                            });
+                                          },
+                                          icon: Icon(_passwordVisible1
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined),
+                                          color: Color.fromARGB(
+                                              255, 143, 143, 143),
+                                        ),
+                                        suffixIconColor: Colors.black,
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        border: InputBorder.none),
                                   ),
                                 ),
                               ),
                             ),
-                          )
-                        ],
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Text(teks['Password2'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: _confirmPasswordController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Validasi password tidak boleh kosong';
+                                      } else if (value !=
+                                          _newPasswordController.text) {
+                                        return 'validasi password tidak sesuai dengan password baru';
+                                      }
+                                    },
+                                    obscureText: _passwordVisible,
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _passwordVisible =
+                                                  !_passwordVisible;
+                                            });
+                                          },
+                                          icon: Icon(_passwordVisible
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined),
+                                          color: Color.fromARGB(
+                                              255, 143, 143, 143),
+                                        ),
+                                        suffixIconColor: Colors.black,
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 32),
+                                child: Material(
+                                  color: Colors.red.shade400,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: InkWell(
+                                    splashColor: Colors.red.shade700,
+                                    highlightColor: Colors.red.shade900,
+                                    onTap: () {
+                                      //navToOtpVerificationPage(context);
+                                      if (_formKey.currentState!.validate()) {
+                                        if (_newPasswordController.text ==
+                                            _confirmPasswordController) {}
+                                      } else {}
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(teks['ButtonLogin'],
+                                              style: teksStyle['Thin2']),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-}
-
-// fungsi
-void navToSignInPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => SignInPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(-1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
-
-void navToOtpVerificationPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    // Navigator.push(context, PageRouteBuilder(
-    //   pageBuilder: (_, __, ___) => OtpVerificationPage(),
-    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //     return SlideTransition(
-    //       position: Tween<Offset>(
-    //         begin: Offset(-1, 0),
-    //         end: Offset.zero,
-    //       ).animate(
-    //         CurvedAnimation(
-    //           parent: animation,
-    //           curve: Curves.easeInOut,
-    //         ),
-    //       ),
-    //       child: child,
-    //     );
-    //   },
-    // ));
-  });
 }
