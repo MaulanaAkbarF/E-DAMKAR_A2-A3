@@ -47,6 +47,7 @@ final List<Map> teksStyleOtpVerification = [
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
+        height: 1.4,
         fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
@@ -11,34 +10,24 @@ class ResetPassPage extends StatefulWidget {
   State<ResetPassPage> createState() => _ResetPassPageState();
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur teks yang akan ditampilkan
-
 final List<Map> teksResetPass = [
   {
     'Header': 'Lupa Kata Sandi',
     'SubHeader':
-        'Masukan kata sandi akun anda yang sudah terdaftar di aplikasi E-Damkar!',
-    'Email': 'E-Mail',
-    'EmailHint': 'E-Mail Kamu',
+        'Masukan nomor WhatsApp anda yang sudah terdaftar di aplikasi E-Damkar!',
+    'Email': 'Nomor WhatsApp',
+    'EmailHint': '08••••••••••',
     'ButtonLogin': 'Konfirmasi'
   }
 ].cast<Map<String, String>>();
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur style teks
-
 final List<Map> teksStyleResetPass = [
   {
-    'Bold1': const TextStyle(
-        fontFamily: "font/inter_black.ttf",
-        color: Colors.black,
-        fontSize: (32),
-        fontWeight: FontWeight.w700),
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
-        fontSize: (16)),
+        height: 1.4,
+        fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
         color: Colors.blueAccent,
@@ -57,12 +46,27 @@ final List<Map> teksStyleResetPass = [
   }
 ];
 
-// ------------------------------------------------------------------------------------------------------------------------------------------
-
 class _ResetPassPageState extends State<ResetPassPage> {
+  final TextEditingController notelp = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Lupa Kata Sandi",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
@@ -74,37 +78,10 @@ class _ResetPassPageState extends State<ResetPassPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Material(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.grey.shade400,
-                                  highlightColor: Colors.grey.shade600,
-                                  onTap: () {
-                                    navToSignInPage(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 10),
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      child: Icon(Icons.arrow_back_ios_new),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(teks['Header'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Bold1']),
-                            ],
-                          ),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: 0),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -114,7 +91,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 24),
                               child: Text(teks['Email'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -124,7 +101,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -135,12 +112,12 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextField(
-                                  // controller: pass,
+                                  controller: notelp,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.mail),
+                                      prefixIcon: Icon(Icons.phone),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
                                       border: InputBorder.none),
@@ -151,7 +128,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 40),
+                              padding: EdgeInsets.only(top: 32),
                               child: Material(
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -160,7 +137,34 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    navToOtpVerificationPage(context);
+                                    Timer(Duration(seconds: 0), () {
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                OtpVerificationPage(
+                                              kodeOtp: '999999',
+                                              noHp: notelp.text,
+                                            ),
+                                            transitionsBuilder: (context,
+                                                animation,
+                                                secondaryAnimation,
+                                                child) {
+                                              return SlideTransition(
+                                                position: Tween<Offset>(
+                                                  begin: Offset(-1, 0),
+                                                  end: Offset.zero,
+                                                ).animate(
+                                                  CurvedAnimation(
+                                                    parent: animation,
+                                                    curve: Curves.easeInOut,
+                                                  ),
+                                                ),
+                                                child: child,
+                                              );
+                                            },
+                                          ));
+                                    });
                                   },
                                   child: Container(
                                     height: 50,
@@ -187,51 +191,4 @@ class _ResetPassPageState extends State<ResetPassPage> {
       ),
     );
   }
-}
-
-// fungsi
-void navToSignInPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => SignInPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(-1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
-
-void navToOtpVerificationPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    // Navigator.push(context, PageRouteBuilder(
-    //   pageBuilder: (_, __, ___) => OtpVerificationPage(),
-    //   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //     return SlideTransition(
-    //       position: Tween<Offset>(
-    //         begin: Offset(-1, 0),
-    //         end: Offset.zero,
-    //       ).animate(
-    //         CurvedAnimation(
-    //           parent: animation,
-    //           curve: Curves.easeInOut,
-    //         ),
-    //       ),
-    //       child: child,
-    //     );
-    //   },
-    // ));
-  });
 }
