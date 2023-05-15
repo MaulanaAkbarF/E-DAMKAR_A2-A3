@@ -18,8 +18,7 @@ class RemakePassPage extends StatefulWidget {
 final List<Map> teksRemakePass = [
   {
     'Header': 'Lupa Kata Sandi',
-    'SubHeader':
-        'Silahkan masukan kata sandi baru untuk akun anda yang sudah terdaftar di E-Damkar!',
+    'SubHeader': 'Silahkan buat kata sandi baru untuk akun E-Damkar Anda',
     'Password1': 'Kata Sandi',
     'Password2': 'Ulangi Kata Sandi',
     'ButtonLogin': 'Konfirmasi'
@@ -64,6 +63,21 @@ class _RemakePassPageState extends State<RemakePassPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Lupa Kata Sandi",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
@@ -75,37 +89,10 @@ class _RemakePassPageState extends State<RemakePassPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Material(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.grey.shade400,
-                                  highlightColor: Colors.grey.shade600,
-                                  onTap: () {
-                                    navToSignInPage(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: 10),
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      child: Icon(Icons.arrow_back_ios_new),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(teks['Header'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Bold1']),
-                            ],
-                          ),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: 0),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -115,7 +102,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 24),
                               child: Text(teks['Password1'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -125,7 +112,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -155,7 +142,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 16),
                               child: Text(teks['Password2'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -165,7 +152,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -195,7 +182,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 40),
+                              padding: EdgeInsets.only(top: 32),
                               child: Material(
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,

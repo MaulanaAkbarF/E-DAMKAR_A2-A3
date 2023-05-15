@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:math';
+import 'package:edamkar_1/pages/OTPResetPassword.dart';
 import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +50,22 @@ final List<Map> teksStyleResetPass = [
 
 class _ResetPassPageState extends State<ResetPassPage> {
   final TextEditingController notelp = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    random();
+    super.initState();
+  }
+
+  int randomNumber = 100000;
+
+  void random() {
+    setState(() {
+      Random random = new Random();
+      randomNumber = random.nextInt(900000) + 100000;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,124 +86,139 @@ class _ResetPassPageState extends State<ResetPassPage> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              for (final teks in teksResetPass)
-                for (final teksStyle in teksStyleResetPass)
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 0),
-                              child: Text(teks['SubHeader'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  style: teksStyle['SemiBold1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 24),
-                              child: Text(teks['Email'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextField(
-                                  controller: notelp,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.phone),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                for (final teks in teksResetPass)
+                  for (final teksStyle in teksStyleResetPass)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0),
+                                child: Text(teks['SubHeader'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 4,
+                                    style: teksStyle['SemiBold1']),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 32),
-                              child: Material(
-                                color: Colors.red.shade400,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.red.shade700,
-                                  highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    Timer(Duration(seconds: 0), () {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(
-                                            pageBuilder: (_, __, ___) =>
-                                                OtpVerificationPage(
-                                              kodeOtp: '999999',
-                                              noHp: notelp.text,
-                                            ),
-                                            transitionsBuilder: (context,
-                                                animation,
-                                                secondaryAnimation,
-                                                child) {
-                                              return SlideTransition(
-                                                position: Tween<Offset>(
-                                                  begin: Offset(-1, 0),
-                                                  end: Offset.zero,
-                                                ).animate(
-                                                  CurvedAnimation(
-                                                    parent: animation,
-                                                    curve: Curves.easeInOut,
-                                                  ),
-                                                ),
-                                                child: child,
-                                              );
-                                            },
-                                          ));
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(teks['ButtonLogin'],
-                                            style: teksStyle['Thin2']),
-                                      ],
-                                    ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 24),
+                                child: Text(teks['Email'],
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: teksStyle['Thin1']),
+                              ),
+                            ),
+                            Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: notelp,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Nomor WhatsApp tidak boleh kosong';
+                                      } else if (value.length > 13) {
+                                        return 'no telepon terlalu panjang';
+                                      } else if (value.length < 9) {
+                                        return 'no telepon terlalu pendek';
+                                      }
+                                    },
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['EmailHint'],
+                                        prefixIcon: Icon(Icons.phone),
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        border: InputBorder.none),
                                   ),
                                 ),
                               ),
                             ),
-                          )
-                        ],
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 32),
+                                child: Material(
+                                  color: Colors.red.shade400,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: InkWell(
+                                    splashColor: Colors.red.shade700,
+                                    highlightColor: Colors.red.shade900,
+                                    onTap: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Timer(Duration(seconds: 0), () {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    OTPResetPassword(
+                                                  kodeOtp:
+                                                      randomNumber.toString(),
+                                                  noHp: notelp.text,
+                                                ),
+                                                transitionsBuilder: (context,
+                                                    animation,
+                                                    secondaryAnimation,
+                                                    child) {
+                                                  return SlideTransition(
+                                                    position: Tween<Offset>(
+                                                      begin: Offset(-1, 0),
+                                                      end: Offset.zero,
+                                                    ).animate(
+                                                      CurvedAnimation(
+                                                        parent: animation,
+                                                        curve: Curves.easeInOut,
+                                                      ),
+                                                    ),
+                                                    child: child,
+                                                  );
+                                                },
+                                              ));
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(teks['ButtonLogin'],
+                                              style: teksStyle['Thin2']),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
