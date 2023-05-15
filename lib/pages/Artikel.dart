@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
+import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:edamkar_1/pages/DetailArtikel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _ArtikelState extends State<Artikel> {
   @override
   void initState() {
     super.initState();
-    // PostDataArtikel();
+    getData();
   }
 
   // PostDataArtikel() async {
@@ -55,6 +56,19 @@ class _ArtikelState extends State<Artikel> {
   //     print("Data Kosong !");
   //   }
   // }
+
+  var data;
+  void getData() async {
+    var result = await APIClient().getData('semuaArtikel').catchError((err) {});
+    if (result != null) {
+      setState(() {
+        data = semuaArtikelModelFromJson(result);
+      });
+      debugPrint(data.length.toString());
+    } else {
+      debugPrint('terdapat kesalah');
+    }
+  }
 
   List<String> Kat = ["Edukasi", "Berita", "Agenda", "Edukasi"];
   List<String> judul = [
@@ -198,93 +212,97 @@ class _ArtikelState extends State<Artikel> {
             );
           }).toList(),
         ),
-        Expanded(
-          child: ListView.separated(
-            itemCount: hardArtikelList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                child: ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailArtikel(
-                            hardArtikelList![index].idArtikel.toString())));
-                  },
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        hardArtikelList[index].namaArtikel.toString(),
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "$thin1",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: black2,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        hardArtikelList![index].judulArtikel.toString(),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: black3,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "$semibold",
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        hardArtikelList![index].namaLengkapDamkar.toString(),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        hardArtikelList![index].artikelTgl.toString(),
-                      )
-                    ],
-                  ),
-                  trailing: Container(
-                    alignment: Alignment.topCenter,
-                    height: paddingVertical4,
-                    width: paddingHorozontal4,
-                    // color: clr[index],
-                    decoration: BoxDecoration(color: clr[index]
-                        // borderRadius: BorderRadius.circular(10),
-                        // image: DecorationImage(
-                        //   image: AssetImage(img[index]))
-                        ),
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.black38,
-              );
-            },
-          ),
-        )
+        listArtikel()
       ]),
       bottomNavigationBar: AppMenu(),
+    );
+  }
+
+  Widget listArtikel() {
+    return data == null ? const Text("Artikel Kosong") : Expanded(
+      child: ListView.separated(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return Container(
+            child: ListTile(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        DetailArtikel(data![index].id.toString())));
+              },
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data[index].judul.toString(),
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontFamily: "$thin1",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: black2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    data![index].judul.toString(),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: black3,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "$semibold",
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
+              subtitle: Row(
+                children: [
+                  Text(
+                    data![index].adminDamkar.toString(),
+                  ),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  Icon(
+                    Icons.circle,
+                    size: 5,
+                  ),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  Text(
+                    data![index].tanggal.toString(),
+                  )
+                ],
+              ),
+              trailing: Container(
+                alignment: Alignment.topCenter,
+                height: paddingVertical4,
+                width: paddingHorozontal4,
+                // color: clr[index],
+                decoration: BoxDecoration(color: Colors.orange
+                    // borderRadius: BorderRadius.circular(10),
+                    // image: DecorationImage(
+                    //   image: AssetImage(img[index]))
+                    ),
+              ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(
+            color: Colors.black38,
+          );
+        },
+      ),
     );
   }
 }

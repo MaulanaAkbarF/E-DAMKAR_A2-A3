@@ -83,18 +83,39 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
 
   void verifyCode() {
     if (otpRegister.toString() == kodeotptxt.text) {
+      whenVerified();
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => VerificationSuccess()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Kode verifikasi tidak cocok")),
+        SnackBar(
+            content: Text(
+          "Kode verifikasi tidak sesuai!",
+          textAlign: TextAlign.center,
+        )),
       );
+    }
+  }
+
+  Future<void> whenVerified() async {
+    var result = await APIClient().postData('verification/$noHp', {
+      "noHp": noHp,
+      "kodeOtp": 'Null',
+      "status": 'Verified'
+    }).catchError((err) {
+      return null;
+    });
+    if (result != null) {
+      print("Nomor berhasil di verifikasi");
+    } else {
+      print('something error on code');
+      print(result);
     }
   }
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.137.1/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": otpRegister.toString(),
@@ -139,7 +160,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                       child: Column(
                         children: [
                           // Text('noHp: ${(widget.noHp)}'),
-                          // Text('otp: $otpRegister'),
+                          // Text('otp: $noHp'),
                           // Text('Verification code: $verificationCode'),
                           Align(
                             alignment: FractionalOffset.topLeft,

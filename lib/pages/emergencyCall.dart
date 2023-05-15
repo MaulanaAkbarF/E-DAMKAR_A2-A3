@@ -1,10 +1,39 @@
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
+
+import 'package:url_launcher/url_launcher_string.dart';
 
 class EmergencyCall extends StatelessWidget {
   const EmergencyCall({super.key});
+
+  final String phoneNumber = "085708574368";
+  
+  void emercall() async {
+    final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(phoneUrl);
+  }
+
+  // String platformCheck() {
+  //   if (Platform.isIOS) {
+  //       return "whatsapp://wa.me/$phoneNumber}";
+  //     } else {
+  //       return "whatsapp://send?phone=$phoneNumber}";
+  //     }
+  // }
+
+  void emerCallWA() async {
+    String url = 'whatsapp://wa.me/$phoneNumber';
+    // await canLaunchUrlString(url)
+    //     ? launchUrlString(url)
+    //     : debugPrint("terdapat kesalahan");
+    // 
+    launchUrlString(url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +71,7 @@ class EmergencyCall extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: paddingHorozontal1, vertical: paddingVertical2),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: emercall,
                   style: ElevatedButton.styleFrom(
                     primary: red1,
                   ),
@@ -50,7 +79,7 @@ class EmergencyCall extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/EmeCall.svg'),
+                          SvgPicture.asset('semuaAset/icon/EmeCall.svg'),
                           SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +89,7 @@ class EmergencyCall extends StatelessWidget {
                                 style: medium,
                               ),
                               SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight2.svg')
+                                  'semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
@@ -69,7 +98,7 @@ class EmergencyCall extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: emerCallWA,
                   style: ElevatedButton.styleFrom(
                     primary: green1,
                   ),
@@ -77,21 +106,17 @@ class EmergencyCall extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
                         children: [
-                          SvgPicture.asset('semuaAset/gambar/WA.svg'),
+                          SvgPicture.asset('semuaAset/icon/WA.svg'),
                           SizedBox(height: paddingHorozontal1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
                                 'Whatsapp',
-                                style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    color: green2,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15),
+                                style: medium
                               ),
                               SvgPicture.asset(
-                                  'semuaAset/gambar/ArrowRight.svg')
+                                  'semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
