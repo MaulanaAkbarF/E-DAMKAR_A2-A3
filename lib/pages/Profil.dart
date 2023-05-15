@@ -63,7 +63,8 @@ class _ProfilePageState extends State<Profile> {
                   splashColor: Colors.grey.shade400,
                   highlightColor: Colors.grey.shade600,
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 10),
@@ -108,7 +109,7 @@ class _ProfilePageState extends State<Profile> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditProfilePage()));
+                            builder: (context) => EditProfilePage(1)));
                   },
                   child: Text(
                     "Ubah",
