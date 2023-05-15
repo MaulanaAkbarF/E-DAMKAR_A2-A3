@@ -12,6 +12,27 @@ class RemakePassPage extends StatefulWidget {
   State<RemakePassPage> createState() => _RemakePassPageState();
 }
 
+bool _passwordVisible = true;
+bool _passwordVisible1 = true;
+
+@override
+void initState() {
+  _passwordVisible = true;
+  _passwordVisible1 = true;
+}
+
+final _formKey = GlobalKey<FormState>();
+final _newPasswordController = TextEditingController();
+final _confirmPasswordController = TextEditingController();
+String _message = '';
+
+@override
+void dispose() {
+  _newPasswordController.dispose();
+  _confirmPasswordController.dispose();
+  // super.dispose();
+}
+
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -122,15 +143,35 @@ class _RemakePassPageState extends State<RemakePassPage> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextField(
-                                  // controller: pass,
-                                  obscureText: true,
+                                child: TextFormField(
+                                  controller: _newPasswordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'password baru tidak boleh kosong';
+                                    } else if (value.length > 20) {
+                                      return 'password baru terlalu panjang';
+                                    } else if (value.length < 8) {
+                                      return 'password baru terlalu pendek';
+                                    }
+                                  },
+                                  obscureText: _passwordVisible1,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
-                                      suffixIcon:
-                                          Icon(Icons.remove_red_eye_outlined),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible1 =
+                                                !_passwordVisible1;
+                                          });
+                                        },
+                                        icon: Icon(_passwordVisible1
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined),
+                                        color:
+                                            Color.fromARGB(255, 143, 143, 143),
+                                      ),
                                       suffixIconColor: Colors.black,
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -162,15 +203,34 @@ class _RemakePassPageState extends State<RemakePassPage> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextField(
-                                  // controller: pass,
-                                  obscureText: true,
+                                child: TextFormField(
+                                  controller: _confirmPasswordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Validasi password tidak boleh kosong';
+                                    } else if (value !=
+                                        _newPasswordController.text) {
+                                      return 'validasi password tidak sesuai dengan password baru';
+                                    }
+                                  },
+                                  obscureText: _passwordVisible,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
-                                      suffixIcon:
-                                          Icon(Icons.remove_red_eye_outlined),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _passwordVisible =
+                                                !_passwordVisible;
+                                          });
+                                        },
+                                        icon: Icon(_passwordVisible
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined),
+                                        color:
+                                            Color.fromARGB(255, 143, 143, 143),
+                                      ),
                                       suffixIconColor: Colors.black,
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -191,7 +251,11 @@ class _RemakePassPageState extends State<RemakePassPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    navToOtpVerificationPage(context);
+                                    //navToOtpVerificationPage(context);
+                                    if (_formKey.currentState!.validate()) {
+                                      if (_newPasswordController.text ==
+                                          _confirmPasswordController) {}
+                                    } else {}
                                   },
                                   child: Container(
                                     height: 50,
