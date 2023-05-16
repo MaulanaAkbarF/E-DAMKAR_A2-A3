@@ -30,7 +30,6 @@ void main() {
               '/': (context) => EmergencyCall(),
               '/signin': (context) => SignInPage(),
               '/signup': (context) => SignUpPage(),
-              '/remakepass': (context) => RemakePassPage(),
               '/resetpass': (context) => ResetPassPage(),
               '/homepage': (context) => HomePage(),
               '/riwayatlapp': (context) => RiwayatLaporan(),
