@@ -3,22 +3,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/pages/LaporanPage.dart';
-import 'package:edamkar_1/pages/LokasiKejadian.dart';
+import 'package:edamkar_1/pages/laporan/LaporanPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'LokasiKejadian.dart';
 
-class LaporanPenyelamatan extends StatefulWidget {
+class LaporanHewanBuas extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanPenyelamatan(
+  LaporanHewanBuas(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -30,7 +28,7 @@ class LaporanPenyelamatan extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanPenyelamatan> createState() => _LaporanPenyelamatanState();
+  State<LaporanHewanBuas> createState() => _LaporanHewanBuasState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -39,9 +37,8 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Urgensi Penyelamatan',
-    'namaBencanaHint':
-        'Contoh: Orang jatuh di sumur, orang terjebak di lift, dll',
+    'namaBencana': 'Urgensi Hewan Buas',
+    'namaBencanaHint': 'Contoh: Buaya, Harimau, Macan Tutul, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -96,7 +93,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
+class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();

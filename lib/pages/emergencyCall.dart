@@ -12,7 +12,7 @@ class EmergencyCall extends StatelessWidget {
   const EmergencyCall({super.key});
 
   final String phoneNumber = "085708574368";
-  
+
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
@@ -26,13 +26,10 @@ class EmergencyCall extends StatelessWidget {
   //     }
   // }
 
+  final String message = "testing";
   void emerCallWA() async {
-    String url = 'whatsapp://wa.me/$phoneNumber';
-    // await canLaunchUrlString(url)
-    //     ? launchUrlString(url)
-    //     : debugPrint("terdapat kesalahan");
-    // 
-    launchUrlString(url);
+    final whatsappUrl = "whatsapp://send?phone=+6285708574368" +
+        "&text=${Uri.encodeComponent(message)}";
   }
 
   @override
@@ -88,8 +85,7 @@ class EmergencyCall extends StatelessWidget {
                                 'Panggilan Darurat',
                                 style: medium,
                               ),
-                              SvgPicture.asset(
-                                  'semuaAset/icon/ArrowRight2.svg')
+                              SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],
@@ -111,12 +107,8 @@ class EmergencyCall extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                'Whatsapp',
-                                style: medium
-                              ),
-                              SvgPicture.asset(
-                                  'semuaAset/icon/ArrowRight2.svg')
+                              const Text('Whatsapp', style: medium),
+                              SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
                         ],

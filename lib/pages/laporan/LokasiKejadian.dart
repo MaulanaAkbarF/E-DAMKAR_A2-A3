@@ -1,8 +1,7 @@
-import 'package:edamkar_1/pages/LaporanBencanaAlam.dart';
-import 'package:edamkar_1/pages/LaporanCustom.dart';
-import 'package:edamkar_1/pages/LaporanHewanBuas.dart';
-import 'package:edamkar_1/pages/LaporanKebakaran.dart';
-import 'package:edamkar_1/pages/LaporanPenyelamatan.dart';
+import 'package:edamkar_1/pages/laporan/LaporanCustom.dart';
+import 'package:edamkar_1/pages/laporan/LaporanHewanBuas.dart';
+import 'package:edamkar_1/pages/laporan/LaporanKebakaran.dart';
+import 'package:edamkar_1/pages/laporan/LaporanPenyelamatan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
@@ -90,18 +89,18 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
   void kirimButtonPressed(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
       if (kategori == "bencanaalam") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanBencanaAlam(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //       builder: (context) => LaporanBencanaAlam(
+        //             kecamatan: kecamatanCon.text,
+        //             desa: desaCon.text,
+        //             jalan: jalanCon.text,
+        //             kota: 'Nganjuk',
+        //             kodepos: '',
+        //             latitude: 0.0,
+        //             longitude: 0.0,
+        //           )),
+        // );
       } else if (kategori == "kebakaran") {
         Navigator.of(context).push(
           MaterialPageRoute(

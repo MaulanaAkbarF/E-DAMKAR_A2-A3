@@ -3,15 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/pages/LaporanPage.dart';
-import 'package:edamkar_1/pages/LokasiKejadian.dart';
+import 'package:edamkar_1/pages/laporan/LaporanPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'LokasiKejadian.dart';
 
 class LaporanKebakaran extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
