@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/pages/UpdatePasswordSuccess.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:edamkar_1/pages/verificationSuccess.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
 
     if (data != null) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => VerificationSuccess()));
+          MaterialPageRoute(builder: (context) => UpdatePasswordSuccess()));
     } else {
       print("Something error on code");
       print(data);
@@ -140,7 +141,6 @@ class _RemakePassPageState extends State<RemakePassPage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text('noHp: ${(widget.noHp)}'),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
