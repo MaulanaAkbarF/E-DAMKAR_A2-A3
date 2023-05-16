@@ -109,7 +109,7 @@ class _ProfilePageState extends State<Profile> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditProfilePage()));
+                            builder: (context) => EditProfilePage(1)));
                   },
                   child: Text(
                     "Ubah",
@@ -311,7 +311,7 @@ class _ProfilePageState extends State<Profile> {
           // ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: 85, horizontal: paddingHorozontal2),
+                vertical: paddingVertical4, horizontal: paddingHorozontal2),
             child: ElevatedButton(
                 onPressed: () {
                   showLogoutDialog(context);

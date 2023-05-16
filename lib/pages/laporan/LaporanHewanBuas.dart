@@ -239,7 +239,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
+    return ModalProgressHUD( 
         inAsyncCall: showSpinner,
         progressIndicator: CircularProgressIndicator(),
         child: Scaffold(

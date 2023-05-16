@@ -10,7 +10,7 @@ class Update {
 
   static Future<Update> ubahSandi(
       String id, String password_lama, String password_baru) async {
-    Uri url = Uri.parse("http://192.168.1.17:8000/api/user/password");
+    Uri url = Uri.parse("http://172.16.103.188:8000/api/user/password");
     var HasilRespon = await http.post(url, body: {
       "id": id,
       "password_lama": password_lama,
