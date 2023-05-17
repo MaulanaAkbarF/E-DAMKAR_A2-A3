@@ -1,3 +1,4 @@
+import 'package:edamkar_1/models/GetProfil.dart';
 import 'package:edamkar_1/pages/HomePage.dart';
 import 'package:edamkar_1/pages/UbahSandi.dart';
 import 'package:edamkar_1/pages/signin.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:edamkar_1/style/app_style.dart';
+
+import '../APIRequest/APIClient.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -18,11 +21,20 @@ class Profile extends StatefulWidget {
 class _ProfilePageState extends State<Profile> {
   var userName = 'user1';
   var emailnya = 'ahmad@gmail.com';
+  var url_photo = "";
 
   void getUserData() async {
     var data = DataUser().getNama();
 
     var data1 = DataUser().getEmail();
+
+    var gambar = DataUser().getGambar();
+
+    gambar.then((value) {
+      setState(() {
+        url_photo = value.toString();
+      });
+    });
 
     data.then((value) {
       setState(() {
@@ -35,6 +47,22 @@ class _ProfilePageState extends State<Profile> {
         emailnya = value.toString();
       });
     });
+  }
+
+  CircleAvatar image(String? url) {
+    if (url != null || url != "") {
+      return CircleAvatar(
+        // minRadius: 30,
+        backgroundImage: NetworkImage(url.toString()),
+
+        // image: ,
+        // fit: BoxFit.cover,
+      );
+    }
+    return const CircleAvatar(
+      // minRadius: 30,
+      backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
+    );
   }
 
   @override
@@ -98,10 +126,8 @@ class _ProfilePageState extends State<Profile> {
                 color: Colors.transparent,
               ),
               child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
-                  backgroundColor: Colors.white,
-                ),
+                leading: image(
+                    "${APIClient.gambar}storage/public/foto_user/${url_photo}"),
                 title: Text("$userName"),
                 subtitle: Text("$emailnya"),
                 trailing: GestureDetector(

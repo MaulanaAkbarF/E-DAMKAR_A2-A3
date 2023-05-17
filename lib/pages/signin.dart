@@ -97,7 +97,8 @@ class _SignInPageState extends State<SignInPage> {
               data.data!.email.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString());
+              data.token.toString(), 
+              data.data!.gambar.toString());
           Navigator.pushNamed(context, '/homepage');
         } else {
           show(data.data!.message.toString());
@@ -290,7 +291,6 @@ class _SignInPageState extends State<SignInPage> {
                                   onTap: () {
                                     loginPost(email.text, pass.text);
                                   },
-                        
                                   child: Container(
                                     height: 50,
                                     child: Row(

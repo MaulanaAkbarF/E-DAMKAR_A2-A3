@@ -1,12 +1,13 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-const String _baseUrl = 'http://188.10.10.254:8000/api/';
+const String _baseUrl = 'http://172.16.103.4:8000/api/';
 
 class APIClient {
   var client = http.Client();
 
+  static String gambar = 'http://172.16.103.4:8000/';
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(_baseUrl + api);
     var response = await client.get(url);
