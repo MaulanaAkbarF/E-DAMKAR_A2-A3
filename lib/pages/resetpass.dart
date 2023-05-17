@@ -57,7 +57,6 @@ class _ResetPassPageState extends State<ResetPassPage> {
   @override
   void initState() {
     random();
-    // getResponse();
     super.initState();
   }
 
@@ -73,7 +72,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.17.202.12/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://172.16.104.15/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -88,22 +87,8 @@ class _ResetPassPageState extends State<ResetPassPage> {
     }
   }
 
-  // void getResponse() async {
-  //   var apiUrl = Uri.parse('http://172.17.202.12:8000/api/getNoHp/$notelp');
-  //   var response = await http.get(apiUrl);
-  //   if (response.statusCode == 200) {
-  //     var jsonResponse = jsonDecode(response.body);
-  //     setState(() {
-  //       noHP = jsonResponse['data'][0]['noHP'];
-  //       print('kontollll');
-  //     });
-  //   } else {
-  //     print('Request failed with status: ${response.statusCode}.');
-  //   }
-  // }
-
   Future<bool> validasiNomer(String noHP) async {
-    var apiUrl = Uri.parse('http://172.17.202.12:8000/api/getNoHp/$noHP');
+    var apiUrl = Uri.parse('http://172.16.104.15:8000/api/getNoHp/$noHP');
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
@@ -113,7 +98,6 @@ class _ResetPassPageState extends State<ResetPassPage> {
         return false; // menambahkan return false
       } else {
         noHP = jsonResponse['data'][0]['noHP'];
-
         return true; // menambahkan return true
       }
     } else {
@@ -122,8 +106,9 @@ class _ResetPassPageState extends State<ResetPassPage> {
     }
   }
 
-  void konfirmasiData() {
-    if (noHP != null) {
+  void konfirmasiData() async {
+    bool isnumberValid = await validasiNomer(noHP);
+    if (isnumberValid) {
       _kirimNotifikasi();
       Navigator.push(
           context,
@@ -190,7 +175,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text('Title : $noHP'),
+                            // Text('Title : $noHP'),
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
@@ -273,7 +258,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                     highlightColor: Colors.red.shade900,
                                     onTap: () {
                                       if (_formKey.currentState!.validate()) {
-                                        // getResponse();
+                                        konfirmasiData();
                                       }
                                     },
                                     child: Container(

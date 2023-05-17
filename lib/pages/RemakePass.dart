@@ -1,12 +1,16 @@
 import 'dart:async';
 
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/pages/UpdatePasswordSuccess.dart';
 import 'package:edamkar_1/pages/signin.dart';
+import 'package:edamkar_1/pages/verificationSuccess.dart';
 import 'package:flutter/material.dart';
 
 import 'otpverification.dart';
 
 class RemakePassPage extends StatefulWidget {
-  const RemakePassPage({Key? key}) : super(key: key);
+  String noHp;
+  RemakePassPage({Key? key, required this.noHp}) : super(key: key);
 
   @override
   State<RemakePassPage> createState() => _RemakePassPageState();
@@ -77,6 +81,35 @@ final List<Map> teksStyleRemakePass = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class _RemakePassPageState extends State<RemakePassPage> {
+  late String noHp;
+  void initState() {
+    super.initState();
+    noHp = widget.noHp;
+  }
+
+  void gantiPassword(context) async {
+    var data = await APIClient().postData('changepass/$noHp', {
+      "password": _confirmPasswordController.text,
+      "noHp": widget.noHp,
+    }).catchError((err) {
+      return null;
+    });
+
+    if (data != null) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => UpdatePasswordSuccess()));
+    } else {
+      print("Something error on code");
+      print(data);
+    }
+  }
+
+  void checkPassword() {
+    if (_newPasswordController.text == _confirmPasswordController.text) {
+      gantiPassword(context);
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,8 +284,7 @@ class _RemakePassPageState extends State<RemakePassPage> {
                                     onTap: () {
                                       //navToOtpVerificationPage(context);
                                       if (_formKey.currentState!.validate()) {
-                                        if (_newPasswordController.text ==
-                                            _confirmPasswordController) {}
+                                        checkPassword();
                                       } else {}
                                     },
                                     child: Container(

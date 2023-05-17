@@ -86,7 +86,11 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
     if (otpRegister.toString() == kodeotptxt.text) {
       whenVerified();
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RemakePassPage()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => RemakePassPage(
+                    noHp: noHp,
+                  )));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -116,7 +120,7 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.16.110.98/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://172.17.201.65/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": otpRegister.toString(),
@@ -276,30 +280,6 @@ void navToResetPassPage(BuildContext context) {
         context,
         PageRouteBuilder(
           pageBuilder: (_, __, ___) => ResetPassPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(-1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
-
-void navToRemakePassPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => RemakePassPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(

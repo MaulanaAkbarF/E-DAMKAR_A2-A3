@@ -131,6 +131,31 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
     }
   }
 
+  void navToRemakePassPage(BuildContext context) {
+    Timer(Duration(seconds: 0), () {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => RemakePassPage(noHp: noHp),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: Offset(-1, 0),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeInOut,
+                  ),
+                ),
+                child: child,
+              );
+            },
+          ));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -276,30 +301,6 @@ void navToResetPassPage(BuildContext context) {
         context,
         PageRouteBuilder(
           pageBuilder: (_, __, ___) => ResetPassPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(-1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
-
-void navToRemakePassPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => RemakePassPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(
