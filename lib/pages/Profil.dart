@@ -216,7 +216,7 @@ class _ProfilePageState extends State<Profile> {
             ),
           ),
           Divider(
-            thickness: 5,
+            thickness: 4,
           ),
           SizedBox(
             height: 10,
@@ -330,7 +330,7 @@ class _ProfilePageState extends State<Profile> {
             ),
           ),
           Divider(
-            thickness: 5,
+            thickness: 4,
           ),
           // SizedBox(
           //   height: 50,
