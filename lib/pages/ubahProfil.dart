@@ -129,7 +129,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           .udpateUser(nama.text, noHp.text, UserPic.toString())
                     }
                   else
-                    {print('toss gagal disini')}
+                    {gagal(context)}
                 });
       } else {
         UpdateProfil.sendRequestWithFile(
@@ -146,7 +146,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       toss(context)
                     }
                   else
-                    {print('toss gagal disini')}
+                    {gagal(context)}
                 });
       }
     } else {
