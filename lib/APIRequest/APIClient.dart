@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-const String _baseUrl = 'http://188.10.10.254:8000/api/';
+const _baseUrl = 'http://172.16.103.4:8000/api/';
 
 class APIClient {
   var client = http.Client();
+
 
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(_baseUrl + api);

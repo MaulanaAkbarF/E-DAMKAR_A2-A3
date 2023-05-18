@@ -5,8 +5,8 @@ import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/style/size_config.dart';
 import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -18,11 +18,20 @@ class Profile extends StatefulWidget {
 class _ProfilePageState extends State<Profile> {
   var userName = 'user1';
   var emailnya = 'ahmad@gmail.com';
-
+  var url_photo = "";
+  var baseurl = '';
   void getUserData() async {
     var data = DataUser().getNama();
 
     var data1 = DataUser().getUsername();
+
+    var gambar = DataUser().getGambar();
+
+    gambar.then((value) {
+      setState(() {
+        url_photo = value.toString();
+      });
+    });
 
     data.then((value) {
       setState(() {
@@ -35,6 +44,22 @@ class _ProfilePageState extends State<Profile> {
         emailnya = value.toString();
       });
     });
+  }
+
+  CircleAvatar image(String? url) {
+    if (url != null || url != "") {
+      return CircleAvatar(
+        // minRadius: 30,
+        backgroundImage: NetworkImage(url.toString()),
+
+        // image: ,
+        // fit: BoxFit.cover,
+      );
+    }
+    return const CircleAvatar(
+      // minRadius: 30,
+      backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
+    );
   }
 
   @override
@@ -98,10 +123,8 @@ class _ProfilePageState extends State<Profile> {
                 color: Colors.transparent,
               ),
               child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
-                  backgroundColor: Colors.white,
-                ),
+                leading:
+                    image("${baseurl}storage/public/foto_user/${url_photo}"),
                 title: Text("$userName"),
                 subtitle: Text("$emailnya"),
                 trailing: GestureDetector(
@@ -190,7 +213,7 @@ class _ProfilePageState extends State<Profile> {
             ),
           ),
           Divider(
-            thickness: 5,
+            thickness: 4,
           ),
           SizedBox(
             height: 10,
@@ -304,7 +327,7 @@ class _ProfilePageState extends State<Profile> {
             ),
           ),
           Divider(
-            thickness: 5,
+            thickness: 4,
           ),
           // SizedBox(
           //   height: 50,

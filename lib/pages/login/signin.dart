@@ -105,7 +105,8 @@ class _SignInPageState extends State<SignInPage> {
               data.data!.username.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString());
+              data.token.toString(), 
+              data.data!.gambar.toString());
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (BuildContext context) => const AppMenu()));

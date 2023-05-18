@@ -25,6 +25,7 @@ class Data {
   String? namaLengkap;
   String? noHp;
   String? message;
+  String? gambar;
 
 
   Data({
@@ -33,12 +34,14 @@ class Data {
     this.password,
     this.namaLengkap,
     this.noHp,
+    this.gambar,
     this.message
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         username: json["username"],
+        gambar: json['foto_user'],
         password: json["password"],
         namaLengkap: json["namaLengkap"],
         noHp: json["noHp"],
