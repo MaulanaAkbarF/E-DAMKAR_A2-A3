@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -37,3 +39,9 @@ const black3 = Color.fromARGB(255, 51, 51, 51);
 const orange1 = Color(0xffF33C04);
 const orange2 = Color(0xffFDE8E8);
 const white = Colors.white;
+
+final _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+Random _rnd = Random();
+
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));

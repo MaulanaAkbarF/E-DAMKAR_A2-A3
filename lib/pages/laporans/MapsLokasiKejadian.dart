@@ -1,8 +1,9 @@
-import 'package:edamkar_1/pages/laporan/LaporanCustom.dart';
-import 'package:edamkar_1/pages/laporan/LaporanHewanBuas.dart';
-import 'package:edamkar_1/pages/laporan/LaporanKebakaran.dart';
-import 'package:edamkar_1/pages/laporan/LaporanPenyelamatan.dart';
-import 'package:edamkar_1/pages/laporan/LokasiKejadian.dart';
+import 'package:edamkar_1/pages/laporans/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/pages/laporans/LaporanCustom.dart';
+import 'package:edamkar_1/pages/laporans/LaporanHewanBuas.dart';
+import 'package:edamkar_1/pages/laporans/LaporanKebakaran.dart';
+import 'package:edamkar_1/pages/laporans/LaporanPenyelamatan.dart';
+import 'package:edamkar_1/pages/laporans/LokasiKejadian.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -206,21 +207,21 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
                                     );
                                   } else {
                                     if (kategori == "bencanaalam") {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         LaporanBencanaAlam(
-                                      //       jalan: jalan,
-                                      //       desa: desa,
-                                      //       kecamatan: kecamatan,
-                                      //       kota: kota,
-                                      //       kodepos: kodepos,
-                                      //       latitude: latitude,
-                                      //       longitude: longitude,
-                                      //     ),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LaporanBencanaAlam(
+                                            jalan: jalan,
+                                            desa: desa,
+                                            kecamatan: kecamatan,
+                                            kota: kota,
+                                            kodepos: kodepos,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                          ),
+                                        ),
+                                      );
                                     } else if (kategori == "kebakaran") {
                                       Navigator.push(
                                         context,

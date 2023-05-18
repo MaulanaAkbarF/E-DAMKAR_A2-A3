@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ProfilModel.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:edamkar_1/style/app_style.dart';
-import '../SharedPreferences/dataUser.dart';
 import 'Profil.dart';
 
 class EditProfilePage extends StatefulWidget {

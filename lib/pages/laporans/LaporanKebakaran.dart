@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/pages/laporan/LaporanPage.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -98,6 +99,12 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    DataUser().getNoHp().then((value) => noTelpCon.text = value);
+  }
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
@@ -213,25 +220,6 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
     setState(() {
       showSpinner = true;
     });
-
-    var stream = new http.ByteStream(image!.openRead());
-    stream.cast();
-    var length = await image!.length();
-    var uri = Uri.parse(
-        "https://api.imgbb.com/1/upload?key=04b75a4aa8a6e4e3c7d0eb6236f1eae4");
-    final request = http.MultipartRequest('POST', uri);
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-      ),
-    );
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.statusCode);
-    }
   }
 
   @override

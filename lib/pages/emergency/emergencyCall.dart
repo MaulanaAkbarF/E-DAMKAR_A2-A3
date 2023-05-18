@@ -8,9 +8,14 @@ import 'dart:io' show Platform;
 
 import 'package:url_launcher/url_launcher_string.dart';
 
-class EmergencyCall extends StatelessWidget {
+class EmergencyCall extends StatefulWidget {
   const EmergencyCall({super.key});
 
+  @override
+  State<EmergencyCall> createState() => _EmergencyCallState();
+}
+
+class _EmergencyCallState extends State<EmergencyCall> {
   final String phoneNumber = "085708574368";
 
   void emercall() async {
@@ -19,22 +24,28 @@ class EmergencyCall extends StatelessWidget {
   }
 
   // String platformCheck() {
-  //   if (Platform.isIOS) {
-  //       return "whatsapp://wa.me/$phoneNumber}";
-  //     } else {
-  //       return "whatsapp://send?phone=$phoneNumber}";
-  //     }
-  // }
+  final String message =
+      "setelah melakukan panggilan tolong kembali ke aplikasi";
 
-  final String message = "testing";
+  final String countryCode = "+62";
+
+  final String phone = "81252277680";
+
   void emerCallWA() async {
-    final whatsappUrl = "whatsapp://send?phone=+6285708574368" +
-        "&text=${Uri.encodeComponent(message)}";
+    var whatsappUrl =
+        "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
+    if (await canLaunchUrlString(whatsappUrl)) {
+      await launchUrlString(whatsappUrl);
+      Navigator.pushNamed(context, "/laporanpage");
+    } else {
+      print("wadoo ada masalah tuh");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -94,7 +105,9 @@ class EmergencyCall extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: ElevatedButton(
-                  onPressed: emerCallWA,
+                  onPressed: () {
+                    emerCallWA();
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: green1,
                   ),

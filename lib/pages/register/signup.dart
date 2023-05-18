@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'package:edamkar_1/pages/otpverification.dart';
-import 'package:edamkar_1/pages/signin.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 
-import '../APIRequest/APIClient.dart';
-import '../models/RegisterModel.dart';
+import '../../APIRequest/APIClient.dart';
+import '../../models/RegisterModel.dart';
+import '../otpVerifications/otpverification.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -37,8 +37,8 @@ final List<Map> teksSignUp = [
         'Masukkan data diri dan buat sebuah akun untuk mengakses seluruh layanan E-Damkar!',
     'Nama': 'Nama Lengkap',
     'NamaHint': 'Nama Kamu',
-    'Email': 'E-Mail',
-    'EmailHint': 'emailkamu@gmail.com',
+    'Email': 'Username',
+    'EmailHint': 'Username Kamu',
     'Telepon': 'No. Telp (Whatsapp)',
     'TeleponHint': '08....',
     'Password1': 'Kata Sandi',

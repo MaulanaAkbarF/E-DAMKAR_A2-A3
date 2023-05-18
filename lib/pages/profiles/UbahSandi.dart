@@ -1,19 +1,12 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/models/UbahPassword.dart';
-import 'package:edamkar_1/pages/Profil.dart';
 import 'package:flutter/material.dart';
-
 import 'dart:async';
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import 'package:edamkar_1/pages/signin.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../APIRequest/APIClient.dart';
-import '../models/RegisterModel.dart';
 
 class UbahSandi extends StatefulWidget {
   //const UbahSandi({super.key});
@@ -70,10 +63,10 @@ class _UbahSandiPageState extends State<UbahSandi> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Profile()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Profile()),
+    // );
   }
 
   gagal(BuildContext context) {

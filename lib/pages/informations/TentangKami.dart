@@ -1,4 +1,3 @@
-import 'package:edamkar_1/pages/Profil.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/style/size_config.dart';
 

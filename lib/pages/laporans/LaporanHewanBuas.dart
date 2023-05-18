@@ -1,9 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/pages/laporan/LaporanPage.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/models/ImageModel.dart';
+import 'package:edamkar_1/models/pelaporanModel.dart';
+import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
+import 'package:edamkar_1/style/app_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,12 +17,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LaporanPenyelamatan extends StatefulWidget {
+class LaporanHewanBuas extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanPenyelamatan(
+  LaporanHewanBuas(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -28,7 +34,7 @@ class LaporanPenyelamatan extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanPenyelamatan> createState() => _LaporanPenyelamatanState();
+  State<LaporanHewanBuas> createState() => _LaporanHewanBuasState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -37,9 +43,8 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Urgensi Penyelamatan',
-    'namaBencanaHint':
-        'Contoh: Orang jatuh di sumur, orang terjebak di lift, dll',
+    'namaBencana': 'Urgensi Hewan Buas',
+    'namaBencanaHint': 'Contoh: Buaya, Harimau, Macan Tutul, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -94,93 +99,81 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
+class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  var iduser;
+  @override
+  void initState() {
+    super.initState();
+    DataUser().getNoHp().then((value) => noTelpCon.text = value);
+    DataUser().getUserId().then((value) => iduser = value);
+  }
 
-  void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        'http://192.168.137.59/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
+  // void pushLaporan() async {
+  //   var result = await APIClient().postData('addPelaporan', {
+  //     'user_listdata_id': '1',
+  //     'status_riwayat_id': '1',
+  //     'kategori_laporan_id': '4',
+  //     'tgl_lap': '2023-05-17',
+  //     'deskripsi_laporan': deskripsiCon.text,
+  //     'alamat_kejadian': widget.jalan.toString() +
+  //         widget.desa.toString() +
+  //         widget.kota.toString(),
+  //     'latitude': widget.latitude.toString(),
+  //     'longitude': widget.longitude.toString()
+  //   });
+  //   var resultWa = await APIClient().postData('sendToWa', {
+  //     'desa': widget.desa,
+  //     'jalan': widget.jalan,
+  //     'kecamatan': widget.kecamatan,
+  //     'kota': widget.kota,
+  //     'kodepos': widget.kodepos.toString(),
+  //     'latitude': widget.latitude.toString(),
+  //     'longitude': widget.longitude.toString(),
+  //     'namaBencana': "hewanBuas",
+  //     'noTelp': DataUser().getNoHp().toString()
+  //   });
+  //   if (result != null || result != false) {
+  //     var lastResult = await laporanModelFromJson(result);
+  //     show("berhasil melakukan pelaporan");
+  //     Navigator.pushNamed(context, '/laporanpage');
+  //   }
+  // }
 
-    // Data yang akan dikirim
-    var data = {
-      "desa": widget.desa,
-      "jalan": widget.jalan,
-      "kecamatan": widget.kecamatan,
-      "kota": widget.kota,
-      "kodepos": widget.kodepos,
-      "latitude": widget.latitude.toString(),
-      "longitude": widget.longitude.toString(),
-      "noTelp": noTelpCon.text.toString(),
-      "namaBencana": namaBencanaCon.text,
-    };
-
-    // Mengirim data ke server menggunakan metode POST
-    var response = await http.post(url, body: data);
-
-    // Menerima dan memproses respons dari server
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print('Respon dari server: $responseData');
+  void pushLaporan() async {
+    String title = iduser.toString() + "_image_" + getRandomString(30);
+    DateTime now = new DateTime.now();
+    DateTime date = new DateTime(now.year, now.month, now.day);
+    String alamat = widget.jalan +
+        ', ' +
+        widget.desa +
+        ', ' +
+        widget.kecamatan +
+        ', ' +
+        widget.kota +
+        ', ' +
+        widget.kodepos;
+    var result =
+        await APIClient().postMulti('addImage', image, imagePath, title);
+    var result2 = await APIClient().postData('addPelaporan', {
+      'user_listdata_id': iduser.toString(),
+      'kategori_laporan_id': '4',
+      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
+      'deskripsi_laporan': deskripsiCon.text,
+      'gambar_bukti_pelaporan': title,
+      'alamat_kejadian': alamat,
+      'latitude': widget.latitude.toString(),
+      'longitude': widget.longitude.toString()
+    });
+    debugPrint(widget.jalan.toString() +
+        widget.desa.toString() +
+        widget.kota.toString());
+    if (result != null) {
     } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
-  }
-
-  Future<bool> _kirimLaporan() async {
-    var res = await http.post(
-      Uri.parse("http://192.168.137.59/flutter_api/submit.php"),
-      body: {
-        "gambar": imageName,
-        "namaBencana": namaBencanaCon.text,
-        "noTelp": noTelpCon.text,
-        "deskripsi": deskripsiCon.text,
-        "kecamatan": widget.kecamatan,
-        "desa": widget.desa,
-        "jalan": widget.jalan,
-      },
-    );
-    var resp = res.body;
-    Map<String, dynamic> status = jsonDecode(resp);
-    bool statusKirim = status["success"];
-    if (statusKirim == true) {
-      return true;
-    }
-    return false;
-  }
-
-  void _onConfirm(context) async {
-    if (_formKey.currentState?.validate() == true) {
-      var statusUpload = await _kirimLaporan();
-      if (statusUpload == true) {
-        await uploadImage();
-        _kirimNotifikasi();
-        final snackBar = SnackBar(
-          /// need to set following properties for best effect of awesome_snackbar_content
-          elevation: 0,
-          padding: EdgeInsets.all(16),
-          behavior: SnackBarBehavior.fixed,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Laporan berhasil terkirim!',
-            message:
-                'Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!',
-
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: ContentType.success,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LaporanPage()),
-        );
-      }
+      debugPrint("wadohh");
     }
   }
 
@@ -210,31 +203,6 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
       setState(() {});
     } else {
       print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-
-    var stream = new http.ByteStream(image!.openRead());
-    stream.cast();
-    var length = await image!.length();
-    var uri = Uri.parse(
-        "https://api.imgbb.com/1/upload?key=04b75a4aa8a6e4e3c7d0eb6236f1eae4");
-    final request = http.MultipartRequest('POST', uri);
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-      ),
-    );
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.statusCode);
     }
   }
 
@@ -408,7 +376,7 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Nama tidak boleh kosong';
+                                              return 'No teleporn tidak boleh kosogn';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -483,7 +451,7 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
                                           onTap: () {
-                                            _onConfirm(context);
+                                            pushLaporan();
                                           },
                                           child: Container(
                                             height: 50,

@@ -1,13 +1,13 @@
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/pages/DetailRiwayatLaporan.dart';
+import 'package:edamkar_1/pages/riwayatLaporans/DetailRiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
 
 import 'package:edamkar_1/style/size_config.dart';
-import '../APIRequest/APIClient.dart';
-import '../Menu/Menu.dart';
+import '../../APIRequest/APIClient.dart';
+import '../../Menu/Menu.dart';
 import 'package:edamkar_1/models/HardLaporan.dart';
 import 'package:edamkar_1/models/HardListStatus.dart';
 
@@ -293,7 +293,6 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
       //   ],
       // ),
       // ),
-      bottomNavigationBar: AppMenu(),
     );
   }
 

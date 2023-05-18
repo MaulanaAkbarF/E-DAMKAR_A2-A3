@@ -1,4 +1,4 @@
-import 'package:edamkar_1/pages/HomePage.dart';
+import 'package:edamkar_1/pages/home/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

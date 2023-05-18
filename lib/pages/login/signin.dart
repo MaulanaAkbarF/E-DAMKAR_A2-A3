@@ -1,12 +1,17 @@
 import 'dart:async';
 
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
-import 'package:edamkar_1/pages/resetpass.dart';
-import 'package:edamkar_1/pages/signup.dart';
+import 'package:edamkar_1/pages/resetpass/resetpass.dart';
+import 'package:edamkar_1/pages/register/signup.dart';
+import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../style/app_style.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -30,8 +35,8 @@ final List<Map> teksSignIn = [
     'Header': 'Masuk',
     'SubHeader':
         'Kami senang melihatmu kembali!\nMasuk dan mulalilah menyelamatkan lebih banyak orang.',
-    'Email': 'E-Mail',
-    'EmailHint': 'E-Mail Kamu',
+    'Email': 'Username atau No Whatsapp',
+    'EmailHint': 'Username atau No Whatsapp kamu',
     'Password': 'Kata Sandi',
     'PasswordHint': 'Sandi minimal 8 karakter',
     'LupaPass': 'Lupa Kata Sandi?',
@@ -82,24 +87,31 @@ final List<Map> teksStyleSignIn = [
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
-  final email = TextEditingController();
+  final account = TextEditingController();
   final pass = TextEditingController();
+  var isLoading = false;
 
-  loginPost(String email, String password) async {
+  loginPost(String acnt, String password) async {
     if (_formKey.currentState!.validate()) {
-      var result = await APIClient().postData(
-          'login', {"email": email, "password": password}).catchError((err) {});
+      setState(() => isLoading = true);
+      var result = await APIClient().postData('login',
+          {"username": acnt, "password": password}).catchError((err) {});
+
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
         if (data.token!.isNotEmpty) {
           await DataUser().addUser(
               data.data!.id.toString(),
-              data.data!.email.toString(),
+              data.data!.username.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
               data.token.toString());
-          Navigator.pushNamed(context, '/homepage');
+          Navigator.of(context).pop();
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) => const AppMenu()));
+          setState(() => isLoading = false);
         } else {
+          setState(() => isLoading = false);
           show(data.data!.message.toString());
         }
       } else {
@@ -111,7 +123,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void dispose() {
     super.dispose();
-    email.dispose();
+    account.dispose();
     pass.dispose();
   }
 
@@ -127,6 +139,8 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    var sty = styleNColor();
     return Scaffold(
         body: Form(
       key: _formKey,
@@ -182,7 +196,7 @@ class _SignInPageState extends State<SignInPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: email,
+                                  controller: account,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Email tidak boleh kosong';
@@ -288,19 +302,38 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    loginPost(email.text, pass.text);
+                                    loginPost(account.text, pass.text);
                                   },
-                        
                                   child: Container(
                                     height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(teks['ButtonLogin'],
-                                            style: teksStyle['Thin2']),
-                                      ],
-                                    ),
+                                    child: isLoading
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                height: 30,
+                                                width: 30,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              SizedBox(width: paddingVertical2),
+                                              Text(
+                                                'loading...',
+                                                style: sty.b(16, white),
+                                              ),
+                                            ],
+                                          )
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(teks['ButtonLogin'],
+                                                  style: teksStyle['Thin2']),
+                                            ],
+                                          ),
                                   ),
                                 ),
                               ),

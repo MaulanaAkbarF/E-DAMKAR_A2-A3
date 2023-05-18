@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
-import 'package:edamkar_1/pages/DetailArtikel.dart';
+import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:edamkar_1/models/ArtikelModel.dart';
 import 'package:edamkar_1/models/HardArtikel.dart';
 
-import '../APIRequest/APIClient.dart';
+import '../../APIRequest/APIClient.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -214,7 +214,6 @@ class _ArtikelState extends State<Artikel> {
         ),
         listArtikel()
       ]),
-      bottomNavigationBar: AppMenu(),
     );
   }
 

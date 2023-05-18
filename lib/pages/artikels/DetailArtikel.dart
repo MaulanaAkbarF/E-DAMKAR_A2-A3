@@ -1,4 +1,4 @@
-import 'package:edamkar_1/pages/Artikel.dart';
+import 'package:edamkar_1/pages/artikels/Artikel.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

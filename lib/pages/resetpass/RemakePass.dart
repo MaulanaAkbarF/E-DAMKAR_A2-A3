@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:edamkar_1/APIRequest/APIClient.dart';
-import 'package:edamkar_1/pages/signin.dart';
-import 'package:edamkar_1/pages/verificationSuccess.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 
-import 'otpverification.dart';
+import '../notification/verificationSuccess.dart';
 
 class RemakePassPage extends StatefulWidget {
   String noHp;

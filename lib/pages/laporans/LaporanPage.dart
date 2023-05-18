@@ -1,5 +1,5 @@
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/pages/laporan/MapsLokasiKejadian.dart';
+import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -432,7 +432,6 @@ class _LaporanPageState extends State<LaporanPage> {
           ],
         ),
       ),
-      bottomNavigationBar: AppMenu(),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'package:edamkar_1/pages/OTPResetPassword.dart';
-import 'package:edamkar_1/pages/otpverification.dart';
-import 'package:edamkar_1/pages/signin.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../otpVerifications/OTPResetPassword.dart';
 
 class ResetPassPage extends StatefulWidget {
   const ResetPassPage({Key? key}) : super(key: key);

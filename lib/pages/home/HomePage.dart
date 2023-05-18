@@ -1,6 +1,5 @@
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/pages/laporan/MapsLokasiKejadian.dart';
-import 'package:edamkar_1/pages/profil.dart';
+import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -8,6 +7,8 @@ import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../profiles/Profil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var userName = '';
   var url_photo;
-  final String phoneNumber = "112";
+  final String phoneNumber = "085708574368";
 
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
@@ -427,7 +428,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ])),
       ]),
-      bottomNavigationBar: AppMenu(),
     );
   }
 }

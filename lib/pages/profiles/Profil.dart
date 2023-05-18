@@ -1,8 +1,8 @@
-import 'package:edamkar_1/pages/HomePage.dart';
-import 'package:edamkar_1/pages/UbahSandi.dart';
-import 'package:edamkar_1/pages/signin.dart';
-import 'package:edamkar_1/pages/TentangKami.dart';
-import 'package:edamkar_1/pages/ubahProfil.dart';
+import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
+import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
+import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -22,7 +22,7 @@ class _ProfilePageState extends State<Profile> {
   void getUserData() async {
     var data = DataUser().getNama();
 
-    var data1 = DataUser().getEmail();
+    var data1 = DataUser().getUsername();
 
     data.then((value) {
       setState(() {

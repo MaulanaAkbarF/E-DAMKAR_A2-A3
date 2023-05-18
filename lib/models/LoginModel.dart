@@ -20,7 +20,7 @@ class LoginModel {
 
 class Data {
   int? id;
-  String? email;
+  String? username;
   String? password;
   String? namaLengkap;
   String? noHp;
@@ -29,7 +29,7 @@ class Data {
 
   Data({
     this.id,
-    this.email,
+    this.username,
     this.password,
     this.namaLengkap,
     this.noHp,
@@ -38,7 +38,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
-        email: json["email"],
+        username: json["username"],
         password: json["password"],
         namaLengkap: json["namaLengkap"],
         noHp: json["noHp"],
