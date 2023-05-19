@@ -1,4 +1,8 @@
-import 'package:edamkar_1/pages/Artikel.dart';
+import 'package:edamkar_1/pages/artikels/Artikel.dart';
+import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
+import 'package:edamkar_1/pages/profiles/Profil.dart';
+import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -11,66 +15,61 @@ class AppMenu extends StatefulWidget {
 
 class _AppMenuState extends State<AppMenu> {
   var _selectedIndex = 0;
+  List<Widget> menu = [
+    const HomePage(),
+    const LaporanPage(),
+    const RiwayatLaporan(),
+    const Artikel(),
+    const Profile()
+  ];
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: Colors.black.withOpacity(.30),
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home_filled,
-            color: black2,
-          ),
-          label: 'Beranda',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.history,
-            color: black2,
-          ),
-          label: 'Riwayat',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.edit_document,
-            color: black2,
-          ),
-          label: 'Laporan',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.article_rounded,
-            color: black2,
-          ),
-          label: 'Artikel',
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      onTap: _onItemTap,
-    );
+    return Scaffold(
+        body: menu[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: orange1,
+          unselectedItemColor: Colors.black.withOpacity(.30),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_filled,
+              ),
+              label: 'Beranda',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.edit_document,
+              ),
+              label: 'Laporan',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history,
+              ),
+              label: 'Riwayat',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.article_rounded,
+              ),
+              label: 'Artikel',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.settings,
+              ),
+              label: 'Setting',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTap,
+        ));
   }
 
   void _onItemTap(int index) {
     setState(() {
-      this._selectedIndex = index;
-      switch (_selectedIndex) {
-        case 0:
-          Navigator.pushNamed(context, '/homepage');
-          break;
-        case 1:
-          Navigator.pushNamed(context, '/riwayatlapp');
-          break;
-        case 2:
-          Navigator.pushNamed(context, '/laporanpage');
-          break;
-        case 3:
-          Navigator.pushNamed(context, '/artikel');
-          break;
-        default:
-          Navigator.pushNamed(context, '/homepage');
-      }
+      _selectedIndex = index;
     });
   }
 }

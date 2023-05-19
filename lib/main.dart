@@ -1,17 +1,16 @@
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/pages/Artikel.dart';
-import 'package:edamkar_1/pages/DetailArtikel.dart';
-import 'package:edamkar_1/pages/HomePage.dart';
-import 'package:edamkar_1/pages/LaporanPage.dart';
-import 'package:edamkar_1/pages/Profil.dart';
-import 'package:edamkar_1/pages/RemakePass.dart';
-import 'package:edamkar_1/pages/TentangKami.dart';
-import 'package:edamkar_1/pages/emergencyCall.dart';
-import 'package:edamkar_1/pages/otpverification.dart';
-import 'package:edamkar_1/pages/resetpass.dart';
-import 'package:edamkar_1/pages/signin.dart';
-import 'package:edamkar_1/pages/signup.dart';
-import 'package:edamkar_1/pages/RiwayatLaporan.dart';
+import 'package:edamkar_1/pages/profiles/Profil.dart';
+import 'package:edamkar_1/pages/laporans/LaporanPage.dart'; 
+import 'package:edamkar_1/pages/informations/TentangKami.dart';
+import 'package:edamkar_1/pages/artikels/Artikel.dart';
+import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
+import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/pages/emergency/emergencyCall.dart';
+import 'package:edamkar_1/pages/resetpass/resetpass.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
+import 'package:edamkar_1/pages/register/signup.dart';
+import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,14 +31,11 @@ void main() {
               '/signin': (context) => SignInPage(),
               '/signup': (context) => SignUpPage(),
               '/resetpass': (context) => ResetPassPage(),
-              '/homepage': (context) => HomePage(),
-              '/riwayatlapp': (context) => RiwayatLaporan(),
-              // '/detailriwayat': (context) => DetailRiwayatLengkap()
-              '/artikel': (context) => Artikel(),
               // '/detailartikel': (context) => DetailArtikel(""),
               '/profil': (context) => Profile(),
               '/tentangkami': (context) => TentangKami(),
               '/laporanpage': (context) => LaporanPage(),
+              '/mainScreen' : (context) => AppMenu()
               // '/buatlaporan': (context) => BuatLaporan()
             },
           )));
