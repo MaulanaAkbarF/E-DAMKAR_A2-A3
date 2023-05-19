@@ -22,17 +22,6 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
   late int _id;
   List<Datum>? dataElement = [];
 
-  // void getIdLaporan() async {
-  //   // String id = widget.idLaporan.toString();
-  //   var data = laporanData().getIdLap();
-  //   data.then((value) {
-  //     setState(() {
-  //       postDetailRiwayat(value.toString());
-  //     });
-  //   });
-  //   // var dataId =
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -61,6 +50,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               centerTitle: true,

@@ -94,13 +94,11 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
     });
   }
 
-  List<Datum>? _foundData = [];
+  // List<Datum>? _foundData = [];
   @override
   void initState() {
     super.initState();
     getUserIdRiwayat();
-
-    // _foundData = dataElement!;
   }
 
   List<Datum>? searchKosong = [];
@@ -345,7 +343,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
   }
 
   void _runSearch(String enteredKeyword) {
-    // List<Datum> result = [];
+
 
     if (enteredKeyword.isEmpty) {
       getUserIdRiwayat();

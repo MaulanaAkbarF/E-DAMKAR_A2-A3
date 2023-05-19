@@ -59,12 +59,22 @@ class _ArtikelState extends State<Artikel> {
 
   void getJenisArtikel() async {}
 
+  void pemabatasanLoad() {
+    artikelElement!.clear();
+
+    for (var i = 0; i <= 10; i++) {
+      
+      getData();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     // PostDataArtikel();
     // PostDataArtikelHigh();
-    getData();
+    pemabatasanLoad();
+    // getData();
     getDataHigh();
 
     //scrol controller
