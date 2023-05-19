@@ -81,7 +81,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
               child: ElevatedButton(
                   onPressed: emercall,
                   style: ElevatedButton.styleFrom(
-                    primary: red1,
+                    primary: Color.fromARGB(255, 224, 36, 36),
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
@@ -109,7 +109,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
                     emerCallWA();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: green1,
+                    primary: Color.fromARGB(255, 37, 211, 102),
                   ),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),

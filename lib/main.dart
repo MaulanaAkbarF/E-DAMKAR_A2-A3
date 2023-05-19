@@ -31,7 +31,7 @@ void main() {
               '/signin': (context) => SignInPage(),
               '/signup': (context) => SignUpPage(),
               '/resetpass': (context) => ResetPassPage(),
-              '/detailartikel': (context) => DetailArtikel(""),
+              // '/detailartikel': (context) => DetailArtikel(""),
               '/profil': (context) => Profile(),
               '/tentangkami': (context) => TentangKami(),
               '/laporanpage': (context) => LaporanPage(),

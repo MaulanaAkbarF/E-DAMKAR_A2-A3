@@ -1,56 +1,48 @@
-import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final dataArtikel = dataArtikelFromJson(jsonString);
 
-import 'package:edamkar_1/models/LoginModel.dart';
+import 'dart:convert';
 
 DataArtikel dataArtikelFromJson(String str) =>
     DataArtikel.fromJson(json.decode(str));
 
 class DataArtikel {
+  List<ArtikelDatum> data;
+
   DataArtikel({
-    required this.kondisi,
-    required this.dataArtikel,
+    required this.data,
   });
 
-  bool kondisi;
-  List<DataArtikelElement>? dataArtikel;
-
   factory DataArtikel.fromJson(Map<String, dynamic> json) => DataArtikel(
-        kondisi: json["kondisi"],
-        dataArtikel: List<DataArtikelElement>.from(
-            json["dataArtikel"].map((x) => DataArtikelElement.fromJson(x))),
+        data: List<ArtikelDatum>.from(
+            json["data"].map((x) => ArtikelDatum.fromJson(x))),
       );
 }
 
-class DataArtikelElement {
-  DataArtikelElement({
-    this.idArtikel,
-    this.judulArtikel,
-    this.artikelIdKat,
-    this.artikelTgl,
-    this.artikelIdDamkar,
-    this.deksripsiArtikel,
-    this.namaLengkapDamkar,
-    this.namaArtikel,
+class ArtikelDatum {
+  int idBerita;
+  String adminDamkar;
+  String fotoBerita;
+  String judulBerita;
+  String deskripsiBerita;
+  String tanggalBerita;
+
+  ArtikelDatum({
+    required this.idBerita,
+    required this.adminDamkar,
+    required this.fotoBerita,
+    required this.judulBerita,
+    required this.deskripsiBerita,
+    required this.tanggalBerita,
   });
 
-  String? idArtikel;
-  String? judulArtikel;
-  String? artikelIdKat;
-  String? artikelTgl;
-  String? artikelIdDamkar;
-  String? deksripsiArtikel;
-  String? namaLengkapDamkar;
-  String? namaArtikel;
-
-  factory DataArtikelElement.fromJson(Map<String, dynamic> json) =>
-      DataArtikelElement(
-        idArtikel: json["id_artikel"],
-        judulArtikel: json["judul_artikel"],
-        artikelIdKat: json["artikel_idKat"],
-        artikelTgl: json["artikel_tgl"],
-        artikelIdDamkar: json["artikel_idDamkar"],
-        deksripsiArtikel: json["deskripsi_artikel"],
-        namaLengkapDamkar: json["nama_lengkapDamkar"],
-        namaArtikel: json["nama_artikel"],
+  factory ArtikelDatum.fromJson(Map<String, dynamic> json) => ArtikelDatum(
+        idBerita: json["id_berita"],
+        adminDamkar: json["admin_damkar"],
+        fotoBerita: json["foto_berita"],
+        judulBerita: json["judul_berita"],
+        deskripsiBerita: json["deskripsi_berita"],
+        tanggalBerita: json["tanggal_berita"],
       );
 }
