@@ -1,4 +1,4 @@
-import 'package:edamkar_1/Menu/Menu.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var userName = '';
-  var url_photo;
+  var url_photo = '';
   final String phoneNumber = "085708574368";
 
   void emercall() async {
@@ -27,13 +27,11 @@ class _HomePageState extends State<HomePage> {
     await launchUrl(phoneUrl);
   }
 
-  void getUserData() async {
+  void getUserData() {
     var data = DataUser().getNama();
-    data.then((value) {
-      setState(() {
-        userName = value.toString();
-      });
-    });
+    var image = DataUser().getGambar();
+    data.then((value) => setState(() => userName = value));
+    image.then((value) => setState(() => url_photo = value));
   }
 
   @override
@@ -41,13 +39,16 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getUserData();
   }
-  
 
-  Image image(String? url) {
-    if (url != null) {
-      return Image(image: NetworkImage(url.toString()));
+  CircleAvatar image(String url) {
+    if (url != "" || url.isNotEmpty) {
+      return CircleAvatar(
+          radius: 30,
+          backgroundImage: NetworkImage(
+              '${baseUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
     }
-    return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
+    return const CircleAvatar(
+        radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
   }
 
   @override
@@ -78,13 +79,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               GestureDetector(
-                  child: CircleAvatar(
-                    radius: 30,
-                    child: image(url_photo),
-                  ),
+                  child: image(url_photo),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()));
                   }),
               //
             ],
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
             height: 2,
           ),
         ),
-        Expanded(
+        Align(
             child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: paddingVertical2,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
           child: const Text('Panggilan Darurat',
               textAlign: TextAlign.center, style: bold),
         )),
-        Expanded(
+        Align(
             child: Padding(
           padding: EdgeInsets.only(
               bottom: paddingVertical1,
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.justify,
               style: medium),
         )),
-        Expanded(
+        Align(
             child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: paddingHorozontal1, vertical: paddingVertical1),
@@ -145,288 +145,304 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ))),
         )),
-        Expanded(
+        Align(
+            alignment: Alignment.center,
             child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-          child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  primary: green1,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: paddingVertical3),
-                  child: Column(
-                    children: [
-                      SvgPicture.asset('semuaAset/icon/WA.svg'),
-                      // SizedBox(height: paddingHorozontal1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+              child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      primary: green1,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: paddingVertical3),
+                      child: Column(
                         children: [
-                          const Text(
-                            'Whatsapp',
-                            style: TextStyle(
-                                fontFamily: 'Inter',
-                                color: white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15),
+                          SvgPicture.asset('semuaAset/icon/WA.svg'),
+                          // SizedBox(height: paddingHorozontal1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Whatsapp',
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    color: white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15),
+                              ),
+                              SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
+                            ],
                           ),
-                          SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                         ],
-                      ),
-                    ],
-                  ))),
-        )),
-        Expanded(
+                      ))),
+            )),
+        Align(
+            alignment: Alignment.topLeft,
             child: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: paddingVertical3, horizontal: paddingHorozontal1),
-          child: const Text('Laporkan kendala anda',
-              textAlign: TextAlign.start, style: semibold),
-        )),
-        Padding(
-            padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-            child: GridView.count(
-                shrinkWrap: true,
-                primary: false,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MapsLokasiKejadian(kategori: "penyelamatan")),
-                      );
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: white,
-                          border: Border.all(width: 1.5, color: grey3),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 4,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: orange2,
+              padding: EdgeInsets.symmetric(
+                  vertical: paddingVertical3, horizontal: paddingHorozontal1),
+              child: const Text('Laporkan kendala anda',
+                  textAlign: TextAlign.start, style: semibold),
+            )),
+        Align(
+            alignment: Alignment.center,
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+                child: GridView.count(
+                    shrinkWrap: true,
+                    primary: false,
+                    crossAxisSpacing: 2,
+                    mainAxisSpacing: 2,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.8,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapsLokasiKejadian(
+                                    kategori: "penyelamatan")),
+                          );
+                        },
+                        child: Container(
+                          height: double.infinity,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          decoration: BoxDecoration(
+                              color: white,
+                              border: Border.all(width: 1.5, color: grey3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 4,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: SvgPicture.asset(
-                                "semuaAset/gambar/bencana-alam-icon.svg",
-                                width: 70,
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: 80,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: orange2,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 40),
+                                  child: SvgPicture.asset(
+                                    "semuaAset/gambar/bencana-alam-icon.svg",
+                                    width: 70,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.only(top: 7),
+                                    child: Text("Laporan Bencana Alam",
+                                        style: style.sb(16))),
+                              ),
+                              Expanded(
+                                  child:
+                                      Text("Salah satu layanan dari E-Damkar"))
+                            ],
                           ),
-                          Expanded(
-                            child: Padding(
-                                padding: EdgeInsets.only(top: 7),
-                                child: Text("Laporan Bencana Alam",
-                                    style: style.sb(16))),
-                          ),
-                          Expanded(
-                              child: Text("Salah satu layanan dari E-Damkar"))
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MapsLokasiKejadian(kategori: "penyelamatan")),
-                      );
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: white,
-                          border: Border.all(width: 1.5, color: grey3),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 4,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: orange2,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapsLokasiKejadian(
+                                    kategori: "penyelamatan")),
+                          );
+                        },
+                        child: Container(
+                          height: double.infinity,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          decoration: BoxDecoration(
+                              color: white,
+                              border: Border.all(width: 1.5, color: grey3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 4,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: SvgPicture.asset(
-                                "semuaAset/gambar/kebakaran-icon.svg",
-                                width: 20,
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: 80,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: orange2,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 40),
+                                  child: SvgPicture.asset(
+                                    "semuaAset/gambar/kebakaran-icon.svg",
+                                    width: 20,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.only(top: 7),
+                                    child: Text("Laporan Kebakaran",
+                                        style: style.sb(16))),
+                              ),
+                              Expanded(
+                                  child:
+                                      Text("Salah satu layanan dari E-Damkar"))
+                            ],
                           ),
-                          Expanded(
-                            child: Padding(
-                                padding: EdgeInsets.only(top: 7),
-                                child: Text("Laporan Kebakaran",
-                                    style: style.sb(16))),
-                          ),
-                          Expanded(
-                              child: Text("Salah satu layanan dari E-Damkar"))
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MapsLokasiKejadian(kategori: "penyelamatan")),
-                      );
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: white,
-                          border: Border.all(width: 1.5, color: grey3),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 4,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: orange2,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapsLokasiKejadian(
+                                    kategori: "penyelamatan")),
+                          );
+                        },
+                        child: Container(
+                          height: double.infinity,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          decoration: BoxDecoration(
+                              color: white,
+                              border: Border.all(width: 1.5, color: grey3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 4,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: SvgPicture.asset(
-                                "semuaAset/gambar/hewan-buas-icon.svg",
-                                width: 20,
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: 80,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: orange2,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 40),
+                                  child: SvgPicture.asset(
+                                    "semuaAset/gambar/hewan-buas-icon.svg",
+                                    width: 20,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.only(top: 7),
+                                    child: Text("Laporan Hewan Buas",
+                                        style: style.sb(16))),
+                              ),
+                              Expanded(
+                                  child:
+                                      Text("Salah satu layanan dari E-Damkar"))
+                            ],
                           ),
-                          Expanded(
-                            child: Padding(
-                                padding: EdgeInsets.only(top: 7),
-                                child: Text("Laporan Hewan Buas",
-                                    style: style.sb(16))),
-                          ),
-                          Expanded(
-                              child: Text("Salah satu layanan dari E-Damkar"))
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MapsLokasiKejadian(kategori: "penyelamatan")),
-                      );
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: white,
-                          border: Border.all(width: 1.5, color: grey3),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 4,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: orange2,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapsLokasiKejadian(
+                                    kategori: "penyelamatan")),
+                          );
+                        },
+                        child: Container(
+                          height: double.infinity,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          decoration: BoxDecoration(
+                              color: white,
+                              border: Border.all(width: 1.5, color: grey3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 4,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: SvgPicture.asset(
-                                "semuaAset/gambar/penyelamatan-icon.svg",
-                                width: 20,
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: 80,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: orange2,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 40),
+                                  child: SvgPicture.asset(
+                                    "semuaAset/gambar/penyelamatan-icon.svg",
+                                    width: 20,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Padding(
+                                    padding: EdgeInsets.only(top: 7),
+                                    child: Text("Laporan Penyelamatan",
+                                        style: style.sb(16))),
+                              ),
+                              Expanded(
+                                  child:
+                                      Text("Salah satu layanan dari E-Damkar"))
+                            ],
                           ),
-                          Expanded(
-                            child: Padding(
-                                padding: EdgeInsets.only(top: 7),
-                                child: Text("Laporan Penyelamatan",
-                                    style: style.sb(16))),
-                          ),
-                          Expanded(
-                              child: Text("Salah satu layanan dari E-Damkar"))
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ])),
+                    ]))),
       ]),
     );
   }

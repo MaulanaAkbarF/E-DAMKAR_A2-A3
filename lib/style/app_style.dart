@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:edamkar_1/style/size_config.dart';
 
 final paddingHorozontal1 = SizeConfig.blockSizeHorizontal! * 2;
 final paddingHorozontal2 = SizeConfig.blockSizeHorizontal! * 4;
@@ -40,7 +39,7 @@ const orange1 = Color(0xffF33C04);
 const orange2 = Color(0xffFDE8E8);
 const white = Colors.white;
 
-final _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
 
 String getRandomString(int length) => String.fromCharCodes(Iterable.generate(

@@ -1,16 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 
-const _baseUrl = 'http://172.16.103.4:8000/api/';
+const String baseUrl = 'http://188.10.10.254:8000/';
+const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
   var client = http.Client();
 
-
   Future<dynamic> getData(String api) async {
-    var url = Uri.parse(_baseUrl + api);
+    var url = Uri.parse(apiUrl + api);
     var response = await client.get(url);
 
     if (response.statusCode == 200) {
@@ -21,7 +18,7 @@ class APIClient {
   }
 
   Future<dynamic> postData(String api, dynamic object) async {
-    var url = Uri.parse(_baseUrl + api);
+    var url = Uri.parse(apiUrl + api);
 
     var response = await client.post(url, body: object);
 
@@ -32,11 +29,12 @@ class APIClient {
     }
   }
 
-  Future<dynamic> postMulti(String api, image, String path, String imageTitle) async {
+  Future<dynamic> postMulti(
+      String api, image, String path, String imageTitle) async {
     var stream = new http.ByteStream(image!.openRead());
     stream.cast();
     var length = await image!.length();
-    var uri = Uri.parse(_baseUrl + api);
+    var uri = Uri.parse(apiUrl + api);
     final request = http.MultipartRequest('POST', uri);
     request.fields['title'] = imageTitle;
     request.files.add(
@@ -54,7 +52,7 @@ class APIClient {
   }
 
   Future<dynamic> putData(String api, dynamic object) async {
-    var url = Uri.parse(_baseUrl + api);
+    var url = Uri.parse(apiUrl + api);
     var response = await client.put(url, body: object);
 
     if (response.statusCode == 200) {
@@ -65,7 +63,7 @@ class APIClient {
   }
 
   Future<dynamic> deleteData(String api) async {
-    var url = Uri.parse(_baseUrl + api);
+    var url = Uri.parse(apiUrl + api);
     var response = await client.delete(url);
 
     if (response.statusCode == 200) {

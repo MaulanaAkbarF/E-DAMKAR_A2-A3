@@ -19,17 +19,14 @@ class _ProfilePageState extends State<Profile> {
   var userName = 'user1';
   var emailnya = 'ahmad@gmail.com';
   var url_photo = "";
-  var baseurl = '';
   void getUserData() async {
     var data = DataUser().getNama();
-
     var data1 = DataUser().getUsername();
-
     var gambar = DataUser().getGambar();
 
     gambar.then((value) {
       setState(() {
-        url_photo = value.toString();
+        url_photo = value;
       });
     });
 
@@ -46,20 +43,15 @@ class _ProfilePageState extends State<Profile> {
     });
   }
 
-  CircleAvatar image(String? url) {
-    if (url != null || url != "") {
+  CircleAvatar image(String url) {
+    if (url != "" || url.isNotEmpty) {
       return CircleAvatar(
-        // minRadius: 30,
-        backgroundImage: NetworkImage(url.toString()),
-
-        // image: ,
-        // fit: BoxFit.cover,
-      );
+          radius: 30,
+          backgroundImage: NetworkImage(
+              '${baseUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
     }
     return const CircleAvatar(
-      // minRadius: 30,
-      backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
-    );
+        radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
   }
 
   @override
@@ -123,8 +115,7 @@ class _ProfilePageState extends State<Profile> {
                 color: Colors.transparent,
               ),
               child: ListTile(
-                leading:
-                    image("${baseurl}storage/public/foto_user/${url_photo}"),
+                leading: image(url_photo),
                 title: Text("$userName"),
                 subtitle: Text("$emailnya"),
                 trailing: GestureDetector(

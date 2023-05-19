@@ -92,6 +92,7 @@ class _SignInPageState extends State<SignInPage> {
   var isLoading = false;
 
   loginPost(String acnt, String password) async {
+    debugPrint(apiUrl);
     if (_formKey.currentState!.validate()) {
       setState(() => isLoading = true);
       var result = await APIClient().postData('login',
@@ -105,17 +106,18 @@ class _SignInPageState extends State<SignInPage> {
               data.data!.username.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString(), 
+              data.token.toString(),
               data.data!.gambar.toString());
           Navigator.of(context).pop();
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) => const AppMenu()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => const AppMenu()));
           setState(() => isLoading = false);
         } else {
           setState(() => isLoading = false);
           show(data.data!.message.toString());
         }
       } else {
+        setState(() => isLoading = false);
         show("mengalami permasalahan call api");
       }
     }

@@ -1,13 +1,8 @@
 import 'dart:async';
 
 import 'package:edamkar_1/APIRequest/APIClient.dart';
-<<<<<<< HEAD:lib/pages/resetpass/RemakePass.dart
 import 'package:edamkar_1/pages/login/signin.dart';
-=======
-import 'package:edamkar_1/pages/UpdatePasswordSuccess.dart';
-import 'package:edamkar_1/pages/signin.dart';
-import 'package:edamkar_1/pages/verificationSuccess.dart';
->>>>>>> 84b3656ce98266f1cc4a4340fd23b431e027a4da:lib/pages/RemakePass.dart
+import 'package:edamkar_1/pages/resetpass/UpdatePasswordSuccess.dart';
 import 'package:flutter/material.dart';
 
 import '../notification/verificationSuccess.dart';

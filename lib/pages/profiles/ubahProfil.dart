@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ProfilModel.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   var UserPic = "";
   var _email = "";
   var nohp = "";
-  var url = '';
   late final _idUser = "";
 
   TextEditingController? getNama;
@@ -38,22 +38,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
     var gambar = DataUser().getGambar();
     var nomor = DataUser().getNoHp();
     var email = DataUser().getUsername();
-    var noHp = DataUser().getNoHp();
+    var basenoHp = DataUser().getNoHp();
 
     gambar.then((value) {
       setState(() {
         UserPic = value.toString();
       });
     });
-    noHp.then((value) {
+    basenoHp.then((value) {
       setState(() {
         nohp = value.toString();
+        noHp.text = nohp;
       });
     });
 
     data.then((value) {
       setState(() {
         Name = value.toString();
+        nama.text = Name;
       });
     });
     email.then((value) {
@@ -67,6 +69,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     super.initState();
     getUserData();
+
     // widget.userId = _idUser as int;
   }
 
@@ -106,8 +109,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         return AssetImage("semuaAset/gambar/user1.png") as ImageProvider;
       } else {
         return NetworkImage(
-                //http://172.16.106.227:8000/storage/public/foto_user/Snipaste_2023-05-15_08-47-07.png
-                "${url}storage/public/foto_user/${urlGambar.replaceAll("'", "")}")
+                "${baseUrl}storage/foto_user/${urlGambar.replaceAll("'", "")}")
             as ImageProvider;
       }
     } else {
@@ -314,7 +316,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
-                                  hintText: '$Name',
                                   prefixIcon: Icon(Icons.person),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -371,7 +372,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
-                                  hintText: '$nohp',
                                   prefixIcon: Icon(Icons.person),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(10, 13, 10, 7),
