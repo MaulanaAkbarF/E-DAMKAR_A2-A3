@@ -1,10 +1,14 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://188.10.10.254:8000/';
+const String baseUrl = 'http://192.168.0.104:8000/';
 const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
   var client = http.Client();
+  static const String base = "http://192.168.0.104/flutter_api/";
+  static const String submit = base + "submit.php";
+  static const String whatsappnotification = base + "whatsappnotification.php";
+  static const String otpwhatsapp = base + "otpwa.php";
 
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(apiUrl + api);

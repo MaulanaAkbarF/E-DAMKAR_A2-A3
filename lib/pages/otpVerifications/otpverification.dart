@@ -117,7 +117,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": otpRegister.toString(),
