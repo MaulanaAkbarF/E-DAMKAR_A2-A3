@@ -32,7 +32,7 @@ class DataUser {
 
   Future<String> getUsername() async {
     return _prefs.then((SharedPreferences pref) {
-      return pref.getString('email') ?? '';
+      return pref.getString('username') ?? '';
     });
   }
 
