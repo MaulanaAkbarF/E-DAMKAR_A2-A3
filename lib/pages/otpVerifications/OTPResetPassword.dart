@@ -120,7 +120,7 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.17.201.65/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": otpRegister.toString(),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -108,8 +109,8 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
   }
 
   void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        'http://192.168.137.59/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
+    var url = Uri.parse(APIClient
+        .whatsappnotification); // Ganti dengan URL endpoint API yang sesuai
 
     // Data yang akan dikirim
     var data = {
@@ -138,7 +139,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
 
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://192.168.137.59/flutter_api/submit.php"),
+      Uri.parse(APIClient.submit),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,

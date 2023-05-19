@@ -100,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
