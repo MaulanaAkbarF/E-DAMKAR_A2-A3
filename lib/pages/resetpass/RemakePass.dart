@@ -5,7 +5,7 @@ import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:edamkar_1/pages/resetpass/UpdatePasswordSuccess.dart';
 import 'package:flutter/material.dart';
 
-import '../notification/verificationSuccess.dart';
+import '../otpVerifications/verificationSuccess.dart';
 
 class RemakePassPage extends StatefulWidget {
   String noHp;

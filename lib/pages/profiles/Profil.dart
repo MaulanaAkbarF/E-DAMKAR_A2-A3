@@ -1,3 +1,4 @@
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/pages/home/HomePage.dart';
 import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
 import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
@@ -62,8 +63,6 @@ class _ProfilePageState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,8 +79,10 @@ class _ProfilePageState extends State<Profile> {
                   splashColor: Colors.grey.shade400,
                   highlightColor: Colors.grey.shade600,
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AppMenu()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 10),
@@ -121,9 +122,10 @@ class _ProfilePageState extends State<Profile> {
                 trailing: GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditProfilePage(1)));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfilePage(1)))
+                        .then((value) => setState(() {}));
                   },
                   child: Text(
                     "Ubah",

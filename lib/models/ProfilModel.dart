@@ -28,14 +28,14 @@ class UpdateProfil {
       String? nama,
       String? nomorHp,
       File? file}) async {
-    var request = http.MultipartRequest(
-        'POST', Uri.parse("${baseUrl}user/foto"));
-
+    var request =
+        http.MultipartRequest('POST', Uri.parse("${apiUrl}user/foto"));
+    print(delPic.toString()); 
     // tambahkan text sebagai field pada request
     request.fields['foto_user'] = delPic.toString();
-    request.fields['id'] = id_akun.toString();
     request.fields['namaLengkap'] = nama.toString();
     request.fields['noHp'] = nomorHp.toString();
+    request.fields['id'] = id_akun.toString();
 
     // tambahkan file sebagai field pada request
     var mimeType = lookupMimeType(file!.path);

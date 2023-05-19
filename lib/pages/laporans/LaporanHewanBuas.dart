@@ -172,6 +172,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
         widget.desa.toString() +
         widget.kota.toString());
     if (result != null) {
+      
     } else {
       debugPrint("wadohh");
     }

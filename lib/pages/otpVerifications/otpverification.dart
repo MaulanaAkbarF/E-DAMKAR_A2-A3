@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:http/http.dart' as http;
 
-import '../notification/verificationSuccess.dart';
+import 'verificationSuccess.dart';
 import '../resetpass/RemakePass.dart';
 
 class OtpVerificationPage extends StatefulWidget {

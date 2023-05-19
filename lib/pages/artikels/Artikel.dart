@@ -177,12 +177,9 @@ class _ArtikelState extends State<Artikel> {
   var dataHigh;
   void getData() async {
     var result =
-        await APIClient().getData('getAllArtikel').catchError((err) {});
+        await APIClient().getData('semuaArtikel').catchError((err) {});
     if (result != null) {
-      setState(() {
         data = semuaArtikelModelFromJson(result);
-      });
-      debugPrint(data.length.toString());
     } else {
       debugPrint('terdapat kesalahan');
     }
@@ -517,7 +514,7 @@ class _ArtikelState extends State<Artikel> {
                                       children: [
                                         Text(
                                           dataHigh[index].id.toString(),
-                                          style: TextStyle(
+                                          style:const TextStyle(
                                               fontFamily:
                                                   "font/inter_medium.tff",
                                               color: Color.fromARGB(
@@ -529,7 +526,7 @@ class _ArtikelState extends State<Artikel> {
                                           dataHigh[index]
                                               .jenisArtikel
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontFamily:
                                                   "font/inter_medium.tff",
                                               color: Color.fromARGB(
