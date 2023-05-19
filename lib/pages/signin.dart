@@ -85,21 +85,22 @@ class _SignInPageState extends State<SignInPage> {
   final email = TextEditingController();
   final pass = TextEditingController();
 
-  loginPost() async {   
+  loginPost(String email, String password) async {
     if (_formKey.currentState!.validate()) {
-      var result = await APIClient().postData('login',
-          {"email": email.text, "password": pass.text}).catchError((err) {});
+      var result = await APIClient().postData(
+          'login', {"email": email, "password": password}).catchError((err) {});
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
-        if (data.token.isNotEmpty) {
+        if (data.token!.isNotEmpty) {
           await DataUser().addUser(
-              data.data.id.toString(),
-              data.data.email.toString(),
-              data.data.namaLengkap.toString(),
+              data.data!.id.toString(),
+              data.data!.email.toString(),
+              data.data!.namaLengkap.toString(),
+              data.data!.noHp.toString(),
               data.token.toString());
-          Navigator.pushNamed(context, '/riwayatlapp');
+          Navigator.pushNamed(context, '/artikel');
         } else {
-          show("Cek Kembali Email dan Password anda");
+          show(data.data!.message.toString());
         }
       } else {
         show("mengalami permasalahan call api");
@@ -287,8 +288,9 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    loginPost();
+                                    loginPost(email.text, pass.text);
                                   },
+                        
                                   child: Container(
                                     height: 50,
                                     child: Row(

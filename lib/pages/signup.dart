@@ -1,8 +1,12 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'dart:math';
+import 'package:edamkar_1/pages/otpverification.dart';
 import 'package:edamkar_1/pages/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
 
 import '../APIRequest/APIClient.dart';
 import '../models/RegisterModel.dart';
@@ -34,7 +38,9 @@ final List<Map> teksSignUp = [
     'Nama': 'Nama Lengkap',
     'NamaHint': 'Nama Kamu',
     'Email': 'E-Mail',
-    'EmailHint': 'E-Mail Kamu',
+    'EmailHint': 'emailkamu@gmail.com',
+    'Telepon': 'No. Telp (Whatsapp)',
+    'TeleponHint': '08....',
     'Password1': 'Kata Sandi',
     'Password2': 'Ulangi Kata Sandi',
     'LupaPass': 'Lupa Kata Sandi?',
@@ -56,8 +62,9 @@ final List<Map> teksStyleSignUp = [
         fontWeight: FontWeight.w700),
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
+        height: 1.4,
         color: Colors.black45,
-        fontSize: (16)),
+        fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
         color: Colors.blueAccent,
@@ -87,25 +94,79 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
+  final TextEditingController notelp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  RegisterPost() async {
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(
+        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+
+    var data = {
+      "kodeOtp": randomNumber.toString(),
+      "noHp": notelp.text,
+    };
+    var response = await http.post(url, body: data);
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
+  }
+
+  void RegisterPost(context) async {
     var result = await APIClient().postData('register', {
       "email": email.text,
       "password": password.text,
-      "namaLengkap": namalengkap.text
-    }).catchError((err) {});
+      "namaLengkap": namalengkap.text,
+      "noHp": notelp.text,
+      "kodeOtp": randomNumber.toString(),
+      "status": 'Unverified'
+    }).catchError((err) {
+      return null;
+    });
+
     if (result != null) {
-      var data = registerFromJson(result);
-      if (data.kondisi) {
-        show('Registrasi Berhasil');
-        Navigator.pushNamed(context, '/signin');
-      } else {
-        show("Cek Kembali Email dan Password anda");
-      }
+      print("kondisi berhasil dijalankan");
+      _kirimNotifikasi();
+      SnackBar(
+          content: Text(
+        "Registrasi berhasil!",
+        textAlign: TextAlign.center,
+      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OtpVerificationPage(
+            noHp: notelp.text,
+            kodeOtp: randomNumber.toString(),
+          ),
+        ),
+      );
     } else {
       print('something error on code');
+      print(result);
     }
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  void initState() {
+    random();
+    super.initState();
+  }
+
+  int randomNumber = 100000;
+
+  void random() {
+    setState(() {
+      Random random = new Random();
+      randomNumber = random.nextInt(900000) + 100000;
+    });
   }
 
   void show(String message) {
@@ -122,10 +183,11 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.all(16),
+            child: Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Expanded(
           child: Column(
             children: [
               for (final teks in teksSignUp)
@@ -134,6 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          // Text("random: $randomNumber"),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Text(teks['Header'],
@@ -144,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: 8),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -228,6 +291,52 @@ class _SignUpPageState extends State<SignUpPage> {
                                   decoration: InputDecoration(
                                       hintText: teks['Example@example.com'],
                                       prefixIcon: Icon(Icons.mail),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Text(teks['Telepon'],
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: teksStyle['Thin1']),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Container(
+                                width: double.infinity,
+                                margin: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade100,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: Colors.grey.shade300,
+                                        width: 1.2)),
+                                child: TextFormField(
+                                  controller: notelp,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'No. Telp (whatsapp) tidak boleh kosong';
+                                    } else if (value.length > 13) {
+                                      return 'no telepon terlalu panjang';
+                                    } else if (value.length < 9) {
+                                      return 'no telepon terlalu pendek';
+                                    }
+                                  },
+                                  cursorColor: Colors.black,
+                                  style: teksStyle['SemiBold1'],
+                                  decoration: InputDecoration(
+                                      hintText: teks['TeleponHint'],
+                                      prefixIcon: Icon(Icons.phone),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
                                       border: InputBorder.none),
@@ -365,7 +474,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
-                                      RegisterPost();
+                                      RegisterPost(context);
                                     }
                                   },
                                   child: Container(
@@ -409,7 +518,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    ));
+    )));
   }
 }
 

@@ -311,17 +311,18 @@ class _ProfilePageState extends State<Profile> {
           // ),
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: paddingVertical4, horizontal: paddingHorozontal1),
+                vertical: 85, horizontal: paddingHorozontal2),
             child: ElevatedButton(
                 onPressed: () {
                   showLogoutDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
+                    elevation: 0,
                     backgroundColor: Color.fromARGB(255, 250, 250, 250),
-                    minimumSize: Size.fromHeight(55),
+                    minimumSize: Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.red.shade500, width: 1),
-                        borderRadius: BorderRadiusDirectional.circular(20))),
+                        borderRadius: BorderRadiusDirectional.circular(100))),
                 child: Text(
                   "Keluar",
                   style: TextStyle(color: Colors.red.shade500),
@@ -338,15 +339,18 @@ class _ProfilePageState extends State<Profile> {
       content: Text("Apakah Kamu Yakin Akan Keluar?"),
       actions: [
         TextButton(
-          child: Text("Tidak"),
+          child: Text("Tidak", style: TextStyle(color: Colors.black)),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: Text("Ya"),
+          child: Text(
+            "Ya",
+            style: TextStyle(color: Colors.black),
+          ),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => SignInPage()));
           },
         ),

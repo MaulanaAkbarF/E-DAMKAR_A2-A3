@@ -1,10 +1,7 @@
-
 import 'package:edamkar_1/Menu/Menu.dart';
 
 import 'package:edamkar_1/pages/LokasiKejadian.dart';
 import 'package:edamkar_1/pages/MapsLokasiKejadian.dart';
-
-import 'package:edamkar_1/pages/buatLaporan.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -117,7 +114,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "bencanaalam")),
                             );
                           },
                           child: Container(
@@ -152,7 +150,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Bencana Alam",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -180,7 +178,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "kebakaran")),
                             );
                           },
                           child: Container(
@@ -214,8 +213,9 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    padding: EdgeInsets.only(
+                                        top: 16, left: 16, right: 16),
+                                    child: Text("Laporan Kebakaran",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -243,7 +243,9 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                        kategori: "hewanbuas",
+                                      )),
                             );
                           },
                           child: Container(
@@ -278,7 +280,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Hewan Buas",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -306,7 +308,8 @@ class _LaporanPageState extends State<LaporanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian()),
+                                  builder: (context) => MapsLokasiKejadian(
+                                      kategori: "penyelamatan")),
                             );
                           },
                           child: Container(
@@ -341,7 +344,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(top: 16, left: 16),
-                                    child: Text(teks['judulLaporan'],
+                                    child: Text("Laporan Penyelamatan",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
                                         style: teksStyle['SemiBold3']),
@@ -384,30 +387,44 @@ class _LaporanPageState extends State<LaporanPage> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: 16, right: 16, top: 16, bottom: 40),
+                        top: 16, left: 16, right: 16, bottom: 24),
                     child: Material(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       borderRadius: BorderRadius.circular(8),
-                      child: InkWell(
-                        splashColor: Colors.grey.shade100,
-                        highlightColor: Colors.grey.shade200,
-                        onTap: () {},
-                        child: Container(
-                          height: 52,
-                          decoration: BoxDecoration(
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                              color: Colors.grey.shade300, width: 1.5),
+                          backgroundColor: Colors.grey.shade100,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.grey.shade300,
-                              width: 1.2,
+                          ),
+                          elevation: 0,
+                          minimumSize: Size.fromHeight(50),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MapsLokasiKejadian(
+                                      kategori: "custom",
+                                    )),
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Buat Laporan Anda Sendiri',
+                              style: TextStyle(
+                                // Properti gaya teks
+                                color: Colors.black54,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(teks['buttonKirim'],
-                                  style: teksStyle['Thin2']),
-                            ],
-                          ),
+                          ],
                         ),
                       ),
                     ),

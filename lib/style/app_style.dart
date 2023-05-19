@@ -29,8 +29,8 @@ const extrabold =
 const blackft =
     TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w900, fontSize: 20);
 
-const red1 = Color(0xfff05252);
-const green1 = Color(0xffbcf0da);
+const red1 = Color(0xffe02424);
+const green1 = Color(0xff25d366);
 const green2 = Color(0xff128C7E);
 const grey1 = Color(0xffD9D9D9);
 final grey2 = Colors.grey.shade200;

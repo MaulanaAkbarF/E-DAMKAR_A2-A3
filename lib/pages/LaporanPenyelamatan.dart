@@ -13,12 +13,12 @@ import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'LokasiKejadian.dart';
 
-class BuatLaporan extends StatefulWidget {
+class LaporanPenyelamatan extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  BuatLaporan(
+  LaporanPenyelamatan(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -30,7 +30,7 @@ class BuatLaporan extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<BuatLaporan> createState() => _BuatLaporanState();
+  State<LaporanPenyelamatan> createState() => _LaporanPenyelamatanState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -39,8 +39,9 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Nama Bencana',
-    'namaBencanaHint': 'contoh: Tsunami, Banjir, Kebakaran, dll',
+    'namaBencana': 'Urgensi Penyelamatan',
+    'namaBencanaHint':
+        'Contoh: Orang jatuh di sumur, orang terjebak di lift, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -95,7 +96,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _BuatLaporanState extends State<BuatLaporan> {
+class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
@@ -103,7 +104,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.16.110.68/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.137.59/flutter_api/whatsappnotification.php'); // Ganti dengan URL endpoint API yang sesuai
 
     // Data yang akan dikirim
     var data = {
@@ -132,7 +133,7 @@ class _BuatLaporanState extends State<BuatLaporan> {
 
   Future<bool> _kirimLaporan() async {
     var res = await http.post(
-      Uri.parse("http://172.16.110.68/flutter_api/submit.php"),
+      Uri.parse("http://192.168.137.59/flutter_api/submit.php"),
       body: {
         "gambar": imageName,
         "namaBencana": namaBencanaCon.text,

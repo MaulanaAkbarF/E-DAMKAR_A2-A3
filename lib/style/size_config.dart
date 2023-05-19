@@ -4,6 +4,7 @@ class SizeConfig{
   static MediaQueryData? _mediaQueryData;
   static double? screenWidth;
   static double? screenHeight;
+  static double? screenHeightHalf;
   static double? blockSizeHorizontal;
   static double? blockSizeVertical;
 
@@ -11,6 +12,8 @@ class SizeConfig{
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData!.size.width;
     screenHeight = _mediaQueryData!.size.height;
+    screenHeightHalf = _mediaQueryData!.size.height / 3 ;
+
     blockSizeVertical = screenWidth! / 100;
     blockSizeHorizontal = screenHeight! / 100;
     

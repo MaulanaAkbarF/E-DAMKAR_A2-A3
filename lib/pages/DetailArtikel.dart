@@ -1,5 +1,6 @@
 import 'package:edamkar_1/SharedPreferences/artikelData.dart';
 import 'package:edamkar_1/models/ArtikelModel.dart';
+import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:edamkar_1/pages/Artikel.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ import '../APIRequest/APIClient.dart';
 
 class DetailArtikel extends StatefulWidget {
   final idArtikel;
-  DetailArtikel({required this.idArtikel, super.key});
+  final jenisArtikel;
+  DetailArtikel(
+      {required this.idArtikel, required this.jenisArtikel, super.key});
 
   @override
   State<DetailArtikel> createState() => _DetailArtikelState();
@@ -23,6 +26,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
   ];
 
   late int _idArt;
+  late String _jenisArt;
   List<ArtikelDatum>? artikelElement = [];
 
   // void getId_Berita(String id) async {
@@ -34,22 +38,57 @@ class _DetailArtikelState extends State<DetailArtikel> {
   @override
   void initState() {
     super.initState();
+    _jenisArt = widget.jenisArtikel;
     _idArt = widget.idArtikel;
-    postDetailBerita(_idArt);
+
+    if (_jenisArt == "Berita") {
+      postDetailBerita(_idArt);
+    } else if (_jenisArt == "Edukasi") {
+      postDetailEdukasi(_idArt);
+    } else if (_jenisArt == "Agenda") {
+      postDetailAgenda(_idArt);
+    } else {
+      postDetailBerita(_idArt);
+    }
+
     // print("id berita: " + _idArt.toString());
   }
 
+  var data;
   postDetailBerita(int id) async {
     var result = await APIClient().getData('getDetailBerita/' + id.toString());
 
     print("id berita" + id.toString());
     if (result != null) {
-      var detailRiwayat = dataArtikelFromJson(result);
-      if (detailRiwayat.data.isNotEmpty) {
-        setState(() {
-          artikelElement = detailRiwayat.data;
-        });
-      }
+      setState(() {
+        data = semuaArtikelModelFromJson(result);
+      });
+    } else {
+      print("Data Kosong");
+    }
+  }
+
+  postDetailEdukasi(int id) async {
+    var result = await APIClient().getData('getDetailEdukasi/' + id.toString());
+
+    print("id berita" + id.toString());
+    if (result != null) {
+      setState(() {
+        data = semuaArtikelModelFromJson(result);
+      });
+    } else {
+      print("Data Kosong");
+    }
+  }
+
+  postDetailAgenda(int id) async {
+    var result = await APIClient().getData('getDetailAgenda/' + id.toString());
+
+    print("id berita" + id.toString());
+    if (result != null) {
+      setState(() {
+        data = semuaArtikelModelFromJson(result);
+      });
     } else {
       print("Data Kosong");
     }
@@ -57,7 +96,6 @@ class _DetailArtikelState extends State<DetailArtikel> {
 
   @override
   Widget build(BuildContext context) {
-    
     SizeConfig().init(context);
     return MaterialApp(
       home: Scaffold(
@@ -89,30 +127,30 @@ class _DetailArtikelState extends State<DetailArtikel> {
           centerTitle: true,
           elevation: 0,
           title: Text(
-            "Detail" + _idArt.toString(),
+            "Detail Artikel",
             style: TextStyle(fontFamily: "$black3", color: black3),
           ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
               vertical: paddingVertical1, horizontal: paddingHorozontal1),
-          child: artikelElement == null ? Text("Kosong") : 
-          isDetailNull(),
+          child: isDetailNull(),
         ),
       ),
     );
   }
 
   Widget isDetailNull() {
-    return artikelElement!.isEmpty
+    return data == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Data Artikel Kosong"),
           )
         : ListView.builder(
-          itemCount: 1,
+            itemCount: 1,
             itemBuilder: (context, index) {
               return Container(
+                padding: EdgeInsets.symmetric(vertical: paddingVertical1),
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +182,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           width: 5,
                         ),
                         Text(
-                          artikelElement![index].idBerita.toString(),
+                          data[index].jenisArtikel.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
                             color: black2,
@@ -153,10 +191,11 @@ class _DetailArtikelState extends State<DetailArtikel> {
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Text(
-                      artikelElement![index].judulBerita.toString(),
+                      data[index].judul.toString(),
+                      // artikelElement![index].judulBerita.toString(),
                       // maxLines: 3,
                       style: TextStyle(
                         fontFamily: "inter-semibold",
@@ -169,13 +208,13 @@ class _DetailArtikelState extends State<DetailArtikel> {
                       height: 5,
                     ),
                     Row(
-                      
                       children: [
                         Text(
-                          artikelElement![index].adminDamkar.toString(),
+                          data[index].adminDamkar.toString(),
+                          // artikelElement![index].adminDamkar.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
-                            color: black2,
+                            color: Colors.redAccent,
                           ),
                         ),
                         SizedBox(
@@ -191,10 +230,11 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           width: 5,
                         ),
                         Text(
-                          artikelElement![index].tanggalBerita.toString(),
+                          data[index].tanggal.toString(),
+                          // artikelElement![index].tanggalBerita.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
-                            color: black2,
+                            color: Colors.redAccent,
                           ),
                         ),
                       ],
@@ -217,15 +257,17 @@ class _DetailArtikelState extends State<DetailArtikel> {
                       height: 20,
                     ),
                     Container(
+                      width: SizeConfig.screenWidth,
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           border: Border.all(
-                              color: Colors.black54,
+                              color: Colors.white,
                               width: 1,
                               style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
-                        artikelElement![index].deskripsiBerita.toString(),
+                        data[index].deskripsi.toString(),
+                        // artikelElement![index].deskripsiBerita.toString(),
                         style: TextStyle(
                           fontFamily: "$bold",
                           color: Colors.black,

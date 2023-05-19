@@ -53,6 +53,8 @@ dependencies:
   geocoding: ^2.1.0
   latlng: ^1.0.0
   card_slider: ^1.0.5
+  url_launcher: ^6.1.11
+  lottie: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,7 @@ flutter:
     - semuaAset/
     - semuaAset/gambar/
     - semuaAset/icon/
+    - semuaAset/icon/success.json
   
   fonts:
     - family: Inter

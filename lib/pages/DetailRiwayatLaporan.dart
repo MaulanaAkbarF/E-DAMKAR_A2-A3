@@ -277,10 +277,8 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                             width: 500,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: const Color.fromARGB(
-                                        255, 156, 163, 175),
-                                    width: 1)),
+                                border:
+                                    Border.all(color: Colors.white, width: 0)),
                             child: Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,6 +292,14 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                         Icons.location_on_outlined,
                                         color: Colors.red,
                                       ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        height: paddingVertical4,
+                                        width: 2,
+                                        color: Colors.redAccent,
+                                      ),
                                       Padding(
                                           padding: EdgeInsets.only(right: 10)),
                                       Expanded(
@@ -301,6 +307,8 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                           dataElement![index].alamat.toString(),
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(height: 1.5),
                                         ),
                                       ),
                                     ],
@@ -314,12 +322,24 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                         Icons.date_range_outlined,
                                         color: Colors.red,
                                       ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        height: paddingVertical4,
+                                        width: 2,
+                                        color: Colors.redAccent,
+                                      ),
                                       Padding(
                                           padding: EdgeInsets.only(right: 10)),
                                       Text(
                                         dataElement![index].tanggal.toString(),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          height: 1.8,
+                                        ),
+                                        textAlign: TextAlign.justify,
                                       ),
                                     ],
                                   ),
@@ -332,11 +352,14 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 10,
                                   ),
                                   Text(
                                     dataElement![index].deskripsi.toString(),
-                                    style: TextStyle(),
+                                    style: TextStyle(
+                                      height: 1.5,
+                                    ),
+                                    textAlign: TextAlign.justify,
                                   ),
                                 ],
                               ),
@@ -361,13 +384,14 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 157,
+                                  vertical: paddingVertical1,
+                                  horizontal: paddingHorozontal5,
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
-                                    color: Color.fromARGB(255, 250, 202, 21),
+                                    color: _getBorderColor(
+                                        dataElement![index].statusRiwayat),
                                     width: 2,
                                   ),
                                 ),
@@ -385,5 +409,22 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                       ]));
             },
           );
+  }
+}
+
+Color _getBorderColor(String status) {
+  switch (status) {
+    case 'Menunggu':
+      return Colors.yellow;
+    case 'Ditangani':
+      return Colors.blue;
+    case 'Selesai':
+      return Colors.green;
+    case 'Ditolak':
+      return Colors.red;
+    case 'Emergency':
+      return Colors.black26;
+    default:
+      return Colors.transparent; // Default color if status is not recognized
   }
 }
