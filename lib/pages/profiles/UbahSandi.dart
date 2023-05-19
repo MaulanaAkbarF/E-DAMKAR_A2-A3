@@ -319,7 +319,7 @@ class _UbahSandiPageState extends State<UbahSandi> {
                             } else {
                               gagal(context);
                             }
-                            showLoadingDialog(context);
+                            //showLoadingDialog(context);
                           }
                         },
                         child: Container(
@@ -342,8 +342,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
             ],
           ),
         ));
-
-        
   }
 
   void show(String message) {
@@ -378,6 +376,4 @@ class _UbahSandiPageState extends State<UbahSandi> {
       },
     );
   }
-
-  
 }
