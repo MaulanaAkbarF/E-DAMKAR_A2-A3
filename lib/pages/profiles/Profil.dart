@@ -1,4 +1,3 @@
-import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/pages/home/HomePage.dart';
 import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
 import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
@@ -63,6 +62,8 @@ class _ProfilePageState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,10 +80,8 @@ class _ProfilePageState extends State<Profile> {
                   splashColor: Colors.grey.shade400,
                   highlightColor: Colors.grey.shade600,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AppMenu()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 10),
@@ -122,10 +121,9 @@ class _ProfilePageState extends State<Profile> {
                 trailing: GestureDetector(
                   onTap: () {
                     Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfilePage(1)))
-                        .then((value) => setState(() {}));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfilePage(1)));
                   },
                   child: Text(
                     "Ubah",
@@ -148,33 +146,6 @@ class _ProfilePageState extends State<Profile> {
                   fontFamily: "font/inter_bold.ttf"),
             ),
           ),
-          // Container(
-          //   width: double.infinity,
-          //   child: ListTile(
-          //     leading: Icon(Icons.person),
-          //     title: TextButton(
-          //         onPressed: () {},
-          //         child: Align(
-          //           alignment: Alignment.centerLeft,
-          //           child: Text(
-          //             "Profil Saya",
-          //             style: TextStyle(
-          //                 color: Colors.black87,
-          //                 fontWeight: FontWeight.normal,
-          //                 fontSize: 16),
-          //             textAlign: TextAlign.left,
-          //           ),
-          //         )),
-          //     horizontalTitleGap: 0,
-          //     trailing: GestureDetector(
-          //       onTap: () {},
-          //       child: Icon(Icons.chevron_right),
-          //     ),
-          //   ),
-          // ),
-          // Divider(
-          //   thickness: 1,
-          // ),
           Container(
             width: double.infinity,
             child: ListTile(
@@ -211,70 +182,6 @@ class _ProfilePageState extends State<Profile> {
           SizedBox(
             height: 10,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: Text(
-          //     "Pengaturan Aplikasi",
-          //     style: TextStyle(
-          //         fontSize: 25,
-          //         fontWeight: FontWeight.w500,
-          //         fontFamily: "font/inter_bold.ttf"),
-          //   ),
-          // ),
-          // Container(
-          //   width: double.infinity,
-          //   child: ListTile(
-          //     leading: Icon(Icons.notifications),
-          //     title: TextButton(
-          //         onPressed: () {},
-          //         child: Align(
-          //           alignment: Alignment.centerLeft,
-          //           child: Text(
-          //             "Notifikasi",
-          //             style: TextStyle(
-          //                 color: Colors.black87,
-          //                 fontWeight: FontWeight.normal,
-          //                 fontSize: 16),
-          //             textAlign: TextAlign.left,
-          //           ),
-          //         )),
-          //     horizontalTitleGap: 0,
-          //     trailing: GestureDetector(
-          //       onTap: () {},
-          //       child: Icon(Icons.chevron_right),
-          //     ),
-          //   ),
-          // ),
-          // Divider(
-          //   thickness: 1,
-          // ),
-          // Container(
-          //   width: double.infinity,
-          //   child: ListTile(
-          //     leading: Icon(Icons.book),
-          //     title: TextButton(
-          //         onPressed: () {},
-          //         child: Align(
-          //           alignment: Alignment.centerLeft,
-          //           child: Text(
-          //             "Preferensi Baca",
-          //             style: TextStyle(
-          //                 color: Colors.black87,
-          //                 fontWeight: FontWeight.normal,
-          //                 fontSize: 16),
-          //             textAlign: TextAlign.left,
-          //           ),
-          //         )),
-          //     horizontalTitleGap: 0,
-          //     trailing: GestureDetector(
-          //       onTap: () {},
-          //       child: Icon(Icons.chevron_right),
-          //     ),
-          //   ),
-          // ),
-          // Divider(
-          //   thickness: 5,
-          // ),
           SizedBox(
             height: 10,
           ),
