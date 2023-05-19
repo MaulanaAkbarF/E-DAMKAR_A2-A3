@@ -97,14 +97,9 @@ class _SignInPageState extends State<SignInPage> {
               data.data!.email.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-<<<<<<< HEAD
-              data.token.toString());
-          Navigator.pushNamed(context, '/artikel');
-=======
               data.token.toString(), 
               data.data!.gambar.toString());
           Navigator.pushNamed(context, '/homepage');
->>>>>>> 84b3656ce98266f1cc4a4340fd23b431e027a4da
         } else {
           show(data.data!.message.toString());
         }
