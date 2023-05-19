@@ -26,7 +26,7 @@ class _TentangKamiPageState extends State<TentangKami> {
           },
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         title: Text(
           "Tentang Kami ",
@@ -34,7 +34,7 @@ class _TentangKamiPageState extends State<TentangKami> {
         ),
       ),
       body: Container(
-        color: Colors.white,
+        color: Colors.transparent,
         child: Column(children: [
           SizedBox(
             height: 50,

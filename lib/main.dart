@@ -16,32 +16,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MaterialApp(
-    title: 'E-Damkar',
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-      brightness: Brightness.light,
-    ),
-    initialRoute: '/',
-    routes: {
-      '/': (context) => EmergencyCall(),
-      '/signin': (context) => SignInPage(),
-      '/signup': (context) => SignUpPage(),
-      '/remakepass': (context) => RemakePassPage(),
-      '/resetpass': (context) => ResetPassPage(),
-      // '/otp': (context) => OtpVerificationPage(),
-      '/homepage': (context) => HomePage(),
-      '/riwayatlapp': (context) => RiwayatLaporan(),
-      // '/detailriwayat': (context) => DetailRiwayatLengkap(),
-      '/artikel': (context) => Artikel(),
-
-      // '/detailartikel': (context) => DetailArtikel(),
-
-      '/profil': (context) => Profile(),
-      '/tentangkami': (context) => TentangKami(),
-      '/laporanpage': (context) => LaporanPage(),
-      // '/buatlaporan': (context) => BuatLaporan()
-    },
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) => runApp(MaterialApp(
+            title: 'E-Damkar',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              brightness: Brightness.light,
+            ),
+            initialRoute: '/',
+            routes: {
+              '/': (context) => EmergencyCall(),
+              '/signin': (context) => SignInPage(),
+              '/signup': (context) => SignUpPage(),
+              '/resetpass': (context) => ResetPassPage(),
+              '/homepage': (context) => HomePage(),
+              '/riwayatlapp': (context) => RiwayatLaporan(),
+              // '/detailriwayat': (context) => DetailRiwayatLengkap()
+              '/artikel': (context) => Artikel(),
+              // '/detailartikel': (context) => DetailArtikel(""),
+              '/profil': (context) => Profile(),
+              '/tentangkami': (context) => TentangKami(),
+              '/laporanpage': (context) => LaporanPage(),
+              // '/buatlaporan': (context) => BuatLaporan()
+            },
+          )));
 }

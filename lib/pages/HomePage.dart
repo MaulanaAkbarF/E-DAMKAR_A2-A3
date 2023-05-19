@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../APIRequest/APIClient.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var userName = '';
   var url_photo;
+  var email;
   final String phoneNumber = "085708574368";
 
   void emercall() async {
@@ -26,9 +29,21 @@ class _HomePageState extends State<HomePage> {
 
   void getUserData() async {
     var data = DataUser().getNama();
+    var dataPoto = DataUser().getGambar();
+    var dataEmail = DataUser().getEmail();
     data.then((value) {
       setState(() {
         userName = value.toString();
+      });
+    });
+    dataPoto.then((value) {
+      setState(() {
+        url_photo = value.toString();
+      });
+    });
+    dataEmail.then((value) {
+      setState(() {
+        email = value.toString();
       });
     });
   }
@@ -39,11 +54,20 @@ class _HomePageState extends State<HomePage> {
     // getUserData();
   }
 
-  Image image(String? url) {
+  CircleAvatar image(String? url) {
     if (url != null) {
-      return Image(image: NetworkImage(url.toString()));
+      return CircleAvatar(
+        minRadius: 30,
+        backgroundImage: NetworkImage(url.toString()),
+
+        // image: ,
+        // fit: BoxFit.cover,
+      );
     }
-    return const Image(image: AssetImage("semuaAset/gambar/user1.png"));
+    return const CircleAvatar(
+      minRadius: 30,
+      backgroundImage: AssetImage("semuaAset/gambar/user1.png"),
+    );
   }
 
   @override
@@ -76,10 +100,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   GestureDetector(
-                      child: CircleAvatar(
-                        radius: 30,
-                        child: image(url_photo),
-                      ),
+                      child: image(
+                          "${APIClient.gambar}storage/public/foto_user/${url_photo}"),
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Profile()));

@@ -25,23 +25,23 @@ class Data {
   String? namaLengkap;
   String? noHp;
   String? message;
+  String? gambar;
 
-
-  Data({
-    this.id,
-    this.email,
-    this.password,
-    this.namaLengkap,
-    this.noHp,
-    this.message
-  });
+  Data(
+      {this.id,
+      this.email,
+      this.password,
+      this.namaLengkap,
+      this.noHp,
+      this.gambar,
+      this.message});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        email: json["email"],
-        password: json["password"],
-        namaLengkap: json["namaLengkap"],
-        noHp: json["noHp"],
-        message: json["message"]
-      );
+      id: json["id"],
+      email: json["email"],
+      gambar: json['foto_user'],
+      password: json["password"],
+      namaLengkap: json["namaLengkap"],
+      noHp: json["noHp"],
+      message: json["message"]);
 }
