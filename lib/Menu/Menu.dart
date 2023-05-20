@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:edamkar_1/pages/artikels/Artikel.dart';
 import 'package:edamkar_1/pages/home/HomePage.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
@@ -14,13 +16,14 @@ class AppMenu extends StatefulWidget {
 }
 
 class _AppMenuState extends State<AppMenu> {
+  bool _isNavigationEnabled = false;
   var _selectedIndex = 0;
   List<Widget> menu = [
-    const HomePage(),
-    const LaporanPage(),
-    const RiwayatLaporan(),
-    const Artikel(),
-    const Profile()
+    HomePage(),
+    LaporanPage(),
+    RiwayatLaporan(),
+    Artikel(),
+    Profile()
   ];
   @override
   Widget build(BuildContext context) {
@@ -66,6 +69,17 @@ class _AppMenuState extends State<AppMenu> {
           onTap: _onItemTap,
         ));
   }
+  // if (_isNavigationEnabled) {
+  //     setState(() {
+  //       _isNavigationEnabled = true;
+  //     });
+  //     Future.delayed(Duration(seconds: 2), () {
+  //       setState(() {
+  //         _isNavigationEnabled = false;
+
+  //       });
+  //     });
+  //   }
 
   void _onItemTap(int index) {
     setState(() {

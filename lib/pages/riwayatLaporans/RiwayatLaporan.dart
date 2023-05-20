@@ -88,13 +88,11 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
     });
   }
 
-  List<Datum>? _foundData = [];
+  // List<Datum>? _foundData = [];
   @override
   void initState() {
     super.initState();
     getUserIdRiwayat();
-
-    // _foundData = dataElement!;
   }
 
   List<Datum>? searchKosong = [];
@@ -339,7 +337,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
   }
 
   void _runSearch(String enteredKeyword) {
-    // List<Datum> result = [];
+
 
     if (enteredKeyword.isEmpty) {
       getUserIdRiwayat();
@@ -356,128 +354,152 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            for (final teks in teksLaporan)
-              for (final teksStyle in teksStyleLaporan)
-                Align(
-                  alignment: FractionalOffset.topCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                    child: Text(
-                      "Riwayat Laporan",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 55, 65, 81),
-                          fontFamily: "font/inter_bold.ttf",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: paddingHorozontal2, vertical: paddingVertical1),
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    controller: search,
-                    onChanged: _runSearch,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
-                          allow: true)
-                    ],
-                    style: TextStyle(
-                        fontFamily: "font/inter_regular.ttf",
-                        color: Color.fromARGB(255, 107, 114, 128),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search_sharp),
-                        prefixIconColor: Color.fromARGB(255, 209, 213, 219),
-                        filled: true,
-                        hintText: "Cari riwayat laporan anda",
-                        fillColor: Color.fromARGB(255, 249, 250, 251),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                                width: 3,
-                                color: Color.fromARGB(255, 209, 213, 219)))),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 40,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          TextButton(
-                              style: _buttonStyle,
-                              onPressed: getUserIdRiwayat,
-                              child: Text("Semua")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: _buttonStyle,
-                              onPressed: getIdStatusEmergency,
-                              child: Text("Emergency")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: _buttonStyle,
-                              onPressed: getIdStatus,
-                              child: Text("Menunggu")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: _buttonStyle,
-                              onPressed: getIdStatusDitolak,
-                              child: Text("Ditolak")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: _buttonStyle,
-                              onPressed: getIdStatusSelesai,
-                              child: Text("Selesai")),
-                        ],
+    return WillPopScope(
+      onWillPop: () async {
+        return await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Konfirmasi keluar !"),
+                content: Text("Apakah anda yakin untuk Keluar ?"),
+                actions: <Widget>[
+                  FloatingActionButton(
+                      child: Text("Tidak"),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      }),
+                  FloatingActionButton(
+                      child: Text("Ya"),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      })
+                ],
+              );
+            });
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              for (final teks in teksLaporan)
+                for (final teksStyle in teksStyleLaporan)
+                  Align(
+                    alignment: FractionalOffset.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                      child: Text(
+                        "Riwayat Laporan",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 55, 65, 81),
+                            fontFamily: "font/inter_bold.ttf",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                  )
-                ],
+                  ),
+              SizedBox(
+                height: 10,
               ),
-            ),
-            Container(
-              height: 1,
-              width: SizeConfig.screenWidth,
-              color: Colors.black26,
-            ),
-            Expanded(
-                child:
-                    search.text.isEmpty ? isRiwayatNull() : isRiwayatSeacrh())
-          ],
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: paddingHorozontal2, vertical: paddingVertical1),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: search,
+                      onChanged: _runSearch,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
+                            allow: true)
+                      ],
+                      style: TextStyle(
+                          fontFamily: "font/inter_regular.ttf",
+                          color: Color.fromARGB(255, 107, 114, 128),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search_sharp),
+                          prefixIconColor: Color.fromARGB(255, 209, 213, 219),
+                          filled: true,
+                          hintText: "Cari riwayat laporan anda",
+                          fillColor: Color.fromARGB(255, 249, 250, 251),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                  width: 3,
+                                  color: Color.fromARGB(255, 209, 213, 219)))),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 40,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getUserIdRiwayat,
+                                child: Text("Semua")),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getIdStatusEmergency,
+                                child: Text("Emergency")),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getIdStatus,
+                                child: Text("Menunggu")),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getIdStatusDitolak,
+                                child: Text("Ditolak")),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getIdStatusSelesai,
+                                child: Text("Selesai")),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: 1,
+                width: SizeConfig.screenWidth,
+                color: Colors.black26,
+              ),
+              Expanded(
+                  child:
+                      search.text.isEmpty ? isRiwayatNull() : isRiwayatSeacrh())
+            ],
+          ),
+          //
         ),
-        //
+        // SingleChildScrollView(
+        //   child: isRiwayatNull(),
+        // )
+        //   ],
+        // ),
+        // ),
       ),
-      // SingleChildScrollView(
-      //   child: isRiwayatNull(),
-      // )
-      //   ],
-      // ),
-      // ),
     );
   }
 
