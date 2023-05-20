@@ -218,13 +218,34 @@ class _ProfilePageState extends State<Profile> {
             Container(
               width: double.infinity,
               child: ListTile(
-                leading: image(url_photo),
-                title: Text("$userName"),
-                subtitle: Text("$noTelp"),
+                leading: Icon(Icons.lock),
+                title: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UbahSandi(_iduser.toString())));
+                    },
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Ubah Kata Sandi",
+                        style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 16),
+                        textAlign: TextAlign.left,
+                      ),
+                    )),
+                horizontalTitleGap: 0,
                 trailing: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UbahSandi(_iduser.toString())));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                UbahSandi(_iduser.toString())));
                   },
                   child: Icon(Icons.chevron_right),
                 ),
@@ -246,33 +267,7 @@ class _ProfilePageState extends State<Profile> {
             //         fontFamily: "font/inter_bold.ttf"),
             //   ),
             // ),
-            // Container(
-            //   width: double.infinity,
-            //   child: ListTile(
-            //     leading: Icon(Icons.notifications),
-            //     title: TextButton(
-            //         onPressed: () {},
-            //         child: Align(
-            //           alignment: Alignment.centerLeft,
-            //           child: Text(
-            //             "Notifikasi",
-            //             style: TextStyle(
-            //                 color: Colors.black87,
-            //                 fontWeight: FontWeight.normal,
-            //                 fontSize: 16),
-            //             textAlign: TextAlign.left,
-            //           ),
-            //         )),
-            //     horizontalTitleGap: 0,
-            //     trailing: GestureDetector(
-            //       onTap: () {},
-            //       child: Icon(Icons.chevron_right),
-            //     ),
-            //   ),
-            // ),
-            // Divider(
-            //   thickness: 1,
-            // ),
+
             // Container(
             //   width: double.infinity,
             //   child: ListTile(
