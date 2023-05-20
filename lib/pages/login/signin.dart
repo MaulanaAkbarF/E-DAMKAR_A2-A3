@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/Example/AweseomSnackBarExample.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
@@ -11,6 +12,7 @@ import 'package:edamkar_1/style/size_config.dart';
 import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../style/app_style.dart';
 
@@ -105,9 +107,10 @@ class _SignInPageState extends State<SignInPage> {
           await DataUser().addUser(
               data.data!.id.toString(),
               data.data!.username.toString(),
+              pass.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString(),  
+              data.token.toString(),
               data.data!.gambar.toString());
           FloatNotif().snackBar(context, "berhasil login",
               "selamat datang ${data.data!.namaLengkap.toString()},");
@@ -307,7 +310,11 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
+                                  onTap: () async {
+                                    String passUser = pass.text;
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    await preferences.setString("passUser",passUser);
                                     loginPost(account.text, pass.text);
                                   },
                                   child: Container(

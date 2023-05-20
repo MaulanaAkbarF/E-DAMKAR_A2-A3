@@ -3,11 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DataUser {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<void> addUser(String? userid, String username, String nama,
+  Future<void> addUser(String? userid, String username,String password, String nama,
       String noHp, String token, String gambar) async {
     final SharedPreferences prefs = await _prefs;
     await prefs.setInt('userId', int.parse(userid.toString()));
     await prefs.setString('username', username);
+    await prefs.setString('password', password);
     await prefs.setString('nama', nama);
     await prefs.setString('noHp', noHp);
     await prefs.setString('token', token);
@@ -33,6 +34,12 @@ class DataUser {
   Future<String> getUsername() async {
     return _prefs.then((SharedPreferences pref) {
       return pref.getString('username') ?? '';
+    });
+  }
+
+  Future<String> getPassword() async {
+    return _prefs.then((SharedPreferences pref) {
+      return pref.getString('password') ?? '';
     });
   }
 
