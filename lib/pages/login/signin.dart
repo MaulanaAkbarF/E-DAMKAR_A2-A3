@@ -311,10 +311,7 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () async {
-                                    String passUser = pass.text;
-                                    SharedPreferences preferences =
-                                        await SharedPreferences.getInstance();
-                                    await preferences.setString("passUser",passUser);
+                                    
                                     loginPost(account.text, pass.text);
                                   },
                                   child: Container(
