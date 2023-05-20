@@ -7,6 +7,7 @@ import 'package:edamkar_1/style/size_config.dart';
 import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -21,6 +22,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<String> getDataPass() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('passUser') ?? '';
+  }
+
   var userName = '';
   var url_photo = '';
 
@@ -59,6 +65,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getUserData();
+    getDataPass();
   }
 
   CircleAvatar image(String url) {

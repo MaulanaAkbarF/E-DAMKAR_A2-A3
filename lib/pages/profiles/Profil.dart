@@ -22,11 +22,19 @@ class _ProfilePageState extends State<Profile> {
   var noTelp = '08..';
   var url_photo = "";
   var _noHp = "0800000000001";
+  var _iduser = 1;
   void getUserData() async {
+    var idData = DataUser().getUserId();
     var data = DataUser().getNama();
     var data1 = DataUser().getNoHp();
     var gambar = DataUser().getGambar();
     var noHp = DataUser().getNoHp();
+
+    idData.then((value) {
+      setState(() {
+        _iduser = value;
+      });
+    });
 
     gambar.then((value) {
       setState(() {
@@ -68,6 +76,7 @@ class _ProfilePageState extends State<Profile> {
   void initState() {
     super.initState();
     getUserData();
+    print("no Hp :" + _noHp);
   }
 
   @override
@@ -215,7 +224,7 @@ class _ProfilePageState extends State<Profile> {
                 trailing: GestureDetector(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UbahSandi(1)));
+                        MaterialPageRoute(builder: (context) => UbahSandi(_iduser.toString())));
                   },
                   child: Icon(Icons.chevron_right),
                 ),
@@ -310,8 +319,10 @@ class _ProfilePageState extends State<Profile> {
                 leading: Icon(Icons.help),
                 title: TextButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => TentangKami()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TentangKami()));
                     },
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -353,7 +364,8 @@ class _ProfilePageState extends State<Profile> {
                       backgroundColor: Color.fromARGB(255, 250, 250, 250),
                       minimumSize: Size.fromHeight(50),
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.red.shade500, width: 1),
+                          side:
+                              BorderSide(color: Colors.red.shade500, width: 1),
                           borderRadius: BorderRadiusDirectional.circular(100))),
                   child: Text(
                     "Keluar",

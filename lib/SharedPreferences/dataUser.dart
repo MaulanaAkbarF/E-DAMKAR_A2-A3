@@ -36,6 +36,12 @@ class DataUser {
     });
   }
 
+  Future<String> getPassword() async {
+    return _prefs.then((SharedPreferences pref) {
+      return pref.getString('password') ?? '';
+    });
+  }
+
   Future<String> getGambar() async {
     return _prefs.then((SharedPreferences pref) {
       return pref.getString('gambar') ?? '';

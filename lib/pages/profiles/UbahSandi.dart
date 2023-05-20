@@ -1,5 +1,9 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/UbahPassword.dart';
+import 'package:edamkar_1/models/changePw.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -11,8 +15,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 class UbahSandi extends StatefulWidget {
   //const UbahSandi({super.key});
 
-  final int userId;
-  UbahSandi(this.userId);
+  final String userId;
+  UbahSandi(this.userId, {super.key});
 
   @override
   State<UbahSandi> createState() => _UbahSandiPageState();
@@ -23,11 +27,29 @@ class _UbahSandiPageState extends State<UbahSandi> {
   bool _passwordVisible1 = true;
   bool _passwordVisible2 = true;
 
+  var pwOld = "";
+
+  late final _id;
+
+  void getUserpw() async {
+    var dataPw = DataUser().getPassword();
+    dataPw.then((value) {
+      setState(() {
+        pwOld = value.toString();
+        print(pwOld.toString());
+      });
+    });
+  }
+
   @override
   void initState() {
+    super.initState();
+    getUserpw();
+    print("pwlama :" + pwOld);
     _passwordVisible = true;
     _passwordVisible1 = true;
     _passwordVisible2 = true;
+    _id = widget.userId;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -36,13 +58,33 @@ class _UbahSandiPageState extends State<UbahSandi> {
   final _confirmPasswordController = TextEditingController();
   String _message = '';
 
-  @override
-  void dispose() {
-    _oldPasswordController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
+  postUbahSandi(String id, String pwLama, String pwBaru) async {
+    if (_formKey.currentState!.validate()) {
+      var result = await APIClient().postData('user/password', {
+        "id": id,
+        "password_lama": pwLama,
+        "password_baru": pwBaru
+      }).catchError((err) {});
+
+      if (result != null && result != false) {
+        var data = changePwFromJson(result);
+        if (data.kode == "200") {
+          toss(context);
+        } else {
+          gagal(context);
+          print("Password Gagal Dirubah !, Kode = " + data.kode.toString());
+        }
+      }
+    }
   }
+
+  // @override
+  // void dispose() {
+  //   _oldPasswordController.dispose();
+  //   _newPasswordController.dispose();
+  //   _confirmPasswordController.dispose();
+  //   super.dispose();
+  // }
 
   toss(BuildContext context) {
     final snackBar = SnackBar(
@@ -144,8 +186,9 @@ class _UbahSandiPageState extends State<UbahSandi> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'password lama tidak boleh kosong';
-                          } else if (value.length > 20) {
-                            return 'password lama terlalu panjang';
+
+                            // else if (value.length > 20) {
+                            //   return 'password lama terlalu panjang';
                           } else if (value.length < 8) {
                             return 'password lama terlalu pendek';
                           }
@@ -264,7 +307,7 @@ class _UbahSandiPageState extends State<UbahSandi> {
                           if (value == null || value.isEmpty) {
                             return 'Validasi password tidak boleh kosong';
                           } else if (value != _newPasswordController.text) {
-                            return 'validasi password tidak sesuai dengan password baru';
+                            return "Validasi password tidak sama !";
                           }
                         },
                         obscureText: _passwordVisible1,
@@ -305,22 +348,8 @@ class _UbahSandiPageState extends State<UbahSandi> {
                         splashColor: Colors.red.shade700,
                         highlightColor: Colors.red.shade900,
                         onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (_newPasswordController.text ==
-                                _confirmPasswordController.text) {
-                              Update.ubahSandi(
-                                      widget.userId.toString(),
-                                      _oldPasswordController.text,
-                                      _newPasswordController.text)
-                                  .then((value) => {
-                                        if (value.kode.toString() == "200")
-                                          {toss(context)}
-                                      });
-                            } else {
-                              gagal(context);
-                            }
-                            //showLoadingDialog(context);
-                          }
+                          postUbahSandi(_id, _oldPasswordController.text,
+                              _newPasswordController.text);
                         },
                         child: Container(
                           height: 50,

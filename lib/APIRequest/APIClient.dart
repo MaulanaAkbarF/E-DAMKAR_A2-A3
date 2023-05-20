@@ -5,7 +5,7 @@ const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
   var client = http.Client();
-  static const String base = "http://192.168.0.104/flutter_api/";
+  static const String base = "http://10.20.8.184/flutter_api/";
   static const String submit = base + "submit.php";
   static const String whatsappnotification = base + "whatsappnotification.php";
   static const String otpwhatsapp = base + "otpwa.php";
