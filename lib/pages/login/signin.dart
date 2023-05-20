@@ -102,6 +102,7 @@ class _SignInPageState extends State<SignInPage> {
           {"username": acnt, "password": password}).catchError((err) {});
 
       if (result != null && result != false) {
+        print(result);
         var data = loginModelFromJson(result);
         if (data.status) {
           await DataUser().addUser(
