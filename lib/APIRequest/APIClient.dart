@@ -28,7 +28,7 @@ class APIClient {
 
     var response = await client.post(url, headers: _headers, body: object);
 
-    if (response.statusCode == 200 || response.statusCode == 422) {
+    if (response.statusCode == 200 ) {
       return response.body;
     } else {
       throw Exception();

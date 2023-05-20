@@ -16,18 +16,14 @@ class LoginModel {
     this.data,
   });
 
-  Map<String, dynamic> jsonNull = {
-    "id": '',
-    "username": '',
-    "namaLengkap": '',
-    "noHp": '',
-    "foto_user": '',
-  };
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         status: json["status"],
         message: json["message"],
         token: json["token"] ?? '',
-        data: Data.fromJson(json["data"]),
+        data: json["data"] != null
+            ? Data.fromJson(json["data"])
+            : Data(
+                id: 0, username: "", namaLengkap: "", noHp: "", fotoUser: ""),
       );
 }
 

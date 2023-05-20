@@ -13,7 +13,7 @@ class RegisterModel {
   });
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
-        kondisi: json["kondisi"] ?? false,
+        kondisi: json["status"] ?? false,
         message: json["message"] ?? '',
       );
 }
