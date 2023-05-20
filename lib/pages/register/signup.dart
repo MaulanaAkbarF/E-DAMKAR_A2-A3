@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -91,7 +92,7 @@ final List<Map> teksStyleSignUp = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController email = TextEditingController();
+  final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
   final TextEditingController notelp = TextEditingController();
@@ -99,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.1.217/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -115,8 +116,10 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void RegisterPost(context) async {
+    debugPrint('start');
+    debugPrint(randomNumber.toString());
     var result = await APIClient().postData('register', {
-      "email": email.text,
+      "username": username.text,
       "password": password.text,
       "namaLengkap": namalengkap.text,
       "noHp": notelp.text,
@@ -125,15 +128,11 @@ class _SignUpPageState extends State<SignUpPage> {
     }).catchError((err) {
       return null;
     });
-
+    debugPrint("middle");
     if (result != null) {
       print("kondisi berhasil dijalankan");
       _kirimNotifikasi();
-      SnackBar(
-          content: Text(
-        "Registrasi berhasil!",
-        textAlign: TextAlign.center,
-      ));
+      FloatNotif().snackBar2(context, "Registrasi Berhasil");
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -280,10 +279,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: email,
+                                  controller: username,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Email tidak boleh kosong';
+                                      FloatNotif().snackBar(
+                                          context, "", "Registrasi Berhasil");
                                     }
                                   },
                                   cursorColor: Colors.black,

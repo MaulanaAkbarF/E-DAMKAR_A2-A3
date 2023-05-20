@@ -4,6 +4,7 @@ import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';
 import 'package:edamkar_1/pages/register/signup.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -106,8 +107,10 @@ class _SignInPageState extends State<SignInPage> {
               data.data!.username.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString(),
+              data.token.toString(),  
               data.data!.gambar.toString());
+          FloatNotif().snackBar(context, "berhasil login",
+              "selamat datang ${data.data!.namaLengkap.toString()},");
           Navigator.of(context).pop();
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => const AppMenu()));

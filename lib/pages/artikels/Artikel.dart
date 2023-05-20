@@ -164,9 +164,11 @@ class _ArtikelState extends State<Artikel> {
       setState(() {
         data = semuaArtikelModelFromJson(result);
       debugPrint(data.length.toString());
+      });
+        
         
 
-      });
+    
       
     } else {
       debugPrint('terdapat kesalahan');

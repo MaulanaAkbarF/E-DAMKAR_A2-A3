@@ -1,4 +1,5 @@
 import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -52,7 +53,7 @@ class VerificationSuccess extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => const SignInPage()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
