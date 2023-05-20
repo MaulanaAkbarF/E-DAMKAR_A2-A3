@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/login/signin.dart';
+import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -96,28 +98,64 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController password = TextEditingController();
   final TextEditingController namalengkap = TextEditingController();
   final TextEditingController notelp = TextEditingController();
+  final TextEditingController validatepass = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  var isloading = false;
 
-  void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
-
-    var data = {
-      "kodeOtp": randomNumber.toString(),
-      "noHp": notelp.text,
-    };
-    var response = await http.post(url, body: data);
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print('Respon dari server: $responseData');
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+  bool checkField() {
+    if (namalengkap.text.isEmpty) {
+      FloatNotif().snackBarFail(context, "", "Nama Lengkap tidak boleh kosong");
+      return false;
     }
+    if (namalengkap.text.length < 5) {
+      FloatNotif()
+          .snackBarFail(context, "", "Nama Yang kamu masukkan terlalu pendek");
+      return false;
+    }
+    if (namalengkap.text.length > 30) {
+      FloatNotif()
+          .snackBarFail(context, "", "Nama yang kamu masukkan terlalu pendek");
+      return false;
+    }
+    if (username.text.isEmpty) {
+      FloatNotif().snackBarFail(context, "", "Username tidak boleh kosong");
+      return false;
+    }
+    if (username.text.length < 5) {
+      FloatNotif().snackBarFail(context, "", "Username terlalu pendek");
+      return false;
+    }
+    if (username.text.length > 30) {
+      FloatNotif().snackBarFail(context, "", "username terlalu panjang");
+      return false;
+    }
+    if (password.text.isEmpty) {
+      FloatNotif().snackBarFail(context, "", "password tidak boleh kosong");
+      return false;
+    }
+    if (password.text.length < 5) {
+      FloatNotif().snackBarFail(context, "", "password terlalu pendek");
+      return false;
+    }
+    if (password.text.length > 30) {
+      FloatNotif().snackBarFail(context, "", "password terlalu panjang");
+      return false;
+    }
+    if (validatepass.text.isEmpty) {
+      FloatNotif()
+          .snackBarFail(context, "", "Validasi password tidak boleh kosong");
+      return false;
+    }
+    if (validatepass.text != password.text) {
+      FloatNotif().snackBarFail(
+          context, "", "validasi password tidak sesuai dengan password");
+      return false;
+    }
+    return true;
   }
 
   void RegisterPost(context) async {
-    debugPrint('start');
-    debugPrint(randomNumber.toString());
+    setState(() => isloading = true);
     var result = await APIClient().postData('register', {
       "username": username.text,
       "password": password.text,
@@ -128,23 +166,33 @@ class _SignUpPageState extends State<SignUpPage> {
     }).catchError((err) {
       return null;
     });
-    debugPrint("middle");
     if (result != null) {
-      print("kondisi berhasil dijalankan");
-      _kirimNotifikasi();
-      FloatNotif().snackBar2(context, "Registrasi Berhasil");
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OtpVerificationPage(
-            noHp: notelp.text,
-            kodeOtp: randomNumber.toString(),
+      var data = registerModelFromJson(result);
+      if (data.kondisi!) {
+        FloatNotif().snackBar2(context, "Registrasi Berhasil");
+        setState(() => isloading = false);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationPage(
+              noHp: notelp.text,
+              kodeOtp: randomNumber.toString(),
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        setState(() => isloading = false);
+        if (data.message!.toString().split(" ").contains("username")) {
+          FloatNotif().snackBarFail(
+              context, "Gagal Membuat Akun", "username sudah digunakan");
+        } else if (data.message!.toString().split(" ").contains("hp")) {
+          FloatNotif().snackBarFail(
+              context, "Gagal Membuat Akun", "No Hp kamu sudah digunakan");
+        }
+      }
     } else {
-      print('something error on code');
-      print(result);
+      setState(() => isloading = false);
+      FloatNotif().snackBar2(context, "coba kembali beberapa saat");
     }
   }
 
@@ -180,6 +228,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    var sty = styleNColor();
     return Scaffold(
         body: SafeArea(
             child: Form(
@@ -238,11 +287,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: namalengkap,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Nama tidak boleh kosong';
-                                    }
-                                  },
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -280,12 +324,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: username,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      FloatNotif().snackBar(
-                                          context, "", "Registrasi Berhasil");
-                                    }
-                                  },
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -323,15 +361,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: notelp,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'No. Telp (whatsapp) tidak boleh kosong';
-                                    } else if (value.length > 13) {
-                                      return 'no telepon terlalu panjang';
-                                    } else if (value.length < 9) {
-                                      return 'no telepon terlalu pendek';
-                                    }
-                                  },
+                                  keyboardType: TextInputType.number,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -369,15 +399,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: password,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'password tidak boleh kosong';
-                                    } else if (value.length > 20) {
-                                      return 'password terlalu panjang';
-                                    } else if (value.length < 8) {
-                                      return 'password terlalu pendek';
-                                    }
-                                  },
                                   obscureText: _passwordVisible,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
@@ -428,13 +449,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Validasi password tidak boleh kosong';
-                                    } else if (value != password.text) {
-                                      return 'validasi password tidak sesuai dengan password';
-                                    }
-                                  },
+                                  controller: validatepass,
                                   obscureText: _passwordVisible1,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
@@ -473,21 +488,41 @@ class _SignUpPageState extends State<SignUpPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (checkField()) {
                                       RegisterPost(context);
                                     }
                                   },
                                   child: Container(
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(teks['ButtonLogin'],
-                                            style: teksStyle['Thin2']),
-                                      ],
-                                    ),
-                                  ),
+                                      height: 50,
+                                      child: isloading
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const SizedBox(
+                                                  height: 30,
+                                                  width: 30,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: paddingVertical2),
+                                                Text(
+                                                  'loading...',
+                                                  style: sty.b(16, white),
+                                                ),
+                                              ],
+                                            )
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(teks['ButtonLogin'],
+                                                    style: teksStyle['Thin2']),
+                                              ],
+                                            )),
                                 ),
                               ),
                             ),

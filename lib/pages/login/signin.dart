@@ -101,14 +101,14 @@ class _SignInPageState extends State<SignInPage> {
 
       if (result != null && result != false) {
         var data = loginModelFromJson(result);
-        if (data.token!.isNotEmpty) {
+        if (data.status) {
           await DataUser().addUser(
-              data.data!.id.toString(),
+              data.data!.id,
               data.data!.username.toString(),
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
-              data.token.toString(),  
-              data.data!.gambar.toString());
+              data.token.toString(),
+              data.data!.fotoUser.toString());
           FloatNotif().snackBar(context, "berhasil login",
               "selamat datang ${data.data!.namaLengkap.toString()},");
           Navigator.of(context).pop();
@@ -117,11 +117,12 @@ class _SignInPageState extends State<SignInPage> {
           setState(() => isLoading = false);
         } else {
           setState(() => isLoading = false);
-          show(data.data!.message.toString());
+          FloatNotif().snackBarFail(context, "Login Gagal", data.message!);
         }
       } else {
         setState(() => isLoading = false);
-        show("mengalami permasalahan call api");
+        FloatNotif().snackBarFail(
+            context, 'Login Gagal', "coba kembali setelah beberapa saat");
       }
     }
   }
@@ -317,7 +318,7 @@ class _SignInPageState extends State<SignInPage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 30,
                                                 width: 30,
                                                 child:

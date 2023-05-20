@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://172.16.103.42:8000/';
+const String baseUrl = 'http://188.10.10.254:8000/';
 const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
@@ -9,6 +9,8 @@ class APIClient {
   static const String submit = base + "submit.php";
   static const String whatsappnotification = base + "whatsappnotification.php";
   static const String otpwhatsapp = base + "otpwa.php";
+
+  final _headers = {"Accept": "application/json"};
 
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(apiUrl + api);
@@ -24,9 +26,9 @@ class APIClient {
   Future<dynamic> postData(String api, dynamic object) async {
     var url = Uri.parse(apiUrl + api);
 
-    var response = await client.post(url, body: object);
+    var response = await client.post(url, headers: _headers, body: object);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 422) {
       return response.body;
     } else {
       throw Exception();

@@ -5,9 +5,11 @@ import 'dart:math';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ImageModel.dart';
 import 'package:edamkar_1/models/pelaporanModel.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:image_picker/image_picker.dart';
@@ -105,43 +107,13 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var iduser;
+
   @override
   void initState() {
     super.initState();
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
     DataUser().getUserId().then((value) => iduser = value);
   }
-
-  // void pushLaporan() async {
-  //   var result = await APIClient().postData('addPelaporan', {
-  //     'user_listdata_id': '1',
-  //     'status_riwayat_id': '1',
-  //     'kategori_laporan_id': '4',
-  //     'tgl_lap': '2023-05-17',
-  //     'deskripsi_laporan': deskripsiCon.text,
-  //     'alamat_kejadian': widget.jalan.toString() +
-  //         widget.desa.toString() +
-  //         widget.kota.toString(),
-  //     'latitude': widget.latitude.toString(),
-  //     'longitude': widget.longitude.toString()
-  //   });
-  //   var resultWa = await APIClient().postData('sendToWa', {
-  //     'desa': widget.desa,
-  //     'jalan': widget.jalan,
-  //     'kecamatan': widget.kecamatan,
-  //     'kota': widget.kota,
-  //     'kodepos': widget.kodepos.toString(),
-  //     'latitude': widget.latitude.toString(),
-  //     'longitude': widget.longitude.toString(),
-  //     'namaBencana': "hewanBuas",
-  //     'noTelp': DataUser().getNoHp().toString()
-  //   });
-  //   if (result != null || result != false) {
-  //     var lastResult = await laporanModelFromJson(result);
-  //     show("berhasil melakukan pelaporan");
-  //     Navigator.pushNamed(context, '/laporanpage');
-  //   }
-  // }
 
   void pushLaporan() async {
     String title = iduser.toString() + "_image_" + getRandomString(30);
@@ -168,13 +140,15 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       'latitude': widget.latitude.toString(),
       'longitude': widget.longitude.toString()
     });
-    debugPrint(widget.jalan.toString() +
-        widget.desa.toString() +
-        widget.kota.toString());
     if (result != null) {
-      
+      if (result.body)
+        FloatNotif().snackBar(context, "Laporan Berhasil",
+            "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => const AppMenu()));
     } else {
-      debugPrint("wadohh");
+      FloatNotif().snackBar(context, "Laporan gagal",
+          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
     }
   }
 

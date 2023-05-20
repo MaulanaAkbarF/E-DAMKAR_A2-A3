@@ -1,4 +1,5 @@
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/style/app_style.dart';
@@ -7,6 +8,7 @@ import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../profiles/Profil.dart';
 
@@ -20,11 +22,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var userName = '';
   var url_photo = '';
+
+  //admin contact
+  final String message =
+      "setelah melakukan panggilan tolong kembali ke aplikasi";
+  final String countryCode = "+62";
+  final String phone = "81252277680";
   final String phoneNumber = "085708574368";
 
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
+  }
+
+  void emerCallWA() async {
+    var whatsappUrl =
+        "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
+    if (await canLaunchUrlString(whatsappUrl)) {
+      await launchUrlString(whatsappUrl);
+      Navigator.pushNamed(context, "/laporanpage");
+    } else {
+      FloatNotif().snackBarFail(
+          context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
+    }
   }
 
   void getUserData() {

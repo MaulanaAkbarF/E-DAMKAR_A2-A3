@@ -81,6 +81,15 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
     super.initState();
     otpRegister = widget.kodeOtp;
     noHp = widget.noHp;
+    _kirimNotifikasi();
+  }
+
+  void _kirimNotifikasi() async {
+    var data = {
+      "kodeOtp": widget.kodeOtp,
+      "noHp": widget.noHp,
+    };
+    await APIClient().postData('verifyOtp/whatsapp', data);
   }
 
   void verifyCode() {
@@ -100,7 +109,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   }
 
   Future<void> whenVerified() async {
-    var result = await APIClient().postData('verification/$noHp', {
+    var result = await APIClient().postData('verification/akun', {
       "noHp": noHp,
       "kodeOtp": 'Null',
       "status": 'Verified'
@@ -115,22 +124,22 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
     }
   }
 
-  void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
+  // void _kirimNotifikasi() async {
+  //   var url = Uri.parse(
+  //       APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
-    var data = {
-      "kodeOtp": otpRegister.toString(),
-      "noHp": noHp.toString(),
-    };
-    var response = await http.post(url, body: data);
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print('Respon dari server: $responseData');
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
-  }
+  //   var data = {
+  //     "kodeOtp": otpRegister.toString(),
+  //     "noHp": noHp.toString(),
+  //   };
+  //   var response = await http.post(url, body: data);
+  //   if (response.statusCode == 200) {
+  //     var responseData = json.decode(response.body);
+  //     print('Respon dari server: $responseData');
+  //   } else {
+  //     print('Gagal mengirim data. Kode status: ${response.statusCode}');
+  //   }
+  // }
 
   void navToRemakePassPage(BuildContext context) {
     Timer(Duration(seconds: 0), () {

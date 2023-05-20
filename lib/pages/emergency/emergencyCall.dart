@@ -1,4 +1,5 @@
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +24,10 @@ class _EmergencyCallState extends State<EmergencyCall> {
     await launchUrl(phoneUrl);
   }
 
-  // String platformCheck() {
+  //admin contact
   final String message =
       "setelah melakukan panggilan tolong kembali ke aplikasi";
-
   final String countryCode = "+62";
-
   final String phone = "81252277680";
 
   void emerCallWA() async {
@@ -38,7 +37,8 @@ class _EmergencyCallState extends State<EmergencyCall> {
       await launchUrlString(whatsappUrl);
       Navigator.pushNamed(context, "/laporanpage");
     } else {
-      print("wadoo ada masalah tuh");
+      FloatNotif().snackBarFail(
+          context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
     }
   }
 

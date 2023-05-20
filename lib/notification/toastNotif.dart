@@ -33,6 +33,24 @@ class FloatNotif {
       ..showSnackBar(snackBar);
   }
 
+  void snackBarFail(BuildContext context, String title, String message) {
+    final snackBar = SnackBar(
+      elevation: 0,
+      padding: EdgeInsets.all(16),
+      behavior: SnackBarBehavior.fixed,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: title,
+        message: message,
+        contentType: ContentType.warning,
+      ),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
   void snackBar2(BuildContext context, String message) {
     final snackBar = SnackBar(
         content: Text(
@@ -45,6 +63,6 @@ class FloatNotif {
       ..showSnackBar(snackBar);
   }
   // void topSnackBar(BuildContext context, String message){
-  
+
   // }
 }

@@ -18,11 +18,11 @@ class Profile extends StatefulWidget {
 
 class _ProfilePageState extends State<Profile> {
   var userName = 'user1';
-  var emailnya = 'ahmad@gmail.com';
+  var noTelp = '08..';
   var url_photo = "";
   void getUserData() async {
     var data = DataUser().getNama();
-    var data1 = DataUser().getUsername();
+    var data1 = DataUser().getNoHp();
     var gambar = DataUser().getGambar();
 
     gambar.then((value) {
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<Profile> {
 
     data1.then((value) {
       setState(() {
-        emailnya = value.toString();
+        noTelp = value.toString();
       });
     });
   }
@@ -118,7 +118,7 @@ class _ProfilePageState extends State<Profile> {
               child: ListTile(
                 leading: image(url_photo),
                 title: Text("$userName"),
-                subtitle: Text("$emailnya"),
+                subtitle: Text("$noTelp"),
                 trailing: GestureDetector(
                   onTap: () {
                     Navigator.push(
