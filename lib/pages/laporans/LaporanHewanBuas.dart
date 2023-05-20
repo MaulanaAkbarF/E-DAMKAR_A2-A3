@@ -95,7 +95,7 @@ final List<Map> teksStyleSignUp = [
         fontFamily: "font/inter_regular.ttf",
         color: Colors.grey,
         fontSize: (18),
-        fontWeight: FontWeight.w600)
+        fontWeight: FontWeight.w500)
   }
 ];
 
@@ -107,12 +107,71 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var iduser;
-
   @override
   void initState() {
     super.initState();
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
     DataUser().getUserId().then((value) => iduser = value);
+  }
+
+  // void pushLaporan() async {
+  //   var result = await APIClient().postData('addPelaporan', {
+  //     'user_listdata_id': '1',
+  //     'status_riwayat_id': '1',
+  //     'kategori_laporan_id': '4',
+  //     'tgl_lap': '2023-05-17',
+  //     'deskripsi_laporan': deskripsiCon.text,
+  //     'alamat_kejadian': widget.jalan.toString() +
+  //         widget.desa.toString() +
+  //         widget.kota.toString(),
+  //     'latitude': widget.latitude.toString(),
+  //     'longitude': widget.longitude.toString()
+  //   });
+  //   var resultWa = await APIClient().postData('sendToWa', {
+  //     'desa': widget.desa,
+  //     'jalan': widget.jalan,
+  //     'kecamatan': widget.kecamatan,
+  //     'kota': widget.kota,
+  //     'kodepos': widget.kodepos.toString(),
+  //     'latitude': widget.latitude.toString(),
+  //     'longitude': widget.longitude.toString(),
+  //     'namaBencana': "hewanBuas",
+  //     'noTelp': DataUser().getNoHp().toString()
+  //   });
+  //   if (result != null || result != false) {
+  //     var lastResult = await laporanModelFromJson(result);
+  //     show("berhasil melakukan pelaporan");
+  //     Navigator.pushNamed(context, '/laporanpage');
+  //   }
+  // }
+
+  void _kirimNotifikasi() async {
+    var url = Uri.parse(APIClient
+        .whatsappnotification); // Ganti dengan URL endpoint API yang sesuai
+
+    // Data yang akan dikirim
+    var data = {
+      "desa": widget.desa,
+      "jalan": widget.jalan,
+      "kecamatan": widget.kecamatan,
+      "kota": widget.kota,
+      "kodepos": widget.kodepos,
+      "latitude": widget.latitude.toString(),
+      "longitude": widget.longitude.toString(),
+      "noTelp": noTelpCon.text.toString(),
+      "namaBencana": namaBencanaCon.text,
+    };
+
+    // Mengirim data ke server menggunakan metode POST
+    var response = await http.post(url, body: data);
+
+    // Menerima dan memproses respons dari server
+    if (response.statusCode == 200) {
+      var responseData = json.decode(response.body);
+      print('Respon dari server: $responseData');
+    } else {
+      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    }
   }
 
   void pushLaporan() async {
@@ -140,15 +199,17 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       'latitude': widget.latitude.toString(),
       'longitude': widget.longitude.toString()
     });
-    if (result != null) {
-      if (result.body)
-        FloatNotif().snackBar(context, "Laporan Berhasil",
-            "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
+    debugPrint(widget.jalan.toString() +
+        widget.desa.toString() +
+        widget.kota.toString());
+    if (result2 != null) {
+      FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
+          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (BuildContext context) => const AppMenu()));
     } else {
-      FloatNotif().snackBar(context, "Laporan gagal",
-          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
+      FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
+          "Lakukan Emergency Call jika terdapat kenadala");
     }
   }
 
@@ -246,29 +307,42 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                           child: Container(
                                             height: 200,
                                             decoration: BoxDecoration(
-                                                color: Colors.grey.shade100,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                border: Border.all(
-                                                    color: Colors.grey.shade300,
-                                                    width: 1.2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              color: Colors.grey.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: Colors.grey.shade300,
+                                                width: 1.2,
+                                              ),
+                                            ),
+                                            child: Stack(
                                               children: [
-                                                Expanded(
-                                                  child: image != null
-                                                      ? Container(
-                                                          child: Image.file(
-                                                            image!,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        )
-                                                      : Container(),
-                                                ),
-                                                // Text(teks['buttonImage'],
-                                                //     overflow: TextOverflow.ellipsis,
-                                                //     style: teksStyle['Thin3']),
+                                                if (image != null)
+                                                  Positioned.fill(
+                                                    child: Image.file(
+                                                      image!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                if (image == null)
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(Icons.image,
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            size: 24),
+                                                        SizedBox(width: 8),
+                                                        Text(
+                                                            'Pilih Photo Bukti Kejadian',
+                                                            style: teksStyle[
+                                                                'Thin3']),
+                                                      ],
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           ),
@@ -276,6 +350,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                       ),
                                     ),
                                   ),
+
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
@@ -305,7 +380,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Nama tidak boleh kosong';
+                                              return 'Urgensi tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -351,7 +426,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'No teleporn tidak boleh kosogn';
+                                              return 'No telepon tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -398,7 +473,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Email tidak boleh kosong';
+                                              return 'Deskripsi tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -426,7 +501,12 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
                                           onTap: () {
-                                            pushLaporan();
+                                            if (_formKey.currentState
+                                                    ?.validate() ==
+                                                true) {
+                                              _kirimNotifikasi();
+                                              pushLaporan();
+                                            }
                                           },
                                           child: Container(
                                             height: 50,
