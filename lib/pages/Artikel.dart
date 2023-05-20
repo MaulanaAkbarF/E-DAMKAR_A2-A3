@@ -1,12 +1,10 @@
-
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/Menu/Menu.dart';
 
 import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
 
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
-import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,6 +12,21 @@ import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 
 import 'package:edamkar_1/models/ArtikelModel.dart';
+
+import '../APIRequest/APIClient.dart';
+import '../models/ArtikelHighlightModel.dart';
+import 'artikels/DetailArtikel.dart';
+
+// final List<String> imgList = [
+//   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+//   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+//   'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+//   'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+//   'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+// ];
+final List<String> kat = ["Edukasi", "Berita", "Agenda", "Edukasi"];
+
+// List<ArtikelDetailDatum>? artikelHigh = [];
 
 class Artikel extends StatefulWidget {
   const Artikel({super.key});
@@ -23,31 +36,28 @@ class Artikel extends StatefulWidget {
 }
 
 class _ArtikelState extends State<Artikel> {
-
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
+  // final List<Widget> ArtikelScroll = [BeritaCard()];
+  // final List<ArtikelModel>? ArtikelData = [];
   List<ArtikelDatum>? artikelElement = [];
   List<EdukasiDatum>? artikelEdukasi = [];
+  List<ArtikelDetailDatum>? artikelDetail = [];
   List<dynamic> beritaE = [];
 
-  void pemabatasanLoad() {
-    artikelElement!.clear();
+  ScrollController _scrollController = ScrollController();
 
-    for (var i = 0; i <= 10; i++) {
-      getData();
-    }
-  }
+  // void getArtikelFilter(){
+  //   if(){
+
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-
-    if(mounted){
     getData();
     getDataHigh();
-
-    }
-    // PostDataArtikel();
-    // PostDataArtikelHigh();
-    // pemabatasanLoad();
 
     //scrol controller
 
@@ -159,15 +169,12 @@ class _ArtikelState extends State<Artikel> {
   var dataHigh;
   void getData() async {
     var result =
-        await APIClient().getData('getAllArtikel');
+        await APIClient().getData('getAllArtikel').catchError((err) {});
     if (result != null) {
       setState(() {
         data = semuaArtikelModelFromJson(result);
-      debugPrint(data.length.toString());
-        
-
+        debugPrint(data.length.toString());
       });
-      
     } else {
       debugPrint('terdapat kesalahan');
     }
@@ -175,21 +182,38 @@ class _ArtikelState extends State<Artikel> {
 
   void getDataHigh() async {
     var result =
-        await APIClient().getData('getAllArtikelHigh');
+        await APIClient().getData('getAllArtikelHigh').catchError((err) {});
     if (result != null) {
       setState(() {
         dataHigh = semuaArtikelModelFromJson(result);
-     
-      debugPrint(dataHigh.length.toString());
-        
+        debugPrint(dataHigh.length.toString());
       });
-     
     } else {
       debugPrint('terdapat kesalah');
     }
   }
 
+  List<String> Kat = ["Edukasi", "Berita", "Agenda", "Edukasi"];
+  List<String> judul = [
+    "Kebakaran Gedung BTS di Nganjut Selatan, 2 Orang Meninggal",
+    "Kebakaran Gedung BTS di Nganjut Selatan, 2 Orang Meninggal",
+    "Kebakaran Gedung BTS di Nganjut Selatan, 2 Orang Meninggal",
+    "Kebakaran Gedung BTS di Nganjut Selatan, 2 Orang Meninggal"
+  ];
 
+  List<String> pub = ["disDamkar", "disDamkar", "disDamkar", "disDamkar"];
+  List<String> tgl = [
+    "23 Februari 2023",
+    "23 Februari 2023",
+    "23 Februari 2023",
+    "23 Februari 2023"
+  ];
+  List<String> img = [
+    "gambar/logokabupatennganjuk.png",
+    "gambar/logokabupatennganjuk.png",
+    "gambar/logokabupatennganjuk.png",
+    "gambar/logokabupatennganjuk.png",
+  ];
 
   final List<Map> teksLaporan = [
     {
@@ -350,32 +374,9 @@ class _ArtikelState extends State<Artikel> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return WillPopScope(
-      onWillPop: () async {
-        return await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
-                actions: <Widget>[
-                  FloatingActionButton(
-                      child: Text("Tidak"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      }),
-                  FloatingActionButton(
-                      child: Text("Ya"),
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      })
-                ],
-              );
-            });
-      },
-      child: Scaffold(
-        body: SafeArea(
-            child: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
             for (final teks in teksLaporan)
               for (final teksStyle in teksStyleLaporan)
@@ -445,7 +446,7 @@ class _ArtikelState extends State<Artikel> {
               height: 5,
             ),
             Container(
-              height: 1,
+              height: 2,
               width: SizeConfig.screenWidth,
               color: Colors.black26,
             ),
@@ -465,8 +466,7 @@ class _ArtikelState extends State<Artikel> {
                   width: 10,
                 ),
                 itemBuilder: (context, index) {
-                  return AnimatedContainer(
-                      duration: Duration(seconds: 50),
+                  return Container(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical1),
                       height: 400,
                       width: 400,
@@ -474,7 +474,9 @@ class _ArtikelState extends State<Artikel> {
                           border: Border.all(color: Colors.black26),
                           borderRadius: BorderRadius.circular(10)),
                       child: dataHigh == null
-                          ? Text("data kosong")
+                          ? Align(
+                              alignment: Alignment.center,
+                              child: Text("data kosong"))
                           : ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -493,7 +495,7 @@ class _ArtikelState extends State<Artikel> {
                                     borderRadius: BorderRadius.circular(10),
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            "semuaAset/gambar/damkar.png"),
+                                            'semuaAset/gambar/damkar.png'),
                                         fit: BoxFit.cover)),
                               ),
                               subtitle: Container(
@@ -507,18 +509,22 @@ class _ArtikelState extends State<Artikel> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          dataHigh[index].adminDamkar.toString(),
+                                          "coba",
                                           style: TextStyle(
-                                              fontFamily: "font/inter_medium.tff",
+                                              fontFamily:
+                                                  "font/inter_medium.tff",
                                               color: Color.fromARGB(
                                                   255, 107, 114, 128),
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                         ),
                                         Text(
-                                          dataHigh[index].jenisArtikel.toString(),
+                                          dataHigh[index]
+                                              .jenisArtikel
+                                              .toString(),
                                           style: TextStyle(
-                                              fontFamily: "font/inter_medium.tff",
+                                              fontFamily:
+                                                  "font/inter_medium.tff",
                                               color: Color.fromARGB(
                                                   255, 107, 114, 128),
                                               fontSize: 14,
@@ -536,7 +542,8 @@ class _ArtikelState extends State<Artikel> {
                                         maxLines: 1,
                                         style: TextStyle(
                                             overflow: TextOverflow.ellipsis,
-                                            fontFamily: "font/inter_semibold.tff",
+                                            fontFamily:
+                                                "font/inter_semibold.tff",
                                             color:
                                                 Color.fromARGB(255, 55, 65, 81),
                                             fontSize: 18,
@@ -568,15 +575,14 @@ class _ArtikelState extends State<Artikel> {
             ),
             Expanded(child: listArtikel())
           ],
-        )),
+        ),
       ),
     );
   }
 
-
   Widget listArtikel() {
     return data == null
-        ? Text("Artikel Kosong")
+        ? const Text("Artikel Kosong")
         : ListView.separated(
             itemCount: data.length,
             itemBuilder: (context, index) {
@@ -643,15 +649,15 @@ class _ArtikelState extends State<Artikel> {
                     ],
                   ),
                   trailing: Container(
-                    alignment: Alignment.topCenter,
-                    height: paddingVertical4,
-                    width: paddingHorozontal4,
-                    // color: clr[index],
-                    decoration: BoxDecoration(
+                      alignment: Alignment.topCenter,
+                      height: paddingVertical4,
+                      width: paddingHorozontal4,
+                      // color: clr[index],
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: AssetImage("semuaAset/gambar/damkar.png"))),
-                  ),
+                            image: AssetImage('semuaAset/gambar/damkar.png')),
+                      )),
                 ),
               );
             },
@@ -663,37 +669,36 @@ class _ArtikelState extends State<Artikel> {
           );
   }
 
-  Widget listArtikelHigh() {
-    return ListView.builder(
-        itemCount: dataHigh.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            child: ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailArtikel(
-                            idArtikel: dataHigh[index].id,
-                            jenisArtikel:
-                                dataHigh[index].jenisArtikel.toString())));
-              },
-              title: Container(
-                width: 400,
-                height: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'),
-                        fit: BoxFit.cover)),
-              ),
-              subtitle: Container(),
-            ),
-          );
-        });
-  }
+  // Widget listArtikelHigh() {
+  //   return ListView.builder(
+  //       itemCount: 3,
+  //       scrollDirection: Axis.horizontal,
+  //       itemBuilder: (context, index) {
+  //         return Container(
+  //           child: ListTile(
+  //             onTap: () {
+  //               Navigator.push(
+  //                   context,
+  //                   MaterialPageRoute(
+  //                       builder: (context) => DetailArtikel(
+  //                           idArtikel: dataHigh[index].adminDamkar,
+  //                           jenisArtikel:
+  //                               dataHigh[index].jenisArtikel.toString())));
+  //             },
+  //             title: Container(
+  //               width: 400,
+  //               height: 200,
+  //               decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(10),
+  //                   image: DecorationImage(
+  //                       image: AssetImage('semuaAset/gambar/damkar.png'),
+  //                       fit: BoxFit.cover)),
+  //             ),
+  //             subtitle: Container(),
+  //           ),
+  //         );
+  //       });
+  // }
 }
 
 

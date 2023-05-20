@@ -5,9 +5,9 @@ import 'package:edamkar_1/pages/artikels/Artikel.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:edamkar_1/style/app_style.dart';
 
+import '../../Menu/Menu.dart';
 
 class DetailArtikel extends StatefulWidget {
   final idArtikel;
@@ -96,45 +96,25 @@ class _DetailArtikelState extends State<DetailArtikel> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: Material(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            borderRadius: BorderRadius.circular(8),
-            child: InkWell(
-              splashColor: Colors.grey.shade400,
-              highlightColor: Colors.grey.shade600,
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Artikel()));
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          title: Text(
-            "Detail Artikel",
-            style: TextStyle(fontFamily: "$black3", color: black3),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Detail Artikel",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: paddingVertical1, horizontal: paddingHorozontal1),
-          child: isDetailNull(),
-        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+        child: isDetailNull(),
       ),
     );
   }
@@ -213,7 +193,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           // artikelElement![index].adminDamkar.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
-                            color: Colors.redAccent,
+                            color: black2,
                           ),
                         ),
                         SizedBox(
@@ -233,7 +213,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           // artikelElement![index].tanggalBerita.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
-                            color: Colors.redAccent,
+                            color: black2,
                           ),
                         ),
                       ],
