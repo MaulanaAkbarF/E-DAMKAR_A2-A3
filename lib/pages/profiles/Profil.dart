@@ -22,7 +22,7 @@ class _ProfilePageState extends State<Profile> {
   var noTelp = '08..';
   var url_photo = "";
   var _noHp = "0800000000001";
-  var _iduser = 1;
+  var _iduser;
   void getUserData() async {
     var idData = DataUser().getUserId();
     var data = DataUser().getNama();
