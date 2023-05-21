@@ -123,6 +123,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
                               const Text('Whatsapp', style: medium),
                               SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
+                            
                           ),
                         ],
                       ))),

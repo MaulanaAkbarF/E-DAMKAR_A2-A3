@@ -189,6 +189,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
           MaterialPageRoute(builder: (context) => LaporanPage()),
         );
       }
+      print("Terdapat kesalahan : " );
     }
   }
 
