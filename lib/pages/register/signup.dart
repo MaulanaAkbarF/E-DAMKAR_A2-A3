@@ -21,15 +21,6 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-bool _passwordVisible = true;
-bool _passwordVisible1 = true;
-
-@override
-void initState() {
-  _passwordVisible = true;
-  _passwordVisible1 = true;
-}
-
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -101,6 +92,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController validatepass = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var isloading = false;
+  bool _passwordVisible = true;
+  bool _passwordVisible1 = true;
 
   bool checkField() {
     if (namalengkap.text.isEmpty) {

@@ -176,9 +176,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: ElevatedButton(
-                  onPressed: () {
-                    emerCallWA();
-                  },
+                  onPressed: emerCallWA,
                   style: ElevatedButton.styleFrom(
                       primary: green1,
                       shape: RoundedRectangleBorder(

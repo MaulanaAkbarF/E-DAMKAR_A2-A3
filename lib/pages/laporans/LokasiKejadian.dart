@@ -27,7 +27,7 @@ final List<Map> teksLokasiKejadian = [
     'namaDesaHint': 'Masukkan lokasi desa',
     'namaJalan': 'Nama jalan',
     'namaJalanHint': 'Alamat jalan kejadian',
-    'buttonKirim': 'Kirim'
+    'buttonKirim': 'Selanjutnya'
   }
 ].cast<Map<String, String>>();
 

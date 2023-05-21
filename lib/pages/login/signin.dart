@@ -94,9 +94,42 @@ class _SignInPageState extends State<SignInPage> {
   final pass = TextEditingController();
   var isLoading = false;
 
+  bool checkInput() {
+    if (account.text.isEmpty) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "username tidak boleh kosong");
+      return false;
+    }
+    if (account.text.length < 5) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "username kamu terlalu pendek");
+      return false;
+    }
+    if (account.text.length > 30) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "username kamu terlalu panjang");
+      return false;
+    }
+    if (pass.text.isEmpty) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "Password tidak boleh kosong");
+      return false;
+    }
+    if (pass.text.length < 5) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "password kamu terlalu pendek");
+      return false;
+    }
+    if (pass.text.length > 30) {
+      FloatNotif()
+          .snackBarFail(context, "Pesan", "Password kamu terlalu panjang");
+      return false;
+    }
+    return true;
+  }
+
   loginPost(String acnt, String password) async {
-    debugPrint(apiUrl);
-    if (_formKey.currentState!.validate()) {
+    if (checkInput()) {
       setState(() => isLoading = true);
       var result = await APIClient().postData('login',
           {"username": acnt, "password": password}).catchError((err) {});
@@ -207,11 +240,6 @@ class _SignInPageState extends State<SignInPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: account,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Email tidak boleh kosong';
-                                    }
-                                  },
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -249,15 +277,6 @@ class _SignInPageState extends State<SignInPage> {
                                         width: 1.2)),
                                 child: TextFormField(
                                   controller: pass,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'password tidak boleh kosong';
-                                    } else if (value.length > 20) {
-                                      return 'password terlalu panjang';
-                                    } else if (value.length < 8) {
-                                      return 'password terlalu pendek';
-                                    }
-                                  },
                                   obscureText: _passwordVisible,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
@@ -312,7 +331,6 @@ class _SignInPageState extends State<SignInPage> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () async {
-                                    
                                     loginPost(account.text, pass.text);
                                   },
                                   child: Container(

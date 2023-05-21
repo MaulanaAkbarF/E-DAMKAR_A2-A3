@@ -17,8 +17,6 @@ class EmergencyCall extends StatefulWidget {
 }
 
 class _EmergencyCallState extends State<EmergencyCall> {
-  final String phoneNumber = "085708574368";
-
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
@@ -29,6 +27,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
       "setelah melakukan panggilan tolong kembali ke aplikasi";
   final String countryCode = "+62";
   final String phone = "81252277680";
+  final String phoneNumber = "085708574368";
 
   void emerCallWA() async {
     var whatsappUrl =
@@ -45,7 +44,6 @@ class _EmergencyCallState extends State<EmergencyCall> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
     return Scaffold(
       body: SafeArea(
           child: Padding(

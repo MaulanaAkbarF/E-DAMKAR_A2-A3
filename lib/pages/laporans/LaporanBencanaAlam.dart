@@ -4,8 +4,11 @@ import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
+import 'package:edamkar_1/style/app_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -101,11 +104,13 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  var iduser;
 
   @override
   void initState() {
     super.initState();
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
+    DataUser().getUserId().then((value) => iduser = value);
   }
 
   void _kirimNotifikasi() async {
@@ -137,59 +142,42 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
     }
   }
 
-  Future<bool> _kirimLaporan() async {
-    var res = await http.post(
-      Uri.parse(APIClient.submit),
-      body: {
-        "gambar": imageName,
-        "namaBencana": namaBencanaCon.text,
-        "noTelp": noTelpCon.text,
-        "deskripsi": deskripsiCon.text,
-        "kecamatan": widget.kecamatan,
-        "desa": widget.desa,
-        "jalan": widget.jalan,
-      },
-    );
-    var resp = res.body;
-    Map<String, dynamic> status = jsonDecode(resp);
-    bool statusKirim = status["success"];
-    if (statusKirim == true) {
-      return true;
-    }
-    return false;
-  }
-
-  void _onConfirm(context) async {
-    if (_formKey.currentState?.validate() == true) {
-      var statusUpload = await _kirimLaporan();
-      if (statusUpload == true) {
-        await uploadImage();
-        _kirimNotifikasi();
-        final snackBar = SnackBar(
-          /// need to set following properties for best effect of awesome_snackbar_content
-          elevation: 0,
-          padding: EdgeInsets.all(16),
-          behavior: SnackBarBehavior.fixed,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Laporan berhasil terkirim!',
-            message:
-                'Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!',
-
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: ContentType.success,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LaporanPage()),
-        );
-      }
-      print("Terdapat kesalahan : " );
+  void pushLaporan() async {
+    String title = iduser.toString() + "_image_" + getRandomString(30);
+    DateTime now = new DateTime.now();
+    DateTime date = new DateTime(now.year, now.month, now.day);
+    String alamat = widget.jalan +
+        ', ' +
+        widget.desa +
+        ', ' +
+        widget.kecamatan +
+        ', ' +
+        widget.kota +
+        ', ' +
+        widget.kodepos;
+    var result =
+        await APIClient().postMulti('addImage', image, imagePath, title);
+    var result2 = await APIClient().postData('addPelaporan', {
+      'user_listdata_id': iduser.toString(),
+      'kategori_laporan_id': '2',
+      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
+      'deskripsi_laporan': deskripsiCon.text,
+      'gambar_bukti_pelaporan': title,
+      'alamat_kejadian': alamat,
+      'latitude': widget.latitude.toString(),
+      'longitude': widget.longitude.toString()
+    });
+    debugPrint(widget.jalan.toString() +
+        widget.desa.toString() +
+        widget.kota.toString());
+    if (result2 != null) {
+      FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
+          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => const AppMenu()));
+    } else {
+      FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
+          "Lakukan Emergency Call jika terdapat kenadala");
     }
   }
 
@@ -219,31 +207,6 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
       setState(() {});
     } else {
       print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-
-    var stream = new http.ByteStream(image!.openRead());
-    stream.cast();
-    var length = await image!.length();
-    var uri = Uri.parse(
-        "https://api.imgbb.com/1/upload?key=04b75a4aa8a6e4e3c7d0eb6236f1eae4");
-    final request = http.MultipartRequest('POST', uri);
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-      ),
-    );
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.statusCode);
     }
   }
 
@@ -312,29 +275,42 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           child: Container(
                                             height: 200,
                                             decoration: BoxDecoration(
-                                                color: Colors.grey.shade100,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                border: Border.all(
-                                                    color: Colors.grey.shade300,
-                                                    width: 1.2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              color: Colors.grey.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: Colors.grey.shade300,
+                                                width: 1.2,
+                                              ),
+                                            ),
+                                            child: Stack(
                                               children: [
-                                                Expanded(
-                                                  child: image != null
-                                                      ? Container(
-                                                          child: Image.file(
-                                                            image!,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        )
-                                                      : Container(),
-                                                ),
-                                                // Text(teks['buttonImage'],
-                                                //     overflow: TextOverflow.ellipsis,
-                                                //     style: teksStyle['Thin3']),
+                                                if (image != null)
+                                                  Positioned.fill(
+                                                    child: Image.file(
+                                                      image!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                if (image == null)
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(Icons.image,
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            size: 24),
+                                                        SizedBox(width: 8),
+                                                        Text(
+                                                            'Pilih Photo Bukti Kejadian',
+                                                            style: teksStyle[
+                                                                'Thin3']),
+                                                      ],
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           ),
@@ -371,7 +347,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Nama tidak boleh kosong';
+                                              return 'Urgensi tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -417,7 +393,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Nama tidak boleh kosong';
+                                              return 'Nomor Telepon tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -464,7 +440,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Email tidak boleh kosong';
+                                              return 'Deskripsi tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,
@@ -492,7 +468,12 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
                                           onTap: () {
-                                            _onConfirm(context);
+                                            if (_formKey.currentState
+                                                    ?.validate() ==
+                                                true) {
+                                              _kirimNotifikasi();
+                                              pushLaporan();
+                                            }
                                           },
                                           child: Container(
                                             height: 50,
