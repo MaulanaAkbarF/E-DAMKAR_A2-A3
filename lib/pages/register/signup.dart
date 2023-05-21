@@ -114,6 +114,11 @@ class _SignUpPageState extends State<SignUpPage> {
       FloatNotif().snackBarFail(context, "", "Username tidak boleh kosong");
       return false;
     }
+    if (username.text.contains(" ")) {
+      FloatNotif()
+          .snackBarFail(context, "", "Username tidak boleh pakai spasi");
+      return false;
+    }
     if (username.text.length < 5) {
       FloatNotif().snackBarFail(context, "", "Username terlalu pendek");
       return false;
@@ -126,7 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
       FloatNotif().snackBarFail(context, "", "password tidak boleh kosong");
       return false;
     }
-    if (password.text.length < 5) {
+    if (password.text.length < 8) {
       FloatNotif().snackBarFail(context, "", "password terlalu pendek");
       return false;
     }
@@ -142,6 +147,14 @@ class _SignUpPageState extends State<SignUpPage> {
     if (validatepass.text != password.text) {
       FloatNotif().snackBarFail(
           context, "", "validasi password tidak sesuai dengan password");
+      return false;
+    }
+    if (notelp.text.length < 9) {
+      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu pendek");
+      return false;
+    }
+    if (notelp.text.length > 13) {
+      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu panjang");
       return false;
     }
     return true;

@@ -165,7 +165,8 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
       'gambar_bukti_pelaporan': title,
       'alamat_kejadian': alamat,
       'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString()
+      'longitude': widget.longitude.toString(),
+      
     });
     debugPrint(widget.jalan.toString() +
         widget.desa.toString() +

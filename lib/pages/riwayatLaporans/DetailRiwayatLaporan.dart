@@ -210,7 +210,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                       children: <Widget>[
                         Text(
                           "Laporan : " +
-                              dataElement![index].kategoriLaporan.toString(),
+                              dataElement![index].kategoriLaporan.toString() +" - " + dataElement![index].urgensi.toString() ,
                           // artikelElement![index].judulBerita.toString(),
                           // maxLines: 3,
                           overflow: TextOverflow.fade,

@@ -19,7 +19,13 @@ class EmergencyCall extends StatefulWidget {
 class _EmergencyCallState extends State<EmergencyCall> {
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
-    await launchUrl(phoneUrl);
+    if (await canLaunchUrl(phoneUrl)) {
+      await launchUrl(phoneUrl);
+      Navigator.pushNamed(context, "/laporanpage");
+    } else {
+      FloatNotif()
+          .snackBarFail(context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
+    }
   }
 
   //admin contact
@@ -121,7 +127,6 @@ class _EmergencyCallState extends State<EmergencyCall> {
                               const Text('Whatsapp', style: medium),
                               SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
-                            
                           ),
                         ],
                       ))),

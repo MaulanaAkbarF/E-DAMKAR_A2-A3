@@ -1,5 +1,6 @@
 
 import 'package:edamkar_1/Menu/Menu.dart';
+import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -53,7 +54,7 @@ class UpdatePasswordSuccess extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AppMenu()));
+                        MaterialPageRoute(builder: (context) => SignInPage()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
