@@ -164,7 +164,8 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
       'gambar_bukti_pelaporan': title,
       'alamat_kejadian': alamat,
       'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString()
+      'longitude': widget.longitude.toString(),
+      'urgensi': namaBencanaCon.text
     });
     debugPrint(widget.jalan.toString() +
         widget.desa.toString() +

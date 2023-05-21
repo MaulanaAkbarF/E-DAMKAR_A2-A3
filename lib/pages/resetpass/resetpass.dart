@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -72,7 +73,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://172.16.104.15/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -88,7 +89,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
   }
 
   Future<bool> validasiNomer(String noHP) async {
-    var apiUrl = Uri.parse('http://172.16.104.15:8000/api/getNoHp/$noHP');
+    var apiUrl = Uri.parse('http://192.168.225.39:8000/api/getNoHp/$noHP');
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
