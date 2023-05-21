@@ -1,5 +1,6 @@
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
+import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,11 @@ class _EmergencyCallState extends State<EmergencyCall> {
         "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
-      Navigator.pushNamed(context, "/laporanpage");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MapsLokasiKejadian(kategori: "custom")),
+      );
     } else {
       FloatNotif().snackBarFail(
           context, "Gagal", "Tunggu beberapa saat lalu coba lagi");

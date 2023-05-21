@@ -152,7 +152,8 @@ class _LaporanPageState extends State<LaporanPage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(253, 232, 232, 1.000),
+                                      color:
+                                          Color.fromRGBO(253, 232, 232, 1.000),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(12),
                                         topLeft: Radius.circular(12),
@@ -164,14 +165,16 @@ class _LaporanPageState extends State<LaporanPage> {
                                           EdgeInsets.only(top: 24, bottom: 24),
                                       child: SvgPicture.asset(
                                         'semuaAset/gambar/bencana-alam-icon.svg',
-                                        width: 50, // ukuran ikon yang diinginkan
+                                        width:
+                                            50, // ukuran ikon yang diinginkan
                                       ),
                                     ),
                                   ),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 16, left: 16),
+                                      padding:
+                                          EdgeInsets.only(top: 16, left: 16),
                                       child: Text("Laporan Bencana Alam",
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 4,
@@ -200,8 +203,10 @@ class _LaporanPageState extends State<LaporanPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapsLokasiKejadian(
-                                        kategori: "kebakaran")),
+                                  builder: (context) => MapsLokasiKejadian(
+                                    kategori: "kebakaran",
+                                  ),
+                                ),
                               );
                             },
                             child: Container(
@@ -216,7 +221,8 @@ class _LaporanPageState extends State<LaporanPage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(253, 232, 232, 1.000),
+                                      color:
+                                          Color.fromRGBO(253, 232, 232, 1.000),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(12),
                                         topLeft: Radius.circular(12),
@@ -228,30 +234,30 @@ class _LaporanPageState extends State<LaporanPage> {
                                           EdgeInsets.only(top: 24, bottom: 24),
                                       child: SvgPicture.asset(
                                         'semuaAset/gambar/kebakaran-icon.svg',
-                                        width: 50, // ukuran ikon yang diinginkan
+                                        width: 50,
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 16, left: 16, right: 16),
-                                      child: Text("Laporan Kebakaran",
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold3']),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 16, left: 16, right: 16),
+                                    child: Text(
+                                      "Laporan Kebakaran",
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: teksStyle['SemiBold3'],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
+                                  Flexible(
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           top: 8, left: 16, right: 16),
-                                      child: Text(teks['deskripsiLaporan'],
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold1']),
+                                      child: Text(
+                                        teks['deskripsiLaporan'],
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: teksStyle['SemiBold1'],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -282,7 +288,8 @@ class _LaporanPageState extends State<LaporanPage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(253, 232, 232, 1.000),
+                                      color:
+                                          Color.fromRGBO(253, 232, 232, 1.000),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(12),
                                         topLeft: Radius.circular(12),
@@ -294,14 +301,16 @@ class _LaporanPageState extends State<LaporanPage> {
                                           EdgeInsets.only(top: 24, bottom: 24),
                                       child: SvgPicture.asset(
                                         'semuaAset/gambar/hewan-buas-icon.svg',
-                                        width: 50, // ukuran ikon yang diinginkan
+                                        width:
+                                            50, // ukuran ikon yang diinginkan
                                       ),
                                     ),
                                   ),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 16, left: 16),
+                                      padding:
+                                          EdgeInsets.only(top: 16, left: 16),
                                       child: Text("Laporan Hewan Buas",
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 4,
@@ -346,7 +355,8 @@ class _LaporanPageState extends State<LaporanPage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(253, 232, 232, 1.000),
+                                      color:
+                                          Color.fromRGBO(253, 232, 232, 1.000),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(12),
                                         topLeft: Radius.circular(12),
@@ -358,14 +368,16 @@ class _LaporanPageState extends State<LaporanPage> {
                                           EdgeInsets.only(top: 28, bottom: 28),
                                       child: SvgPicture.asset(
                                         'semuaAset/gambar/penyelamatan-icon.svg',
-                                        width: 70, // ukuran ikon yang diinginkan
+                                        width:
+                                            70, // ukuran ikon yang diinginkan
                                       ),
                                     ),
                                   ),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 16, left: 16),
+                                      padding:
+                                          EdgeInsets.only(top: 16, left: 16),
                                       child: Text("Laporan Penyelamatan",
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 4,
