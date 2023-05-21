@@ -20,12 +20,13 @@ class EmergencyCall extends StatefulWidget {
 class _EmergencyCallState extends State<EmergencyCall> {
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
-    await launchUrl(phoneUrl);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => MapsLokasiKejadian(kategori: "custom")),
-    );
+    if (await canLaunchUrl(phoneUrl)) {
+      await launchUrl(phoneUrl);
+      Navigator.pushNamed(context, "/laporanpage");
+    } else {
+      FloatNotif()
+          .snackBarFail(context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
+    }
   }
 
   final String countryCode = "+62";

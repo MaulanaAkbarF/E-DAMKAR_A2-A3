@@ -73,7 +73,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.225.132:8080/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -89,7 +89,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
   }
 
   Future<bool> validasiNomer(String noHP) async {
-    var apiUrl = Uri.parse('http://192.168.225.39:8000/api/getNoHp/$noHP');
+    var apiUrl = Uri.parse('http://192.168.225.132:8000/api/getNoHp/$noHP');
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);

@@ -1,11 +1,7 @@
-// To parse this JSON data, do
-//
-//     final dataPelaporan = dataPelaporanFromJson(jsonString);
 
 import 'dart:convert';
 
-DataPelaporan dataPelaporanFromJson(String str) => 
-DataPelaporan.fromJson(json.decode(str));
+DataPelaporan dataPelaporanFromJson(String str) => DataPelaporan.fromJson(json.decode(str));
 
 
 class DataPelaporan {
@@ -19,17 +15,17 @@ class DataPelaporan {
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     );
 
- 
 }
 
 class Datum {
-    int? idLaporan;
+    int idLaporan;
     String statusRiwayat;
     String kategoriLaporan;
     String tanggal;
     String deskripsi;
     String imageUrl;
     String alamat;
+    String urgensi;
 
     Datum({
         required this.idLaporan,
@@ -39,6 +35,7 @@ class Datum {
         required this.deskripsi,
         required this.imageUrl,
         required this.alamat,
+        required this.urgensi,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -49,7 +46,6 @@ class Datum {
         deskripsi: json["deskripsi"],
         imageUrl: json["image_url"],
         alamat: json["alamat"],
+        urgensi: json["urgensi"],
     );
-
-
 }
