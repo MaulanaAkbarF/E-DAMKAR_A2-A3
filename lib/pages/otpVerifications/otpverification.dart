@@ -77,6 +77,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   final TextEditingController kodeotptxt = TextEditingController();
   late String otpRegister;
   late String noHp;
+
   void initState() {
     super.initState();
     otpRegister = widget.kodeOtp;
@@ -195,9 +196,6 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Text('noHp: ${(widget.noHp)}'),
-                          // Text('otp: $noHp'),
-                          // Text('Verification code: $otpRegister'),
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(

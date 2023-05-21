@@ -28,10 +28,10 @@ class _EmergencyCallState extends State<EmergencyCall> {
     );
   }
 
+  final String countryCode = "+62";
   //admin contact
   final String message =
       "setelah melakukan panggilan tolong kembali ke aplikasi";
-  final String countryCode = "+62";
   final String phone = "81252277680";
   final String phoneNumber = "085708574368";
 

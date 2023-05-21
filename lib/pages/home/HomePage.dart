@@ -20,14 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<String> getDataPass() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString('passUser') ?? '';
-  }
-
   var userName = '';
   var url_photo = '';
-
   //admin contact
   final String message =
       "setelah melakukan panggilan tolong kembali ke aplikasi";
@@ -63,7 +57,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getUserData();
-    getDataPass();
   }
 
   CircleAvatar image(String url) {

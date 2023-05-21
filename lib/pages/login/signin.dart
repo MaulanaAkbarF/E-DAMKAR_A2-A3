@@ -170,16 +170,6 @@ class _SignInPageState extends State<SignInPage> {
     pass.dispose();
   }
 
-  void show(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.white,
-        textColor: Colors.black);
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
