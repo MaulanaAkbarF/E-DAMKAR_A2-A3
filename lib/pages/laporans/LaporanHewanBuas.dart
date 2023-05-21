@@ -114,37 +114,6 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
     DataUser().getUserId().then((value) => iduser = value);
   }
 
-  // void pushLaporan() async {
-  //   var result = await APIClient().postData('addPelaporan', {
-  //     'user_listdata_id': '1',
-  //     'status_riwayat_id': '1',
-  //     'kategori_laporan_id': '4',
-  //     'tgl_lap': '2023-05-17',
-  //     'deskripsi_laporan': deskripsiCon.text,
-  //     'alamat_kejadian': widget.jalan.toString() +
-  //         widget.desa.toString() +
-  //         widget.kota.toString(),
-  //     'latitude': widget.latitude.toString(),
-  //     'longitude': widget.longitude.toString()
-  //   });
-  //   var resultWa = await APIClient().postData('sendToWa', {
-  //     'desa': widget.desa,
-  //     'jalan': widget.jalan,
-  //     'kecamatan': widget.kecamatan,
-  //     'kota': widget.kota,
-  //     'kodepos': widget.kodepos.toString(),
-  //     'latitude': widget.latitude.toString(),
-  //     'longitude': widget.longitude.toString(),
-  //     'namaBencana': "hewanBuas",
-  //     'noTelp': DataUser().getNoHp().toString()
-  //   });
-  //   if (result != null || result != false) {
-  //     var lastResult = await laporanModelFromJson(result);
-  //     show("berhasil melakukan pelaporan");
-  //     Navigator.pushNamed(context, '/laporanpage');
-  //   }
-  // }
-
   void _kirimNotifikasi() async {
     var url = Uri.parse(APIClient
         .whatsappnotification); // Ganti dengan URL endpoint API yang sesuai
@@ -197,7 +166,8 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       'gambar_bukti_pelaporan': title,
       'alamat_kejadian': alamat,
       'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString()
+      'longitude': widget.longitude.toString(),
+      'urgensi': namaBencanaCon.text
     });
     debugPrint(widget.jalan.toString() +
         widget.desa.toString() +
@@ -276,12 +246,6 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // Text('Name: ${widget.kecamatan}'),
-                                  // Text('Name: ${widget.desa}'),
-                                  // Text('Name: ${widget.jalan}'),
-                                  // Text('Name: ${widget.kota}'),
-                                  // Text('Name: ${widget.latitude}'),
-                                  // Text('Name: ${widget.longitude}'),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
