@@ -157,6 +157,7 @@ class _ArtikelState extends State<Artikel> {
 
   var data;
   var dataHigh;
+  
   void getData() async {
     var result =
         await APIClient().getData('getAllArtikel');

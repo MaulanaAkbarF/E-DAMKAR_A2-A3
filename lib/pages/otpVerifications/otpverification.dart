@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -91,6 +92,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
       "noHp": widget.noHp,
     };
     await APIClient().postData('verifyOtp/whatsapp', data);
+    FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
   }
 
   void verifyCode() {
