@@ -144,6 +144,10 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -468,7 +472,6 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },

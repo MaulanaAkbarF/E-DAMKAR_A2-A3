@@ -143,6 +143,10 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -245,12 +249,6 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // Text('Name: ${widget.kecamatan}'),
-                                  // Text('Name: ${widget.desa}'),
-                                  // Text('Name: ${widget.jalan}'),
-                                  // Text('Name: ${widget.kota}'),
-                                  // Text('Name: ${widget.latitude}'),
-                                  // Text('Name: ${widget.longitude}'),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
@@ -472,7 +470,6 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },
