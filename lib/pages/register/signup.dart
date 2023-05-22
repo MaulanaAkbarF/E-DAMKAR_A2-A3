@@ -127,6 +127,18 @@ class _SignUpPageState extends State<SignUpPage> {
       FloatNotif().snackBarFail(context, "", "username terlalu panjang");
       return false;
     }
+    if (notelp.text.isEmpty) {
+      FloatNotif().snackBarFail(context, "", "Nomor Hp tidak boleh kosong");
+      return false;
+    }
+    if (notelp.text.length < 9) {
+      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu pendek");
+      return false;
+    }
+    if (notelp.text.length > 13) {
+      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu panjang");
+      return false;
+    }
     if (password.text.isEmpty) {
       FloatNotif().snackBarFail(context, "", "password tidak boleh kosong");
       return false;
@@ -149,14 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
           context, "", "validasi password tidak sesuai dengan password");
       return false;
     }
-    if (notelp.text.length < 9) {
-      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu pendek");
-      return false;
-    }
-    if (notelp.text.length > 13) {
-      FloatNotif().snackBarFail(context, "", "Nomor Hp terlalu panjang");
-      return false;
-    }
+
     return true;
   }
 
@@ -188,10 +193,10 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       } else {
         setState(() => isloading = false);
-        if (data.message!.toString().split(" ").contains("username")) {
+        if (data.message.toString().split(" ").contains("username")) {
           FloatNotif().snackBarFail(
               context, "Gagal Membuat Akun", "username sudah digunakan");
-        } else if (data.message!.toString().split(" ").contains("hp")) {
+        } else if (data.message.toString().split(" ").contains("hp")) {
           FloatNotif().snackBarFail(
               context, "Gagal Membuat Akun", "No Hp kamu sudah digunakan");
         }

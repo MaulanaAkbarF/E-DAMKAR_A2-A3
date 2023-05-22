@@ -29,23 +29,22 @@ class _UbahSandiPageState extends State<UbahSandi> {
 
   var pwOld = "";
 
-  late final _id;
+  late String _id;
 
-  void getUserpw() async {
-    var dataPw = DataUser().getPassword();
-    dataPw.then((value) {
-      setState(() {
-        pwOld = value.toString();
-        print(pwOld.toString());
-      });
-    });
-  }
+  // void getUserpw() async {
+  //   var dataPw = DataUser().getPassword();
+  //   dataPw.then((value) {
+  //     setState(() {
+  //       pwOld = value.toString();
+  //       print(pwOld.toString());
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getUserpw();
-    print("pwlama :" + pwOld);
+
     _passwordVisible = true;
     _passwordVisible1 = true;
     _passwordVisible2 = true;

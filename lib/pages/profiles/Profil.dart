@@ -165,7 +165,7 @@ class _ProfilePageState extends State<Profile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EditProfilePage(1)));
+                              builder: (context) => EditProfilePage(_iduser)));
                     },
                     child: Text(
                       "Ubah",

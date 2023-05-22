@@ -1,3 +1,4 @@
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanBencanaAlam.dart';
 import 'package:edamkar_1/pages/laporans/LaporanCustom.dart';
 import 'package:edamkar_1/pages/laporans/LaporanHewanBuas.dart';
@@ -372,20 +373,19 @@ class _MapsLokasiKejadian extends State<MapsLokasiKejadian> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      return Future.error("GPS kamu belum dinyalakan nih :(");
+      FloatNotif().snackBarFail(context, "Status GPS", "Gps belum dinyalakan");
     }
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Izin GPS ditolak :(');
+        FloatNotif().snackBarFail(context, "Status GPS", "Izin GPS ditolak");
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS');
+      FloatNotif().snackBarFail(context, "Status GPS", "Harap nyalakan GPS");
     }
 
     Position position = await Geolocator.getCurrentPosition();

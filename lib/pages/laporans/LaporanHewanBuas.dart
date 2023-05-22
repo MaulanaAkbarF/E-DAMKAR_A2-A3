@@ -160,6 +160,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
         await APIClient().postMulti('addImage', image, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
+      'status_riwayat_id' : '1',
       'kategori_laporan_id': '4',
       'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
@@ -208,6 +209,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       imagePath = imagePicked.path;
       setState(() {});
     } else {
+      // FloatNotif().snackBarFail(context, "", "Gambar harap di masukan");
       print('no image selected');
     }
   }

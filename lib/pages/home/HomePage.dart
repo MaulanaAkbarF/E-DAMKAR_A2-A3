@@ -7,7 +7,7 @@ import 'package:edamkar_1/style/size_config.dart';
 import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../profiles/Profil.dart';
@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
         "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
-      Navigator.pushNamed(context, "/laporanpage");
     } else {
       FloatNotif().snackBarFail(
           context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
