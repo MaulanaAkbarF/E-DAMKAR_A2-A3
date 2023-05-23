@@ -4,12 +4,12 @@ import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
-import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
 
 import 'package:edamkar_1/models/ArtikelModel.dart';
 
@@ -153,6 +153,7 @@ class _ArtikelState extends State<Artikel> {
 
   var data;
   var dataHigh;
+
   void getData() async {
     var result = await APIClient().getData('getAllArtikel');
     if (result != null) {

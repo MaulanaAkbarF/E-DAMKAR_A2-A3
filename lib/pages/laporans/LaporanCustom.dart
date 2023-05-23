@@ -113,8 +113,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
   }
 
   void _kirimNotifikasi() async {
-    var url = Uri.parse(APIClient
-        .whatsappnotification); // Ganti dengan URL endpoint API yang sesuai
+    // Ganti dengan URL endpoint API yang sesuai
 
     // Data yang akan dikirim
     var data = {
@@ -125,13 +124,12 @@ class _LaporanCustomState extends State<LaporanCustom> {
       "kodepos": widget.kodepos,
       "latitude": widget.latitude.toString(),
       "longitude": widget.longitude.toString(),
-      "noTelp": noTelpCon.text.toString(),
       "namaBencana": namaBencanaCon.text,
+      "noTelp": noTelpCon.text.toString(),
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await http.post(url, body: data);
-
+    var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
     if (response.statusCode == "200") {
       var responseData = json.decode(response.body);
@@ -142,6 +140,10 @@ class _LaporanCustomState extends State<LaporanCustom> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -167,9 +169,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
       'longitude': widget.longitude.toString(),
       'urgensi': namaBencanaCon.text
     });
-    debugPrint(widget.jalan.toString() +
-        widget.desa.toString() +
-        widget.kota.toString());
+    _kirimNotifikasi();
     if (result2 != null) {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
           "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
@@ -207,31 +207,6 @@ class _LaporanCustomState extends State<LaporanCustom> {
       setState(() {});
     } else {
       print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-
-    var stream = new http.ByteStream(image!.openRead());
-    stream.cast();
-    var length = await image!.length();
-    var uri = Uri.parse(
-        "https://api.imgbb.com/1/upload?key=04b75a4aa8a6e4e3c7d0eb6236f1eae4");
-    final request = http.MultipartRequest('POST', uri);
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-      ),
-    );
-    final response = await request.send();
-    if (response.statusCode == "200") {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.statusCode);
     }
   }
 
@@ -490,7 +465,6 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },

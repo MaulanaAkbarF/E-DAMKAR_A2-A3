@@ -27,7 +27,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
     var dataId = DataUser().getUserId();
     dataId.then((value) {
       setState(() {
-        // print(value.toString());
+        print(value.toString());
         PostDataRiwayat(value.toString());
       });
     });

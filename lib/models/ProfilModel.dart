@@ -30,7 +30,6 @@ class UpdateProfil {
       File? file}) async {
     var request =
         http.MultipartRequest('POST', Uri.parse("${apiUrl}user/foto"));
-    print(delPic.toString()); 
     // tambahkan text sebagai field pada request
     request.fields['foto_user'] = delPic.toString();
     request.fields['namaLengkap'] = nama.toString();
@@ -49,11 +48,10 @@ class UpdateProfil {
       contentType: MediaType.parse(mimeType!),
     );
     request.files.add(multipartFile);
-
+    print(delPic.toString());
     // kirim request dan tunggu responsenya
     var response = await http.Response.fromStream(await request.send());
     var data = json.decode(response.body);
-    print("Tes Image Bruh" + response.body);
     return UpdateProfil(kode: data['code'].toString(), status: data['message']);
   }
 }

@@ -113,8 +113,7 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
   }
 
   void _kirimNotifikasi() async {
-    var url = Uri.parse(APIClient
-        .whatsappnotification); // Ganti dengan URL endpoint API yang sesuai
+    // Ganti dengan URL endpoint API yang sesuai
 
     // Data yang akan dikirim
     var data = {
@@ -125,13 +124,12 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
       "kodepos": widget.kodepos,
       "latitude": widget.latitude.toString(),
       "longitude": widget.longitude.toString(),
-      "noTelp": noTelpCon.text.toString(),
       "namaBencana": namaBencanaCon.text,
+      "noTelp": noTelpCon.text.toString(),
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await http.post(url, body: data);
-
+    var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
     if (response.statusCode == "200") {
       var responseData = json.decode(response.body);
@@ -142,6 +140,10 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -166,9 +168,7 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
       'longitude': widget.longitude.toString(),
       'urgensi': namaBencanaCon.text
     });
-    debugPrint(widget.jalan.toString() +
-        widget.desa.toString() +
-        widget.kota.toString());
+    _kirimNotifikasi();
     if (result2 != null) {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
           "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
@@ -458,7 +458,6 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
                                       onTap: () {
                                         if (_formKey.currentState?.validate() ==
                                             true) {
-                                          _kirimNotifikasi();
                                           pushLaporan();
                                         }
                                       },

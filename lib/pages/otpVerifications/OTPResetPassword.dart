@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -119,19 +120,13 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
   }
 
   void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
-
-    var data = {
-      "kodeOtp": otpRegister.toString(),
-      "noHp": noHp.toString(),
-    };
-    var response = await http.post(url, body: data);
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print('Respon dari server: $responseData');
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+    void _kirimNotifikasi() async {
+      var data = {
+        "kodeOtp": widget.kodeOtp,
+        "noHp": widget.noHp,
+      };
+      await APIClient().postData('verifyOtp/whatsapp', data);
+      FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
     }
   }
 

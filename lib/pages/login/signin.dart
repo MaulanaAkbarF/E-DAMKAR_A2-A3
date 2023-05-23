@@ -62,7 +62,8 @@ final List<Map> teksStyleSignIn = [
     'SemiBold1': const TextStyle(
         fontFamily: "font/inter_bold.ttf",
         color: Colors.black45,
-        fontSize: (16)),
+        height: 1.4,
+        fontSize: (18)),
     'SemiBold2': const TextStyle(
         fontFamily: "font/inter_extrabold.ttf",
         color: Colors.blueAccent,
@@ -198,7 +199,7 @@ class _SignInPageState extends State<SignInPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.only(top: 8),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -208,7 +209,7 @@ class _SignInPageState extends State<SignInPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 24),
                               child: Text(teks['Email'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -218,7 +219,7 @@ class _SignInPageState extends State<SignInPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -245,7 +246,7 @@ class _SignInPageState extends State<SignInPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 16),
                               child: Text(teks['Password'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -255,7 +256,7 @@ class _SignInPageState extends State<SignInPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -341,7 +342,7 @@ class _SignInPageState extends State<SignInPage> {
                                               SizedBox(width: paddingVertical2),
                                               Text(
                                                 'loading...',
-                                                style: sty.b(16, white),
+                                                style: sty.b( 16, white),
                                               ),
                                             ],
                                           )

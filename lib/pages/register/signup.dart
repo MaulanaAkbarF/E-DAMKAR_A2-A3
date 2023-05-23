@@ -31,9 +31,9 @@ final List<Map> teksSignUp = [
     'SubHeader':
         'Masukkan data diri dan buat sebuah akun untuk mengakses seluruh layanan E-Damkar!',
     'Nama': 'Nama Lengkap',
-    'NamaHint': 'Nama Kamu',
+    'NamaHint': 'Contoh: John Doe',
     'Email': 'Username',
-    'EmailHint': 'Username Kamu',
+    'EmailHint': 'Contoh: johndoe',
     'Telepon': 'No. Telp (Whatsapp)',
     'TeleponHint': '08....',
     'Password1': 'Kata Sandi',
@@ -275,7 +275,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 24),
                               child: Text(teks['Nama'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -285,7 +285,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -300,7 +300,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
-                                      hintText: teks['cth. Nabil Kusuma'],
+                                      hintText: teks['NamaHint'],
                                       prefixIcon: Icon(Icons.person),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -322,7 +322,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -337,7 +337,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
-                                      hintText: teks['Example@example.com'],
+                                      hintText: teks['EmailHint'],
                                       prefixIcon: Icon(Icons.mail),
                                       contentPadding:
                                           EdgeInsets.fromLTRB(10, 13, 10, 7),
@@ -359,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -400,7 +400,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),
@@ -451,7 +451,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.all(2),

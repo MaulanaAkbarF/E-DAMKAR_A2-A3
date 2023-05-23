@@ -1,5 +1,6 @@
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
+import 'package:edamkar_1/pages/emergency/mapsAnonym.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -22,10 +23,13 @@ class _EmergencyCallState extends State<EmergencyCall> {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(phoneUrl)) {
       await launchUrl(phoneUrl);
-      Navigator.pushNamed(context, "/laporanpage");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
+      );
     } else {
-      FloatNotif()
-          .snackBarFail(context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
+      FloatNotif().snackBarFail(
+          context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
     }
   }
 
@@ -43,8 +47,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
       await launchUrlString(whatsappUrl);
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => MapsLokasiKejadian(kategori: "custom")),
+        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
       );
     } else {
       FloatNotif().snackBarFail(
@@ -68,7 +71,11 @@ class _EmergencyCallState extends State<EmergencyCall> {
               alignment: Alignment.center,
               child: Text(
                 'Panggilan Darurat',
-                style: bold,
+                style: TextStyle(
+                    fontFamily: "font/inter_black.ttf",
+                    color: Colors.black87,
+                    fontSize: (24),
+                    fontWeight: FontWeight.w700),
               ),
             ),
             Padding(
@@ -78,20 +85,25 @@ class _EmergencyCallState extends State<EmergencyCall> {
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Panggilan Darurat ini digunakan untuk panggilan mendesak saja. Kemudian sertakan foto dari tempat kejadian!',
-                  textAlign: TextAlign.justify,
                   maxLines: 2,
-                  style: reguler,
+                  style: TextStyle(
+                      fontFamily: "font/inter_regular.ttf",
+                      color: Colors.black54,
+                      fontSize: (17),
+                      height: 1.4,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: paddingHorozontal1, vertical: paddingVertical2),
+              padding: EdgeInsets.only(top: 24),
               child: ElevatedButton(
                   onPressed: emercall,
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 224, 36, 36),
-                  ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      primary: Color.fromARGB(255, 224, 36, 36),
+                      elevation: 0),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
@@ -103,7 +115,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
                             children: [
                               Text(
                                 'Panggilan Darurat',
-                                style: medium,
+                                style: TextStyle(
+                                    fontFamily: "font/inter_regular.ttf",
+                                    color: Colors.white,
+                                    fontSize: (18),
+                                    height: 1.4,
+                                    fontWeight: FontWeight.w500),
                               ),
                               SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
@@ -112,14 +129,16 @@ class _EmergencyCallState extends State<EmergencyCall> {
                       ))),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+              padding: EdgeInsets.only(top: 16),
               child: ElevatedButton(
                   onPressed: () {
                     emerCallWA();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 37, 211, 102),
-                  ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      primary: Color.fromARGB(255, 37, 211, 102),
+                      elevation: 0),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
                       child: Column(
@@ -129,7 +148,15 @@ class _EmergencyCallState extends State<EmergencyCall> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Whatsapp', style: medium),
+                              const Text(
+                                'Whatsapp',
+                                style: TextStyle(
+                                    fontFamily: "font/inter_regular.ttf",
+                                    color: Colors.white,
+                                    fontSize: (18),
+                                    height: 1.4,
+                                    fontWeight: FontWeight.w500),
+                              ),
                               SvgPicture.asset('semuaAset/icon/ArrowRight2.svg')
                             ],
                           ),
@@ -142,10 +169,14 @@ class _EmergencyCallState extends State<EmergencyCall> {
               child: const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Masuk untuk dapat melihat semua fitur yang ada di E-Damkar !',
-                  textAlign: TextAlign.justify,
+                  'Masuk untuk dapat mengakses semua layanan dari E-Damkar',
                   maxLines: 2,
-                  style: reguler,
+                  style: TextStyle(
+                      fontFamily: "font/inter_regular.ttf",
+                      color: Colors.black54,
+                      fontSize: (17),
+                      height: 1.4,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
             ),
@@ -157,12 +188,18 @@ class _EmergencyCallState extends State<EmergencyCall> {
                     primary: white,
                     onPrimary: red1,
                     padding: EdgeInsets.symmetric(vertical: paddingVertical2),
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(width: 2, color: red1),
-                        borderRadius: BorderRadius.circular(8))),
+                        borderRadius: BorderRadius.circular(80))),
                 child: const Text(
                   'Masuk',
-                  style: medium,
+                  style: TextStyle(
+                      fontFamily: "font/inter_regular.ttf",
+                      color: Color.fromARGB(255, 224, 36, 36),
+                      fontSize: (18),
+                      height: 1.4,
+                      fontWeight: FontWeight.w500),
                 ))
           ],
         ),
