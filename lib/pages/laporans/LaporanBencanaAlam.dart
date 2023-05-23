@@ -140,6 +140,10 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -457,7 +461,6 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },

@@ -52,14 +52,16 @@ class VerificationSuccess extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const SignInPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInPage()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Take Me Home',
+                        'Masuk',
                         style: TextStyle(
                           // Properti gaya teks
                           color: Colors.white,

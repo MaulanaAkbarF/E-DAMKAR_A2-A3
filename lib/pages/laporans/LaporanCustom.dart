@@ -139,6 +139,10 @@ class _LaporanCustomState extends State<LaporanCustom> {
   }
 
   void pushLaporan() async {
+    _kirimNotifikasi();
+    setState(() {
+      showSpinner = true;
+    });
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -202,31 +206,6 @@ class _LaporanCustomState extends State<LaporanCustom> {
       setState(() {});
     } else {
       print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-
-    var stream = new http.ByteStream(image!.openRead());
-    stream.cast();
-    var length = await image!.length();
-    var uri = Uri.parse(
-        "https://api.imgbb.com/1/upload?key=04b75a4aa8a6e4e3c7d0eb6236f1eae4");
-    final request = http.MultipartRequest('POST', uri);
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-      ),
-    );
-    final response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.statusCode);
     }
   }
 
@@ -485,7 +464,6 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },
