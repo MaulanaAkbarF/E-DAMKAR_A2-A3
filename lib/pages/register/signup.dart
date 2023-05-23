@@ -6,6 +6,7 @@ import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/style_n_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
@@ -191,14 +192,12 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         );
-      } else {
+      } 
+      else {
         setState(() => isloading = false);
         if (data.message.toString().split(" ").contains("username")) {
           FloatNotif().snackBarFail(
-              context, "Gagal Membuat Akun", "username sudah digunakan");
-        } else if (data.message.toString().split(" ").contains("hp")) {
-          FloatNotif().snackBarFail(
-              context, "Gagal Membuat Akun", "No Hp kamu sudah digunakan");
+              context, "Gagal Membuat Akun", "username atau no Hp sudah digunakan");
         }
       }
     } else {
@@ -373,6 +372,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextFormField(
                                   controller: notelp,
                                   keyboardType: TextInputType.number,
+                                  inputFormatters:<TextInputFormatter>[
+                                    FilteringTextInputFormatter(RegExp(r'[0-9]'),
+                            allow: true)],
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(

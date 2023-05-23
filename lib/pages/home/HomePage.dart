@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
       return CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(
-              '${baseUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
+              '${apiUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));

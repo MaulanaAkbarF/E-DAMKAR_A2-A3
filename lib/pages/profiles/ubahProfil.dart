@@ -17,7 +17,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
-  late final int userId;
+  final int userId;
   EditProfilePage(this.userId);
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -28,7 +28,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   var UserPic = "";
   var _email = "";
   var nohp = "";
-  late final _idUser = "";
+  late int _idUser = 1;
 
   TextEditingController? getNama;
   //TextEditingController? getnoHp;
@@ -69,12 +69,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     super.initState();
     getUserData();
+    print("Nama File Nya adalah == ${_namaFile} ${_image}");
 
     // widget.userId = _idUser as int;
   }
 
   File? _image;
   String? _namaFile;
+  var _imagePath;
   Future _pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
@@ -88,6 +90,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         // String pathBaru =
         //     Path.join(Path.dirname(_image.toString()), namaFileBaru);
         _namaFile = Path.basename(_image.toString());
+        print("nama file pick : " + UserPic.toString());
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
@@ -109,7 +112,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         return AssetImage("semuaAset/gambar/user1.png") as ImageProvider;
       } else {
         return NetworkImage(
-                "${baseUrl}storage/foto_user/${urlGambar.replaceAll("'", "")}")
+                "${baseUrl}api/storage/foto_user/${urlGambar.replaceAll("'", "")}")
             as ImageProvider;
       }
     } else {
@@ -117,33 +120,35 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  void pushUpdate() {
+  void pushUpdate() async {
+    String title = _idUser.toString() + " profile_" + getRandomString(30);
     if (_formKey.currentState!.validate()) {
-      print("Nama File Nya adalah == ${_namaFile}");
-      if (_image == null || _namaFile == "") {
-        UpdateProfil.ubahProfil(widget.userId.toString(), nama.text, noHp.text)
+      if (_image == null || _namaFile == null) {
+       
+        UpdateProfil.ubahProfil(
+                widget.userId.toString(), nama.text, noHp.text)
             .then((value) => {
                   if (value.kode.toString() == "200")
                     {
                       toss(context),
-                      DataUser()
-                          .udpateUser(nama.text, noHp.text, UserPic.toString())
+                      // DataUser()
+                      //     .udpateUser(nama.text, noHp.text, UserPic.toString())
                     }
                   else
                     {gagal(context)}
                 });
       } else {
         UpdateProfil.sendRequestWithFile(
-                nama: nama.text,
-                nomorHp: noHp.text,
                 id_akun: widget.userId.toString(),
                 delPic: UserPic.toString(),
+                nama: nama.text,
+                nomorHp: noHp.text,
                 file: _image)
             .then((value) => {
                   if (value.kode.toString() == "200")
                     {
-                      DataUser().udpateUser(
-                          nama.text, noHp.text, _namaFile.toString()),
+                      // DataUser().udpateUser(
+                      //     nama.text, noHp.text, _namaFile.toString()),
                       toss(context)
                     }
                   else
@@ -151,13 +156,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 });
       }
     } else {
-      gagal(context);
+      FieldKosong(context);
     }
   }
 
+  final TextEditingController namaBencanaCon = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
-  final nama = TextEditingController();
-  final noHp = TextEditingController();
+  final TextEditingController nama = TextEditingController();
+  final TextEditingController noHp = TextEditingController();
   TextEditingController? getNoHp;
   String _message = '';
 
@@ -200,6 +207,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
       content: AwesomeSnackbarContent(
         title: 'Gagal',
         message: 'Anda Gagal Merubah Profil',
+
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: ContentType.failure,
+      ),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  FieldKosong(BuildContext context) {
+    final snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      padding: EdgeInsets.all(16),
+      behavior: SnackBarBehavior.fixed,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: 'Gagal',
+        message: 'Field Harus Di isi !',
 
         /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
         contentType: ContentType.failure,

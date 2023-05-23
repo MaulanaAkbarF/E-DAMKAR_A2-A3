@@ -4,7 +4,7 @@ import 'package:edamkar_1/pages/riwayatLaporans/DetailRiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:edamkar_1/style/app_style.dart';
-
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/style/size_config.dart';
 import 'package:flutter/services.dart';
 import '../../APIRequest/APIClient.dart';
@@ -109,6 +109,7 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         });
       } else {
         setState(() {
+          FloatNotif().snackBar2(context, "Data yang anda cari kosong !");
           searchData = searchKosong;
 
           print("masukan salah");
@@ -127,6 +128,8 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataMenunggu.data;
         });
+      } else {
+        FloatNotif().snackBar2(context, "Data laporan Menunggu kosong !");
       }
     } else {
       print("Status Menunggu kosong");
@@ -141,6 +144,8 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataProses.data;
         });
+      } else {
+        FloatNotif().snackBar2(context, "Data laporan diproses kosong !");
       }
     } else {
       print("Status Proses kosong");
@@ -155,6 +160,8 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataSelesai.data;
         });
+      } else {
+        FloatNotif().snackBar2(context, "Data laporan Selesai kosong !");
       }
     } else {
       print("Status Selesai kosong");
@@ -169,6 +176,8 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataDitolak.data;
         });
+      } else {
+        FloatNotif().snackBar2(context, "Data laporan Ditolak kosong !");
       }
     } else {
       print("Status Ditolak kosong");
@@ -183,6 +192,8 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataEmer.data;
         });
+      } else {
+        FloatNotif().snackBar2(context, "Data laporan emergency kosong !");
       }
     } else {
       print("Status Ditolak kosong");
@@ -221,6 +232,9 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
         setState(() {
           dataElement = dataRiwayat.data;
         });
+      } else {
+        FloatNotif()
+            .snackBar2(context, "Anda belum pernah melakukan pelaporan !");
       }
     } else {
       print("data kosong");
@@ -337,8 +351,6 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
   }
 
   void _runSearch(String enteredKeyword) {
-
-
     if (enteredKeyword.isEmpty) {
       getUserIdRiwayat();
     } else {
@@ -460,6 +472,13 @@ class _RiwayatLaporanState extends State<RiwayatLaporan> {
                                 style: _buttonStyle,
                                 onPressed: getIdStatus,
                                 child: Text("Menunggu")),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            TextButton(
+                                style: _buttonStyle,
+                                onPressed: getIdStatusProses,
+                                child: Text("Diproses")),
                             SizedBox(
                               width: 50,
                             ),

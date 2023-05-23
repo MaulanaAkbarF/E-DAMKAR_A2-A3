@@ -1,10 +1,8 @@
-
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 
 import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
-
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +21,6 @@ class Artikel extends StatefulWidget {
 }
 
 class _ArtikelState extends State<Artikel> {
-
   List<ArtikelDatum>? artikelElement = [];
   List<EdukasiDatum>? artikelEdukasi = [];
   List<dynamic> beritaE = [];
@@ -40,10 +37,9 @@ class _ArtikelState extends State<Artikel> {
   void initState() {
     super.initState();
 
-    if(mounted){
-    getData();
-    getDataHigh();
-
+    if (mounted) {
+      getData();
+      getDataHigh();
     }
     // PostDataArtikel();
     // PostDataArtikelHigh();
@@ -158,40 +154,29 @@ class _ArtikelState extends State<Artikel> {
   var data;
   var dataHigh;
   void getData() async {
-    var result =
-        await APIClient().getData('getAllArtikel');
+    var result = await APIClient().getData('getAllArtikel');
     if (result != null) {
       setState(() {
         data = semuaArtikelModelFromJson(result);
-      debugPrint(data.length.toString());
+        debugPrint(data.length.toString());
       });
-        
-        
-
-    
-      
     } else {
       debugPrint('terdapat kesalahan');
     }
   }
 
   void getDataHigh() async {
-    var result =
-        await APIClient().getData('getAllArtikelHigh');
+    var result = await APIClient().getData('getAllArtikelHigh');
     if (result != null) {
       setState(() {
         dataHigh = semuaArtikelModelFromJson(result);
-     
-      debugPrint(dataHigh.length.toString());
-        
+
+        debugPrint(dataHigh.length.toString());
       });
-     
     } else {
       debugPrint('terdapat kesalah');
     }
   }
-
-
 
   final List<Map> teksLaporan = [
     {
@@ -475,8 +460,11 @@ class _ArtikelState extends State<Artikel> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
                           borderRadius: BorderRadius.circular(10)),
-                      child: dataHigh == null
-                          ? Text("data kosong")
+                      child: dataHigh == null || dataHigh.length <= 9
+                          ? Text(
+                              "Data kosong",
+                              textAlign: TextAlign.center,
+                            )
                           : ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -509,18 +497,24 @@ class _ArtikelState extends State<Artikel> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          dataHigh[index].adminDamkar.toString(),
+                                          dataHigh[index]
+                                              .adminDamkar
+                                              .toString(),
                                           style: TextStyle(
-                                              fontFamily: "font/inter_medium.tff",
+                                              fontFamily:
+                                                  "font/inter_medium.tff",
                                               color: Color.fromARGB(
                                                   255, 107, 114, 128),
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                         ),
                                         Text(
-                                          dataHigh[index].jenisArtikel.toString(),
+                                          dataHigh[index]
+                                              .jenisArtikel
+                                              .toString(),
                                           style: TextStyle(
-                                              fontFamily: "font/inter_medium.tff",
+                                              fontFamily:
+                                                  "font/inter_medium.tff",
                                               color: Color.fromARGB(
                                                   255, 107, 114, 128),
                                               fontSize: 14,
@@ -538,7 +532,8 @@ class _ArtikelState extends State<Artikel> {
                                         maxLines: 1,
                                         style: TextStyle(
                                             overflow: TextOverflow.ellipsis,
-                                            fontFamily: "font/inter_semibold.tff",
+                                            fontFamily:
+                                                "font/inter_semibold.tff",
                                             color:
                                                 Color.fromARGB(255, 55, 65, 81),
                                             fontSize: 18,
@@ -575,10 +570,12 @@ class _ArtikelState extends State<Artikel> {
     );
   }
 
-
   Widget listArtikel() {
-    return data == null
-        ? Text("Artikel Kosong")
+    return data == null 
+        ? const Text(
+            "Artikel Kosong",
+            textAlign: TextAlign.center,
+          )
         : ListView.separated(
             itemCount: data.length,
             itemBuilder: (context, index) {

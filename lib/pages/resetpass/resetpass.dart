@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
 import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../otpVerifications/OTPResetPassword.dart';
@@ -73,7 +74,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
 
   void _kirimNotifikasi() async {
     var url = Uri.parse(
-        'http://192.168.18.74:8080/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
+        'http://192.168.43.64:8080/flutter_api/otpwa.php'); // Ganti dengan URL endpoint API yang sesuai
 
     var data = {
       "kodeOtp": randomNumber.toString(),
@@ -89,7 +90,7 @@ class _ResetPassPageState extends State<ResetPassPage> {
   }
 
   Future<bool> validasiNomer(String noHP) async {
-    var apiUrl = Uri.parse('http://192.168.18.74:8000/api/getNoHp/$noHP');
+    var apiUrl = Uri.parse('http://192.168.43.64:8000/api/getNoHp/$noHP');
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
@@ -236,6 +237,12 @@ class _ResetPassPageState extends State<ResetPassPage> {
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter(
+                                          RegExp(r'[0-9]'),
+                                          allow: true)
+                                    ],
                                     decoration: InputDecoration(
                                         hintText: teks['EmailHint'],
                                         prefixIcon: Icon(Icons.phone),

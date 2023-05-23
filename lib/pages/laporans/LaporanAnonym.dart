@@ -121,7 +121,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
     var response = await http.post(url, body: data);
 
     // Menerima dan memproses respons dari server
-    if (response.statusCode == 200) {
+    if (response.statusCode == "200") {
       var responseData = json.decode(response.body);
       print('Respon dari server: $responseData');
     } else {

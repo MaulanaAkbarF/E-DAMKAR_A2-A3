@@ -193,6 +193,7 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
                               padding: EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
                                 controller: kodeotptxt,
+                                keyboardType: TextInputType.number,
                                 appContext: context,
                                 length: 6, // panjang kode OTP
                                 onChanged: (value) {

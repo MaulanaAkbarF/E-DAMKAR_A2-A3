@@ -1,11 +1,11 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://192.168.18.74:8000/';
+const String baseUrl = 'http://172.17.201.8:8000/';
 const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
   var client = http.Client();
-  static const String base = "http://192.168.18.74:8080/flutter_api/";
+  static const String base = "http://172.17.201.8:8080/flutter_api/";
   static const String submit = base + "submit.php";
   static const String whatsappnotification = base + "whatsappnotification.php";
   static const String otpwhatsapp = base + "otpwa.php";
@@ -28,7 +28,7 @@ class APIClient {
 
     var response = await client.post(url, headers: _headers, body: object);
 
-    if (response.statusCode == 200 || response.statusCode == 422 ) {
+    if (response.statusCode == 200 || response.statusCode == 422) {
       return response.body;
     } else {
       throw Exception();

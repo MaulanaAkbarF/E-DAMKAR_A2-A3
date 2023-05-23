@@ -133,7 +133,7 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
     var response = await http.post(url, body: data);
 
     // Menerima dan memproses respons dari server
-    if (response.statusCode == 200) {
+    if (response.statusCode == "200") {
       var responseData = json.decode(response.body);
       print('Respon dari server: $responseData');
     } else {
@@ -154,8 +154,7 @@ class _LaporanKebakaranState extends State<LaporanKebakaran> {
         widget.kota +
         ', ' +
         widget.kodepos;
-    var result =
-        await APIClient().postMulti('addImage', image, imagePath, title);
+    var result = await APIClient().postMulti('addImage', image, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
       'kategori_laporan_id': '1',
