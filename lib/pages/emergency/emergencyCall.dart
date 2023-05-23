@@ -1,5 +1,6 @@
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
+import 'package:edamkar_1/pages/emergency/mapsAnonym.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/style/app_style.dart';
 import 'package:edamkar_1/style/size_config.dart';
@@ -22,10 +23,13 @@ class _EmergencyCallState extends State<EmergencyCall> {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(phoneUrl)) {
       await launchUrl(phoneUrl);
-      Navigator.pushNamed(context, "/laporanpage");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
+      );
     } else {
-      FloatNotif()
-          .snackBarFail(context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
+      FloatNotif().snackBarFail(
+          context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
     }
   }
 
@@ -43,8 +47,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
       await launchUrlString(whatsappUrl);
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => MapsLokasiKejadian(kategori: "custom")),
+        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
       );
     } else {
       FloatNotif().snackBarFail(

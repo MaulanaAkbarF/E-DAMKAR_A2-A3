@@ -36,6 +36,7 @@ const green2 = Color(0xff128C7E);
 const grey1 = Color(0xffD9D9D9);
 final grey2 = Colors.grey.shade200;
 const grey3 = Color(0xffD1D5DB);
+const grey4 = Color(0xff6B7280);
 const black = Colors.black;
 const black2 = Color.fromARGB(255, 107, 114, 128);
 const black3 = Color.fromARGB(255, 51, 51, 51);

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://192.168.1.9:8000/';
+const String baseUrl = 'http://172.16.106.138:8000/';
 const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
@@ -28,7 +28,7 @@ class APIClient {
     if (response.statusCode == 200 || response.statusCode == 422 ) {
       return response.body;
     } else {
-      throw Exception();
+       throw Exception();
     }
   }
 

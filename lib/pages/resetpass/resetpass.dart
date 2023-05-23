@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -72,20 +73,12 @@ class _ResetPassPageState extends State<ResetPassPage> {
   }
 
   void _kirimNotifikasi() async {
-    var url = Uri.parse(
-        APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
-
     var data = {
       "kodeOtp": randomNumber.toString(),
       "noHp": notelp.text,
     };
-    var response = await http.post(url, body: data);
-    if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
-      print('Respon dari server: $responseData');
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
+    await APIClient().postData('verifyOtp/whatsapp', data);
+    FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
   }
 
   Future<bool> validasiNomer(String noHP) async {

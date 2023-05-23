@@ -131,7 +131,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("/sendToWa", data);
+    var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
     if (response != null) {
       print(jsonDecode(response));
@@ -153,8 +153,10 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
         widget.kota +
         ', ' +
         widget.kodepos;
+
     var result =
         await APIClient().postMulti('addImage', image, imagePath, title);
+
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
       'kategori_laporan_id': '4',
@@ -166,6 +168,7 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       'longitude': widget.longitude.toString(),
       'urgensi': namaBencanaCon.text
     });
+
     _kirimNotifikasi();
     if (result2 != null) {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
@@ -176,16 +179,6 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
       FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
           "Lakukan Emergency Call jika terdapat kenadala");
     }
-  }
-
-  void show(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.white,
-        textColor: Colors.black);
   }
 
   File? image;
@@ -463,7 +456,6 @@ class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
                                             if (_formKey.currentState
                                                     ?.validate() ==
                                                 true) {
-                                              _kirimNotifikasi();
                                               pushLaporan();
                                             }
                                           },

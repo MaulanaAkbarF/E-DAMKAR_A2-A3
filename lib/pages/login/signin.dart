@@ -341,7 +341,7 @@ class _SignInPageState extends State<SignInPage> {
                                               SizedBox(width: paddingVertical2),
                                               Text(
                                                 'loading...',
-                                                style: sty.b(16, white),
+                                                style: sty.b( 16, white),
                                               ),
                                             ],
                                           )

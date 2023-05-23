@@ -15,12 +15,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LaporanCustom extends StatefulWidget {
+class LaporanAnonym extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanCustom(
+  LaporanAnonym(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -32,7 +32,7 @@ class LaporanCustom extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanCustom> createState() => _LaporanCustomState();
+  State<LaporanAnonym> createState() => _LaporanAnonymState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -97,7 +97,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanCustomState extends State<LaporanCustom> {
+class _LaporanAnonymState extends State<LaporanAnonym> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
@@ -121,7 +121,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("/sendToWa", data);
+    var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
     if (response != null) {
       print(jsonDecode(response));
@@ -146,8 +146,8 @@ class _LaporanCustomState extends State<LaporanCustom> {
     var result =
         await APIClient().postMulti('addImage', image, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '4',
+      'user_listdata_id': "1",
+      'kategori_laporan_id': '5',
       'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
       'gambar_bukti_pelaporan': title,

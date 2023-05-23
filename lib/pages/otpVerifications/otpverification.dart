@@ -225,6 +225,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                               child: PinCodeTextField(
                                 controller: kodeotptxt,
                                 appContext: context,
+                                keyboardType: TextInputType.number,
                                 length: 6, // panjang kode OTP
                                 onChanged: (value) {
                                   // aksi yang dijalankan setiap kali kode OTP berubah

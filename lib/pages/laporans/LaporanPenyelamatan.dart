@@ -130,7 +130,7 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("/sendToWa", data);
+    var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
     if (response != null) {
       print(jsonDecode(response));
