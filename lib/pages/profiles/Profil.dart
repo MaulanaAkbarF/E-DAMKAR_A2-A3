@@ -1,12 +1,12 @@
-import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/src/home/HomePage.dart';
 import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
 import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
-import 'package:edamkar_1/pages/login/signin.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 
 import '../../Menu/Menu.dart';
 

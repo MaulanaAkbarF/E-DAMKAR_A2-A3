@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:edamkar_1/APIRequest/APIClient.dart';
-import 'package:edamkar_1/Example/AweseomSnackBarExample.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';
 import 'package:edamkar_1/pages/register/signup.dart';
-import 'package:edamkar_1/style/size_config.dart';
-import 'package:edamkar_1/style/style_n_color.dart';
+import 'package:edamkar_1/utils/size_config.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../style/app_style.dart';
+import '../../../utils/app_style.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);

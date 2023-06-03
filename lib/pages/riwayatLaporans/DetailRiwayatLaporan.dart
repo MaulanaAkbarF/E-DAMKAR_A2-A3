@@ -1,11 +1,11 @@
 import 'dart:ffi';
 
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/laporanData.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
 import '../../Menu/Menu.dart';

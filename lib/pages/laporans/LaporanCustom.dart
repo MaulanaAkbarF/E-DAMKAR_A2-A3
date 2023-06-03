@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

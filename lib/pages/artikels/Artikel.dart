@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 
 import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
 
@@ -7,8 +7,8 @@ import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
 
 import 'package:edamkar_1/models/ArtikelModel.dart';

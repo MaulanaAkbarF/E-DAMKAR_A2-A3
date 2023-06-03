@@ -2,11 +2,11 @@ import 'dart:async';
 
 
 import 'package:edamkar_1/pages/artikels/Artikel.dart';
-import 'package:edamkar_1/pages/home/HomePage.dart';
+import 'package:edamkar_1/src/home/HomePage.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/pages/profiles/Profil.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
 class AppMenu extends StatefulWidget {
@@ -17,14 +17,13 @@ class AppMenu extends StatefulWidget {
 }
 
 class _AppMenuState extends State<AppMenu> {
-  bool _isNavigationEnabled = false;
   var _selectedIndex = 0;
   List<Widget> menu = [
-    HomePage(),
-    LaporanPage(),
-    RiwayatLaporan(),
-    Artikel(),
-    Profile()
+    const HomePage(),
+    const LaporanPage(),
+    const RiwayatLaporan(),
+    const Artikel(),
+    const Profile()
   ];
   @override
   Widget build(BuildContext context) {

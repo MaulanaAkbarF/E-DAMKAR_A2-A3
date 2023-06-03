@@ -5,8 +5,6 @@ import 'package:edamkar_1/pages/laporans/LaporanKebakaran.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPenyelamatan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:http/http.dart' as http;
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LokasiKejadian extends StatefulWidget {
   String kategori;
@@ -224,11 +222,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                           width: 1.2)),
                                   child: TextFormField(
                                     controller: kecamatanCon,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Kecamatan tidak boleh kosong';
-                                      }
-                                    },
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
@@ -265,11 +258,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                           width: 1.2)),
                                   child: TextFormField(
                                     controller: desaCon,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Desa tidak boleh kosong';
-                                      }
-                                    },
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
@@ -308,11 +296,6 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                     keyboardType: TextInputType.multiline,
                                     maxLines: 6,
                                     controller: jalanCon,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Jalan tidak boleh kosong';
-                                      }
-                                    },
                                     cursorColor: Colors.black,
                                     style: teksStyle['Semibold1'],
                                     decoration: InputDecoration(

@@ -1,59 +1,20 @@
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/emergency/mapsAnonym.dart';
-import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/src/emergency/controller/emergency_controller.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'dart:io' show Platform;
+import 'package:get/get.dart';
 
-import 'package:url_launcher/url_launcher_string.dart';
+// class EmergencyCall extends StatefulWidget {
+//   const EmergencyCall({super.key});
 
-class EmergencyCall extends StatefulWidget {
-  const EmergencyCall({super.key});
+//   @override
+//   State<EmergencyCall> createState() => _EmergencyCallState();
+// }
 
-  @override
-  State<EmergencyCall> createState() => _EmergencyCallState();
-}
-
-class _EmergencyCallState extends State<EmergencyCall> {
-  void emercall() async {
-    final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneUrl)) {
-      await launchUrl(phoneUrl);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
-      );
-    } else {
-      FloatNotif().snackBarFail(
-          context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
-    }
-  }
-
-  final String countryCode = "+62";
-  //admin contact
-  final String message =
-      "setelah melakukan panggilan tolong kembali ke aplikasi";
-  final String phone = "81252277680";
-  final String phoneNumber = "085708574368";
-
-  void emerCallWA() async {
-    var whatsappUrl =
-        "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
-    if (await canLaunchUrlString(whatsappUrl)) {
-      await launchUrlString(whatsappUrl);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
-      );
-    } else {
-      FloatNotif().snackBarFail(
-          context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
-    }
-  }
+class EmergencyCall extends StatelessWidget {
+  EmergencyCall({super.key});
+  final emerController = Get.put(EmergencyController());
 
   @override
   Widget build(BuildContext context) {
@@ -74,35 +35,34 @@ class _EmergencyCallState extends State<EmergencyCall> {
                 style: TextStyle(
                     fontFamily: "font/inter_black.ttf",
                     color: Colors.black87,
-                    fontSize: (24),
+                    fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: SizeConfig.blockSizeHorizontal! * 2),
+              padding: EdgeInsets.only(top: paddingVertical2),
               child: const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Panggilan Darurat ini digunakan untuk panggilan mendesak saja. Kemudian sertakan foto dari tempat kejadian!',
+                  'Panggilan Darurat ini digunakan untuk keadaan mendesak saja. Kemudian sertakan foto dari tempat kejadian!',
                   maxLines: 2,
                   style: TextStyle(
                       fontFamily: "font/inter_regular.ttf",
                       color: Colors.black54,
-                      fontSize: (17),
+                      fontSize: 14,
                       height: 1.4,
                       fontWeight: FontWeight.w400),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 24),
+              padding: EdgeInsets.only(top: paddingVertical3),
               child: ElevatedButton(
-                  onPressed: emercall,
+                  onPressed: () => emerController.emercall(),
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      primary: Color.fromARGB(255, 224, 36, 36),
+                      primary: red1,
                       elevation: 0),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
@@ -113,12 +73,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'Panggilan Darurat',
                                 style: TextStyle(
                                     fontFamily: "font/inter_regular.ttf",
                                     color: Colors.white,
-                                    fontSize: (18),
+                                    fontSize: 16,
                                     height: 1.4,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -129,15 +89,13 @@ class _EmergencyCallState extends State<EmergencyCall> {
                       ))),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: EdgeInsets.only(top: paddingVertical2),
               child: ElevatedButton(
-                  onPressed: () {
-                    emerCallWA();
-                  },
+                  onPressed: () => emerController.emerCallWA(),
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      primary: Color.fromARGB(255, 37, 211, 102),
+                      primary: green1,
                       elevation: 0),
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical3),
@@ -153,7 +111,7 @@ class _EmergencyCallState extends State<EmergencyCall> {
                                 style: TextStyle(
                                     fontFamily: "font/inter_regular.ttf",
                                     color: Colors.white,
-                                    fontSize: (18),
+                                    fontSize: 16,
                                     height: 1.4,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -174,16 +132,14 @@ class _EmergencyCallState extends State<EmergencyCall> {
                   style: TextStyle(
                       fontFamily: "font/inter_regular.ttf",
                       color: Colors.black54,
-                      fontSize: (17),
+                      fontSize: 14,
                       height: 1.4,
                       fontWeight: FontWeight.w400),
                 ),
               ),
             ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/signin');
-                },
+                onPressed: emerController.goLogin,
                 style: ElevatedButton.styleFrom(
                     primary: white,
                     onPrimary: red1,
@@ -191,12 +147,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(width: 2, color: red1),
-                        borderRadius: BorderRadius.circular(80))),
+                        borderRadius: BorderRadius.circular(10))),
                 child: const Text(
                   'Masuk',
                   style: TextStyle(
                       fontFamily: "font/inter_regular.ttf",
-                      color: Color.fromARGB(255, 224, 36, 36),
+                      color: red1,
                       fontSize: (18),
                       height: 1.4,
                       fontWeight: FontWeight.w500),

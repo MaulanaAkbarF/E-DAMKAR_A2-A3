@@ -3,11 +3,11 @@ import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/DetailRiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/services.dart';
-import '../../APIRequest/APIClient.dart';
+import '../../config/APIClient.dart';
 
 class RiwayatLaporan extends StatefulWidget {
   const RiwayatLaporan({super.key});

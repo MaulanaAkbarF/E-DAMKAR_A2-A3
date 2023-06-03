@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ProfilModel.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'Profil.dart';
 import 'package:path/path.dart' as Path;
 import 'package:flutter/services.dart' show PlatformException;

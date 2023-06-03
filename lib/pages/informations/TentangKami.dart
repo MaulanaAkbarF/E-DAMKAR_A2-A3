@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 
 class TentangKami extends StatefulWidget {
   const TentangKami({super.key});

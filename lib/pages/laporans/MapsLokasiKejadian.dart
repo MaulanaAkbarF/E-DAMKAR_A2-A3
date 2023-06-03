@@ -4,7 +4,7 @@ import 'package:edamkar_1/pages/laporans/LaporanHewanBuas.dart';
 import 'package:edamkar_1/pages/laporans/LaporanKebakaran.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPenyelamatan.dart';
 import 'package:edamkar_1/pages/laporans/LokasiKejadian.dart';
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';

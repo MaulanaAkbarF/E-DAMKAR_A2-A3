@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:edamkar_1/style/size_config.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
 final paddingHorozontal1 = SizeConfig.blockSizeHorizontal! * 2;
@@ -31,6 +31,7 @@ const blackft =
     TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w900, fontSize: 20);
 
 const red1 = Color(0xffe02424);
+const redallert = Color(0xffFF0000);
 const green1 = Color(0xff25d366);
 const green2 = Color(0xff128C7E);
 const grey1 = Color(0xffD9D9D9);

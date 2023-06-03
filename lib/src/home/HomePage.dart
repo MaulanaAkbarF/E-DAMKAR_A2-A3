@@ -1,17 +1,16 @@
-import 'package:edamkar_1/APIRequest/APIClient.dart';
+import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/models/HomeModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/style/size_config.dart';
-import 'package:edamkar_1/style/style_n_color.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/size_config.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '../profiles/Profil.dart';
+import '../../pages/profiles/Profil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -96,16 +95,16 @@ class _HomePageState extends State<HomePage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
+                title:const Text("Konfirmasi keluar !"),
+                content: const Text("Apakah anda yakin untuk Keluar ?"),
                 actions: <Widget>[
                   FloatingActionButton(
-                      child: Text("Tidak"),
+                      child: const Text("Tidak"),
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       }),
                   FloatingActionButton(
-                      child: Text("Ya"),
+                      child: const Text("Ya"),
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       })
@@ -135,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                             style: semibold,
                           ),
                           Text(
-                            '$namalengkap',
+                            namalengkap,
                             style: medium,
                           )
                         ],
@@ -154,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ColoredBox(
                   color: grey2,
-                  child: SizedBox(
+                  child: const SizedBox(
                     height: 2,
                   ),
                 ),
@@ -357,11 +356,11 @@ class _HomePageState extends State<HomePage> {
                                           color: Colors.grey.withOpacity(0.5),
                                           spreadRadius: 3,
                                           blurRadius: 4,
-                                          offset: Offset(0,
+                                          offset: const Offset(0,
                                               3), // changes position of shadow
                                         ),
                                       ],
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                           Radius.circular(10))),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -369,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                                       Container(
                                         height: 80,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: orange2,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
@@ -389,9 +388,8 @@ class _HomePageState extends State<HomePage> {
                                             child: Text("Laporan Kebakaran",
                                                 style: style.sb(size: 16))),
                                       ),
-                                      Expanded(
-                                          child: Text(
-                                              "Salah satu layanan dari E-Damkar"))
+                                      const Text(
+                                          "Salah satu layanan dari E-Damkar")
                                     ],
                                   ),
                                 ),
@@ -497,13 +495,13 @@ class _HomePageState extends State<HomePage> {
                                       Container(
                                         height: 80,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: orange2,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
                                         ),
                                         child: Padding(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 40),
                                           child: SvgPicture.asset(
                                             "semuaAset/gambar/penyelamatan-icon.svg",
@@ -549,7 +547,7 @@ class _HomePageState extends State<HomePage> {
                             border: Border.all(width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image:
                                     AssetImage("semuaAset/gambar/damkar.png"),
                                 fit: BoxFit.cover)),

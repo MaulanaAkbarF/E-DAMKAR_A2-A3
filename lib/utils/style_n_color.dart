@@ -1,7 +1,4 @@
-import 'dart:ffi';
-import 'dart:math';
-
-import 'package:edamkar_1/style/app_style.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
 class styleNColor {

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:edamkar_1/APIRequest/APIClient.dart';
-import 'package:edamkar_1/pages/login/signin.dart';
+import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/pages/resetpass/UpdatePasswordSuccess.dart';
 import 'package:flutter/material.dart';
 

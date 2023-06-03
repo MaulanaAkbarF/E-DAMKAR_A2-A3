@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/login/signin.dart';
-import 'package:edamkar_1/style/app_style.dart';
-import 'package:edamkar_1/style/style_n_color.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 
-import '../../APIRequest/APIClient.dart';
+import '../../config/APIClient.dart';
 import '../../models/RegisterModel.dart';
 import '../otpVerifications/otpverification.dart';
 

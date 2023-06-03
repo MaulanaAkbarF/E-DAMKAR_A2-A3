@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 
 const String baseUrl = 'http://172.16.106.138:8000/';
@@ -6,6 +8,15 @@ const String apiUrl = "${baseUrl}api/";
 class APIClient {
   var client = http.Client();
 
+  Future printIps() async {
+    for (var interface in await NetworkInterface.list()) {
+      print('== Interface: ${interface.name} ==');
+      for (var addr in interface.addresses) {
+        print(
+            '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
+      }
+    }
+  }
 
   final _headers = {"Accept": "application/json"};
 
@@ -25,10 +36,10 @@ class APIClient {
 
     var response = await client.post(url, headers: _headers, body: object);
 
-    if (response.statusCode == 200 || response.statusCode == 422 ) {
+    if (response.statusCode == 200 || response.statusCode == 422) {
       return response.body;
     } else {
-       throw Exception();
+      throw Exception();
     }
   }
 
@@ -36,7 +47,7 @@ class APIClient {
       String api, image, String path, String imageTitle) async {
     var stream = new http.ByteStream(image!.openRead());
     stream.cast();
-    var length = await image!.length();
+    // var length = await image!.length();
     var uri = Uri.parse(apiUrl + api);
     final request = http.MultipartRequest('POST', uri);
     request.fields['title'] = imageTitle;
