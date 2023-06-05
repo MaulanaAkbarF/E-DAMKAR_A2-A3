@@ -6,15 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MapsAnonym extends StatefulWidget {
-  MapsAnonym({Key? key}) : super(key: key);
-
-  @override
-  State<MapsAnonym> createState() => _MapsAnonym();
-}
-
-class _MapsAnonym extends State<MapsAnonym> {
-  final mapsC = Get.put(MapsAnonymController());
+class MapsAnonym extends GetView<MapsAnonymController> {
+  const MapsAnonym({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +38,12 @@ class _MapsAnonym extends State<MapsAnonym> {
               () => Stack(
                 children: [
                   GoogleMap(
-                    initialCameraPosition: mapsC.initialCameraPosition,
-                    markers: mapsC.markers,
+                    initialCameraPosition: controller.initialCameraPosition,
+                    markers: controller.markers,
                     zoomControlsEnabled: true,
                     mapType: MapType.normal,
-                    onMapCreated: (GoogleMapController controller) {
-                      mapsC.googleMapController = controller;
-                    },
+                    onMapCreated: (GoogleMapController gmController) =>
+                        controller.setGoogleMapC(gmController),
                   ),
                   Positioned(
                     bottom: 0,
@@ -63,7 +55,7 @@ class _MapsAnonym extends State<MapsAnonym> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 24, right: 16),
                           child: FloatingActionButton(
-                            onPressed: mapsC.userRePotition,
+                            onPressed: controller.userRePotition,
                             child: SvgPicture.asset(
                               'semuaAset/icon/Discovery.svg',
                               width: 24,
@@ -118,7 +110,7 @@ class _MapsAnonym extends State<MapsAnonym> {
                                   padding: const EdgeInsets.only(
                                       left: 16, right: 16, top: 8),
                                   child: Text(
-                                    'Alamat: ${mapsC.address.value}',
+                                    'Alamat: ${controller.address.value}',
                                     style: const TextStyle(
                                       fontSize: 16,
                                       height: 1.4,
@@ -150,7 +142,7 @@ class _MapsAnonym extends State<MapsAnonym> {
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
-                                        onPressed: mapsC.goToPelaporan,
+                                        onPressed: controller.goToPelaporan,
                                         child: const Text(
                                           'Ya, Lokasi Saya Sudah Sesuai',
                                           style: TextStyle(

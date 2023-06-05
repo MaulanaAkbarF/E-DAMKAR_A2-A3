@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/utils/app_style.dart';

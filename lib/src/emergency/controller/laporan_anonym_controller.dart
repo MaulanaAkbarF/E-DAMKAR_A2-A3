@@ -4,7 +4,6 @@ import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class LaporanAnonymController extends GetxController {

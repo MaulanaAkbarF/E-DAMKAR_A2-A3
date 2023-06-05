@@ -2,7 +2,7 @@ import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/models/HomeModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';

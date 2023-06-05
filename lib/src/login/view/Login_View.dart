@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/LoginModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';

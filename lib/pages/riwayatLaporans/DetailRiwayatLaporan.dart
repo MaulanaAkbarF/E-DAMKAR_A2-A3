@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/SharedPreferences/laporanData.dart';
+import 'package:edamkar_1/service/SharedPreferences/laporanData.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
 import 'package:edamkar_1/utils/app_style.dart';

@@ -1,4 +1,4 @@
-import 'package:edamkar_1/src/emergency/view/laporan_anonym_view.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -24,6 +24,10 @@ class MapsAnonymController extends GetxController {
   //snackBar Message
   String title = "posisi tidak valid";
   String message = "Tentukan alamat terlebih dahulu";
+
+  void setGoogleMapC(GoogleMapController controller) {
+    googleMapController = controller;
+  }
 
   void userRePotition() async {
     Position position = await _determinePosition();
@@ -87,14 +91,16 @@ class MapsAnonymController extends GetxController {
     if (jalan.isEmpty) {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     } else {
-      Get.to(LaporanAnonym(
-          desa: desa.value,
-          jalan: jalan.value,
-          kecamatan: kecamatan.value,
-          kota: kota.value,
-          kodepos: kodepos.value,
-          latitude: latitude.value,
-          longitude: longitude.value));
+      Map<String, dynamic> dataMaps = {
+        'desa': desa.value,
+        'jalan': jalan.value,
+        'kecamatan': kecamatan.value,
+        'kota': kota.value,
+        'kodepos': kodepos.value,
+        'latitude': latitude.value,
+        'longitude': longitude.value
+      };
+      Get.toNamed(Routes.emePelaporan, arguments: dataMaps);
     }
   }
 }

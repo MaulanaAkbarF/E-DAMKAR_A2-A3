@@ -1,5 +1,5 @@
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/DetailRiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';

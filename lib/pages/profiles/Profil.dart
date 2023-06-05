@@ -4,7 +4,7 @@ import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
 import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:flutter/material.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 

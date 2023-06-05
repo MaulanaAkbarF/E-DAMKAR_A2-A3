@@ -3,28 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LaporanAnonym extends StatefulWidget {
-  // const BuatLaporan({Key? key}) : super(key: key);
-
-  final String desa, jalan, kecamatan, kota, kodepos;
-  final double latitude, longitude;
-  LaporanAnonym(
-      {Key? key,
-      required this.desa,
-      required this.jalan,
-      required this.kecamatan,
-      required this.kota,
-      required this.kodepos,
-      required this.latitude,
-      required this.longitude})
-      : super(key: key);
-
-  @override
-  State<LaporanAnonym> createState() => _LaporanAnonymState();
-}
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur teks yang akan ditampilkan
-
 final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
@@ -85,13 +63,13 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanAnonymState extends State<LaporanAnonym> {
-  final laController = Get.put(LaporanAnonymController());
+class LaporanAnonym extends GetView<LaporanAnonymController> {
+  const LaporanAnonym({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-        inAsyncCall: laController.showSpinner,
+        inAsyncCall: controller.showSpinner,
         progressIndicator: CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
@@ -139,7 +117,7 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                       borderRadius: BorderRadius.circular(8),
                                       child: InkWell(
                                         onTap: () async {
-                                          await laController.getImage();
+                                          await controller.getImage();
                                         },
                                         child: Container(
                                           height: 200,
@@ -155,12 +133,12 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Expanded(
-                                                child: Obx(() => laController
+                                                child: Obx(() => controller
                                                             .rxImage.value !=
                                                         null
                                                     ? Container(
                                                         child: Image.file(
-                                                          laController
+                                                          controller
                                                               .rxImage.value!,
                                                           fit: BoxFit.cover,
                                                         ),
@@ -221,7 +199,7 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                               color: Colors.grey.shade300,
                                               width: 1.2)),
                                       child: TextFormField(
-                                        controller: laController.namaBencanaCon,
+                                        controller: controller.namaBencanaCon,
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -259,7 +237,7 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                               color: Colors.grey.shade300,
                                               width: 1.2)),
                                       child: TextFormField(
-                                        controller: laController.noTelpCon,
+                                        controller: controller.noTelpCon,
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -299,7 +277,7 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                       child: TextFormField(
                                         keyboardType: TextInputType.multiline,
                                         maxLines: 6,
-                                        controller: laController.deskripsiCon,
+                                        controller: controller.deskripsiCon,
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -323,7 +301,7 @@ class _LaporanAnonymState extends State<LaporanAnonym> {
                                       child: InkWell(
                                         splashColor: Colors.red.shade700,
                                         highlightColor: Colors.red.shade900,
-                                        onTap: laController.pushLaporan,
+                                        onTap: controller.pushLaporan,
                                         child: SizedBox(
                                           height: 50,
                                           child: Row(

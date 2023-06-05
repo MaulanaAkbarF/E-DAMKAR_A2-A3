@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ProfilModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

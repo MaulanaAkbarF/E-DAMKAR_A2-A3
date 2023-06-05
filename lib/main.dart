@@ -1,12 +1,11 @@
-import 'package:edamkar_1/src/emergency/view/emergency_call_view.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(GetMaterialApp(
             title: 'E-Damkar',
             debugShowCheckedModeBanner: false,
@@ -14,6 +13,7 @@ void main() {
               primarySwatch: Colors.blue,
               brightness: Brightness.light,
             ),
-            home: EmergencyCall(),
+            initialRoute: AppPages.initial,
+            getPages: AppPages.routes,
           )));
 }

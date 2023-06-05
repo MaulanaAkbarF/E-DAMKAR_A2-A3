@@ -6,7 +6,7 @@ import 'dart:math';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/models/ImageModel.dart';
 import 'package:edamkar_1/models/pelaporanModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';

@@ -1,4 +1,4 @@
-import 'package:edamkar_1/src/emergency/view/maps_anonym_view.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class EmergencyController extends GetxController {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(phoneUrl)) {
       await launchUrl(phoneUrl);
-      Get.off(MapsAnonym());
+      Get.offNamed(Routes.emeMaps);
     } else {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     }
@@ -33,7 +33,7 @@ class EmergencyController extends GetxController {
         "whatsapp://send?phone=${countryCode + waPhoneNumber}&text=${Uri.encodeComponent(templateMessage)}";
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
-      Get.off(MapsAnonym());
+      Get.offNamed(Routes.emeMaps);
     } else {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     }
