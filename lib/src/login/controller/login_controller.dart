@@ -9,8 +9,16 @@ class LoginController extends GetxController {
   final account = TextEditingController().obs;
   final pass = TextEditingController().obs;
   var isLoading = false.obs;
+  var passwordVisible = true.obs;
 
   String title = 'pesan';
+
+  @override
+  void onClose() {
+    super.onClose();
+    account.value.dispose();
+    pass.value.dispose();
+  }
 
   bool checkInput() {
     if (account.value.text.isEmpty) {
@@ -46,11 +54,13 @@ class LoginController extends GetxController {
     return true;
   }
 
-  loginPost(String acnt, String password) async {
+  loginPost() async {
     if (checkInput()) {
       isLoading.value = true;
-      var result = await APIClient().postData('login',
-          {"username": acnt, "password": password}).catchError((err) {});
+      var result = await APIClient().postData('login', {
+        "username": account.value.text,
+        "password": pass.value.text
+      }).catchError((err) {});
 
       if (result != null && result != false) {
         print(result);
@@ -80,4 +90,8 @@ class LoginController extends GetxController {
       }
     }
   }
+
+  showHidePass() => passwordVisible.value = !passwordVisible.value;
+
+  goToResetPass() => null;
 }

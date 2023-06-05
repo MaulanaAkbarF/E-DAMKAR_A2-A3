@@ -1,31 +1,10 @@
-import 'dart:async';
-
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/Menu/Menu.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/models/LoginModel.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/resetpass/resetpass.dart';
-import 'package:edamkar_1/pages/register/signup.dart';
+import 'package:edamkar_1/src/login/controller/login_controller.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../../utils/app_style.dart';
-
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
-
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-bool _passwordVisible = true;
-
-@override
-void initState() {
-  _passwordVisible = true;
-}
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -86,24 +65,15 @@ final List<Map> teksStyleSignIn = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _SignInPageState extends State<SignInPage> {
-  
-
-  @override
-  void dispose() {
-    super.dispose();
-    account.dispose();
-    pass.dispose();
-  }
+class SignInPage extends GetView<LoginController> {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     var sty = styleNColor();
     return Scaffold(
-        body: Form(
-      key: _formKey,
-      child: SafeArea(
+      body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -155,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: account,
+                                  controller: controller.account.value,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -192,21 +162,18 @@ class _SignInPageState extends State<SignInPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: pass,
-                                  obscureText: _passwordVisible,
+                                  controller: controller.pass.value,
+                                  obscureText: controller.passwordVisible.value,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       hintText: teks['PasswordHint'],
                                       prefixIcon: Icon(Icons.lock),
                                       suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordVisible =
-                                                !_passwordVisible;
-                                          });
-                                        },
-                                        icon: Icon(_passwordVisible
+                                        onPressed: () =>
+                                            controller.showHidePass(),
+                                        icon: Icon(controller
+                                                .passwordVisible.value
                                             ? Icons.visibility_outlined
                                             : Icons.visibility_off_outlined),
                                         color:
@@ -225,9 +192,7 @@ class _SignInPageState extends State<SignInPage> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 20),
                               child: GestureDetector(
-                                onTap: () {
-                                  navToResetPassPage(context);
-                                },
+                                onTap: () => controller.goToResetPass(),
                                 child: Text(teks['LupaPass'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -246,12 +211,10 @@ class _SignInPageState extends State<SignInPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () async {
-                                    loginPost(account.text, pass.text);
-                                  },
+                                  onTap: () => controller.loginPost(),
                                   child: Container(
                                     height: 50,
-                                    child: isLoading
+                                    child: controller.isLoading.value
                                         ? Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -267,7 +230,7 @@ class _SignInPageState extends State<SignInPage> {
                                               SizedBox(width: paddingVertical2),
                                               Text(
                                                 'loading...',
-                                                style: sty.b( 16, white),
+                                                style: sty.b(16, white),
                                               ),
                                             ],
                                           )
@@ -313,55 +276,55 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
-    ));
+    );
   }
 }
 
-// fungsi
-void navToSignUpPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => SignUpPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
+// // fungsi
+// void navToSignUpPage(BuildContext context) {
+//   Timer(Duration(seconds: 0), () {
+//     Navigator.push(
+//         context,
+//         PageRouteBuilder(
+//           pageBuilder: (_, __, ___) => SignUpPage(),
+//           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//             return SlideTransition(
+//               position: Tween<Offset>(
+//                 begin: Offset(1, 0),
+//                 end: Offset.zero,
+//               ).animate(
+//                 CurvedAnimation(
+//                   parent: animation,
+//                   curve: Curves.easeInOut,
+//                 ),
+//               ),
+//               child: child,
+//             );
+//           },
+//         ));
+//   });
+// }
 
-void navToResetPassPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => ResetPassPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(1, 0),
-                end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: child,
-            );
-          },
-        ));
-  });
-}
+// void navToResetPassPage(BuildContext context) {
+//   Timer(Duration(seconds: 0), () {
+//     Navigator.push(
+//         context,
+//         PageRouteBuilder(
+//           pageBuilder: (_, __, ___) => ResetPassPage(),
+//           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//             return SlideTransition(
+//               position: Tween<Offset>(
+//                 begin: Offset(1, 0),
+//                 end: Offset.zero,
+//               ).animate(
+//                 CurvedAnimation(
+//                   parent: animation,
+//                   curve: Curves.easeInOut,
+//                 ),
+//               ),
+//               child: child,
+//             );
+//           },
+//         ));
+//   });
+// }
