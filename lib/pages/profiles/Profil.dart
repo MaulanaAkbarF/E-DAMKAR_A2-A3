@@ -1,4 +1,4 @@
-import 'package:edamkar_1/src/home/HomePage.dart';
+import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
 import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
