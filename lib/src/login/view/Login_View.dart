@@ -75,7 +75,7 @@ class SignInPage extends GetView<LoginController> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               for (final teks in teksSignIn)
@@ -94,7 +94,7 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 8),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -104,7 +104,7 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 24),
+                              padding: const EdgeInsets.only(top: 24),
                               child: Text(teks['Email'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -114,10 +114,10 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
-                                margin: EdgeInsets.all(2),
+                                margin: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                     color: Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(8),
@@ -130,9 +130,9 @@ class SignInPage extends GetView<LoginController> {
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.mail),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                      prefixIcon: const Icon(Icons.mail),
+                                      contentPadding: const EdgeInsets.fromLTRB(
+                                          10, 13, 10, 7),
                                       border: InputBorder.none),
                                 ),
                               ),
@@ -141,7 +141,7 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 16),
+                              padding: const EdgeInsets.only(top: 16),
                               child: Text(teks['Password'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -151,46 +151,50 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 8),
                               child: Container(
                                 width: double.infinity,
-                                margin: EdgeInsets.all(2),
+                                margin: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                     color: Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.pass.value,
-                                  obscureText: controller.passwordVisible.value,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['PasswordHint'],
-                                      prefixIcon: Icon(Icons.lock),
-                                      suffixIcon: IconButton(
-                                        onPressed: () =>
-                                            controller.showHidePass(),
-                                        icon: Icon(controller
-                                                .passwordVisible.value
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined),
-                                        color:
-                                            Color.fromARGB(255, 143, 143, 143),
-                                      ),
-                                      suffixIconColor: Colors.black,
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                                child: Obx(() => TextFormField(
+                                      controller: controller.pass.value,
+                                      obscureText:
+                                          controller.passwordVisible.value,
+                                      cursorColor: Colors.black,
+                                      style: teksStyle['SemiBold1'],
+                                      decoration: InputDecoration(
+                                          hintText: teks['PasswordHint'],
+                                          prefixIcon: const Icon(Icons.lock),
+                                          suffixIcon: IconButton(
+                                            onPressed: () =>
+                                                controller.showHidePass(),
+                                            splashColor: Colors.transparent,
+                                            icon: Icon(controller
+                                                    .passwordVisible.value
+                                                ? Icons.visibility_outlined
+                                                : Icons
+                                                    .visibility_off_outlined),
+                                            color: const Color.fromARGB(
+                                                255, 143, 143, 143),
+                                          ),
+                                          suffixIconColor: Colors.black,
+                                          contentPadding:
+                                              const EdgeInsets.fromLTRB(
+                                                  10, 13, 10, 7),
+                                          border: InputBorder.none),
+                                    )),
                               ),
                             ),
                           ),
                           Align(
                             alignment: FractionalOffset.topRight,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: const EdgeInsets.only(top: 20),
                               child: GestureDetector(
                                 onTap: () => controller.goToResetPass(),
                                 child: Text(teks['LupaPass'],
@@ -203,47 +207,49 @@ class SignInPage extends GetView<LoginController> {
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 40),
+                              padding: const EdgeInsets.only(top: 40),
                               child: Material(
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.red.shade700,
-                                  highlightColor: Colors.red.shade900,
-                                  onTap: () => controller.loginPost(),
-                                  child: Container(
-                                    height: 50,
-                                    child: controller.isLoading.value
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const SizedBox(
-                                                height: 30,
-                                                width: 30,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: Colors.white,
-                                                ),
+                                child: Obx(() => InkWell(
+                                      splashColor: Colors.red.shade700,
+                                      highlightColor: Colors.red.shade900,
+                                      onTap: () => controller.loginPost(),
+                                      child: SizedBox(
+                                        height: 50,
+                                        child: controller.isLoading.value
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 30,
+                                                    width: 30,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                      width: paddingVertical2),
+                                                  Text(
+                                                    'loading...',
+                                                    style: sty.b(16, white),
+                                                  ),
+                                                ],
+                                              )
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(teks['ButtonLogin'],
+                                                      style:
+                                                          teksStyle['Thin2']),
+                                                ],
                                               ),
-                                              SizedBox(width: paddingVertical2),
-                                              Text(
-                                                'loading...',
-                                                style: sty.b(16, white),
-                                              ),
-                                            ],
-                                          )
-                                        : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(teks['ButtonLogin'],
-                                                  style: teksStyle['Thin2']),
-                                            ],
-                                          ),
-                                  ),
-                                ),
+                                      ),
+                                    )),
                               ),
                             ),
                           )
@@ -260,12 +266,7 @@ class SignInPage extends GetView<LoginController> {
                       children: [
                         Text(teks['Footer'], style: teksStyle['SemiBold3']),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/signup',
-                            );
-                          },
+                          onTap: () => controller.goToSignUp(),
                           child: Text(teks['FooterButton'],
                               style: teksStyle['SemiBold2']),
                         )

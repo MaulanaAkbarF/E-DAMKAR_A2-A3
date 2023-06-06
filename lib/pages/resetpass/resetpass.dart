@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/src/login/view/Login_View.dart';
+import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

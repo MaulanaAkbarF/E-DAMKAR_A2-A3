@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://172.16.106.138:8000/';
+const String baseUrl = 'http://192.168.1.23:8000/';
 const String apiUrl = "${baseUrl}api/";
+final _headers = {"Accept": "application/json"};
 
 class APIClient {
   var client = http.Client();
@@ -17,8 +18,6 @@ class APIClient {
       }
     }
   }
-
-  final _headers = {"Accept": "application/json"};
 
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(apiUrl + api);

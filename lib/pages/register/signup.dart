@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/src/login/view/Login_View.dart';
+import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';

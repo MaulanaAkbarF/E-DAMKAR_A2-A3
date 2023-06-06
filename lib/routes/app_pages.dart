@@ -4,6 +4,8 @@ import 'package:edamkar_1/src/emergency/bindings/maps_page_binding.dart';
 import 'package:edamkar_1/src/emergency/view/emergency_call_view.dart';
 import 'package:edamkar_1/src/emergency/view/laporan_anonym_view.dart';
 import 'package:edamkar_1/src/emergency/view/maps_anonym_view.dart';
+import 'package:edamkar_1/src/login/bindings/login_binding.dart';
+import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -24,6 +26,8 @@ class AppPages {
     GetPage(
         name: Routes.emePelaporan,
         page: () => LaporanAnonym(),
-        binding: LaporanAnonymBinding())
+        binding: LaporanAnonymBinding()),
+    GetPage(
+        name: Routes.login, page: () => SignInPage(), binding: LoginBinding())
   ];
 }

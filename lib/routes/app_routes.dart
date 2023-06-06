@@ -5,5 +5,6 @@ abstract class Routes {
   static const emeMaps = '/mapsAnonym';
   static const emePelaporan = '/pelaporanAnonym';
 
+  static const login = '/login';
   static const home = '/home';
 }

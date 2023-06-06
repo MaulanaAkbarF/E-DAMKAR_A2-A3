@@ -1,5 +1,4 @@
 import 'package:edamkar_1/routes/app_pages.dart';
-import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -40,6 +39,6 @@ class EmergencyController extends GetxController {
   }
 
   void goLogin() {
-    Get.to(SignInPage());
+    Get.toNamed(Routes.login);
   }
 }

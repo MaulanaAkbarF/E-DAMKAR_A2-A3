@@ -1,5 +1,5 @@
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/models/LoginModel.dart';
+import 'package:edamkar_1/src/login/model/login_model.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +63,6 @@ class LoginController extends GetxController {
       }).catchError((err) {});
 
       if (result != null && result != false) {
-        print(result);
         var data = loginModelFromJson(result);
         if (data.status) {
           await DataUser().addUser(
@@ -94,4 +93,6 @@ class LoginController extends GetxController {
   showHidePass() => passwordVisible.value = !passwordVisible.value;
 
   goToResetPass() => null;
+
+  goToSignUp() => null;
 }
