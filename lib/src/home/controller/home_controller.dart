@@ -10,7 +10,7 @@ class HomeController extends GetxController {
   var userName = ''.obs;
   var urlPhoto = ''.obs;
   var namalengkap = ''.obs;
-  var data = HomeModel().obs;
+  var data;
 
 //admin contact
   final String message =
@@ -58,8 +58,8 @@ class HomeController extends GetxController {
     }
   }
 
-  CircleAvatar image(String url) {
-    if (url != "" || url.isNotEmpty) {
+  CircleAvatar image() {
+    if (urlPhoto.isNotEmpty) {
       return CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(

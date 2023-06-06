@@ -59,13 +59,13 @@ class HomePageView extends GetView<HomeController> {
                             style: semibold,
                           ),
                           Text(
-                            namalengkap,
+                            controller.namalengkap.value,
                             style: medium,
                           )
                         ],
                       ),
                       GestureDetector(
-                          child: image(url_photo),
+                          child: controller.image(),
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -108,7 +108,7 @@ class HomePageView extends GetView<HomeController> {
                       horizontal: paddingHorozontal1,
                       vertical: paddingVertical1),
                   child: ElevatedButton(
-                      onPressed: emercall,
+                      onPressed: () => controller.emercall(),
                       style: ElevatedButton.styleFrom(
                           primary: red1,
                           shape: RoundedRectangleBorder(
@@ -140,7 +140,7 @@ class HomePageView extends GetView<HomeController> {
                       padding:
                           EdgeInsets.symmetric(horizontal: paddingHorozontal1),
                       child: ElevatedButton(
-                          onPressed: emerCallWA,
+                          onPressed: controller.emerCallWA,
                           style: ElevatedButton.styleFrom(
                               primary: green1,
                               shape: RoundedRectangleBorder(
@@ -515,7 +515,7 @@ class HomePageView extends GetView<HomeController> {
   }
 
   Widget listArtikel() {
-    return data == null
+    return controller.data == null
         ? Text("Artikel Kosong")
         : Column(
             children: [
@@ -533,7 +533,7 @@ class HomePageView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.data[0].jenisArtikel.toString(),
+                        controller.data.data[0].jenisArtikel.toString(),
                         maxLines: 1,
                         style: TextStyle(
                           fontFamily: "$thin1",
@@ -546,7 +546,7 @@ class HomePageView extends GetView<HomeController> {
                         height: 10,
                       ),
                       Text(
-                        data.data![0].judul.toString(),
+                        controller.data.data![0].judul.toString(),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -564,7 +564,7 @@ class HomePageView extends GetView<HomeController> {
                   subtitle: Row(
                     children: [
                       Text(
-                        data.data![0].adminDamkar.toString(),
+                        controller.data.data![0].adminDamkar.toString(),
                       ),
                       SizedBox(
                         width: 3,
@@ -577,7 +577,7 @@ class HomePageView extends GetView<HomeController> {
                         width: 3,
                       ),
                       Text(
-                        data.data![0].tanggal.toString(),
+                        controller.data.data![0].tanggal.toString(),
                       )
                     ],
                   ),
@@ -593,154 +593,6 @@ class HomePageView extends GetView<HomeController> {
                   ),
                 ),
               ),
-              Container(
-                child: ListTile(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => DetailArtikel(
-                    //         idArtikel: data[index].id,
-                    //         jenisArtikel:
-                    //             data[index].jenisArtikel.toString())));
-                  },
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.data[1].jenisArtikel.toString(),
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "$thin1",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: black2,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        data.data![1].judul.toString(),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: black3,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "$semibold",
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        data.data![1].adminDamkar.toString(),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        data.data![1].tanggal.toString(),
-                      )
-                    ],
-                  ),
-                  trailing: Container(
-                    alignment: Alignment.topCenter,
-                    height: paddingVertical4,
-                    width: paddingHorozontal4,
-                    // color: clr[index],
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage("semuaAset/gambar/damkar.png"))),
-                  ),
-                ),
-              ),
-              Container(
-                child: ListTile(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => DetailArtikel(
-                    //         idArtikel: data[index].id,
-                    //         jenisArtikel:
-                    //             data[index].jenisArtikel.toString())));
-                  },
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.data[2].jenisArtikel.toString(),
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "$thin1",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: black2,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        data.data![2].judul.toString(),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: black3,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "$semibold",
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        data.data![2].adminDamkar.toString(),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        data.data![2].tanggal.toString(),
-                      )
-                    ],
-                  ),
-                  trailing: Container(
-                    alignment: Alignment.topCenter,
-                    height: paddingVertical4,
-                    width: paddingHorozontal4,
-                    // color: clr[index],
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage("semuaAset/gambar/damkar.png"))),
-                  ),
-                ),
-              )
             ],
           );
   }
