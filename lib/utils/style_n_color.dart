@@ -1,8 +1,8 @@
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
-class styleNColor {
-  TextStyle r({double? size, Color? color}) {
+class StyleTxt {
+  static TextStyle r({double? size, Color? color}) {
     var sz = size ?? 12;
     var clr = color ?? black;
     return TextStyle(
@@ -12,7 +12,7 @@ class styleNColor {
         color: clr);
   }
 
-  TextStyle m({double? size, Color? color}) {
+  static TextStyle m({double? size, Color? color}) {
     var sz = size ?? 12;
     var clr = color ?? black;
     return TextStyle(
@@ -22,7 +22,7 @@ class styleNColor {
         color: clr);
   }
 
-  TextStyle sb({double? size, Color? color}) {
+  static TextStyle sb({double? size, Color? color}) {
     var sz = size ?? 12;
     var clr = color ?? black;
     return TextStyle(
@@ -32,7 +32,7 @@ class styleNColor {
         color: clr);
   }
 
-  TextStyle b([double? size, Color? color]) {
+  static TextStyle b([double? size, Color? color]) {
     var sz = size ?? 12;
     var clr = color ?? black;
     return TextStyle(

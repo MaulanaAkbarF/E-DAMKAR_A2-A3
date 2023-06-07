@@ -14,7 +14,6 @@ class HomePageView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final style = styleNColor();
     return WillPopScope(
       onWillPop: () async {
         return await showDialog(
@@ -48,34 +47,34 @@ class HomePageView extends GetView<HomeController> {
                   padding: EdgeInsets.symmetric(
                       vertical: paddingVertical2,
                       horizontal: paddingHorozontal1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Selamat datang ${controller.userName.value}',
-                            maxLines: 1,
-                            style: semibold,
+                  child: Obx(() => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Selamat datang ${controller.userName.value}',
+                                maxLines: 1,
+                                style: semibold,
+                              ),
+                              Text(
+                                controller.namalengkap.value,
+                                style: medium,
+                              )
+                            ],
                           ),
-                          Text(
-                            controller.namalengkap.value,
-                            style: medium,
-                          )
+                          GestureDetector(
+                              child: controller.image(),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Profile()));
+                              }),
+                          //
                         ],
-                      ),
-                      GestureDetector(
-                          child: controller.image(),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Profile()));
-                          }),
-                      //
-                    ],
-                  ),
+                      )),
                 ),
                 ColoredBox(
                   color: grey2,
@@ -248,7 +247,7 @@ class HomePageView extends GetView<HomeController> {
                                         child: Padding(
                                             padding: EdgeInsets.only(top: 7),
                                             child: Text("Laporan Bencana Alam",
-                                                style: style.sb(size: 16))),
+                                                style: StyleTxt.sb(size: 16))),
                                       ),
                                       Expanded(
                                           child: Text(
@@ -312,7 +311,7 @@ class HomePageView extends GetView<HomeController> {
                                         child: Padding(
                                             padding: EdgeInsets.only(top: 7),
                                             child: Text("Laporan Kebakaran",
-                                                style: style.sb(size: 16))),
+                                                style: StyleTxt.sb(size: 16))),
                                       ),
                                       const Text(
                                           "Salah satu layanan dari E-Damkar")
@@ -375,7 +374,7 @@ class HomePageView extends GetView<HomeController> {
                                         child: Padding(
                                             padding: EdgeInsets.only(top: 7),
                                             child: Text("Laporan Hewan Buas",
-                                                style: style.sb(size: 16))),
+                                                style: StyleTxt.sb(size: 16))),
                                       ),
                                       Expanded(
                                           child: Text(
@@ -439,7 +438,7 @@ class HomePageView extends GetView<HomeController> {
                                         child: Padding(
                                             padding: EdgeInsets.only(top: 7),
                                             child: Text("Laporan Penyelamatan",
-                                                style: style.sb(size: 16))),
+                                                style: StyleTxt.sb(size: 16))),
                                       ),
                                       Expanded(
                                           child: Text(
@@ -458,56 +457,8 @@ class HomePageView extends GetView<HomeController> {
                       child: const Text('Artikel Terkini',
                           textAlign: TextAlign.start, style: semibold),
                     )),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(
-                      left: paddingHorozontal1,
-                      right: paddingHorozontal1,
-                      bottom: paddingHorozontal1),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 140,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            image: const DecorationImage(
-                                image:
-                                    AssetImage("semuaAset/gambar/damkar.png"),
-                                fit: BoxFit.cover)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: paddingVertical1,
-                            horizontal: paddingHorozontal1),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Disdamkar • 23 mei 2023",
-                              style: style.m(color: grey4),
-                            ),
-                            Text(
-                              "Berita",
-                              style: style.m(color: grey4),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: paddingVertical1,
-                              horizontal: paddingHorozontal1),
-                          child: Text(
-                            "Kebakaran Pabrik dan Gudang di Kawasan Perumahan Locaret",
-                            style: style.sb(size: 18),
-                          ))
-                    ],
-                  ),
-                ),
-                CardArtikelView()
+
+                const CardArtikelView()
                 // Allisign(alignment: Alignment.center, child: listArtikel())
               ]),
         ),

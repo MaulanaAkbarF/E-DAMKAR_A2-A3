@@ -71,7 +71,6 @@ class SignInPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    var sty = styleNColor();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -235,7 +234,7 @@ class SignInPage extends GetView<LoginController> {
                                                       width: paddingVertical2),
                                                   Text(
                                                     'loading...',
-                                                    style: sty.b(16, white),
+                                                    style: StyleTxt.b(16, white),
                                                   ),
                                                 ],
                                               )

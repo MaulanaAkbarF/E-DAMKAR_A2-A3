@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
@@ -7,8 +6,6 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:http/http.dart' as http;
 
 import '../../config/APIClient.dart';
 import '../../models/RegisterModel.dart';
@@ -234,7 +231,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    var sty = styleNColor();
     return Scaffold(
         body: SafeArea(
             child: Form(
@@ -517,7 +513,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     width: paddingVertical2),
                                                 Text(
                                                   'loading...',
-                                                  style: sty.b(16, white),
+                                                  style: StyleTxt.b(16, white),
                                                 ),
                                               ],
                                             )

@@ -1,4 +1,5 @@
 import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/models/HomeModel.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ class HomeController extends GetxController {
   var userName = ''.obs;
   var urlPhoto = ''.obs;
   var namalengkap = ''.obs;
+  var data = HomeModel().obs;
 
 //admin contact
   final String message =
@@ -21,6 +23,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getUserData();
+    getArtikel();
   }
 
   void emercall() async {
@@ -57,5 +60,13 @@ class HomeController extends GetxController {
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
+  }
+
+  void getArtikel() async {
+    var result = await APIClient().getData("getBeritaHome");
+    if (result != null || result != "") {
+      data.value = homeModelFromJson(result);
+      print(data.value);
+    }
   }
 }

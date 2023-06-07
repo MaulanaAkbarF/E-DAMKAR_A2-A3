@@ -1,4 +1,5 @@
 import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/login/model/login_model.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
@@ -75,7 +76,7 @@ class LoginController extends GetxController {
           Get.snackbar(
               "Berhasil Login", "Selamat Datang ${data.data!.namaLengkap}",
               backgroundColor: black3, colorText: white);
-
+          Get.offNamed(Routes.home);
           isLoading.value = false;
         } else {
           isLoading.value = false;

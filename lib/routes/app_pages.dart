@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const initial = Routes.emergency;
+  static const initial = Routes.home;
 
   static final routes = [
     GetPage(
@@ -24,23 +24,22 @@ class AppPages {
     ),
     GetPage(
         name: Routes.emeMaps,
-        page: () => MapsAnonym(),
+        page: () => const MapsAnonym(),
         binding: MapsAnonymBinding()),
     GetPage(
         name: Routes.emePelaporan,
-        page: () => LaporanAnonym(),
+        page: () => const LaporanAnonym(),
         binding: LaporanAnonymBinding()),
     GetPage(
-        name: Routes.login, page: () => SignInPage(), binding: LoginBinding()),
+        name: Routes.login,
+        page: () => const SignInPage(),
+        binding: LoginBinding()),
     GetPage(
         name: Routes.home,
-        page: () => HomePageView(),
+        page: () => const HomePageView(),
         binding: HomeBinding(),
         children: [
-          GetPage(
-            name: Routes.hmArtikel,
-            page: () => CardArtikelView(),
-          )
+          GetPage(name: Routes.hmArtikel, page: () => const CardArtikelView())
         ])
   ];
 }
