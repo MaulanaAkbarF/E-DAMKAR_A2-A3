@@ -9,7 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../config/APIClient.dart';
 import '../../models/RegisterModel.dart';
-import '../otpVerifications/otpverification.dart';
+import '../../pages/otpVerifications/otpverification.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

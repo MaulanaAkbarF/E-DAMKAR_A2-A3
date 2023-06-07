@@ -37,6 +37,7 @@ class HomeController extends GetxController {
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
     } else {
+      
       // FloatNotif()
       //     .snackBarFail(context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
     }
