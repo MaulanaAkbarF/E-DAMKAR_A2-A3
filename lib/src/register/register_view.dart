@@ -1,22 +1,10 @@
 import 'dart:async';
-import 'dart:math';
-import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/register/controller/register_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../config/APIClient.dart';
-import '../../models/RegisterModel.dart';
-import '../../pages/otpVerifications/otpverification.dart';
-
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
+import 'package:get/get.dart';
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -81,15 +69,13 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _SignUpPageState extends State<SignUpPage> {
- 
+class SignUpView extends GetView<SignUpController> {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Form(
-      key: _formKey,
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Expanded(
@@ -143,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: namalengkap,
+                                  controller: controller.namalengkap,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -180,7 +166,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: username,
+                                  controller: controller.username,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
@@ -217,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: notelp,
+                                  controller: controller.notelp,
                                   keyboardType: TextInputType.number,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
@@ -255,20 +241,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: password,
-                                  obscureText: _passwordVisible,
+                                  controller: controller.password,
+                                  obscureText: controller.passwordVisible.value,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
                                       suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordVisible =
-                                                !_passwordVisible;
-                                          });
-                                        },
-                                        icon: Icon(_passwordVisible
+                                        onPressed: () {},
+                                        icon: Icon(controller
+                                                .passwordVisible.value
                                             ? Icons.visibility_outlined
                                             : Icons.visibility_off_outlined),
                                         color:
@@ -306,20 +288,17 @@ class _SignUpPageState extends State<SignUpPage> {
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
                                 child: TextFormField(
-                                  controller: validatepass,
-                                  obscureText: _passwordVisible1,
+                                  controller: controller.validatepass,
+                                  obscureText:
+                                      controller.passwordVisible1.value,
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.lock),
                                       suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordVisible1 =
-                                                !_passwordVisible1;
-                                          });
-                                        },
-                                        icon: Icon(_passwordVisible1
+                                        onPressed: () {},
+                                        icon: Icon(controller
+                                                .passwordVisible1.value
                                             ? Icons.visibility_outlined
                                             : Icons.visibility_off_outlined),
                                         color:
@@ -344,14 +323,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    if (checkField()) {
-                                      RegisterPost(context);
-                                    }
-                                  },
+                                  onTap: controller.RegisterPost,
                                   child: Container(
                                       height: 50,
-                                      child: isloading
+                                      child: controller.isloading.value
                                           ? Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -410,7 +385,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    )));
+    ));
   }
 }
 

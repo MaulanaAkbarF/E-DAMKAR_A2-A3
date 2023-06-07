@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/models/RegisterModel.dart';
-import 'package:edamkar_1/pages/otpVerifications/otpverification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +12,8 @@ class SignUpController extends GetxController {
   final TextEditingController notelp = TextEditingController();
   final TextEditingController validatepass = TextEditingController();
   var isloading = false.obs;
-  var _passwordVisible = true.obs;
-  var _passwordVisible1 = true.obs;
+  var passwordVisible = true.obs;
+  var passwordVisible1 = true.obs;
   var randomNumber = 100000.obs;
 
   @override
@@ -88,7 +87,7 @@ class SignUpController extends GetxController {
     return true;
   }
 
-  void RegisterPost(context) async {
+  void RegisterPost() async {
     isloading.value = true;
     var result = await APIClient().postData('register', {
       "username": username.text,
@@ -105,15 +104,15 @@ class SignUpController extends GetxController {
       if (data.kondisi!) {
         //FloatNotif().snackBar2(context, "Registrasi Berhasil");
         isloading.value = false;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OtpVerificationPage(
-              noHp: notelp.text,
-              kodeOtp: randomNumber.toString(),
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => OtpVerificationPage(
+        //       noHp: notelp.text,
+        //       kodeOtp: randomNumber.toString(),
+        //     ),
+        //   ),
+        // );
       } else {
         isloading.value = false;
         if (data.message!.toString().split(" ").contains("username")) {
