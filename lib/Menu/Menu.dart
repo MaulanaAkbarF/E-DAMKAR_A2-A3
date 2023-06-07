@@ -19,7 +19,6 @@ class AppMenu extends StatefulWidget {
 class _AppMenuState extends State<AppMenu> {
   var _selectedIndex = 0;
   List<Widget> menu = [
-    const HomePage(),
     const LaporanPage(),
     const RiwayatLaporan(),
     const Artikel(),
