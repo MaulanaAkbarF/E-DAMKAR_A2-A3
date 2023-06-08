@@ -3,7 +3,7 @@ import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VerificationSignUp extends GetxController {
+class VerificationSignUpController extends GetxController {
   final kodeotptxt = TextEditingController().obs;
   var otpRegister = ''.obs;
   var noHp = ''.obs;

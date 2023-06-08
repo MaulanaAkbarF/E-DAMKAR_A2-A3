@@ -58,8 +58,8 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-class OtpVerificationPage extends GetView<VerificationSignUp> {
-  const OtpVerificationPage({Key? key}) : super(key: key);
+class OtpVerificationView extends GetView<VerificationSignUpController> {
+  const OtpVerificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

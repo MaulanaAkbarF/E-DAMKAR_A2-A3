@@ -9,6 +9,8 @@ import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
+import 'package:edamkar_1/src/register/view/register_view.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -33,13 +35,17 @@ class AppPages {
     GetPage(
         name: Routes.login,
         page: () => const SignInPage(),
-        binding: LoginBinding()),
+        binding: LoginBinding(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)),
     GetPage(
         name: Routes.home,
         page: () => const HomePageView(),
         binding: HomeBinding(),
         children: [
           GetPage(name: Routes.hmArtikel, page: () => const CardArtikelView())
-        ])
+        ]),
+    GetPage(name: Routes.register, page: () => const SignUpView()),
+    GetPage(name: Routes.otpVerif, page: () => const OtpVerificationView()),
   ];
 }

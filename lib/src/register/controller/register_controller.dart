@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/models/RegisterModel.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -104,15 +105,7 @@ class SignUpController extends GetxController {
       if (data.kondisi!) {
         //FloatNotif().snackBar2(context, "Registrasi Berhasil");
         isloading.value = false;
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => OtpVerificationPage(
-        //       noHp: notelp.text,
-        //       kodeOtp: randomNumber.toString(),
-        //     ),
-        //   ),
-        // );
+        Get.offNamed(Routes.otpVerif);
       } else {
         isloading.value = false;
         if (data.message!.toString().split(" ").contains("username")) {
