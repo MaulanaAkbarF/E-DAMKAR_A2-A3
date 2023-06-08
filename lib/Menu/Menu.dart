@@ -1,8 +1,4 @@
-import 'dart:async';
-
-
 import 'package:edamkar_1/pages/artikels/Artikel.dart';
-import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/pages/profiles/Profil.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';

@@ -129,13 +129,13 @@ class SignUpController extends GetxController {
     }
   }
 
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
-  }
+  // void showSnackBar(BuildContext context, String message) {
+  //   ScaffoldMessenger.of(context)
+  //       .showSnackBar(SnackBar(content: Text(message)));
+  // }
 
   void random() {
-    Random random = new Random();
+    Random random = Random();
     randomNumber.value = random.nextInt(900000) + 100000;
   }
 }

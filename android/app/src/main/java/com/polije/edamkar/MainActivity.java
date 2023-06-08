@@ -1,4 +1,4 @@
-package com.maulana.edamkar_1;
+package com.polije.edamkar;
 
 import io.flutter.embedding.android.FlutterActivity;
 
