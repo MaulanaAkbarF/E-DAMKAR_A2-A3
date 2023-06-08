@@ -1,25 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/resetpass/resetpass.dart';
+import 'package:edamkar_1/src/register/controller/verifikasi_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:http/http.dart' as http;
-
-import 'verificationSuccess.dart';
-import '../resetpass/RemakePass.dart';
-
-class OtpVerificationPage extends StatefulWidget {
-  String noHp, kodeOtp;
-
-  OtpVerificationPage({Key? key, required this.noHp, required this.kodeOtp})
-      : super(key: key);
-
-  @override
-  State<OtpVerificationPage> createState() => _OtpVerificationPageState();
-}
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -74,100 +58,8 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-class _OtpVerificationPageState extends State<OtpVerificationPage> {
-  final TextEditingController kodeotptxt = TextEditingController();
-  late String otpRegister;
-  late String noHp;
-
-  void initState() {
-    super.initState();
-    otpRegister = widget.kodeOtp;
-    noHp = widget.noHp;
-    _kirimNotifikasi();
-  }
-
-  void _kirimNotifikasi() async {
-    var data = {
-      "kodeOtp": widget.kodeOtp,
-      "noHp": widget.noHp,
-    };
-    await APIClient().postData('verifyOtp/whatsapp', data);
-    FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
-  }
-
-  void verifyCode() {
-    if (otpRegister.toString() == kodeotptxt.text) {
-      whenVerified();
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => VerificationSuccess()));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(
-          "Kode verifikasi tidak sesuai!",
-          textAlign: TextAlign.center,
-        )),
-      );
-    }
-  }
-
-  Future<void> whenVerified() async {
-    var result = await APIClient().postData('verification/akun', {
-      "noHp": noHp,
-      "kodeOtp": 'Null',
-      "status": 'Verified'
-    }).catchError((err) {
-      return null;
-    });
-    if (result != null) {
-      print("Nomor berhasil di verifikasi");
-    } else {
-      print('something error on code');
-      print(result);
-    }
-  }
-
-  // void _kirimNotifikasi() async {
-  //   var url = Uri.parse(
-  //       APIClient.otpwhatsapp); // Ganti dengan URL endpoint API yang sesuai
-
-  //   var data = {
-  //     "kodeOtp": otpRegister.toString(),
-  //     "noHp": noHp.toString(),
-  //   };
-  //   var response = await http.post(url, body: data);
-  //   if (response.statusCode == 200) {
-  //     var responseData = json.decode(response.body);
-  //     print('Respon dari server: $responseData');
-  //   } else {
-  //     print('Gagal mengirim data. Kode status: ${response.statusCode}');
-  //   }
-  // }
-
-  void navToRemakePassPage(BuildContext context) {
-    Timer(Duration(seconds: 0), () {
-      Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (_, __, ___) => RemakePassPage(noHp: noHp),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return SlideTransition(
-                position: Tween<Offset>(
-                  begin: Offset(-1, 0),
-                  end: Offset.zero,
-                ).animate(
-                  CurvedAnimation(
-                    parent: animation,
-                    curve: Curves.easeInOut,
-                  ),
-                ),
-                child: child,
-              );
-            },
-          ));
-    });
-  }
+class OtpVerificationPage extends GetView<VerificationSignUp> {
+  const OtpVerificationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +115,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
-                                controller: kodeotptxt,
+                                controller: controller.kodeotptxt.value,
                                 appContext: context,
                                 keyboardType: TextInputType.number,
                                 length: 6, // panjang kode OTP
@@ -258,9 +150,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                               InkWell(
                                 child: Text(teks['SendCodeButton'],
                                     style: teksStyle['SemiBold2']),
-                                onTap: () {
-                                  _kirimNotifikasi();
-                                },
+                                onTap: () => controller.sendNotification(),
                               ),
                             ],
                           ),
@@ -275,9 +165,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    verifyCode();
-                                  },
+                                  onTap: () => controller.verifyCode(),
                                   child: Container(
                                     height: 50,
                                     child: Row(
