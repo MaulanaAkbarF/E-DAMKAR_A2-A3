@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:http/http.dart' as http;
 
-import '../../src/resetpass/RemakePass.dart';
+import '../../src/resetpass/remake_pass_view.dart';
 
 class OTPResetPassword extends StatefulWidget {
   String noHp, kodeOtp;
