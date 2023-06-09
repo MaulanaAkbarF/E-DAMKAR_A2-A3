@@ -199,7 +199,7 @@ void navToResetPassPage(BuildContext context) {
     Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => ResetPassPage(),
+          pageBuilder: (_, __, ___) => ResetPassView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(
