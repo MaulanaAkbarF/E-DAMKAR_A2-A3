@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/resetpass/resetpass.dart';
+import 'package:edamkar_1/src/resetpass/resetpass.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:http/http.dart' as http;
 
-import '../resetpass/RemakePass.dart';
+import '../../src/resetpass/RemakePass.dart';
 
 class OTPResetPassword extends StatefulWidget {
   String noHp, kodeOtp;

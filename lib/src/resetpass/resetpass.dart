@@ -7,7 +7,7 @@ import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../otpVerifications/OTPResetPassword.dart';
+import '../../pages/otpVerifications/OTPResetPassword.dart';
 
 class ResetPassPage extends StatefulWidget {
   const ResetPassPage({Key? key}) : super(key: key);

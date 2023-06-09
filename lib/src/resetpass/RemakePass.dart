@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
-import 'package:edamkar_1/pages/resetpass/UpdatePasswordSuccess.dart';
+import 'package:edamkar_1/src/resetpass/UpdatePasswordSuccess.dart';
 import 'package:flutter/material.dart';
 
-import '../../src/register/view/verification_succses_view.dart';
+import '../register/view/verification_succses_view.dart';
 
 class RemakePassPage extends StatefulWidget {
   String noHp;

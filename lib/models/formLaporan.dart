@@ -42,6 +42,5 @@ class _AppFormState extends State<AppForm> {
         ],
       ),
     );
-    ;
   }
 }
