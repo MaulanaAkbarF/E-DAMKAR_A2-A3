@@ -93,7 +93,7 @@ class LoginController extends GetxController {
 
   showHidePass() => passwordVisible.value = !passwordVisible.value;
 
-  goToResetPass() => null;
+  goToResetPass() => Get.toNamed(Routes.resetPass);
 
   goToSignUp() => Get.toNamed(Routes.register);
 }

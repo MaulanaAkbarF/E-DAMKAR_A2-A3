@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:edamkar_1/src/resetpass/controller/ito_resetpass_controller.dart';
+import 'package:edamkar_1/src/resetpass/controller/otp_resetpass_controller.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
