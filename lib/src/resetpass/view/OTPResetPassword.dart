@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/src/resetpass/resetpass.dart';
+import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:http/http.dart' as http;
-
-import '../../src/resetpass/remake_pass_view.dart';
 
 class OTPResetPassword extends StatefulWidget {
   String noHp, kodeOtp;
@@ -73,7 +69,7 @@ final List<Map> teksStyleOtpVerification = [
   }
 ];
 
-class _OTPResetPasswordState extends State<OTPResetPassword> {
+class OtpResetPasswordView extends GetView<OtpResetPasswordController> {
   final TextEditingController kodeotptxt = TextEditingController();
   late String otpRegister;
   late String noHp;
@@ -86,20 +82,20 @@ class _OTPResetPasswordState extends State<OTPResetPassword> {
   void verifyCode() {
     if (otpRegister.toString() == kodeotptxt.text) {
       whenVerified();
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RemakePassPage(
-                    noHp: noHp,
-                  )));
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => RemakePassView(
+      //               noHp: noHp,
+      //             )));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(
-          "Kode verifikasi tidak sesuai!",
-          textAlign: TextAlign.center,
-        )),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //       content: Text(
+      //     "Kode verifikasi tidak sesuai!",
+      //     textAlign: TextAlign.center,
+      //   )),
+      // );
     }
   }
 
@@ -274,7 +270,7 @@ void navToResetPassPage(BuildContext context) {
     Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => ResetPassPage(),
+          pageBuilder: (_, __, ___) => ResetPassView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(

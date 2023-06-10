@@ -1,5 +1,3 @@
-
-import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -11,7 +9,7 @@ class UpdatePasswordSuccess extends StatelessWidget {
       body: Container(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -49,26 +47,21 @@ class UpdatePasswordSuccess extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     elevation: 0,
-                    minimumSize: Size.fromHeight(50),
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    minimumSize: const Size.fromHeight(50),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                   ),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SignInPage()));
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Kembali ke Login',
-                        style: TextStyle(
-                          // Properti gaya teks
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  child: const Text(
+                    'Kembali ke Login',
+                    style: TextStyle(
+                      // Properti gaya teks
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

@@ -39,7 +39,7 @@ final List<Map> teksStyleResetPass = [
 ];
 
 class ResetPassView extends GetView<ResetPassController> {
-  // const ResetPassView({Key? key}) : super(key: key);
+  const ResetPassView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

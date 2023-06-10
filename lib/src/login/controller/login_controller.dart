@@ -95,5 +95,5 @@ class LoginController extends GetxController {
 
   goToResetPass() => null;
 
-  goToSignUp() => Get.offNamed(Routes.register);
+  goToSignUp() => Get.toNamed(Routes.register);
 }

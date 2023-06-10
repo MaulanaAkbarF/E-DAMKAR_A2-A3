@@ -162,7 +162,7 @@ class SignInPage extends GetView<LoginController> {
                                         width: 1.2)),
                                 child: Obx(() => TextFormField(
                                       controller: controller.pass.value,
-                                      obscureText:
+                                      obscureText:                                              
                                           controller.passwordVisible.value,
                                       cursorColor: Colors.black,
                                       style: teksStyle['SemiBold1'],
@@ -173,7 +173,7 @@ class SignInPage extends GetView<LoginController> {
                                             onPressed: () =>
                                                 controller.showHidePass(),
                                             splashColor: Colors.transparent,
-                                            icon: Icon(controller
+                                            icon: Icon(!controller
                                                     .passwordVisible.value
                                                 ? Icons.visibility_outlined
                                                 : Icons
