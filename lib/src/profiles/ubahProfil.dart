@@ -8,13 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
 import 'package:edamkar_1/utils/app_style.dart';
-import 'Profil.dart';
 import 'package:path/path.dart' as Path;
 import 'package:flutter/services.dart' show PlatformException;
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
   late final int userId;
@@ -26,9 +22,9 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   var Name = 'user1';
   var UserPic = "";
-  var _email = "";
+  // var _email = "";
   var nohp = "";
-  late final _idUser = "";
+  //late final _idUser = "";
 
   TextEditingController? getNama;
   //TextEditingController? getnoHp;
@@ -36,8 +32,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void getUserData() async {
     var data = DataUser().getNama();
     var gambar = DataUser().getGambar();
-    var nomor = DataUser().getNoHp();
-    var email = DataUser().getUsername();
+    // var nomor = DataUser().getNoHp();
+    // var email = DataUser().getUsername();
     var basenoHp = DataUser().getNoHp();
 
     gambar.then((value) {
@@ -58,11 +54,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         nama.text = Name;
       });
     });
-    email.then((value) {
-      setState(() {
-        _email = value.toString();
-      });
-    });
+    // email.then((value) {
+    //   setState(() {
+    //     _email = value.toString();
+    //   });
+    // });
   }
 
   @override
@@ -159,7 +155,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final nama = TextEditingController();
   final noHp = TextEditingController();
   TextEditingController? getNoHp;
-  String _message = '';
+  String message = '';
 
   @override
   void dispose() {
@@ -306,13 +302,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: TextFormField(
                               controller: nama,
                               //readOnly: true,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'nama lengkap tidak boleh kosong';
-                                } else if (value.length > 50) {
-                                  return 'nama lengkap terlalu panjang';
-                                }
-                              },
+                              // validator: (value) {
+                              //   if (value == null || value.isEmpty) {
+                              //     return 'nama lengkap tidak boleh kosong';
+                              //   } else if (value.length > 50) {
+                              //     return 'nama lengkap terlalu panjang';
+                              //   }
+                              // },
 
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
@@ -359,15 +355,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     color: Colors.grey.shade300, width: 1.2)),
                             child: TextFormField(
                               controller: noHp,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'nomor hp tidak boleh kosong';
-                                } else if (value.length > 13) {
-                                  return 'nomor hp terlalu panjang';
-                                } else if (value.length < 10) {
-                                  return 'nomor hp terlalu pendek';
-                                }
-                              },
+                              // validator: (value) {
+                              //   if (value == null || value.isEmpty) {
+                              //     return 'nomor hp tidak boleh kosong';
+                              //   } else if (value.length > 13) {
+                              //     return 'nomor hp terlalu panjang';
+                              //   } else if (value.length < 10) {
+                              //     return 'nomor hp terlalu pendek';
+                              //   }
+                              // },
                               //readOnly: true,
 
                               cursorColor: Colors.black,

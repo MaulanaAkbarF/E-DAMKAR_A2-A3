@@ -1,6 +1,5 @@
-import 'package:edamkar_1/src/home/view/home_view.dart';
-import 'package:edamkar_1/pages/profiles/UbahSandi.dart';
-import 'package:edamkar_1/pages/profiles/ubahProfil.dart';
+import 'package:edamkar_1/src/profiles/UbahSandi.dart';
+import 'package:edamkar_1/src/profiles/ubahProfil.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:flutter/material.dart';

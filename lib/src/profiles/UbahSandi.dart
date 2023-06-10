@@ -1,14 +1,7 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/models/UbahPassword.dart';
 import 'package:edamkar_1/models/changePw.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -56,7 +49,7 @@ class _UbahSandiPageState extends State<UbahSandi> {
   final _oldPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  String _message = '';
+  
 
   postUbahSandi(String id, String pwLama, String pwBaru) async {
     if (_formKey.currentState!.validate()) {
@@ -183,16 +176,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
                               color: Colors.grey.shade300, width: 1.2)),
                       child: TextFormField(
                         controller: _oldPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'password lama tidak boleh kosong';
-
-                            // else if (value.length > 20) {
-                            //   return 'password lama terlalu panjang';
-                          } else if (value.length < 8) {
-                            return 'password lama terlalu pendek';
-                          }
-                        },
                         obscureText: _passwordVisible,
                         cursorColor: Colors.black,
                         style: TextStyle(),
@@ -243,15 +226,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
                               color: Colors.grey.shade300, width: 1.2)),
                       child: TextFormField(
                         controller: _newPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'password baru tidak boleh kosong';
-                          } else if (value.length > 20) {
-                            return 'password baru terlalu panjang';
-                          } else if (value.length < 8) {
-                            return 'password baru terlalu pendek';
-                          }
-                        },
                         obscureText: _passwordVisible2,
                         cursorColor: Colors.black,
                         style: TextStyle(),
@@ -303,13 +277,6 @@ class _UbahSandiPageState extends State<UbahSandi> {
                               color: Colors.grey.shade300, width: 1.2)),
                       child: TextFormField(
                         controller: _confirmPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Validasi password tidak boleh kosong';
-                          } else if (value != _newPasswordController.text) {
-                            return "Validasi password tidak sama !";
-                          }
-                        },
                         obscureText: _passwordVisible1,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
