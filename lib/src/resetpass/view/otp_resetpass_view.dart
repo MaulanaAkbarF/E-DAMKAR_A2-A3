@@ -1,20 +1,9 @@
 import 'dart:async';
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
+import 'package:edamkar_1/src/resetpass/controller/ito_resetpass_controller.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
-class OTPResetPassword extends StatefulWidget {
-  String noHp, kodeOtp;
-
-  OTPResetPassword({Key? key, required this.noHp, required this.kodeOtp})
-      : super(key: key);
-
-  @override
-  State<OTPResetPassword> createState() => _OTPResetPasswordState();
-}
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -70,61 +59,7 @@ final List<Map> teksStyleOtpVerification = [
 ];
 
 class OtpResetPasswordView extends GetView<OtpResetPasswordController> {
-  final TextEditingController kodeotptxt = TextEditingController();
-  late String otpRegister;
-  late String noHp;
-  void initState() {
-    super.initState();
-    otpRegister = widget.kodeOtp;
-    noHp = widget.noHp;
-  }
-
-  void verifyCode() {
-    if (otpRegister.toString() == kodeotptxt.text) {
-      whenVerified();
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => RemakePassView(
-      //               noHp: noHp,
-      //             )));
-    } else {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //       content: Text(
-      //     "Kode verifikasi tidak sesuai!",
-      //     textAlign: TextAlign.center,
-      //   )),
-      // );
-    }
-  }
-
-  Future<void> whenVerified() async {
-    var result = await APIClient().postData('verification/$noHp', {
-      "noHp": noHp,
-      "kodeOtp": 'Null',
-      "status": 'Verified'
-    }).catchError((err) {
-      return null;
-    });
-    if (result != null) {
-      print("Nomor berhasil di verifikasi");
-    } else {
-      print('something error on code');
-      print(result);
-    }
-  }
-
-  void _kirimNotifikasi() async {
-    void _kirimNotifikasi() async {
-      var data = {
-        "kodeOtp": widget.kodeOtp,
-        "noHp": widget.noHp,
-      };
-      await APIClient().postData('verifyOtp/whatsapp', data);
-      FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
-    }
-  }
+  const OtpResetPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
