@@ -43,14 +43,12 @@ class OtpResetPasswordController extends GetxController {
     }
   }
 
-  void _kirimNotifikasi() async {
-    void _kirimNotifikasi() async {
-      var data = {
-        "kodeOtp": kodeOtp.value,
-        "noHp": noHp.value,
-      };
-      await APIClient().postData('verifyOtp/whatsapp', data);
-      // FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
-    }
+  void kirimNotifikasi() async {
+    var data = {
+      "kodeOtp": kodeOtp.value,
+      "noHp": noHp.value,
+    };
+    await APIClient().postData('verifyOtp/whatsapp', data);
+    // FloatNotif().snackBar2(context, "kode Otp berhasil terkirim");
   }
 }

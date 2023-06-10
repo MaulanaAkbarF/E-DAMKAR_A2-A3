@@ -118,7 +118,7 @@ class OtpResetPasswordView extends GetView<OtpResetPasswordController> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
-                                controller: kodeotptxt,
+                                controller: controller.kodeotptxt.value,
                                 appContext: context,
                                 length: 6, // panjang kode OTP
                                 onChanged: (value) {
@@ -152,9 +152,7 @@ class OtpResetPasswordView extends GetView<OtpResetPasswordController> {
                               InkWell(
                                 child: Text(teks['SendCodeButton'],
                                     style: teksStyle['SemiBold2']),
-                                onTap: () {
-                                  _kirimNotifikasi();
-                                },
+                                onTap: () => controller.kirimNotifikasi(),
                               ),
                             ],
                           ),
@@ -169,9 +167,7 @@ class OtpResetPasswordView extends GetView<OtpResetPasswordController> {
                                 child: InkWell(
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
-                                  onTap: () {
-                                    verifyCode();
-                                  },
+                                  onTap: () => controller.verifyCode(),
                                   child: Container(
                                     height: 50,
                                     child: Row(
