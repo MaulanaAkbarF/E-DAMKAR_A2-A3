@@ -1,4 +1,5 @@
 import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,6 +50,34 @@ class ProfileController extends GetxController {
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
+  }
+
+  showLogoutDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      title: Text("Keluar"),
+      content: Text("Apakah Kamu Yakin Akan Keluar?"),
+      actions: [
+        TextButton(
+          child: Text("Tidak", style: TextStyle(color: Colors.black)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        TextButton(
+          child: Text(
+            "Ya",
+            style: TextStyle(color: Colors.black),
+          ),
+          onPressed: () => Get.offAll(Routes.login),
+        ),
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   goPop() => Get.back();

@@ -1,16 +1,11 @@
-import 'package:edamkar_1/src/login/view/login_view.dart';
-import 'package:edamkar_1/pages/informations/TentangKami.dart';
 import 'package:edamkar_1/src/profiles/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: () async {
         return await showDialog(
@@ -148,7 +143,7 @@ class ProfileView extends GetView<ProfileController> {
                       //         builder: (context) =>
                       //             UbahSandi(_iduser.toString())));
                     },
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Ubah Kata Sandi",
@@ -235,10 +230,10 @@ class ProfileView extends GetView<ProfileController> {
                 leading: Icon(Icons.help),
                 title: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TentangKami()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => TentangKami()));
                     },
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -254,8 +249,8 @@ class ProfileView extends GetView<ProfileController> {
                 horizontalTitleGap: 0,
                 trailing: GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TentangKami()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => TentangKami()));
                   },
                   child: Icon(Icons.chevron_right),
                 ),
@@ -272,9 +267,7 @@ class ProfileView extends GetView<ProfileController> {
               padding: EdgeInsets.symmetric(
                   vertical: paddingVertical4, horizontal: paddingHorozontal2),
               child: ElevatedButton(
-                  onPressed: () {
-                    showLogoutDialog(context);
-                  },
+                  onPressed: () => controller.showLogoutDialog(context),
                   style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Color.fromARGB(255, 250, 250, 250),
@@ -291,37 +284,6 @@ class ProfileView extends GetView<ProfileController> {
           ],
         ),
       ),
-    );
-  }
-
-  showLogoutDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      title: Text("Keluar"),
-      content: Text("Apakah Kamu Yakin Akan Keluar?"),
-      actions: [
-        TextButton(
-          child: Text("Tidak", style: TextStyle(color: Colors.black)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        TextButton(
-          child: Text(
-            "Ya",
-            style: TextStyle(color: Colors.black),
-          ),
-          onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => SignInPage()));
-          },
-        ),
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }
