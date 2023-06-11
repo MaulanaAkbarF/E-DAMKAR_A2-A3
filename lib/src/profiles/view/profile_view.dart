@@ -1,86 +1,15 @@
-import 'package:edamkar_1/src/profiles/UbahSandi.dart';
-import 'package:edamkar_1/src/profiles/ubahProfil.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:edamkar_1/pages/informations/TentangKami.dart';
+import 'package:edamkar_1/src/profiles/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
-import 'package:edamkar_1/config/APIClient.dart';
+import 'package:get/get.dart';
 
-import '../../Menu/Menu.dart';
+class ProfileView extends GetView<ProfileController> {
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
-
-  @override
-  State<Profile> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<Profile> {
-  var userName = 'user1';
-  var noTelp = '08..';
-  var url_photo = "";
-  var _noHp = "0800000000001";
-  var _iduser;
-  void getUserData() async {
-    var idData = DataUser().getUserId();
-    var data = DataUser().getNama();
-    var data1 = DataUser().getNoHp();
-    var gambar = DataUser().getGambar();
-    var noHp = DataUser().getNoHp();
-
-    idData.then((value) {
-      setState(() {
-        _iduser = value;
-      });
-    });
-
-    gambar.then((value) {
-      setState(() {
-        url_photo = value;
-      });
-    });
-
-    data.then((value) {
-      setState(() {
-        userName = value.toString();
-      });
-    });
-
-    data1.then((value) {
-      setState(() {
-        noTelp = value.toString();
-      });
-    });
-
-    noHp.then((value) {
-      setState(() {
-        _noHp = value.toString();
-      });
-    });
-  }
-
-  CircleAvatar image(String url) {
-    if (url != "" || url.isNotEmpty) {
-      return CircleAvatar(
-          radius: 30,
-          backgroundImage: NetworkImage(
-              '${baseUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
-    }
-    return const CircleAvatar(
-        radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getUserData();
-    print("no Hp :" + _noHp);
-  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
     return WillPopScope(
       onWillPop: () async {
@@ -92,15 +21,11 @@ class _ProfilePageState extends State<Profile> {
                 content: Text("Apakah anda yakin untuk Keluar ?"),
                 actions: <Widget>[
                   FloatingActionButton(
-                      child: Text("Tidak"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      }),
+                      child: const Text("Tidak"),
+                      onPressed: () => controller.goPop()),
                   FloatingActionButton(
-                      child: Text("Ya"),
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      })
+                      child: const Text("Ya"),
+                      onPressed: () => controller.goPop())
                 ],
               );
             });
@@ -109,7 +34,7 @@ class _ProfilePageState extends State<Profile> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(
@@ -120,10 +45,7 @@ class _ProfilePageState extends State<Profile> {
                   child: InkWell(
                     splashColor: Colors.grey.shade400,
                     highlightColor: Colors.grey.shade600,
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (BuildContext context) => const AppMenu()));
-                    },
+                    onTap: () {},
                     child: Padding(
                       padding: EdgeInsets.only(right: 10),
                       child: Container(
@@ -134,7 +56,7 @@ class _ProfilePageState extends State<Profile> {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   "Profil",
                   style: TextStyle(
                       fontSize: 30,
@@ -156,15 +78,15 @@ class _ProfilePageState extends State<Profile> {
                   color: Colors.transparent,
                 ),
                 child: ListTile(
-                  leading: image(url_photo),
-                  title: Text("$userName"),
-                  subtitle: Text("$_noHp"),
+                  leading: controller.image(),
+                  title: Text(controller.userName),
+                  subtitle: Text(controller.noHp),
                   trailing: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditProfilePage(1)));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => EditProfilePage(1)));
                     },
                     child: Text(
                       "Ubah",
@@ -220,11 +142,11 @@ class _ProfilePageState extends State<Profile> {
                 leading: Icon(Icons.lock),
                 title: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  UbahSandi(_iduser.toString())));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             UbahSandi(_iduser.toString())));
                     },
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -240,11 +162,11 @@ class _ProfilePageState extends State<Profile> {
                 horizontalTitleGap: 0,
                 trailing: GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                UbahSandi(_iduser.toString())));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             UbahSandi(_iduser.toString())));
                   },
                   child: Icon(Icons.chevron_right),
                 ),
