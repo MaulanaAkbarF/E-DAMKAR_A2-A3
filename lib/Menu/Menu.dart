@@ -1,7 +1,3 @@
-import 'package:edamkar_1/pages/artikels/Artikel.dart';
-import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
-import 'package:edamkar_1/src/profiles/Profil.dart';
-import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +11,6 @@ class AppMenu extends StatefulWidget {
 class _AppMenuState extends State<AppMenu> {
   var _selectedIndex = 0;
   List<Widget> menu = [
-    const LaporanPage(),
-    const RiwayatLaporan(),
-    const Artikel(),
-    const Profile()
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:edamkar_1/src/profiles/controller/ubah_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 
 // class EditProfilePage extends StatefulWidget {
