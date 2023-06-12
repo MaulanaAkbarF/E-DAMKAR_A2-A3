@@ -9,6 +9,12 @@ import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/profiles/bindings/profile_binding.dart';
+import 'package:edamkar_1/src/profiles/bindings/ubah_profile_binding.dart';
+import 'package:edamkar_1/src/profiles/bindings/ubah_sandi_binding.dart';
+import 'package:edamkar_1/src/profiles/view/profile_view.dart';
+import 'package:edamkar_1/src/profiles/view/ubah_profile_view.dart';
+import 'package:edamkar_1/src/profiles/view/ubah_sandi_view.dart';
 import 'package:edamkar_1/src/register/bindings/otp_verifikasi_binding.dart';
 import 'package:edamkar_1/src/register/bindings/register_binding.dart';
 import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
@@ -19,7 +25,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const initial = Routes.emergency;
+  static const initial = Routes.profile;
 
   /*halaman navigasi routing
     Name -> berfungsi sebagai nama dari route
@@ -43,6 +49,7 @@ class AppPages {
       page: () => const LaporanAnonym(),
       binding: LaporanAnonymBinding(),
     ),
+
     GetPage(
       name: Routes.login,
       page: () => const SignInPage(),
@@ -50,6 +57,7 @@ class AppPages {
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500),
     ),
+
     GetPage(
         name: Routes.home,
         page: () => const HomePageView(),
@@ -72,6 +80,26 @@ class AppPages {
       page: () => const OtpVerificationView(),
       binding: VerificationSignUpBinding(),
     ),
-    GetPage(name: Routes.resetPass, page: () => const ResetPassView(),)
+    GetPage(
+      name: Routes.resetPass,
+      page: () => const ResetPassView(),
+    ),
+
+    //profile
+    GetPage(
+      name: Routes.profile,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
+
+    GetPage(
+        name: Routes.ubProf,
+        page: () => const EditProfilePage(),
+        binding: UbahProfileBinding()),
+
+    GetPage(
+        name: Routes.ubPsProf,
+        page: () => const UbahSandiView(),
+        binding: UbahSandiBinding()),
   ];
 }

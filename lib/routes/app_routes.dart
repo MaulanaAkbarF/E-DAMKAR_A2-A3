@@ -17,4 +17,17 @@ abstract class Routes {
   //home
   static const home = '/home';
   static const hmArtikel = '/hmArtikel';
+
+  //laporan
+  static const laporan = '/laporan';
+  static const mpLap = '/mapsLaporan';
+
+  //Riwayat
+
+  //artikel
+
+  // profile
+  static const profile = '/profile';
+  static const ubProf = '/ubahProfile';
+  static const ubPsProf = '/ubahPasswordProfile';
 }

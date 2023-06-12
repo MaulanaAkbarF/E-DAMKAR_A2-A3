@@ -4,6 +4,7 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
+  const ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
