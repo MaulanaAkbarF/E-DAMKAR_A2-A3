@@ -1,5 +1,6 @@
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/models/HomeModel.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,6 @@ class HomeController extends GetxController {
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
     } else {
-      
       // FloatNotif()
       //     .snackBarFail(context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
     }
@@ -70,4 +70,6 @@ class HomeController extends GetxController {
       print(data.value);
     }
   }
+
+  goToProfile() => Get.toNamed(Routes.profile);
 }

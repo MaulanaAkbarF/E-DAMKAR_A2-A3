@@ -25,7 +25,8 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const initial = Routes.profile;
+  //initial merupakan route halaman yang akan pertaman kali ditampilkan
+  static const initial = Routes.emergency;
 
   /*halaman navigasi routing
     Name -> berfungsi sebagai nama dari route

@@ -65,12 +65,7 @@ class HomePageView extends GetView<HomeController> {
                           ),
                           GestureDetector(
                               child: controller.image(),
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => const Profile()));
-                              }),
+                              onTap: () => controller.goToProfile()),
                           //
                         ],
                       )),

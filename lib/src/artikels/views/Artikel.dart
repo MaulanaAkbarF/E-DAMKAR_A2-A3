@@ -1,183 +1,12 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:edamkar_1/config/APIClient.dart';
-
-import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
-
-import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
-import 'package:flutter/foundation.dart';
+import 'package:edamkar_1/src/artikels/controller/artikel_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
-import 'package:edamkar_1/pages/artikels/DetailArtikel.dart';
+import 'package:edamkar_1/src/artikels/DetailArtikel.dart';
+import 'package:get/get.dart';
 
-import 'package:edamkar_1/models/ArtikelModel.dart';
-
-class Artikel extends StatefulWidget {
-  const Artikel({super.key});
-
-  @override
-  State<Artikel> createState() => _ArtikelState();
-}
-
-class _ArtikelState extends State<Artikel> {
-  List<ArtikelDatum>? artikelElement = [];
-  List<EdukasiDatum>? artikelEdukasi = [];
-  List<dynamic> beritaE = [];
-
-  void pemabatasanLoad() {
-    artikelElement!.clear();
-
-    for (var i = 0; i <= 10; i++) {
-      getData();
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (mounted) {
-      getData();
-      getDataHigh();
-    }
-    // PostDataArtikel();
-    // PostDataArtikelHigh();
-    // pemabatasanLoad();
-
-    //scrol controller
-
-    //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //     double minScrollExtent1 = _scrollController.position.minScrollExtent;
-    //     double maxScrollExtent1 = _scrollController.position.maxScrollExtent;
-    //     //
-    //     animateToMaxMin(maxScrollExtent1, minScrollExtent1, maxScrollExtent1, 50,
-    //         _scrollController);
-    //   });
-    // }
-
-    // animateToMaxMin(double max, double min, double direction, int second,
-    //     ScrollController scrollController) {
-    //   scrollController
-    //       .animateTo(direction,
-    //           duration: Duration(seconds: second), curve: Curves.linear)
-    //       .then((value) {
-    //     direction = direction == max ? min : max;
-    //     animateToMaxMin(max, min, direction, second, scrollController);
-    //   });
-  }
-
-  void postDataBerita() async {
-    var result = await APIClient().getData('getBerita');
-
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-      // debugPrint(data.length.toString());
-    } else {
-      debugPrint('terdapat kesalah');
-    }
-  }
-
-  void postDataEdukasi() async {
-    var result = await APIClient().getData('getEdukasi');
-
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-    } else {
-      print("data kosong");
-    }
-  }
-
-  void postDataAgenda() async {
-    var result = await APIClient().getData('getAgenda');
-
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-    } else {
-      print("data kosong");
-    }
-  }
-
-  // postDataArtikelAll() async {
-  //   var result = await APIClient().getData('getBerita');
-  //   var result2 = await APIClient().getData('getEdukasi');
-
-  //   if (result && result2 != null) {
-  //     var dataRiwayat_berita = dataArtikelFromJson(result);
-  //     var dataRiwayat_edukasi = artikelEdukasiModelFromJson(result2);
-
-  //     if (dataRiwayat_berita.data.isNotEmpty &&
-  //         dataRiwayat_edukasi.data.isNotEmpty) {
-  //       setState(() {
-  //         // artikelAll = dataRiwayat_berita.data;
-  //         // artikelAll = dataRiwayat_edukasi.data;
-  //       });
-  //     }
-  //   } else {
-  //     print("data kosong");
-  //   }
-  // }
-
-  // PostDataArtikelHigh() async {
-  //   var result = await APIClient().getData('getBeritaHigh');
-
-  //   if (result != null) {
-  //     var dataRiwayat = artikelHighlightModelFromJson(result);
-  //     if (dataRiwayat.data.isNotEmpty) {
-  //       setState(() {
-  //         artikelHigh = dataRiwayat.data;
-  //         print(dataRiwayat);
-  //       });
-  //     }
-  //   } else {
-  //     print("data kosong");
-  //   }
-  // }
-
-  final ButtonStyle _buttonStyle = TextButton.styleFrom(
-    primary: Colors.white,
-    backgroundColor: Color.fromARGB(255, 224, 36, 36),
-    padding: EdgeInsets.symmetric(
-        horizontal: paddingHorozontal1, vertical: paddingVertical1),
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-      Radius.circular(20),
-    )),
-  );
-
-  var data;
-  var dataHigh;
-
-  void getData() async {
-    var result = await APIClient().getData('getAllArtikel');
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-        debugPrint(data.length.toString());
-      });
-    } else {
-      debugPrint('terdapat kesalahan');
-    }
-  }
-
-  void getDataHigh() async {
-    var result = await APIClient().getData('getAllArtikelHigh');
-    if (result != null) {
-      setState(() {
-        dataHigh = semuaArtikelModelFromJson(result);
-
-        debugPrint(dataHigh.length.toString());
-      });
-    } else {
-      debugPrint('terdapat kesalah');
-    }
-  }
+class ArtikelView extends GetView<ArtikleController> {
+  ArtikelView({super.key});
 
   final List<Map> teksLaporan = [
     {
@@ -365,26 +194,25 @@ class _ArtikelState extends State<Artikel> {
         body: SafeArea(
             child: Column(
           children: [
-            for (final teks in teksLaporan)
-              for (final teksStyle in teksStyleLaporan)
-                Align(
-                  alignment: FractionalOffset.topCenter,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: paddingVertical1,
-                        horizontal: paddingHorozontal1),
-                    child: Text(
-                      "Artikel",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 55, 65, 81),
-                          fontFamily: "font/inter_bold.ttf",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
+            // for (final teks in teksLaporan)
+            //   for (final teksStyle in teksStyleLaporan)
+            Align(
+              alignment: FractionalOffset.topCenter,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: paddingVertical1, horizontal: paddingHorozontal1),
+                child: const Text(
+                  "Artikel",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 55, 65, 81),
+                      fontFamily: "font/inter_bold.ttf",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
                 ),
+              ),
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
               child: Column(
@@ -398,29 +226,29 @@ class _ArtikelState extends State<Artikel> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextButton(
-                              style: _buttonStyle,
-                              onPressed: getData,
+                              style: controller.buttonStyle,
+                              onPressed: () => controller.getData,
                               child: Text("Semua")),
                           SizedBox(
                             width: 50,
                           ),
                           TextButton(
-                              style: _buttonStyle,
-                              onPressed: postDataBerita,
+                              style: controller.buttonStyle,
+                              onPressed: controller.postDataBerita,
                               child: Text("Berita")),
                           SizedBox(
                             width: 50,
                           ),
                           TextButton(
-                              style: _buttonStyle,
-                              onPressed: postDataEdukasi,
+                              style: controller.buttonStyle,
+                              onPressed: controller.postDataEdukasi,
                               child: Text("Edukasi")),
                           SizedBox(
                             width: 50,
                           ),
                           TextButton(
-                              style: _buttonStyle,
-                              onPressed: postDataAgenda,
+                              style: controller.buttonStyle,
+                              onPressed: controller.postDataAgenda,
                               child: Text("Agenda")),
                         ],
                       ),
@@ -461,7 +289,7 @@ class _ArtikelState extends State<Artikel> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
                           borderRadius: BorderRadius.circular(10)),
-                      child: dataHigh == null
+                      child: controller.dataHigh == null
                           ? Text("data kosong")
                           : ListTile(
                               onTap: () {
@@ -469,9 +297,10 @@ class _ArtikelState extends State<Artikel> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DetailArtikel(
-                                            idArtikel: dataHigh[index].id,
-                                            jenisArtikel: dataHigh[index]
-                                                .jenisArtikel
+                                            idArtikel:
+                                                controller.dataHigh[index].id,
+                                            jenisArtikel: controller
+                                                .dataHigh[index].jenisArtikel
                                                 .toString())));
                               },
                               title: Container(
@@ -495,8 +324,7 @@ class _ArtikelState extends State<Artikel> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          dataHigh[index]
-                                              .adminDamkar
+                                          controller.dataHigh[index].adminDamkar
                                               .toString(),
                                           style: TextStyle(
                                               fontFamily:
@@ -507,8 +335,8 @@ class _ArtikelState extends State<Artikel> {
                                               fontWeight: FontWeight.w500),
                                         ),
                                         Text(
-                                          dataHigh[index]
-                                              .jenisArtikel
+                                          controller
+                                              .dataHigh[index].jenisArtikel
                                               .toString(),
                                           style: TextStyle(
                                               fontFamily:
@@ -526,7 +354,8 @@ class _ArtikelState extends State<Artikel> {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        dataHigh[index].judul.toString(),
+                                        controller.dataHigh[index].judul
+                                            .toString(),
                                         maxLines: 1,
                                         style: TextStyle(
                                             overflow: TextOverflow.ellipsis,
@@ -541,7 +370,8 @@ class _ArtikelState extends State<Artikel> {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        dataHigh[index].deskripsi.toString(),
+                                        controller.dataHigh[index].deskripsi
+                                            .toString(),
                                         maxLines: 2,
                                         style: TextStyle(
                                             overflow: TextOverflow.ellipsis,
@@ -569,26 +399,26 @@ class _ArtikelState extends State<Artikel> {
   }
 
   Widget listArtikel() {
-    return data == null
+    return controller.data == null
         ? Text("Artikel Kosong")
         : ListView.separated(
-            itemCount: data.length,
+            itemCount: controller.data.length,
             itemBuilder: (context, index) {
               return Container(
                 child: ListTile(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailArtikel(
-                            idArtikel: data[index].id,
-                            jenisArtikel:
-                                data[index].jenisArtikel.toString())));
+                            idArtikel: controller.data[index].id,
+                            jenisArtikel: controller.data[index].jenisArtikel
+                                .toString())));
                   },
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data[index].jenisArtikel.toString(),
+                        controller.data[index].jenisArtikel.toString(),
                         maxLines: 1,
                         style: TextStyle(
                           fontFamily: "$thin1",
@@ -601,7 +431,7 @@ class _ArtikelState extends State<Artikel> {
                         height: 10,
                       ),
                       Text(
-                        data![index].judul.toString(),
+                        controller.data![index].judul.toString(),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -619,7 +449,7 @@ class _ArtikelState extends State<Artikel> {
                   subtitle: Row(
                     children: [
                       Text(
-                        data![index].adminDamkar.toString(),
+                        controller.data![index].adminDamkar.toString(),
                       ),
                       SizedBox(
                         width: 3,
@@ -632,7 +462,7 @@ class _ArtikelState extends State<Artikel> {
                         width: 3,
                       ),
                       Text(
-                        data![index].tanggal.toString(),
+                        controller.data![index].tanggal.toString(),
                       )
                     ],
                   ),
@@ -659,7 +489,7 @@ class _ArtikelState extends State<Artikel> {
 
   Widget listArtikelHigh() {
     return ListView.builder(
-        itemCount: dataHigh.length,
+        itemCount: controller.dataHigh.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
@@ -669,9 +499,10 @@ class _ArtikelState extends State<Artikel> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => DetailArtikel(
-                            idArtikel: dataHigh[index].id,
-                            jenisArtikel:
-                                dataHigh[index].jenisArtikel.toString())));
+                            idArtikel: controller.dataHigh[index].id,
+                            jenisArtikel: controller
+                                .dataHigh[index].jenisArtikel
+                                .toString())));
               },
               title: Container(
                 width: 400,
