@@ -25,7 +25,8 @@ abstract class Routes {
   static const mpLap = '/mapsLaporan';
 
   //Riwayat
-
+  static const riwayat = '/riwayat';
+  static const dtRiwayat = '/detailRiwayat';
   //artikel
 
   // profile
