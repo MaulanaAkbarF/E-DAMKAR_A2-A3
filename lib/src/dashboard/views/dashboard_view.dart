@@ -1,6 +1,7 @@
 import 'package:edamkar_1/src/artikels/views/artikel_view.dart';
 import 'package:edamkar_1/src/dashboard/controller/dashboard_controller.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
+import 'package:edamkar_1/src/riwayatLaporans/views/riwayat_laporan_view.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,10 +13,7 @@ class DashboardPage extends GetView<DashboardController> {
         body: SafeArea(
             child: IndexedStack(
           index: controller.selectedIndex.value,
-          children: [
-            const HomePageView(),
-            ArtikelView()
-          ],
+          children: [const HomePageView(), ArtikelView(), RiwayatLaporanView()],
         )),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -46,12 +44,12 @@ class DashboardPage extends GetView<DashboardController> {
               ),
               label: 'Artikel',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-              ),
-              label: 'Setting',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     Icons.settings,
+            //   ),
+            //   label: 'Setting',
+            // ),
           ],
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeSelectedIndex,

@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/Menu/Menu.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
@@ -173,8 +172,8 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
     if (result2 != null) {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
           "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => const AppMenu()));
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //     builder: (BuildContext context) => const AppMenu()));
     } else {
       FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
           "Lakukan Emergency Call jika terdapat kenadala");
