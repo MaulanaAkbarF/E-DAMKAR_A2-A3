@@ -1,6 +1,7 @@
 import 'package:edamkar_1/src/riwayatLaporans/controller/detail_riwayat_laporan_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
             ),
           ),
         ),
-        body: controller.dataElement == null ? Text("kosong") : isDetailNull()
+        body: isDetailNull()
         // Column(
         //   children: <Widget>[
         //     Padding(
@@ -153,186 +154,209 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   }
 
   Widget isDetailNull() {
-    return controller.dataElement!.isEmpty
+    return Obx(() => !controller.isDone.value
         ? Align(
             alignment: Alignment.center,
-            child: Text("Data Laporan Kosong"),
+            child: Text(
+              controller.loadingTxt.value,
+              style: StyleTxt.m(size: 18),
+            ),
           )
-        : ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return Container(
-                  padding: EdgeInsets.symmetric(vertical: paddingVertical1),
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Laporan : ${controller.dataElement![index].kategoriLaporan.toString()} - ${controller.dataElement![index].urgensi.toString()}",
-                          // artikelElement![index].judulBerita.toString(),
-                          // maxLines: 3,
-                          overflow: TextOverflow.fade,
-                          style: const TextStyle(
-                            fontFamily: "inter-semibold",
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: black3,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 250,
-                          // width: 400,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                    "https://images.unsplash.com/photo-1518904868869-fbb2cdd0429a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80",
-                                  ),
-                                  fit: BoxFit.cover)),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                            padding: const EdgeInsets.all(10),
-                            width: 500,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border:
-                                    Border.all(color: Colors.white, width: 0)),
-                            child: Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
+        : controller.dataElement.value == null
+            ? Align(
+                alignment: Alignment.center,
+                child: Text("Data Laporan Kosong"),
+              )
+            : ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return Container(
+                      padding: EdgeInsets.symmetric(vertical: paddingVertical1),
+                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Laporan : ${controller.dataElement.value![index].kategoriLaporan.toString()} - ${controller.dataElement.value![index].urgensi.toString()}",
+                              // artikelElement![index].judulBerita.toString(),
+                              // maxLines: 3,
+                              overflow: TextOverflow.fade,
+                              style: const TextStyle(
+                                fontFamily: "inter-semibold",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: black3,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              height: 250,
+                              // width: 400,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        "https://images.unsplash.com/photo-1518904868869-fbb2cdd0429a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80",
+                                      ),
+                                      fit: BoxFit.cover)),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(10),
+                                width: 500,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: Colors.white, width: 0)),
+                                child: Expanded(
+                                  child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Icon(
-                                        Icons.location_on_outlined,
-                                        color: Colors.red,
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.location_on_outlined,
+                                            color: Colors.red,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            height: paddingVertical4,
+                                            width: 2,
+                                            color: Colors.redAccent,
+                                          ),
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 10)),
+                                          Expanded(
+                                            child: Text(
+                                              controller.dataElement
+                                                  .value![index].alamat
+                                                  .toString(),
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(height: 1.5),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        height: 13,
                                       ),
-                                      Container(
-                                        height: paddingVertical4,
-                                        width: 2,
-                                        color: Colors.redAccent,
-                                      ),
-                                      Padding(
-                                          padding: EdgeInsets.only(right: 10)),
-                                      Expanded(
-                                        child: Text(
-                                          controller.dataElement![index].alamat.toString(),
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(height: 1.5),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 13,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.date_range_outlined,
-                                        color: Colors.red,
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.date_range_outlined,
+                                            color: Colors.red,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            height: paddingVertical4,
+                                            width: 2,
+                                            color: Colors.redAccent,
+                                          ),
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 10)),
+                                          Text(
+                                            controller.dataElement.value![index]
+                                                .tanggal
+                                                .toString(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              height: 1.8,
+                                            ),
+                                            textAlign: TextAlign.justify,
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        height: 13,
                                       ),
-                                      Container(
-                                        height: paddingVertical4,
-                                        width: 2,
-                                        color: Colors.redAccent,
+                                      Row(
+                                        children: [
+                                          Text("Deskripsi : "),
+                                        ],
                                       ),
-                                      Padding(
-                                          padding: EdgeInsets.only(right: 10)),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
                                       Text(
-                                        controller.dataElement![index].tanggal.toString(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                        controller
+                                            .dataElement.value![index].deskripsi
+                                            .toString(),
                                         style: TextStyle(
-                                          height: 1.8,
+                                          height: 1.5,
                                         ),
                                         textAlign: TextAlign.justify,
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 13,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Deskripsi : "),
-                                    ],
+                                )),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: paddingVertical1)),
+                                  Text(
+                                    "Status :",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    controller.dataElement![index].deskripsi.toString(),
-                                    style: TextStyle(
-                                      height: 1.5,
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: paddingVertical1,
+                                      horizontal: paddingHorozontal5,
                                     ),
-                                    textAlign: TextAlign.justify,
-                                  ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: _getBorderColor(controller
+                                            .dataElement
+                                            .value![index]
+                                            .statusRiwayat),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      controller.dataElement.value![index]
+                                          .statusRiwayat
+                                          .toString(),
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 55, 65, 81),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  )
                                 ],
                               ),
-                            )),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: paddingVertical1)),
-                              Text(
-                                "Status :",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: paddingVertical1,
-                                  horizontal: paddingHorozontal5,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: _getBorderColor(
-                                        controller.dataElement![index].statusRiwayat),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Text(
-                                  controller.dataElement![index].statusRiwayat.toString(),
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 55, 65, 81),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]));
-            },
-          );
+                            )
+                          ]));
+                },
+              ));
   }
 }
 
