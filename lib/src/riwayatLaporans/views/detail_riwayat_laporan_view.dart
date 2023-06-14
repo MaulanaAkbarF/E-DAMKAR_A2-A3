@@ -1,51 +1,11 @@
-import 'dart:ffi';
-
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/laporanData.dart';
-import 'package:edamkar_1/models/DataPelaporan.dart';
-import 'package:edamkar_1/src/riwayatLaporans/views/riwayat_laporan_view.dart';
+import 'package:edamkar_1/src/riwayatLaporans/controller/detail_riwayat_laporan_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../Menu/Menu.dart';
-
-class DetailRiwayatLengkap extends StatefulWidget {
-  final idLapp;
-
-  const DetailRiwayatLengkap({required this.idLapp, super.key});
-
-  @override
-  State<DetailRiwayatLengkap> createState() => _DetailRiwayatLengkapState();
-}
-
-class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
-  late int _id;
-  List<Datum>? dataElement = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // getIdLaporan();
-    _id = widget.idLapp;
-    postDetailRiwayat(_id);
-    print("id Laporan :" + _id.toString());
-  }
-
-  postDetailRiwayat(int id) async {
-    var result = await APIClient().getData('getDetailLap/' + id.toString());
-
-    if (result != null) {
-      var detailRiwayat = dataPelaporanFromJson(result);
-      if (detailRiwayat.data.isNotEmpty) {
-        setState(() {
-          dataElement = detailRiwayat.data;
-        });
-      }
-    } else {
-      print("Data Kosong");
-    }
-  }
+class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
+  DetailRiwayatLengkapView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +26,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
             ),
           ),
         ),
-        body: dataElement == null ? Text("kosong") : isDetailNull()
+        body: controller.dataElement == null ? Text("kosong") : isDetailNull()
         // Column(
         //   children: <Widget>[
         //     Padding(
@@ -193,8 +153,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
   }
 
   Widget isDetailNull() {
-    SizeConfig().init(context);
-    return dataElement!.isEmpty
+    return controller.dataElement!.isEmpty
         ? Align(
             alignment: Alignment.center,
             child: Text("Data Laporan Kosong"),
@@ -209,12 +168,11 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Laporan : " +
-                              dataElement![index].kategoriLaporan.toString() +" - " + dataElement![index].urgensi.toString() ,
+                          "Laporan : ${controller.dataElement![index].kategoriLaporan.toString()} - ${controller.dataElement![index].urgensi.toString()}",
                           // artikelElement![index].judulBerita.toString(),
                           // maxLines: 3,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: "inter-semibold",
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
@@ -270,7 +228,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                           padding: EdgeInsets.only(right: 10)),
                                       Expanded(
                                         child: Text(
-                                          dataElement![index].alamat.toString(),
+                                          controller.dataElement![index].alamat.toString(),
                                           maxLines: 3,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.justify,
@@ -299,7 +257,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                       Padding(
                                           padding: EdgeInsets.only(right: 10)),
                                       Text(
-                                        dataElement![index].tanggal.toString(),
+                                        controller.dataElement![index].tanggal.toString(),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -321,7 +279,7 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                     height: 10,
                                   ),
                                   Text(
-                                    dataElement![index].deskripsi.toString(),
+                                    controller.dataElement![index].deskripsi.toString(),
                                     style: TextStyle(
                                       height: 1.5,
                                     ),
@@ -357,12 +315,12 @@ class _DetailRiwayatLengkapState extends State<DetailRiwayatLengkap> {
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
                                     color: _getBorderColor(
-                                        dataElement![index].statusRiwayat),
+                                        controller.dataElement![index].statusRiwayat),
                                     width: 2,
                                   ),
                                 ),
                                 child: Text(
-                                  dataElement![index].statusRiwayat.toString(),
+                                  controller.dataElement![index].statusRiwayat.toString(),
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 55, 65, 81),
                                       fontSize: 20,

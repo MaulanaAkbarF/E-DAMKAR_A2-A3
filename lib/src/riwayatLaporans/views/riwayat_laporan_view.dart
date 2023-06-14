@@ -1,5 +1,4 @@
 import 'package:edamkar_1/src/riwayatLaporans/controller/riwayat_laporan_controller.dart';
-import 'package:edamkar_1/src/riwayatLaporans/views/detail_riwayat_laporan_view.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
@@ -415,16 +414,8 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                     10,
                   ),
                   child: ListTile(
-                    onTap: () {
-                      //
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailRiwayatLengkap(
-                                idLapp:
-                                    controller.searchData![index].idLaporan),
-                          ));
-                    },
+                    onTap: () => controller
+                        .goToDetail(controller.searchData![index].idLaporan),
                     leading: Container(
                       width: 70,
                       child: Row(
