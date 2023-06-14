@@ -14,6 +14,8 @@ abstract class Routes {
   static const register = '/register';
   static const otpVerif = '/otpVerif';
 
+  //dashboard
+  static const dashboard = '/dashboard';
   //home
   static const home = '/home';
   static const hmArtikel = '/hmArtikel';

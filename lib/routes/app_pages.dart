@@ -1,3 +1,5 @@
+import 'package:edamkar_1/src/dashboard/bindings/dashboard_binding.dart';
+import 'package:edamkar_1/src/dashboard/views/dashboard_view.dart';
 import 'package:edamkar_1/src/emergency/bindings/emergency_page_binding.dart';
 import 'package:edamkar_1/src/emergency/bindings/laporan_eme_page_binding.dart';
 import 'package:edamkar_1/src/emergency/bindings/maps_page_binding.dart';
@@ -57,6 +59,12 @@ class AppPages {
       binding: LoginBinding(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500),
+    ),
+
+    GetPage(
+      name: Routes.dashboard,
+      page: () => DashboardPage(),
+      binding: DashboardBinding(),
     ),
 
     GetPage(

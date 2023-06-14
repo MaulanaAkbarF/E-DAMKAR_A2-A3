@@ -76,7 +76,7 @@ class LoginController extends GetxController {
           Get.snackbar(
               "Berhasil Login", "Selamat Datang ${data.data!.namaLengkap}",
               backgroundColor: black3, colorText: white);
-          Get.offNamed(Routes.home);
+          Get.offNamed(Routes.dashboard);
           isLoading.value = false;
         } else {
           isLoading.value = false;
