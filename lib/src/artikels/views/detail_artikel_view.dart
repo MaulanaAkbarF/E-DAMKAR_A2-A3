@@ -1,93 +1,16 @@
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/models/ArtikelModel.dart';
-import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
+import 'package:edamkar_1/src/artikels/controller/detail_artikel_controller.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
+import 'package:get/get.dart';
 
-class DetailArtikel extends StatefulWidget {
-  final idArtikel;
-  final jenisArtikel;
-  DetailArtikel(
-      {required this.idArtikel, required this.jenisArtikel, super.key});
+class DetailArtikelView extends GetView<DetailArtikelController> {
+  DetailArtikelView({super.key});
 
-  @override
-  State<DetailArtikel> createState() => _DetailArtikelState();
-}
-
-class _DetailArtikelState extends State<DetailArtikel> {
   final List<String> img = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'
   ];
 
-  late int _idArt;
-  late String _jenisArt;
-  List<ArtikelDatum>? artikelElement = [];
-
-  // void getId_Berita(String id) async {
-  //   postDetailBerita(id);
-
-  //   // var dataId =
-  // }
-
-  @override
-  void initState() {
-    super.initState();
-    _jenisArt = widget.jenisArtikel;
-    _idArt = widget.idArtikel;
-
-    if (_jenisArt == "Berita") {
-      postDetailBerita(_idArt);
-    } else if (_jenisArt == "Edukasi") {
-      postDetailEdukasi(_idArt);
-    } else if (_jenisArt == "Agenda") {
-      postDetailAgenda(_idArt);
-    } else {
-      postDetailBerita(_idArt);
-    }
-
-    // print("id berita: " + _idArt.toString());
-  }
-
-  var data;
-  postDetailBerita(int id) async {
-    var result = await APIClient().getData('getDetailBerita/' + id.toString());
-
-    print("id berita" + id.toString());
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-    } else {
-      print("Data Kosong");
-    }
-  }
-
-  postDetailEdukasi(int id) async {
-    var result = await APIClient().getData('getDetailEdukasi/' + id.toString());
-
-    print("id berita" + id.toString());
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-    } else {
-      print("Data Kosong");
-    }
-  }
-
-  postDetailAgenda(int id) async {
-    var result = await APIClient().getData('getDetailAgenda/' + id.toString());
-
-    print("id berita" + id.toString());
-    if (result != null) {
-      setState(() {
-        data = semuaArtikelModelFromJson(result);
-      });
-    } else {
-      print("Data Kosong");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +39,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
   }
 
   Widget isDetailNull() {
-    return data == null
+    return controller.data == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Data Artikel Kosong"),
@@ -157,7 +80,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           width: 5,
                         ),
                         Text(
-                          data[index].jenisArtikel.toString(),
+                          controller.data[index].jenisArtikel.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
                             color: black2,
@@ -169,7 +92,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                       height: 5,
                     ),
                     Text(
-                      data[index].judul.toString(),
+                      controller.data[index].judul.toString(),
                       // artikelElement![index].judulBerita.toString(),
                       // maxLines: 3,
                       style: TextStyle(
@@ -185,7 +108,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                     Row(
                       children: [
                         Text(
-                          data[index].adminDamkar.toString(),
+                          controller.data[index].adminDamkar.toString(),
                           // artikelElement![index].adminDamkar.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -205,7 +128,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                           width: 5,
                         ),
                         Text(
-                          data[index].tanggal.toString(),
+                          controller.data[index].tanggal.toString(),
                           // artikelElement![index].tanggalBerita.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -241,7 +164,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
                               style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
-                        data[index].deskripsi.toString(),
+                        controller.data[index].deskripsi.toString(),
                         // artikelElement![index].deskripsiBerita.toString(),
                         style: TextStyle(
                           fontFamily: "$bold",

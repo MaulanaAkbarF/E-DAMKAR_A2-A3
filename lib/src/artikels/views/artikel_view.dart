@@ -2,7 +2,6 @@ import 'package:edamkar_1/src/artikels/controller/artikel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
-import 'package:edamkar_1/src/artikels/DetailArtikel.dart';
 import 'package:get/get.dart';
 
 class ArtikelView extends GetView<ArtikleController> {
@@ -293,15 +292,15 @@ class ArtikelView extends GetView<ArtikleController> {
                           ? Text("data kosong")
                           : ListTile(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DetailArtikel(
-                                            idArtikel:
-                                                controller.dataHigh[index].id,
-                                            jenisArtikel: controller
-                                                .dataHigh[index].jenisArtikel
-                                                .toString())));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => DetailArtikel(
+                                //             idArtikel:
+                                //                 controller.dataHigh[index].id,
+                                //             jenisArtikel: controller
+                                //                 .dataHigh[index].jenisArtikel
+                                //                 .toString())));
                               },
                               title: Container(
                                 // width: 400,
@@ -407,11 +406,11 @@ class ArtikelView extends GetView<ArtikleController> {
               return Container(
                 child: ListTile(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailArtikel(
-                            idArtikel: controller.data[index].id,
-                            jenisArtikel: controller.data[index].jenisArtikel
-                                .toString())));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => DetailArtikel(
+                    //         idArtikel: controller.data[index].id,
+                    //         jenisArtikel: controller.data[index].jenisArtikel
+                    //             .toString())));
                   },
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -495,14 +494,14 @@ class ArtikelView extends GetView<ArtikleController> {
           return Container(
             child: ListTile(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailArtikel(
-                            idArtikel: controller.dataHigh[index].id,
-                            jenisArtikel: controller
-                                .dataHigh[index].jenisArtikel
-                                .toString())));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => DetailArtikel(
+                //             idArtikel: controller.dataHigh[index].id,
+                //             jenisArtikel: controller
+                //                 .dataHigh[index].jenisArtikel
+                //                 .toString())));
               },
               title: Container(
                 width: 400,
