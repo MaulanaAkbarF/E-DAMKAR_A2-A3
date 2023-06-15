@@ -1,36 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/utils/app_style.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:edamkar_1/src/laporans/controllers/pelaporan_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
-
-class LaporanBencanaAlam extends StatefulWidget {
-  // const BuatLaporan({Key? key}) : super(key: key);
-
-  String desa, jalan, kecamatan, kota, kodepos;
-  double latitude, longitude;
-  LaporanBencanaAlam(
-      {Key? key,
-      required this.desa,
-      required this.jalan,
-      required this.kecamatan,
-      required this.kota,
-      required this.kodepos,
-      required this.latitude,
-      required this.longitude})
-      : super(key: key);
-
-  @override
-  State<LaporanBencanaAlam> createState() => _LaporanBencanaAlamState();
-}
-// ------------------------------------------------------------------------------------------------------------------------------------------
-// atur teks yang akan ditampilkan
 
 final List<Map> teksSignUp = [
   {
@@ -91,113 +62,18 @@ final List<Map> teksStyleSignUp = [
 ];
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
+// atur teks yang akan ditampilkan
 
-class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
-  final TextEditingController namaBencanaCon = TextEditingController();
-  final TextEditingController noTelpCon = TextEditingController();
-  final TextEditingController deskripsiCon = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  var iduser;
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
-  @override
-  void initState() {
-    super.initState();
-    DataUser().getNoHp().then((value) => noTelpCon.text = value);
-    DataUser().getUserId().then((value) => iduser = value);
-  }
-
-  void _kirimNotifikasi() async {
-    // Ganti dengan URL endpoint API yang sesuai
-
-    // Data yang akan dikirim
-    var data = {
-      "desa": widget.desa,
-      "jalan": widget.jalan,
-      "kecamatan": widget.kecamatan,
-      "kota": widget.kota,
-      "kodepos": widget.kodepos,
-      "latitude": widget.latitude.toString(),
-      "longitude": widget.longitude.toString(),
-      "namaBencana": namaBencanaCon.text,
-      "noTelp": noTelpCon.text.toString(),
-    };
-
-    // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("sendToWa", data);
-    // Menerima dan memproses respons dari server
-    if (response != null) {
-      print(jsonDecode(response));
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
-  }
-
-  void pushLaporan() async {
-    _kirimNotifikasi();
-    setState(() {
-      showSpinner = true;
-    });
-    String title = iduser.toString() + "_image_" + getRandomString(30);
-    DateTime now = new DateTime.now();
-    DateTime date = new DateTime(now.year, now.month, now.day);
-    String alamat = widget.jalan +
-        ', ' +
-        widget.desa +
-        ', ' +
-        widget.kecamatan +
-        ', ' +
-        widget.kota +
-        ', ' +
-        widget.kodepos;
-    var result =
-        await APIClient().postMulti('addImage', image, imagePath, title);
-    var result2 = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '2',
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
-      'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
-      'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString(),
-      'urgensi': namaBencanaCon.text
-    });
-    _kirimNotifikasi();
-    if (result2 != null) {
-      FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
-          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (BuildContext context) => const AppMenu()));
-    } else {
-      FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
-          "Lakukan Emergency Call jika terdapat kenadala");
-    }
-  }
-
-  File? image;
-  String? imageName;
-  var imagePath;
-  bool showSpinner = false;
-  final ImagePicker _picker = ImagePicker();
-
-  Future getImage() async {
-    final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (imagePicked != null) {
-      image = File(imagePicked.path);
-      imageName = imagePicked.name;
-      imagePath = imagePicked.path;
-      setState(() {});
-    } else {
-      print('no image selected');
-    }
-  }
+class LaporanBencanaAlam extends GetView<PelaporanController> {
+  const LaporanBencanaAlam({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        progressIndicator: CircularProgressIndicator(),
+        inAsyncCall: controller.showSpinner,
+        progressIndicator: const CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -216,7 +92,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
             ),
             body: SafeArea(
               child: Form(
-                key: _formKey,
+                key: controller.formKey,
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: Column(
@@ -253,7 +129,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                         borderRadius: BorderRadius.circular(8),
                                         child: InkWell(
                                           onTap: () async {
-                                            await getImage();
+                                            await controller.getImage();
                                           },
                                           child: Container(
                                             height: 200,
@@ -268,14 +144,14 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                             ),
                                             child: Stack(
                                               children: [
-                                                if (image != null)
+                                                if (controller.image != null)
                                                   Positioned.fill(
                                                     child: Image.file(
-                                                      image!,
+                                                      controller.image!,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                if (image == null)
+                                                if (controller.image == null)
                                                   Align(
                                                     alignment: Alignment.center,
                                                     child: Row(
@@ -326,12 +202,13 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                                 color: Colors.grey.shade300,
                                                 width: 1.2)),
                                         child: TextFormField(
-                                          controller: namaBencanaCon,
+                                          controller: controller.namaBencanaCon,
                                           validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Urgensi tidak boleh kosong';
-                                            }
+                                            // if (value == null ||
+                                            //     value.isEmpty) {
+                                            //   return 'Urgensi tidak boleh kosong';
+                                            // }
+                                            return '';
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -372,12 +249,13 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                                 color: Colors.grey.shade300,
                                                 width: 1.2)),
                                         child: TextFormField(
-                                          controller: noTelpCon,
+                                          controller: controller.noTelpCon,
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
                                               return 'Nomor Telepon tidak boleh kosong';
                                             }
+                                            return '';
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -419,12 +297,13 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                         child: TextFormField(
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 6,
-                                          controller: deskripsiCon,
+                                          controller: controller.deskripsiCon,
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
                                               return 'Deskripsi tidak boleh kosong';
                                             }
+                                            return "";
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -451,11 +330,11 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
                                           onTap: () {
-                                            if (_formKey.currentState
-                                                    ?.validate() ==
-                                                true) {
-                                              pushLaporan();
-                                            }
+                                            // if (_formKey.currentState
+                                            //         ?.validate() ==
+                                            //     true) {
+                                            //   pushLaporan();
+                                            // }
                                           },
                                           child: Container(
                                             height: 50,
