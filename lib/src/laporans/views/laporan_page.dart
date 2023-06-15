@@ -77,357 +77,322 @@ final List<Map> teksStyleLaporan = [
 class _LaporanPageState extends State<LaporanPage> {
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
-      onWillPop: () async {
-        return await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
-                actions: <Widget>[
-                  FloatingActionButton(
-                      child: Text("Tidak"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      }),
-                  FloatingActionButton(
-                      child: Text("Ya"),
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      })
-                ],
-              );
-            });
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              for (final teks in teksLaporan)
-                for (final teksStyle in teksStyleLaporan)
-                  Align(
-                    alignment: FractionalOffset.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                      child: Text(teks['Header'],
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 4,
-                          style: teksStyle['Bold1']),
-                    ),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            for (final teks in teksLaporan)
+              for (final teksStyle in teksStyleLaporan)
+                Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                    child: Text(teks['Header'],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 4,
+                        style: teksStyle['Bold1']),
                   ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.80,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    children: [
-                      for (final teks in teksLaporan)
-                        for (final teksStyle in teksStyleLaporan)
-                          InkWell(
-                            onTap: () => Get.toNamed(Routes.mpLap,
-                                arguments: "bencanaalam"),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1.2),
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Color.fromRGBO(253, 232, 232, 1.000),
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(12),
-                                        topLeft: Radius.circular(12),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 24, bottom: 24),
-                                      child: SvgPicture.asset(
-                                        'semuaAset/gambar/bencana-alam-icon.svg',
-                                        width:
-                                            50, // ukuran ikon yang diinginkan
-                                      ),
+                ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.80,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  children: [
+                    for (final teks in teksLaporan)
+                      for (final teksStyle in teksStyleLaporan)
+                        InkWell(
+                          onTap: () => Get.toNamed(Routes.mpLap,
+                              arguments: "bencanaalam"),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1.2),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(253, 232, 232, 1.000),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 16, left: 16),
-                                      child: Text("Laporan Bencana Alam",
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold3']),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 24, bottom: 24),
+                                    child: SvgPicture.asset(
+                                      'semuaAset/gambar/bencana-alam-icon.svg',
+                                      width: 50, // ukuran ikon yang diinginkan
                                     ),
                                   ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 8, left: 16, right: 16),
-                                      child: Text(teks['deskripsiLaporan'],
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold1']),
-                                    ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    child: Text("Laporan Bencana Alam",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold3']),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8, left: 16, right: 16),
+                                    child: Text(teks['deskripsiLaporan'],
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold1']),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                      for (final teks in teksLaporan)
-                        for (final teksStyle in teksStyleLaporan)
-                          InkWell(
-                            onTap: () => Get.toNamed(Routes.mpLap,
-                                arguments: "kebakaran"),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1.2),
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Color.fromRGBO(253, 232, 232, 1.000),
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(12),
-                                        topLeft: Radius.circular(12),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 24, bottom: 24),
-                                      child: SvgPicture.asset(
-                                        'semuaAset/gambar/kebakaran-icon.svg',
-                                        width: 50,
-                                      ),
+                        ),
+                    for (final teks in teksLaporan)
+                      for (final teksStyle in teksStyleLaporan)
+                        InkWell(
+                          onTap: () =>
+                              Get.toNamed(Routes.mpLap, arguments: "kebakaran"),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1.2),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(253, 232, 232, 1.000),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
                                     ),
                                   ),
-                                  Padding(
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 24, bottom: 24),
+                                    child: SvgPicture.asset(
+                                      'semuaAset/gambar/kebakaran-icon.svg',
+                                      width: 50,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 16, left: 16, right: 16),
+                                  child: Text(
+                                    "Laporan Kebakaran",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: teksStyle['SemiBold3'],
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Padding(
                                     padding: EdgeInsets.only(
-                                        top: 16, left: 16, right: 16),
+                                        top: 8, left: 16, right: 16),
                                     child: Text(
-                                      "Laporan Kebakaran",
+                                      teks['deskripsiLaporan'],
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
-                                      style: teksStyle['SemiBold3'],
+                                      style: teksStyle['SemiBold1'],
                                     ),
                                   ),
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 8, left: 16, right: 16),
-                                      child: Text(
-                                        teks['deskripsiLaporan'],
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: teksStyle['SemiBold1'],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                      for (final teks in teksLaporan)
-                        for (final teksStyle in teksStyleLaporan)
-                          InkWell(
-                            onTap: () => Get.toNamed(Routes.mpLap,
-                                arguments: "hewanbuas"),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1.2),
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Color.fromRGBO(253, 232, 232, 1.000),
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(12),
-                                        topLeft: Radius.circular(12),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 24, bottom: 24),
-                                      child: SvgPicture.asset(
-                                        'semuaAset/gambar/hewan-buas-icon.svg',
-                                        width:
-                                            50, // ukuran ikon yang diinginkan
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 16, left: 16),
-                                      child: Text("Laporan Hewan Buas",
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold3']),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 8, left: 16, right: 16),
-                                      child: Text(teks['deskripsiLaporan'],
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold1']),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                      for (final teks in teksLaporan)
-                        for (final teksStyle in teksStyleLaporan)
-                          InkWell(
-                            onTap: () => Get.toNamed(Routes.mpLap,
-                                arguments: "penyelamatan"),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1.2),
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      color:
-                                          Color.fromRGBO(253, 232, 232, 1.000),
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(12),
-                                        topLeft: Radius.circular(12),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 28, bottom: 28),
-                                      child: SvgPicture.asset(
-                                        'semuaAset/gambar/penyelamatan-icon.svg',
-                                        width:
-                                            70, // ukuran ikon yang diinginkan
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 16, left: 16),
-                                      child: Text("Laporan Penyelamatan",
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold3']),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 8, left: 16, right: 16),
-                                      child: Text(teks['deskripsiLaporan'],
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                          style: teksStyle['SemiBold1']),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                    ],
-                  ),
-                ),
-              ),
-              for (final teks in teksLaporan)
-                for (final teksStyle in teksStyleLaporan)
-                  Align(
-                    alignment: FractionalOffset.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Text(teks['deskripsiBawah'],
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 4,
-                          style: teksStyle['SemiBold1']),
-                    ),
-                  ),
-              // for (final teks in teksLaporan)
-              //   for (final teksStyle in teksStyleLaporan)
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
-                  child: Material(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    borderRadius: BorderRadius.circular(8),
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side:
-                            BorderSide(color: Colors.grey.shade300, width: 1.5),
-                        backgroundColor: Colors.grey.shade100,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
                         ),
-                        elevation: 0,
-                        minimumSize: Size.fromHeight(50),
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                      ),
-                      onPressed: () =>
-                          Get.toNamed(Routes.mpLap, arguments: "custom"),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Buat Laporan Anda Sendiri',
-                            style: TextStyle(
-                              // Properti gaya teks
-                              color: Colors.black54,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                    for (final teks in teksLaporan)
+                      for (final teksStyle in teksStyleLaporan)
+                        InkWell(
+                          onTap: () =>
+                              Get.toNamed(Routes.mpLap, arguments: "hewanbuas"),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1.2),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(253, 232, 232, 1.000),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 24, bottom: 24),
+                                    child: SvgPicture.asset(
+                                      'semuaAset/gambar/hewan-buas-icon.svg',
+                                      width: 50, // ukuran ikon yang diinginkan
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    child: Text("Laporan Hewan Buas",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold3']),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8, left: 16, right: 16),
+                                    child: Text(teks['deskripsiLaporan'],
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold1']),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
+                    for (final teks in teksLaporan)
+                      for (final teksStyle in teksStyleLaporan)
+                        InkWell(
+                          onTap: () => Get.toNamed(Routes.mpLap,
+                              arguments: "penyelamatan"),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1.2),
+                              color: Colors.white,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromRGBO(253, 232, 232, 1.000),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(12),
+                                      topLeft: Radius.circular(12),
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 28, bottom: 28),
+                                    child: SvgPicture.asset(
+                                      'semuaAset/gambar/penyelamatan-icon.svg',
+                                      width: 70, // ukuran ikon yang diinginkan
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    child: Text("Laporan Penyelamatan",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold3']),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: FractionalOffset.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8, left: 16, right: 16),
+                                    child: Text(teks['deskripsiLaporan'],
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        style: teksStyle['SemiBold1']),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                  ],
+                ),
+              ),
+            ),
+            for (final teks in teksLaporan)
+              for (final teksStyle in teksStyleLaporan)
+                Align(
+                  alignment: FractionalOffset.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    child: Text(teks['deskripsiBawah'],
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 4,
+                        style: teksStyle['SemiBold1']),
+                  ),
+                ),
+            // for (final teks in teksLaporan)
+            //   for (final teksStyle in teksStyleLaporan)
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
+                child: Material(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  borderRadius: BorderRadius.circular(8),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.grey.shade300, width: 1.5),
+                      backgroundColor: Colors.grey.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      elevation: 0,
+                      minimumSize: Size.fromHeight(50),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                    ),
+                    onPressed: () =>
+                        Get.toNamed(Routes.mpLap, arguments: "custom"),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Buat Laporan Anda Sendiri',
+                          style: TextStyle(
+                            // Properti gaya teks
+                            color: Colors.black54,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

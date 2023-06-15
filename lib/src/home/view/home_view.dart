@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:edamkar_1/src/home/controller/home_controller.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/utils/app_style.dart';
@@ -14,26 +16,30 @@ class HomePageView extends GetView<HomeController> {
     SizeConfig().init(context);
     return WillPopScope(
       onWillPop: () async {
-        return await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Konfirmasi keluar !"),
-                content: const Text("Apakah anda yakin untuk Keluar ?"),
-                actions: <Widget>[
-                  FloatingActionButton(
-                      child: const Text("Tidak"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      }),
-                  FloatingActionButton(
-                      child: const Text("Ya"),
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      })
-                ],
-              );
-            });
+        return await Get.dialog(
+          AlertDialog(
+            title: const Text("Notice"),
+            content: const Text(
+                "apakah anda sudah yakin untuk keluar dari aplikasi"),
+            actions: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: paddingHorozontal1, vertical: paddingVertical2),
+                child: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Text('Tidak'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => exit(0),
+                child: const Text('Ya'),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        );
       },
       child: Scaffold(
         body: SafeArea(
@@ -187,7 +193,6 @@ class HomePageView extends GetView<HomeController> {
                             children: <Widget>[
                               InkWell(
                                 onTap: () {
-
                                   // Navigator.push(
                                   //   context,
                                   //   MaterialPageRoute(
