@@ -9,6 +9,8 @@ import 'package:edamkar_1/src/emergency/view/maps_anonym_view.dart';
 import 'package:edamkar_1/src/home/bindings/home_binding.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
+import 'package:edamkar_1/src/laporans/bindings/maps_lokasi_kejadiaan_binding.dart';
+import 'package:edamkar_1/src/laporans/views/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:edamkar_1/src/profiles/bindings/profile_binding.dart';
@@ -96,11 +98,18 @@ class AppPages {
       page: () => const ResetPassView(),
     ),
 
+    //Laporan
+    GetPage(
+        name: Routes.mpLap,
+        page: () => const MapsLokasiKejadian(),
+        binding: MapsLokasiKejadianBinding()),
+
     //riwyata
     GetPage(
         name: Routes.dtRiwayat,
         page: () => DetailRiwayatLengkapView(),
         binding: DetailRiwayatLaporanBinding()),
+
     //profile
     GetPage(
       name: Routes.profile,

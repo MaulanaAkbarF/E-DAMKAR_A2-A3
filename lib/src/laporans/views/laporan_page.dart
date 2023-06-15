@@ -1,8 +1,7 @@
-import 'package:edamkar_1/pages/laporans/MapsLokasiKejadian.dart';
-
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 // import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class LaporanPage extends StatefulWidget {
@@ -76,8 +75,6 @@ final List<Map> teksStyleLaporan = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class _LaporanPageState extends State<LaporanPage> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -131,14 +128,8 @@ class _LaporanPageState extends State<LaporanPage> {
                       for (final teks in teksLaporan)
                         for (final teksStyle in teksStyleLaporan)
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MapsLokasiKejadian(
-                                        kategori: "bencanaalam")),
-                              );
-                            },
+                            onTap: () => Get.toNamed(Routes.mpLap,
+                                arguments: "bencanaalam"),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -198,16 +189,8 @@ class _LaporanPageState extends State<LaporanPage> {
                       for (final teks in teksLaporan)
                         for (final teksStyle in teksStyleLaporan)
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian(
-                                    kategori: "kebakaran",
-                                  ),
-                                ),
-                              );
-                            },
+                            onTap: () => Get.toNamed(Routes.mpLap,
+                                arguments: "kebakaran"),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -266,15 +249,8 @@ class _LaporanPageState extends State<LaporanPage> {
                       for (final teks in teksLaporan)
                         for (final teksStyle in teksStyleLaporan)
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MapsLokasiKejadian(
-                                          kategori: "hewanbuas",
-                                        )),
-                              );
-                            },
+                            onTap: () => Get.toNamed(Routes.mpLap,
+                                arguments: "hewanbuas"),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -334,14 +310,8 @@ class _LaporanPageState extends State<LaporanPage> {
                       for (final teks in teksLaporan)
                         for (final teksStyle in teksStyleLaporan)
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MapsLokasiKejadian(
-                                        kategori: "penyelamatan")),
-                              );
-                            },
+                            onTap: () => Get.toNamed(Routes.mpLap,
+                                arguments: "penyelamatan"),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
@@ -353,7 +323,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color:
                                           Color.fromRGBO(253, 232, 232, 1.000),
                                       borderRadius: BorderRadius.only(
@@ -414,55 +384,48 @@ class _LaporanPageState extends State<LaporanPage> {
                           style: teksStyle['SemiBold1']),
                     ),
                   ),
-              for (final teks in teksLaporan)
-                for (final teksStyle in teksStyleLaporan)
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 16, left: 16, right: 16, bottom: 24),
-                      child: Material(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        borderRadius: BorderRadius.circular(8),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(
-                                color: Colors.grey.shade300, width: 1.5),
-                            backgroundColor: Colors.grey.shade100,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            elevation: 0,
-                            minimumSize: Size.fromHeight(50),
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MapsLokasiKejadian(
-                                        kategori: "custom",
-                                      )),
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Buat Laporan Anda Sendiri',
-                                style: TextStyle(
-                                  // Properti gaya teks
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+              // for (final teks in teksLaporan)
+              //   for (final teksStyle in teksStyleLaporan)
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding:
+                      EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
+                  child: Material(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    borderRadius: BorderRadius.circular(8),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side:
+                            BorderSide(color: Colors.grey.shade300, width: 1.5),
+                        backgroundColor: Colors.grey.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        elevation: 0,
+                        minimumSize: Size.fromHeight(50),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                      ),
+                      onPressed: () =>
+                          Get.toNamed(Routes.mpLap, arguments: "custom"),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Buat Laporan Anda Sendiri',
+                            style: TextStyle(
+                              // Properti gaya teks
+                              color: Colors.black54,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+                ),
+              ),
             ],
           ),
         ),

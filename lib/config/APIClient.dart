@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:http/http.dart' as http;
 
 const String baseUrl = 'http://188.10.10.254:8000/';
@@ -8,16 +6,6 @@ final _headers = {"Accept": "application/json"};
 
 class APIClient {
   var client = http.Client();
-
-  Future printIps() async {
-    for (var interface in await NetworkInterface.list()) {
-      print('== Interface: ${interface.name} ==');
-      for (var addr in interface.addresses) {
-        print(
-            '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
-      }
-    }
-  }
 
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(apiUrl + api);

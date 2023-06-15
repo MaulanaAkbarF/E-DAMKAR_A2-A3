@@ -85,7 +85,7 @@ class LoginController extends GetxController {
         }
       } else {
         isLoading.value = false;
-        Get.snackbar("Login Gagal", "coba kembalilogin dalam beberapa saat",
+        Get.snackbar("Login Gagal", "coba ulangi dalam beberapa saat",
             backgroundColor: black3, colorText: white);
       }
     }

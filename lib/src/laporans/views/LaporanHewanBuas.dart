@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/models/ImageModel.dart';
+import 'package:edamkar_1/models/pelaporanModel.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +16,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'LokasiKejadian.dart';
 
-class LaporanBencanaAlam extends StatefulWidget {
+class LaporanHewanBuas extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanBencanaAlam(
+  LaporanHewanBuas(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -33,7 +34,7 @@ class LaporanBencanaAlam extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanBencanaAlam> createState() => _LaporanBencanaAlamState();
+  State<LaporanHewanBuas> createState() => _LaporanHewanBuasState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -42,8 +43,8 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Nama Bencana',
-    'namaBencanaHint': 'contoh: Tsunami, Banjir, Tanah Longsor, dll',
+    'namaBencana': 'Urgensi Hewan Buas',
+    'namaBencanaHint': 'Contoh: Buaya, Harimau, Macan Tutul, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -92,19 +93,18 @@ final List<Map> teksStyleSignUp = [
         fontFamily: "font/inter_regular.ttf",
         color: Colors.grey,
         fontSize: (18),
-        fontWeight: FontWeight.w600)
+        fontWeight: FontWeight.w500)
   }
 ];
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
+class _LaporanHewanBuasState extends State<LaporanHewanBuas> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var iduser;
-
   @override
   void initState() {
     super.initState();
@@ -155,11 +155,13 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
         widget.kota +
         ', ' +
         widget.kodepos;
+
     var result =
         await APIClient().postMulti('addImage', image, imagePath, title);
+
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '2',
+      'kategori_laporan_id': '4',
       'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
       'gambar_bukti_pelaporan': title,
@@ -168,6 +170,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
       'longitude': widget.longitude.toString(),
       'urgensi': namaBencanaCon.text
     });
+
     _kirimNotifikasi();
     if (result2 != null) {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
@@ -233,12 +236,6 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // Text('Name: ${widget.kecamatan}'),
-                                  // Text('Name: ${widget.desa}'),
-                                  // Text('Name: ${widget.jalan}'),
-                                  // Text('Name: ${widget.kota}'),
-                                  // Text('Name: ${widget.latitude}'),
-                                  // Text('Name: ${widget.longitude}'),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
@@ -307,6 +304,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                       ),
                                     ),
                                   ),
+
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
@@ -382,7 +380,7 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Nomor Telepon tidak boleh kosong';
+                                              return 'No telepon tidak boleh kosong';
                                             }
                                           },
                                           cursorColor: Colors.black,

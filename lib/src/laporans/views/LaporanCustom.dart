@@ -6,7 +6,6 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edamkar_1/config/APIClient.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/pages/laporans/LaporanPage.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +14,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LaporanPenyelamatan extends StatefulWidget {
+class LaporanCustom extends StatefulWidget {
   // const BuatLaporan({Key? key}) : super(key: key);
 
   String desa, jalan, kecamatan, kota, kodepos;
   double latitude, longitude;
-  LaporanPenyelamatan(
+  LaporanCustom(
       {Key? key,
       required this.desa,
       required this.jalan,
@@ -32,7 +31,7 @@ class LaporanPenyelamatan extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<LaporanPenyelamatan> createState() => _LaporanPenyelamatanState();
+  State<LaporanCustom> createState() => _LaporanCustomState();
 }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
@@ -41,9 +40,8 @@ final List<Map> teksSignUp = [
   {
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
-    'namaBencana': 'Urgensi Penyelamatan',
-    'namaBencanaHint':
-        'Contoh: Orang jatuh di sumur, orang terjebak di lift, dll',
+    'namaBencana': 'Urgensi',
+    'namaBencanaHint': 'Contoh: Kesurupan, Kepala tersangkut di pagar, dll',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',
@@ -98,7 +96,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
+class _LaporanCustomState extends State<LaporanCustom> {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
@@ -159,7 +157,7 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
         await APIClient().postMulti('addImage', image, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '3',
+      'kategori_laporan_id': '4',
       'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
       'gambar_bukti_pelaporan': title,
@@ -173,7 +171,7 @@ class _LaporanPenyelamatanState extends State<LaporanPenyelamatan> {
       FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
           "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
       // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (BuildContext context) => const AppMenu()));
+      //     // builder: (BuildContext context) => const AppMenu()));
     } else {
       FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
           "Lakukan Emergency Call jika terdapat kenadala");

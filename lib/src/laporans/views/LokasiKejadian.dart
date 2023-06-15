@@ -1,10 +1,4 @@
-import 'package:edamkar_1/pages/laporans/LaporanBencanaAlam.dart';
-import 'package:edamkar_1/pages/laporans/LaporanCustom.dart';
-import 'package:edamkar_1/pages/laporans/LaporanHewanBuas.dart';
-import 'package:edamkar_1/pages/laporans/LaporanKebakaran.dart';
-import 'package:edamkar_1/pages/laporans/LaporanPenyelamatan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LokasiKejadian extends StatefulWidget {
   String kategori;
@@ -85,76 +79,76 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
     kategori = widget.kategori;
   }
 
-  void kirimButtonPressed(BuildContext context) {
-    if (_formKey.currentState?.validate() == true) {
-      if (kategori == "bencanaalam") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanBencanaAlam(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
-      } else if (kategori == "kebakaran") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanKebakaran(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
-      } else if (kategori == "hewanbuas") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanHewanBuas(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
-      } else if (kategori == "penyelamatan") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanPenyelamatan(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
-      } else if (kategori == "custom") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => LaporanCustom(
-                    kecamatan: kecamatanCon.text,
-                    desa: desaCon.text,
-                    jalan: jalanCon.text,
-                    kota: 'Nganjuk',
-                    kodepos: '',
-                    latitude: 0.0,
-                    longitude: 0.0,
-                  )),
-        );
-      }
-    }
-  }
+  // void kirimButtonPressed(BuildContext context) {
+  //   if (_formKey.currentState?.validate() == true) {
+  //     if (kategori == "bencanaalam") {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //             builder: (context) => LaporanBencanaAlam(
+  //                   kecamatan: kecamatanCon.text,
+  //                   desa: desaCon.text,
+  //                   jalan: jalanCon.text,
+  //                   kota: 'Nganjuk',
+  //                   kodepos: '',
+  //                   latitude: 0.0,
+  //                   longitude: 0.0,
+  //                 )),
+  //       );
+  //     } else if (kategori == "kebakaran") {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //             builder: (context) => LaporanKebakaran(
+  //                   kecamatan: kecamatanCon.text,
+  //                   desa: desaCon.text,
+  //                   jalan: jalanCon.text,
+  //                   kota: 'Nganjuk',
+  //                   kodepos: '',
+  //                   latitude: 0.0,
+  //                   longitude: 0.0,
+  //                 )),
+  //       );
+  //     } else if (kategori == "hewanbuas") {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //             builder: (context) => LaporanHewanBuas(
+  //                   kecamatan: kecamatanCon.text,
+  //                   desa: desaCon.text,
+  //                   jalan: jalanCon.text,
+  //                   kota: 'Nganjuk',
+  //                   kodepos: '',
+  //                   latitude: 0.0,
+  //                   longitude: 0.0,
+  //                 )),
+  //       );
+  //     } else if (kategori == "penyelamatan") {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //             builder: (context) => LaporanPenyelamatan(
+  //                   kecamatan: kecamatanCon.text,
+  //                   desa: desaCon.text,
+  //                   jalan: jalanCon.text,
+  //                   kota: 'Nganjuk',
+  //                   kodepos: '',
+  //                   latitude: 0.0,
+  //                   longitude: 0.0,
+  //                 )),
+  //       );
+  //     } else if (kategori == "custom") {
+  //       Navigator.of(context).push(
+  //         MaterialPageRoute(
+  //             builder: (context) => LaporanCustom(
+  //                   kecamatan: kecamatanCon.text,
+  //                   desa: desaCon.text,
+  //                   jalan: jalanCon.text,
+  //                   kota: 'Nganjuk',
+  //                   kodepos: '',
+  //                   latitude: 0.0,
+  //                   longitude: 0.0,
+  //                 )),
+  //       );
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -318,7 +312,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                   child: InkWell(
                                     splashColor: Colors.red.shade700,
                                     highlightColor: Colors.red.shade900,
-                                    onTap: () => kirimButtonPressed(context),
+                                    // onTap: () => kirimButtonPressed(context),
                                     child: Container(
                                       height: 50,
                                       child: Row(
