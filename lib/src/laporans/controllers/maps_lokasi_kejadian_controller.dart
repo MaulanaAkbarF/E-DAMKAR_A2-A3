@@ -1,17 +1,18 @@
+import 'package:edamkar_1/src/laporans/views/LokasiKejadian.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsLokasiKejadianController extends GetxController {
-  late String kategori;
+  late String kategori = Get.arguments;
 
   late GoogleMapController googleMapController;
   final CameraPosition initialCameraPosition =
-      CameraPosition(target: LatLng(-7.2232139, 112.6226935), zoom: 15);
+      const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
 
   Set<Marker> markers = {};
-
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
   String jalan = '';
@@ -37,7 +38,7 @@ class MapsLokasiKejadianController extends GetxController {
     markers.add(Marker(
         markerId: const MarkerId('currentLocation'),
         position: LatLng(position.latitude, position.longitude)));
-
+    update();
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemarks[0];
@@ -84,4 +85,105 @@ class MapsLokasiKejadianController extends GetxController {
     // });
     return position;
   }
+
+  void goToPelaporan() {
+    if (jalan.isEmpty) {
+      // Tampilkan notifikasi "Pilih alamat"
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //       content: Text(
+      //     "Tentukan alamat terlebih dahulu",
+      //     textAlign: TextAlign.center,
+      //   )),
+      // );
+
+      //tampilan notifikasi dengan getx
+      Get.snackbar('Alamat kosong', "Tentukan alamat terlebih dahulu",
+          backgroundColor: black3, colorText: white);
+    } else {
+      if (kategori == "bencanaalam") {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) =>
+        //         LaporanBencanaAl(
+        //       jalan: jalan,
+        //       desa: desa,
+        //       kecamatan: kecamatan,
+        //       kota: kota,
+        //       kodepos: kodepos,
+        //       latitude: latitude,
+        //       longitude: longitude,
+        //     ),
+        //   ),
+        // );
+
+        // Get.toNamed(page)
+      } else if (kategori == "kebakaran") {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => LaporanKebakaran(
+        //       jalan: jalan,
+        //       desa: desa,
+        //       kecamatan: kecamatan,
+        //       kota: kota,
+        //       kodepos: kodepos,
+        //       latitude: latitude,
+        //       longitude: longitude,
+        //     ),
+        //   ),
+        // );
+      } else if (kategori == "hewanbuas") {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => LaporanHewanBuas(
+        //       jalan: jalan,
+        //       desa: desa,
+        //       kecamatan: kecamatan,
+        //       kota: kota,
+        //       kodepos: kodepos,
+        //       latitude: latitude,
+        //       longitude: longitude,
+        //     ),
+        //   ),
+        // );
+      } else if (kategori == "penyelamatan") {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => LaporanPenyelamatan(
+        //       jalan: jalan,
+        //       desa: desa,
+        //       kecamatan: kecamatan,
+        //       kota: kota,
+        //       kodepos: kodepos,
+        //       latitude: latitude,
+        //       longitude: longitude,
+        //     ),
+        //   ),
+        // );
+      } else if (kategori == "custom") {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => LaporanCustom(
+        //       jalan: jalan,
+        //       desa: desa,
+        //       kecamatan: kecamatan,
+        //       kota: kota,
+        //       kodepos: kodepos,
+        //       latitude: latitude,
+        //       longitude: longitude,
+        //     ),
+        //   ),
+        // );
+      }
+    }
+  }
+
+  void goToLokasiKejadian() => Get.to(LokasiKejadian(
+        kategori: kategori,
+      ));
 }

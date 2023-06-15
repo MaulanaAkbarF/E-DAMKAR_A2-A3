@@ -14,11 +14,11 @@ class MapsAnonymController extends GetxController {
 
   var latitude = 0.0.obs;
   var longitude = 0.0.obs;
-  var jalan = ''.obs;
-  var desa = ''.obs;
-  var kecamatan = ''.obs;
-  var kota = ''.obs;
-  var kodepos = ''.obs;
+  var jalan = '';
+  var desa = '';
+  var kecamatan = '';
+  var kota = '';
+  var kodepos = '';
   var address = 'Klik tombol Locator untuk menuju alamat kamu sekarang'.obs;
 
   //snackBar Message
@@ -47,11 +47,11 @@ class MapsAnonymController extends GetxController {
 
     latitude.value = position.latitude;
     longitude.value = position.longitude;
-    jalan.value = place.street.toString();
-    desa.value = place.subLocality.toString();
-    kecamatan.value = place.locality.toString();
-    kota.value = place.subAdministrativeArea.toString();
-    kodepos.value = place.postalCode.toString();
+    jalan = place.street.toString();
+    desa = place.subLocality.toString();
+    kecamatan = place.locality.toString();
+    kota = place.subAdministrativeArea.toString();
+    kodepos = place.postalCode.toString();
     address.value =
         "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.postalCode}";
   }
@@ -92,11 +92,11 @@ class MapsAnonymController extends GetxController {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     } else {
       Map<String, dynamic> dataMaps = {
-        'desa': desa.value,
-        'jalan': jalan.value,
-        'kecamatan': kecamatan.value,
-        'kota': kota.value,
-        'kodepos': kodepos.value,
+        'desa': desa,
+        'jalan': jalan,
+        'kecamatan': kecamatan,
+        'kota': kota,
+        'kodepos': kodepos,
         'latitude': latitude.value,
         'longitude': longitude.value
       };
