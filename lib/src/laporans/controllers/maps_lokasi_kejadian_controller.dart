@@ -1,3 +1,4 @@
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/laporans/views/LokasiKejadian.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:geocoding/geocoding.dart';
@@ -87,6 +88,17 @@ class MapsLokasiKejadianController extends GetxController {
   }
 
   void goToPelaporan() {
+    var data = {
+      'idKategori': 0,
+      'kategori': '',
+      'jalan': jalan,
+      'desa': desa,
+      'kecamatan': kecamatan,
+      'kota': kota,
+      'kodepos': kodepos,
+      'latitude': latitude.value,
+      'longitude': longitude.value,
+    };
     if (jalan.isEmpty) {
       // Tampilkan notifikasi "Pilih alamat"
       // ScaffoldMessenger.of(context).showSnackBar(
@@ -117,8 +129,9 @@ class MapsLokasiKejadianController extends GetxController {
         //     ),
         //   ),
         // );
-
-        // Get.toNamed(page)
+        data['idKategori'] = 2;
+        data['kategori'] = "bencanaalam";
+        Get.toNamed(Routes.lpBencanaAlam, arguments: data);
       } else if (kategori == "kebakaran") {
         // Navigator.push(
         //   context,

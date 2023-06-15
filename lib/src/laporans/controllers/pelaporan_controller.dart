@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -15,23 +15,15 @@ class PelaporanController extends GetxController {
   var iduser;
   var dataArgs = Get.arguments;
 
-  File? image;
+  Rx<File?> image = Rx<File?>(null);
   String? imageName;
   var imagePath;
-  bool showSpinner = false;
+  RxBool showSpinner = false.obs;
   final ImagePicker _picker = ImagePicker();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   DataUser().getNoHp().then((value) => noTelpCon.text = value);
-  //   DataUser().getUserId().then((value) => iduser = value);
-  // }
 
   @override
   void onInit() {
     super.onInit();
-
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
     DataUser().getUserId().then((value) => iduser = value);
   }
@@ -62,8 +54,8 @@ class PelaporanController extends GetxController {
   }
 
   void pushLaporan() async {
-    _kirimNotifikasi();
-    showSpinner = true;
+    // _kirimNotifikasi();
+    showSpinner.value = true;
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
@@ -79,19 +71,29 @@ class PelaporanController extends GetxController {
 
     //eksekuis post kirim photo
     await APIClient().postMulti('addImage', image, imagePath, title);
-    var result2 = await APIClient().postData('addPelaporan', {
+    var result = await APIClient().postData('addPelaporan', {
       'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '2',
+      'kategori_laporan_id': dataArgs['idKategori'].toString(),
       'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
       'gambar_bukti_pelaporan': title,
       'alamat_kejadian': alamat,
-      'latitude': dataArgs["latitude"],
-      'longitude': dataArgs["longitude"],
+      'latitude': dataArgs["latitude"].toString(),
+      'longitude': dataArgs["longitude"].toString(),
       'urgensi': namaBencanaCon.text
     });
-    _kirimNotifikasi();
-    if (result2 != null) {
+    // _kirimNotifikasi();
+    if (result != null) {
+      Get.snackbar("Laporan Berhasil dikirim!",
+          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!",
+          icon: Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
+      // Get.back();
+      Get.offAllNamed(Routes.dashboard, arguments: 2);
       // FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
       //     "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
       // Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -99,19 +101,29 @@ class PelaporanController extends GetxController {
     } else {
       // FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
       //     "Lakukan Emergency Call jika terdapat kenadala");
+
+      Get.snackbar("Laporan gagal dikirim!",
+          "Lakukan Emergency Call jika terdapat kenadala");
     }
+    showSpinner.value = false;
   }
 
   Future getImage() async {
     final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
 
     if (imagePicked != null) {
-      image = File(imagePicked.path);
+      image.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
       update();
     } else {
       print('no image selected');
+    }
+  }
+
+  void pushPelaporan() {
+    if (formKey.currentState?.validate() == true) {
+      pushLaporan();
     }
   }
 }

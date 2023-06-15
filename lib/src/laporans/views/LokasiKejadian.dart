@@ -63,9 +63,7 @@ final List<Map> teksStyleLokasiKejadian = [
   }
 ];
 
-class MyClass {
-  String namaKecamatan = 'Hello world!';
-}
+
 
 class _LokasiKejadianState extends State<LokasiKejadian> {
   final TextEditingController kecamatanCon = TextEditingController();

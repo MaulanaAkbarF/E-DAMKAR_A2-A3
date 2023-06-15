@@ -71,8 +71,8 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-        inAsyncCall: controller.showSpinner,
+    return Obx(() => ModalProgressHUD(
+        inAsyncCall: controller.showSpinner.value,
         progressIndicator: const CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
@@ -142,36 +142,43 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                                                 width: 1.2,
                                               ),
                                             ),
-                                            child: Stack(
-                                              children: [
-                                                if (controller.image != null)
-                                                  Positioned.fill(
-                                                    child: Image.file(
-                                                      controller.image!,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                if (controller.image == null)
-                                                  Align(
-                                                    alignment: Alignment.center,
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Icon(Icons.image,
-                                                            color: Colors
-                                                                .grey.shade400,
-                                                            size: 24),
-                                                        SizedBox(width: 8),
-                                                        Text(
-                                                            'Pilih Photo Bukti Kejadian',
-                                                            style: teksStyle[
-                                                                'Thin3']),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
+                                            child: Obx(() => Stack(
+                                                  children: [
+                                                    if (controller
+                                                            .image.value !=
+                                                        null)
+                                                      Positioned.fill(
+                                                        child: Image.file(
+                                                          controller
+                                                              .image.value!,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    if (controller
+                                                            .image.value ==
+                                                        null)
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            Icon(Icons.image,
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade400,
+                                                                size: 24),
+                                                            SizedBox(width: 8),
+                                                            Text(
+                                                                'Pilih Photo Bukti Kejadian',
+                                                                style: teksStyle[
+                                                                    'Thin3']),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                  ],
+                                                )),
                                           ),
                                         ),
                                       ),
@@ -329,13 +336,7 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                                         child: InkWell(
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
-                                          onTap: () {
-                                            // if (_formKey.currentState
-                                            //         ?.validate() ==
-                                            //     true) {
-                                            //   pushLaporan();
-                                            // }
-                                          },
+                                          onTap: () => controller.pushLaporan(),
                                           child: Container(
                                             height: 50,
                                             child: Row(
@@ -360,6 +361,6 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                   ),
                 ),
               ),
-            )));
+            ))));
   }
 }

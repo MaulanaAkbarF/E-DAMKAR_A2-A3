@@ -23,7 +23,7 @@ abstract class Routes {
   //laporan
   static const laporan = '/laporan';
   static const mpLap = '/mapsLaporan';
-
+  static const lpBencanaAlam = '/laporanBencananAlam';
   //Riwayat
   static const riwayat = '/riwayat';
   static const dtRiwayat = '/detailRiwayat';

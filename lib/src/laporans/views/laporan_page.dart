@@ -77,7 +77,7 @@ final List<Map> teksStyleLaporan = [
 class _LaporanPageState extends State<LaporanPage> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return  WillPopScope(
       onWillPop: () async {
         return await showDialog(
             context: context,

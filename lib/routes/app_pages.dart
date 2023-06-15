@@ -10,6 +10,8 @@ import 'package:edamkar_1/src/home/bindings/home_binding.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/src/laporans/bindings/maps_lokasi_kejadiaan_binding.dart';
+import 'package:edamkar_1/src/laporans/bindings/pelaporan_binding.dart';
+import 'package:edamkar_1/src/laporans/views/LaporanBencanaAlam.dart';
 import 'package:edamkar_1/src/laporans/views/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
@@ -104,7 +106,12 @@ class AppPages {
         page: () => const MapsLokasiKejadian(),
         binding: MapsLokasiKejadianBinding()),
 
-    //riwyata
+    GetPage(
+        name: Routes.lpBencanaAlam,
+        page: () => const LaporanBencanaAlam(),
+        binding: PelaporanBinding()),
+
+    //riwayat
     GetPage(
         name: Routes.dtRiwayat,
         page: () => DetailRiwayatLengkapView(),
