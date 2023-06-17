@@ -1,38 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/utils/app_style.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import '../controllers/pelaporan_controller.dart';
 
-class LaporanCustom extends StatefulWidget {
-  // const BuatLaporan({Key? key}) : super(key: key);
-
-  String desa, jalan, kecamatan, kota, kodepos;
-  double latitude, longitude;
-  LaporanCustom(
-      {Key? key,
-      required this.desa,
-      required this.jalan,
-      required this.kecamatan,
-      required this.kota,
-      required this.kodepos,
-      required this.latitude,
-      required this.longitude})
-      : super(key: key);
-
-  @override
-  State<LaporanCustom> createState() => _LaporanCustomState();
-}
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -96,121 +66,12 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanCustomState extends State<LaporanCustom> {
-  final TextEditingController namaBencanaCon = TextEditingController();
-  final TextEditingController noTelpCon = TextEditingController();
-  final TextEditingController deskripsiCon = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  var iduser;
-
-  @override
-  void initState() {
-    super.initState();
-    DataUser().getNoHp().then((value) => noTelpCon.text = value);
-    DataUser().getUserId().then((value) => iduser = value);
-  }
-
-  void _kirimNotifikasi() async {
-    // Ganti dengan URL endpoint API yang sesuai
-
-    // Data yang akan dikirim
-    var data = {
-      "desa": widget.desa,
-      "jalan": widget.jalan,
-      "kecamatan": widget.kecamatan,
-      "kota": widget.kota,
-      "kodepos": widget.kodepos,
-      "latitude": widget.latitude.toString(),
-      "longitude": widget.longitude.toString(),
-      "namaBencana": namaBencanaCon.text,
-      "noTelp": noTelpCon.text.toString(),
-    };
-
-    // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("sendToWa", data);
-    // Menerima dan memproses respons dari server
-    if (response != null) {
-      print(jsonDecode(response));
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
-  }
-
-  void pushLaporan() async {
-    _kirimNotifikasi();
-    setState(() {
-      showSpinner = true;
-    });
-    String title = iduser.toString() + "_image_" + getRandomString(30);
-    DateTime now = new DateTime.now();
-    DateTime date = new DateTime(now.year, now.month, now.day);
-    String alamat = widget.jalan +
-        ', ' +
-        widget.desa +
-        ', ' +
-        widget.kecamatan +
-        ', ' +
-        widget.kota +
-        ', ' +
-        widget.kodepos;
-    var result =
-        await APIClient().postMulti('addImage', image, imagePath, title);
-    var result2 = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '4',
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
-      'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
-      'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString(),
-      'urgensi': namaBencanaCon.text
-    });
-    _kirimNotifikasi();
-    if (result2 != null) {
-      FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
-          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     // builder: (BuildContext context) => const AppMenu()));
-    } else {
-      FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
-          "Lakukan Emergency Call jika terdapat kenadala");
-    }
-  }
-
-  void show(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.white,
-        textColor: Colors.black);
-  }
-
-  File? image;
-  String? imageName;
-  var imagePath;
-  bool showSpinner = false;
-  final ImagePicker _picker = ImagePicker();
-
-  Future getImage() async {
-    final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (imagePicked != null) {
-      image = File(imagePicked.path);
-      imageName = imagePicked.name;
-      imagePath = imagePicked.path;
-      setState(() {});
-    } else {
-      print('no image selected');
-    }
-  }
-
+class LaporanCustom extends GetView<PelaporanController> {
+  const LaporanCustom({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-        inAsyncCall: showSpinner,
+    return Obx(() => ModalProgressHUD(
+        inAsyncCall: controller.showSpinner.value,
         progressIndicator: CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
@@ -230,7 +91,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
             ),
             body: SafeArea(
               child: Form(
-                key: _formKey,
+                key: controller.formKey,
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: Column(
@@ -260,9 +121,7 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                             Clip.antiAliasWithSaveLayer,
                                         borderRadius: BorderRadius.circular(8),
                                         child: InkWell(
-                                          onTap: () async {
-                                            await getImage();
-                                          },
+                                          onTap: () => controller.getImage(),
                                           child: Container(
                                             height: 200,
                                             decoration: BoxDecoration(
@@ -276,14 +135,16 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                             ),
                                             child: Stack(
                                               children: [
-                                                if (image != null)
+                                                if (controller.image.value !=
+                                                    null)
                                                   Positioned.fill(
                                                     child: Image.file(
-                                                      image!,
+                                                      controller.image.value!,
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                if (image == null)
+                                                if (controller.image.value ==
+                                                    null)
                                                   Align(
                                                     alignment: Alignment.center,
                                                     child: Row(
@@ -334,13 +195,13 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                                 color: Colors.grey.shade300,
                                                 width: 1.2)),
                                         child: TextFormField(
-                                          controller: namaBencanaCon,
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Urgensi tidak boleh kosong';
-                                            }
-                                          },
+                                          controller: controller.namaBencanaCon,
+                                          // validator: (value) {
+                                          //   if (value == null ||
+                                          //       value.isEmpty) {
+                                          //     return 'Urgensi tidak boleh kosong';
+                                          //   }
+                                          // },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
@@ -380,13 +241,13 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                                 color: Colors.grey.shade300,
                                                 width: 1.2)),
                                         child: TextFormField(
-                                          controller: noTelpCon,
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Nomor Telepon tidak boleh kosong';
-                                            }
-                                          },
+                                          controller: controller.noTelpCon,
+                                          // validator: (value) {
+                                          //   if (value == null ||
+                                          //       value.isEmpty) {
+                                          //     return 'Nomor Telepon tidak boleh kosong';
+                                          //   }
+                                          // },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
@@ -427,13 +288,13 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                         child: TextFormField(
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 6,
-                                          controller: deskripsiCon,
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Deskripsi tidak boleh kosong';
-                                            }
-                                          },
+                                          controller: controller.deskripsiCon,
+                                          // validator: (value) {
+                                          //   // if (value == null ||
+                                          //   //     value.isEmpty) {
+                                          //   //   return 'Deskripsi tidak boleh kosong';
+                                          //   // }
+                                          // },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
@@ -458,13 +319,8 @@ class _LaporanCustomState extends State<LaporanCustom> {
                                         child: InkWell(
                                           splashColor: Colors.red.shade700,
                                           highlightColor: Colors.red.shade900,
-                                          onTap: () {
-                                            if (_formKey.currentState
-                                                    ?.validate() ==
-                                                true) {
-                                              pushLaporan();
-                                            }
-                                          },
+                                          onTap: () =>
+                                              controller.pushPelaporan(),
                                           child: Container(
                                             height: 50,
                                             child: Row(
@@ -489,6 +345,6 @@ class _LaporanCustomState extends State<LaporanCustom> {
                   ),
                 ),
               ),
-            )));
+            ))));
   }
 }

@@ -1,38 +1,27 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
-import 'package:edamkar_1/notification/toastNotif.dart';
-import 'package:edamkar_1/utils/app_style.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:edamkar_1/src/laporans/controllers/pelaporan_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LaporanKebakaran extends StatefulWidget {
-  // const BuatLaporan({Key? key}) : super(key: key);
+// class LaporanKebakaran extends StatefulWidget {
+//   // const BuatLaporan({Key? key}) : super(key: key);
 
-  String desa, jalan, kecamatan, kota, kodepos;
-  double latitude, longitude;
-  LaporanKebakaran(
-      {Key? key,
-      required this.desa,
-      required this.jalan,
-      required this.kecamatan,
-      required this.kota,
-      required this.kodepos,
-      required this.latitude,
-      required this.longitude})
-      : super(key: key);
+//   String desa, jalan, kecamatan, kota, kodepos;
+//   double latitude, longitude;
+//   LaporanKebakaran(
+//       {Key? key,
+//       required this.desa,
+//       required this.jalan,
+//       required this.kecamatan,
+//       required this.kota,
+//       required this.kodepos,
+//       required this.latitude,
+//       required this.longitude})
+//       : super(key: key);
 
-  @override
-  State<LaporanKebakaran> createState() => _LaporanKebakaranState();
-}
+//   @override
+//   State<LaporanKebakaran> createState() => _LaporanKebakaranState();
+// }
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // atur teks yang akan ditampilkan
 
@@ -96,394 +85,283 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanKebakaranState extends State<LaporanKebakaran> {
-  final TextEditingController namaBencanaCon = TextEditingController();
-  final TextEditingController noTelpCon = TextEditingController();
-  final TextEditingController deskripsiCon = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  var iduser;
-
-  @override
-  void initState() {
-    super.initState();
-    DataUser().getNoHp().then((value) => noTelpCon.text = value);
-    DataUser().getUserId().then((value) => iduser = value);
-  }
-
-  void _kirimNotifikasi() async {
-    // Ganti dengan URL endpoint API yang sesuai
-
-    // Data yang akan dikirim
-    var data = {
-      "desa": widget.desa,
-      "jalan": widget.jalan,
-      "kecamatan": widget.kecamatan,
-      "kota": widget.kota,
-      "kodepos": widget.kodepos,
-      "latitude": widget.latitude.toString(),
-      "longitude": widget.longitude.toString(),
-      "namaBencana": namaBencanaCon.text,
-      "noTelp": noTelpCon.text.toString(),
-    };
-
-    // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("sendToWa", data);
-    // Menerima dan memproses respons dari server
-    if (response != null) {
-      print(jsonDecode(response));
-    } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
-    }
-  }
-
-  void pushLaporan() async {
-    _kirimNotifikasi();
-    setState(() {
-      showSpinner = true;
-    });
-    String title = iduser.toString() + "_image_" + getRandomString(30);
-    DateTime now = new DateTime.now();
-    DateTime date = new DateTime(now.year, now.month, now.day);
-    String alamat = widget.jalan +
-        ', ' +
-        widget.desa +
-        ', ' +
-        widget.kecamatan +
-        ', ' +
-        widget.kota +
-        ', ' +
-        widget.kodepos;
-    var result =
-        await APIClient().postMulti('addImage', image, imagePath, title);
-    var result2 = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
-      'kategori_laporan_id': '1',
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
-      'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
-      'latitude': widget.latitude.toString(),
-      'longitude': widget.longitude.toString(),
-      'urgensi': namaBencanaCon.text
-    });
-    _kirimNotifikasi();
-    if (result2 != null) {
-      FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
-          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (BuildContext context) => const AppMenu()));
-    } else {
-      FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
-          "Lakukan Emergency Call jika terdapat kenadala");
-    }
-  }
-
-  void show(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.white,
-        textColor: Colors.black);
-  }
-
-  File? image;
-  String? imageName;
-  var imagePath;
-  bool showSpinner = false;
-  final ImagePicker _picker = ImagePicker();
-
-  Future getImage() async {
-    final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
-
-    if (imagePicked != null) {
-      image = File(imagePicked.path);
-      imageName = imagePicked.name;
-      imagePath = imagePicked.path;
-      setState(() {});
-    } else {
-      print('no image selected');
-    }
-  }
-
-  Future<void> uploadImage() async {
-    setState(() {
-      showSpinner = true;
-    });
-  }
-
+class _LaporanKebakaranState extends GetView<PelaporanController> {
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: showSpinner,
-      progressIndicator: CircularProgressIndicator(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-          centerTitle: false,
-          title: const Text(
-            "Buat Laporan Anda",
-            style: TextStyle(
-              fontSize: 20,
-              fontFamily: "font/inter_bold.ttf",
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+    return Obx(() => ModalProgressHUD(
+          inAsyncCall: controller.showSpinner.value,
+          progressIndicator: CircularProgressIndicator(),
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black87,
+              elevation: 0,
+              centerTitle: false,
+              title: const Text(
+                "Buat Laporan Anda",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "font/inter_bold.ttf",
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
             ),
-          ),
-        ),
-        body: SafeArea(
-          child: Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  for (final teks in teksSignUp)
-                    for (final teksStyle in teksStyleSignUp)
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 0),
-                                  child: Text(teks['SubHeader'],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 4,
-                                      style: teksStyle['SemiBold1']),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 32),
-                                  child: Material(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await getImage();
-                                      },
+            body: SafeArea(
+              child: Form(
+                key: controller.formKey,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      for (final teks in teksSignUp)
+                        for (final teksStyle in teksStyleSignUp)
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 0),
+                                      child: Text(teks['SubHeader'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 4,
+                                          style: teksStyle['SemiBold1']),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 32),
+                                      child: Material(
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: InkWell(
+                                          onTap: () => controller.getImage(),
+                                          child: Container(
+                                            height: 200,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: Colors.grey.shade300,
+                                                width: 1.2,
+                                              ),
+                                            ),
+                                            child: Stack(
+                                              children: [
+                                                if (controller.image.value !=
+                                                    null)
+                                                  Positioned.fill(
+                                                    child: Image.file(
+                                                      controller.image.value!,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                if (controller.image.value ==
+                                                    null)
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(Icons.image,
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            size: 24),
+                                                        SizedBox(width: 8),
+                                                        Text(
+                                                            'Pilih Photo Bukti Kejadian',
+                                                            style: teksStyle[
+                                                                'Thin3']),
+                                                      ],
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 24),
+                                      child: Text(teks['namaBencana'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: teksStyle['Thin1']),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 8),
                                       child: Container(
-                                        height: 200,
+                                        width: double.infinity,
+                                        margin: EdgeInsets.all(2),
                                         decoration: BoxDecoration(
                                           color: Colors.grey.shade100,
                                           borderRadius:
                                               BorderRadius.circular(8),
                                           border: Border.all(
-                                            color: Colors.grey.shade300,
-                                            width: 1.2,
+                                              color: Colors.grey.shade300,
+                                              width: 1.2),
+                                        ),
+                                        child: TextFormField(
+                                          controller: controller.namaBencanaCon,
+                                          // validator: (value) {
+                                          //   if (value == null || value.isEmpty) {
+                                          //     return 'Urgensi tidak boleh kosong';
+                                          //   }
+                                          // },
+                                          cursorColor: Colors.black,
+                                          style: teksStyle['SemiBold1'],
+                                          decoration: InputDecoration(
+                                              hintText: teks['namaBencanaHint'],
+                                              prefixIcon:
+                                                  Icon(Icons.fire_truck),
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      10, 13, 10, 7),
+                                              border: InputBorder.none),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 16),
+                                      child: Text(teks['noTelp'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: teksStyle['Thin1']),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 8),
+                                      child: Container(
+                                        width: double.infinity,
+                                        margin: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade100,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                                color: Colors.grey.shade300,
+                                                width: 1.2)),
+                                        child: TextFormField(
+                                          controller: controller.noTelpCon,
+                                          // validator: (value) {
+                                          //   if (value == null || value.isEmpty) {
+                                          //     return 'Nomor Telepon tidak boleh kosong';
+                                          //   }
+                                          // },
+                                          cursorColor: Colors.black,
+                                          style: teksStyle['SemiBold1'],
+                                          decoration: InputDecoration(
+                                              hintText: teks['noTelpHint'],
+                                              prefixIcon: Icon(Icons.phone),
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      10, 13, 10, 7),
+                                              border: InputBorder.none),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 16),
+                                      child: Text(teks['deskripsi'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: teksStyle['Thin1']),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: FractionalOffset.topLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 8),
+                                      child: Container(
+                                        width: double.infinity,
+                                        margin: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade100,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            border: Border.all(
+                                                color: Colors.grey.shade300,
+                                                width: 1.2)),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: 6,
+                                          controller: controller.deskripsiCon,
+                                          // validator: (value) {
+                                          //   if (value == null || value.isEmpty) {
+                                          //     return 'Deskripsi tidak boleh kosong';
+                                          //   }
+                                          // },
+                                          cursorColor: Colors.black,
+                                          style: teksStyle['SemiBold1'],
+                                          decoration: InputDecoration(
+                                              hintText: teks['deskripsiHint'],
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      10, 13, 10, 7),
+                                              border: InputBorder.none),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 40),
+                                      child: Material(
+                                        color: Colors.red.shade400,
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: InkWell(
+                                          splashColor: Colors.red.shade700,
+                                          highlightColor: Colors.red.shade900,
+                                          onTap: () =>
+                                              controller.pushPelaporan(),
+                                          child: Container(
+                                            height: 50,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(teks['buttonKirim'],
+                                                    style: teksStyle['Thin2']),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        child: Stack(
-                                          children: [
-                                            if (image != null)
-                                              Positioned.fill(
-                                                child: Image.file(
-                                                  image!,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            if (image == null)
-                                              Align(
-                                                alignment: Alignment.center,
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Icon(Icons.image,
-                                                        color: Colors
-                                                            .grey.shade400,
-                                                        size: 24),
-                                                    SizedBox(width: 8),
-                                                    Text(
-                                                        'Pilih Photo Bukti Kejadian',
-                                                        style:
-                                                            teksStyle['Thin3']),
-                                                  ],
-                                                ),
-                                              ),
-                                          ],
-                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 24),
-                                  child: Text(teks['namaBencana'],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: teksStyle['Thin1']),
-                                ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 8),
-                                  child: Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade100,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                          color: Colors.grey.shade300,
-                                          width: 1.2),
-                                    ),
-                                    child: TextFormField(
-                                      controller: namaBencanaCon,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Urgensi tidak boleh kosong';
-                                        }
-                                      },
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['SemiBold1'],
-                                      decoration: InputDecoration(
-                                          hintText: teks['namaBencanaHint'],
-                                          prefixIcon: Icon(Icons.fire_truck),
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 16),
-                                  child: Text(teks['noTelp'],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: teksStyle['Thin1']),
-                                ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 8),
-                                  child: Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: Colors.grey.shade300,
-                                            width: 1.2)),
-                                    child: TextFormField(
-                                      controller: noTelpCon,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Nomor Telepon tidak boleh kosong';
-                                        }
-                                      },
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['SemiBold1'],
-                                      decoration: InputDecoration(
-                                          hintText: teks['noTelpHint'],
-                                          prefixIcon: Icon(Icons.phone),
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 16),
-                                  child: Text(teks['deskripsi'],
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: teksStyle['Thin1']),
-                                ),
-                              ),
-                              Align(
-                                alignment: FractionalOffset.topLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 8),
-                                  child: Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: Colors.grey.shade300,
-                                            width: 1.2)),
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.multiline,
-                                      maxLines: 6,
-                                      controller: deskripsiCon,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Deskripsi tidak boleh kosong';
-                                        }
-                                      },
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['SemiBold1'],
-                                      decoration: InputDecoration(
-                                          hintText: teks['deskripsiHint'],
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 40),
-                                  child: Material(
-                                    color: Colors.red.shade400,
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: InkWell(
-                                      splashColor: Colors.red.shade700,
-                                      highlightColor: Colors.red.shade900,
-                                      onTap: () {
-                                        if (_formKey.currentState?.validate() ==
-                                            true) {
-                                          pushLaporan();
-                                        }
-                                      },
-                                      child: Container(
-                                        height: 50,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(teks['buttonKirim'],
-                                                style: teksStyle['Thin2']),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
