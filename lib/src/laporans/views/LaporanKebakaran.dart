@@ -86,6 +86,7 @@ final List<Map> teksStyleSignUp = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class LaporanKebakaran extends GetView<PelaporanController> {
+  const LaporanKebakaran({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Obx(() => ModalProgressHUD(
