@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class cobadata {
   String idLap;
   String title;

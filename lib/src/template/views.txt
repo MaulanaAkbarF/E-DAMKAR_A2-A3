@@ -1,0 +1,11 @@
+class view dengan extends GetView<Controller> adalah class yang akan menampung code 
+tampilan widget yang akan dilihat oleh pengguna.
+
+
+pada view untuk mengakses fungsi atau variabel harus menambahkan controller. sebelum nama variabel
+variable : 
+- controller.namaUser
+
+Method : 
+- controller.getUserName
+- () => contrller.getUserName()

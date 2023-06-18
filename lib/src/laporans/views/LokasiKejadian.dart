@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LokasiKejadian extends StatefulWidget {
-  String kategori;
-  LokasiKejadian({Key? key, required this.kategori}) : super(key: key);
+  final String kategori;
+  const LokasiKejadian({Key? key, required this.kategori}) : super(key: key);
 
   @override
   State<LokasiKejadian> createState() => _LokasiKejadianState();
@@ -62,8 +62,6 @@ final List<Map> teksStyleLokasiKejadian = [
         fontWeight: FontWeight.w600)
   }
 ];
-
-
 
 class _LokasiKejadianState extends State<LokasiKejadian> {
   final TextEditingController kecamatanCon = TextEditingController();

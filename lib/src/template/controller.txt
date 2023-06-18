@@ -1,0 +1,23 @@
+class controller dengan extends GetxController adalah class yang akan menampung logika yang akan dijalankan
+pada saat user melakukan aksi .
+
+
+dengan menggunakan getx variable dapat di observasi ketika terdapat 
+perubahan maka tampilan juga akan otomtis berubah tanpa menggunakan setState()
+
+untuk variabel yang di observasi tipe datanya memiliki Rx diawal: 
+ - RxString
+ - RxInt
+ - RxBool 
+
+dan untuk value harus diakhiri dengan .obs
+RxBool isLoading = true.obs
+RxString user = "".obs
+var number = 3.obs
+
+
+untuk mengakses variable harus menambahkan .value di akhir nama varible yang dipanggil
+karena widget tidak dapat mengakses variabel dengan tipe Rx
+
+controller.isLoading.value //akan mengembalikan tipe data boolean tidak lagi RxBoolean
+controller.user.value //akan mengembalikan tipe data String tidak lagi RxString
