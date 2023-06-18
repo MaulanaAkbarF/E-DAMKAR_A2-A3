@@ -5,6 +5,8 @@ import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../config/APIClient.dart';
+
 class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   DetailRiwayatLengkapView({super.key});
 
@@ -198,7 +200,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "https://images.unsplash.com/photo-1518904868869-fbb2cdd0429a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80",
+                                        "${baseUrl}storage/gambar_pelaporans/${controller.dataElement.value![index].imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),

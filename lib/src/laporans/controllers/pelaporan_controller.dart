@@ -56,9 +56,9 @@ class PelaporanController extends GetxController {
   void pushLaporan() async {
     // _kirimNotifikasi();
     showSpinner.value = true;
-    String title = iduser.toString() + "_image_" + getRandomString(30);
-    DateTime now = new DateTime.now();
-    DateTime date = new DateTime(now.year, now.month, now.day);
+    String title = "${iduser.toString()}_image_${getRandomString(30)}";
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
     String alamat = dataArgs["jalan"] +
         ', ' +
         dataArgs["desa"] +
