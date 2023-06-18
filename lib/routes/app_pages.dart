@@ -12,6 +12,9 @@ import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/src/laporans/bindings/maps_lokasi_kejadiaan_binding.dart';
 import 'package:edamkar_1/src/laporans/bindings/pelaporan_binding.dart';
 import 'package:edamkar_1/src/laporans/views/LaporanBencanaAlam.dart';
+import 'package:edamkar_1/src/laporans/views/LaporanHewanBuas.dart';
+import 'package:edamkar_1/src/laporans/views/LaporanKebakaran.dart';
+import 'package:edamkar_1/src/laporans/views/LaporanPenyelamatan.dart';
 import 'package:edamkar_1/src/laporans/views/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
@@ -111,7 +114,22 @@ class AppPages {
         page: () => const LaporanBencanaAlam(),
         binding: PelaporanBinding()),
 
-    //riwayat
+    GetPage(
+        name: Routes.lpHewanBuas,
+        page: () => LaporanHewanBuas(),
+        binding: PelaporanBinding()),
+
+    GetPage(
+        name: Routes.lpKebakaran,
+        page: () => LaporanKebakaran(),
+        binding: PelaporanBinding()),
+
+    GetPage(
+        name: Routes.lpPenyelamatan,
+        page: () => LaporanPenyelamatan(),
+        binding: PelaporanBinding()),
+
+  //riwayat pelaporan
     GetPage(
         name: Routes.dtRiwayat,
         page: () => DetailRiwayatLengkapView(),

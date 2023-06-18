@@ -24,6 +24,11 @@ abstract class Routes {
   static const laporan = '/laporan';
   static const mpLap = '/mapsLaporan';
   static const lpBencanaAlam = '/laporanBencananAlam';
+  static const lpHewanBuas = '/laporanHewanBuas';
+  static const lpKebakaran = '/laporanKebakaran';
+  static const lpPenyelamatan = '/laporanPenyelamatan';
+  static const lpCustom = '/laporanCustom';
+
   //Riwayat
   static const riwayat = '/riwayat';
   static const dtRiwayat = '/detailRiwayat';

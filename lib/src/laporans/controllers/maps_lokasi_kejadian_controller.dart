@@ -130,7 +130,7 @@ class MapsLokasiKejadianController extends GetxController {
         //   ),
         // );
         data['idKategori'] = 2;
-        data['kategori'] = "bencanaalam";
+        data['kategori'] = kategori;
         Get.toNamed(Routes.lpBencanaAlam, arguments: data);
       } else if (kategori == "kebakaran") {
         // Navigator.push(
@@ -147,6 +147,10 @@ class MapsLokasiKejadianController extends GetxController {
         //     ),
         //   ),
         // );
+
+        data['idKategori'] = 1;
+        data['kategori'] = kategori;
+        Get.toNamed(Routes.lpKebakaran, arguments: data);
       } else if (kategori == "hewanbuas") {
         // Navigator.push(
         //   context,
@@ -162,6 +166,10 @@ class MapsLokasiKejadianController extends GetxController {
         //     ),
         //   ),
         // );
+
+        data['idKategori'] = 4;
+        data['kategori'] = kategori;
+        Get.toNamed(Routes.lpHewanBuas, arguments: data);
       } else if (kategori == "penyelamatan") {
         // Navigator.push(
         //   context,
@@ -177,6 +185,10 @@ class MapsLokasiKejadianController extends GetxController {
         //     ),
         //   ),
         // );
+
+        data['idKategori'] = 3;
+        data['kategori'] = kategori;
+        Get.toNamed(Routes.lpPenyelamatan, arguments: data);
       } else if (kategori == "custom") {
         // Navigator.push(
         //   context,
@@ -192,6 +204,10 @@ class MapsLokasiKejadianController extends GetxController {
         //     ),
         //   ),
         // );
+
+        data['idKategori'] = 5;
+        data['kategori'] = kategori;
+        Get.toNamed(Routes.lpCustom, arguments: data);
       }
     }
   }

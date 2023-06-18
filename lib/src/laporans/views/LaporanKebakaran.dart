@@ -85,7 +85,7 @@ final List<Map> teksStyleSignUp = [
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-class _LaporanKebakaranState extends GetView<PelaporanController> {
+class LaporanKebakaran extends GetView<PelaporanController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => ModalProgressHUD(
