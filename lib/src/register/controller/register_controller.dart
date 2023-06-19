@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/models/RegisterModel.dart';
+import 'package:edamkar_1/src/register/model/register_model.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

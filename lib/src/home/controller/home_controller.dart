@@ -1,5 +1,5 @@
 import 'package:edamkar_1/config/APIClient.dart';
-import 'package:edamkar_1/models/HomeModel.dart';
+import 'package:edamkar_1/src/home/model/home_model.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
