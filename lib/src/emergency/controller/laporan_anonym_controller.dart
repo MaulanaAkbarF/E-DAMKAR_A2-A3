@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

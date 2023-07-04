@@ -46,9 +46,9 @@ class APIClient {
     );
     final response = await request.send();
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      // print(await response.stream.bytesToString());
     } else {
-      print(response.statusCode);
+      // print(response.statusCode);
     }
   }
 

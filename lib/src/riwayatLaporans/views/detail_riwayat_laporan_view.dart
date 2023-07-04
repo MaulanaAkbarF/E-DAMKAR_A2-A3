@@ -5,7 +5,7 @@ import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../config/APIClient.dart';
+import '../../../config/api_client.dart';
 
 class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   DetailRiwayatLengkapView({super.key});

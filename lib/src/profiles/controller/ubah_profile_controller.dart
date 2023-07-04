@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

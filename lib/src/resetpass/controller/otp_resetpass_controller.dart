@@ -1,4 +1,4 @@
-import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/config/api_client.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

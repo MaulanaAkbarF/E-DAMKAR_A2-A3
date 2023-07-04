@@ -1,4 +1,4 @@
-import 'package:edamkar_1/config/APIClient.dart';
+import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/models/ArtikelModel.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:get/get.dart';
