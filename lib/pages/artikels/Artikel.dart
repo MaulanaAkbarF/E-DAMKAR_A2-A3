@@ -461,7 +461,7 @@ class _ArtikelState extends State<Artikel> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
                           borderRadius: BorderRadius.circular(10)),
-                      child: dataHigh == null || dataHigh.length <= 9
+                      child: dataHigh == null 
                           ? Text(
                               "Data kosong",
                               textAlign: TextAlign.center,

@@ -10,8 +10,16 @@ import 'package:edamkar_1/pages/register/signup.dart';
 import 'package:edamkar_1/pages/riwayatLaporans/RiwayatLaporan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 void main() {
+  AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+        channelKey: 'channelKey',
+        channelName: 'channelName',
+        channelDescription: 'channelDescription')
+  ]);
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])

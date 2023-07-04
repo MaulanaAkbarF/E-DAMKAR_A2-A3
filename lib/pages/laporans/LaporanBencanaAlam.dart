@@ -115,7 +115,8 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
 
   void _kirimNotifikasi() async {
     // Ganti dengan URL endpoint API yang sesuai
-
+var url = Uri.parse(APIClient
+        .whatsappnotification);
     // Data yang akan dikirim
     var data = {
       "desa": widget.desa,
@@ -130,13 +131,14 @@ class _LaporanBencanaAlamState extends State<LaporanBencanaAlam> {
     };
 
     // Mengirim data ke server menggunakan metode POST
-    var response = await APIClient().postData("sendToWa", data);
+    var response2 = await http.post(url, body: data);
+    // var response = await APIClient().postData("sendToWa", data);
     // Menerima dan memproses respons dari server
-    if (response.statusCode == "200") {
-      var responseData = json.decode(response.body);
+    if (response2.statusCode == "200") {
+      var responseData = json.decode(response2.body);
       print('Respon dari server: $responseData');
     } else {
-      print('Gagal mengirim data. Kode status: ${response.statusCode}');
+      print('Gagal mengirim data. Kode status: ${response2.statusCode}');
     }
   }
 

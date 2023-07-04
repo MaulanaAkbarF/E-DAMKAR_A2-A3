@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:edamkar_1/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/notification/toastNotif.dart';
 import 'package:edamkar_1/pages/emergency/mapsAnonym.dart';
@@ -27,6 +28,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
         context,
         MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
       );
+      AwesomeNotifications().createNotification(
+          content: NotificationContent(
+              id: 10,
+              channelKey: 'channelKey',
+              title: "Emergency Call",
+              body: 'Kembali ke aplikasi untuk melanjutkan laporan !'));
     } else {
       FloatNotif().snackBarFail(
           context, "Gagal", "Tunggu beberapa saat dan coba lagi!");
@@ -49,6 +56,12 @@ class _EmergencyCallState extends State<EmergencyCall> {
         context,
         MaterialPageRoute(builder: (context) => MapsAnonym(kategori: "anonym")),
       );
+      AwesomeNotifications().createNotification(
+          content: NotificationContent(
+              id: 10,
+              channelKey: 'channelKey',
+              title: "Emergency Call",
+              body: 'Kembali ke aplikasi untuk melanjutkan laporan !'));
     } else {
       FloatNotif().snackBarFail(
           context, "Gagal", "Tunggu beberapa saat lalu coba lagi");

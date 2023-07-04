@@ -1,11 +1,11 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://192.168.225.132:8000/';
+const String baseUrl = 'http://192.168.18.74:8000/';
 const String apiUrl = "${baseUrl}api/";
 
 class APIClient {
   var client = http.Client();
-  static const String base = "http://192.168.225.132:8080/flutter_api/";
+  static const String base = "http://192.168.18.74:8080/flutter_api/";
   static const String submit = base + "submit.php";
   static const String whatsappnotification = base + "whatsappnotification.php";
   static const String otpwhatsapp = base + "otpwa.php";

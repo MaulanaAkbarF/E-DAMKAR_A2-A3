@@ -192,12 +192,15 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         );
-      } 
-      else {
+      } else {
         setState(() => isloading = false);
         if (data.message.toString().split(" ").contains("username")) {
-          FloatNotif().snackBarFail(
-              context, "Gagal Membuat Akun", "username atau no Hp sudah digunakan");
+          FloatNotif().snackBarFail(context, "Gagal Membuat Akun",
+              "username atau no Hp sudah digunakan");
+        } else if (data.message.toString().split(" ").contains("hp")) {
+          FloatNotif().snackBarFail(context, "Gagal Membuat Akun",
+              "username atau no Hp sudah digunakan");
+          {}
         }
       }
     } else {
@@ -372,9 +375,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextFormField(
                                   controller: notelp,
                                   keyboardType: TextInputType.number,
-                                  inputFormatters:<TextInputFormatter>[
-                                    FilteringTextInputFormatter(RegExp(r'[0-9]'),
-                            allow: true)],
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter(
+                                        RegExp(r'[0-9]'),
+                                        allow: true)
+                                  ],
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(

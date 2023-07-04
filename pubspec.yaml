@@ -60,6 +60,7 @@ dependencies:
   mime_type: ^1.0.0
   mime: ^1.0.4
   flutter_local_notifications: ^14.1.0
+  awesome_notifications: ^0.6.19
   
 
 dev_dependencies:
