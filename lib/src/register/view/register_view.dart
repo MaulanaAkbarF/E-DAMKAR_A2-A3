@@ -4,6 +4,7 @@ import 'package:edamkar_1/src/register/controller/register_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
@@ -205,6 +206,11 @@ class SignUpView extends GetView<SignUpController> {
                                 child: TextFormField(
                                   controller: controller.notelp,
                                   keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter(
+                                        RegExp(r'[0-9]'),
+                                        allow: true)
+                                  ],
                                   cursorColor: Colors.black,
                                   style: teksStyle['SemiBold1'],
                                   decoration: InputDecoration(

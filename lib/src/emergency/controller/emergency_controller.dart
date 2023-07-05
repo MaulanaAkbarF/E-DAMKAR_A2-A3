@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,13 @@ class EmergencyController extends GetxController {
     if (await canLaunchUrl(phoneUrl)) {
       await launchUrl(phoneUrl);
       Get.offNamed(Routes.emeMaps);
+
+      AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'channelKey',
+        title: "Emergency Call",
+        body: 'Kembali ke aplikasi untuk melanjutkan pelaporan!'));
     } else {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     }
@@ -33,6 +41,13 @@ class EmergencyController extends GetxController {
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
       Get.offNamed(Routes.emeMaps);
+
+      AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'channelKey',
+        title: "Emergency Call",
+        body: 'Kembali ke aplikasi untuk melanjutkan pelaporan!'));
     } else {
       Get.snackbar(title, message, backgroundColor: black3, colorText: white);
     }

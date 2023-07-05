@@ -13,9 +13,9 @@ class UpdateProfil {
 
   UpdateProfil({this.kode, this.status});
 
-  static Future<UpdateProfil> ubahProfil(
-      String id, String namaLengkap, String noHp) async {
-    Uri url = Uri.parse("${baseUrl}user");
+   static Future<UpdateProfil> ubahProfil(
+    String id, String namaLengkap, String noHp) async {
+    Uri url = Uri.parse("${apiUrl}user");
     var HasilRespon = await http
         .post(url, body: {"id": id, "namaLengkap": namaLengkap, "noHp": noHp});
     var data = json.decode(HasilRespon.body);

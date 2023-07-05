@@ -1,3 +1,10 @@
+// import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:edamkar_1/APIRequest/APIClient.dart';
+
+// import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
+// import 'package:edamkar_1/notification/toastNotif.dart';
+// import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:edamkar_1/src/artikels/controller/artikel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';

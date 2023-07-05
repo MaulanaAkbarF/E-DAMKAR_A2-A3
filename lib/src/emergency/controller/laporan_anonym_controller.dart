@@ -16,6 +16,7 @@ class LaporanAnonymController extends GetxController {
   LaporanAnonymController(
       {this.desa,
       this.jalan,
+      this.kecamatan,
       this.kota,
       this.kodepos,
       this.latitude,

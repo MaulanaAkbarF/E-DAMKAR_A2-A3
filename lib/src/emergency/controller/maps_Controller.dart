@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -56,6 +59,19 @@ class MapsAnonymController extends GetxController {
         "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.postalCode}";
   }
 
+  Future<void> showSnackbar(String title, String message) {
+    final completer = Completer<void>();
+
+    Get.snackbar(
+      title,
+      message,
+      backgroundColor: Colors.white70,
+      colorText: Colors.black,
+    );
+
+    return completer.future;
+  }
+
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -71,33 +87,29 @@ class MapsAnonymController extends GetxController {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      Get.snackbar("GPS Error", "GPS kamu belum dinyalakan nih :(");
-      return Future.error("GPS kamu belum dinyalakan nih :(");
-      // return deflt;
+      await showSnackbar(
+          'GPS belum dinyalakan!', 'Harap menyalakan GPS di perangkat anda !');
     }
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        Get.snackbar("GPS Eror", "Izin GPS ditolak :(");
-        return Future.error('Izin GPS ditolak :(');
+        await showSnackbar(
+            'Izin GPS ditolak!', 'Harap Izinkan aplikasi untuk mengakses GPS');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      Get.snackbar("GPS Eror",
-          "Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS");
-      return Future.error(
-          'Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS');
-        
+      await showSnackbar(
+          'Izin GPS ditolak!', 'Harap Izinkan aplikasi untuk mengakses GPS');
     }
 
     Position position = await Geolocator.getCurrentPosition();
 
     latitude.value = position.latitude;
     longitude.value = position.longitude;
-   
+
     return position;
   }
 
