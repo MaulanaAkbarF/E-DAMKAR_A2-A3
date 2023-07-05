@@ -81,45 +81,44 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   @override
   Widget build(BuildContext context) {
+    // TabController tabController = TabController(length: 6, vsync: this)
+
     SizeConfig().init(context);
     return WillPopScope(
-        onWillPop: () async {
-          return await showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Konfirmasi keluar !"),
-                  content: Text("Apakah anda yakin untuk Keluar ?"),
-                  actions: <Widget>[
-                    FloatingActionButton(
-                        child: Text("Tidak"),
-                        onPressed: () {
-                          Navigator.of(context).pop(false);
-                        }),
-                    FloatingActionButton(
-                        child: Text("Ya"),
-                        onPressed: () {
-                          Navigator.of(context).pop(true);
-                        })
-                  ],
-                );
-              });
-        },
-        child: DefaultTabController(
-          initialIndex: 2, //optional, starts from 0, select the tab by default
-          length: 6,
-          child: Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: [
-                  // for (final teks in teksLaporan)
-                  //   for (final teksStyle in teksStyleLaporan)
-                  Align(
-                    alignment: FractionalOffset.topCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                      child: Text(
-                        "Riwayat Laporan",
+      onWillPop: () async {
+        return await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Konfirmasi keluar !"),
+                content: Text("Apakah anda yakin untuk Keluar ?"),
+                actions: <Widget>[
+                  FloatingActionButton(
+                      child: Text("Tidak"),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      }),
+                  FloatingActionButton(
+                      child: Text("Ya"),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      })
+                ],
+              );
+            });
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              // for (final teks in teksLaporan)
+              //   for (final teksStyle in teksStyleLaporan)
+              Align(
+                alignment: FractionalOffset.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                  child: Obx(() => Text(
+                        controller.textSearch.value,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -127,104 +126,104 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                             fontFamily: "font/inter_bold.ttf",
                             fontSize: 20,
                             fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: paddingHorozontal2,
-                        vertical: paddingVertical1),
-                    child: Column(
-                      children: <Widget>[
-                        TextField(
-                          controller: controller.search.value,
-                          onChanged: controller.runSearch,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
-                                allow: true)
-                          ],
-                          style: TextStyle(
-                              fontFamily: "font/inter_regular.ttf",
-                              color: Color.fromARGB(255, 107, 114, 128),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                          decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 10.0),
-                              prefixIcon: Icon(Icons.search_sharp),
-                              prefixIconColor:
-                                  Color.fromARGB(255, 209, 213, 219),
-                              filled: true,
-                              hintText: "Cari riwayat laporan anda",
-                              fillColor: Color.fromARGB(255, 249, 250, 251),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      width: 3,
-                                      color:
-                                          Color.fromARGB(255, 209, 213, 219)))),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const TabBar(
-                            isScrollable: true,
-                            unselectedLabelColor:
-                                Color.fromARGB(255, 165, 165, 165),
-                            indicatorColor: orange1,
-                            labelColor: black,
-                            tabs: [
-                              Tab(
-                                icon: Icon(Icons.search),
-                              ),
-                              Tab(
-                                text: "Semua",
-                              ),
-                              Tab(
-                                text: "Menunggu",
-                              ),
-                              Tab(
-                                text: "Proses",
-                              ),
-                              Tab(
-                                text: "selesai",
-                              ),
-                              Tab(
-                                text: "Ditolak",
-                              ),
-                            ])
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 1,
-                    width: SizeConfig.screenWidth,
-                    color: Colors.black26,
-                  ),
-                  Expanded(
-                      child: Obx(() => TabBarView(children: [
-                            Pencarian(),
-                            isRiwayatNull(),
-                            menunggu(),
-                            proses(),
-                            selesai(),
-                            ditolak()
-                          ])))
-                ],
+                      )),
+                ),
               ),
-              //
-            ),
-            // SingleChildScrollView(
-            //   child: isRiwayatNull(),
-            // )
-            //   ],
-            // ),
-            // ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: paddingHorozontal2, vertical: paddingVertical1),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      onTap: () => controller.goSearch(),
+                      controller: controller.search.value,
+                      onChanged: (_) => controller.runSearch(),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
+                            allow: true)
+                      ],
+                      style: TextStyle(
+                          fontFamily: "font/inter_regular.ttf",
+                          color: Color.fromARGB(255, 107, 114, 128),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                          prefixIcon: Icon(Icons.search_sharp),
+                          prefixIconColor: Color.fromARGB(255, 209, 213, 219),
+                          filled: true,
+                          hintText: "Cari riwayat laporan anda",
+                          fillColor: Color.fromARGB(255, 249, 250, 251),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                  width: 3,
+                                  color: Color.fromARGB(255, 209, 213, 219)))),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TabBar(
+                        isScrollable: true,
+                        unselectedLabelColor:
+                            Color.fromARGB(255, 165, 165, 165),
+                        indicatorColor: orange1,
+                        labelColor: black,
+                        controller: controller.tabController,
+                        tabs: [
+                          Tab(
+                            icon: Icon(Icons.search),
+                          ),
+                          Tab(
+                            text: "Semua",
+                          ),
+                          Tab(
+                            text: "Menunggu",
+                          ),
+                          Tab(
+                            text: "Proses",
+                          ),
+                          Tab(
+                            text: "selesai",
+                          ),
+                          Tab(
+                            text: "Ditolak",
+                          ),
+                        ])
+                  ],
+                ),
+              ),
+              Container(
+                height: 1,
+                width: SizeConfig.screenWidth,
+                color: Colors.black26,
+              ),
+              Expanded(
+                  child: TabBarView(
+                      controller: controller.tabController,
+                      children: [
+                    Pencarian(),
+                    isRiwayatNull(),
+                    menunggu(),
+                    proses(),
+                    selesai(),
+                    ditolak()
+                  ]))
+            ],
           ),
-        ));
+          //
+        ),
+        // SingleChildScrollView(
+        //   child: isRiwayatNull(),
+        // )
+        //   ],
+        // ),
+        // ),
+      ),
+    );
   }
 
   Widget dataSearchKosong() {
@@ -235,7 +234,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget isRiwayatNull() {
-    return controller.dataElement == null
+    return Obx(() => controller.dataElement == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
@@ -374,11 +373,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                         ))
                       ])));
-            });
+            }));
   }
 
   Widget menunggu() {
-    return controller.dataMenunggu == null
+    return Obx(() => controller.dataMenunggu == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
@@ -518,11 +517,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                         ))
                       ])));
-            });
+            }));
   }
 
   Widget proses() {
-    return controller.dataProses == null
+    return Obx(() => controller.dataProses == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
@@ -661,11 +660,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                         ))
                       ])));
-            });
+            }));
   }
 
   Widget selesai() {
-    return controller.dataSelesai == null
+    return Obx(() => controller.dataSelesai == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
@@ -804,11 +803,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                         ))
                       ])));
-            });
+            }));
   }
 
   Widget ditolak() {
-    return controller.dataDitolak == null
+    return Obx(() => controller.dataDitolak == null
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
@@ -947,6 +946,6 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                         ))
                       ])));
-            });
+            }));
   }
 }

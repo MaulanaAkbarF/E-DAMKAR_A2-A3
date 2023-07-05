@@ -6,17 +6,20 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RiwayatLaporanController extends GetxController {
+class RiwayatLaporanController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   var search = TextEditingController().obs;
+  var textSearch = ''.obs;
+  late TabController tabController;
   // TextEditingController controllerSearch = TextEditingController();
   // TabController tabController;
 
-  List<Datum>? dataElement = <Datum>[];
-  List<Datum>? dataProses = <Datum>[];
-  List<Datum>? dataMenunggu = <Datum>[];
-  List<Datum>? dataSelesai = <Datum>[];
-  List<Datum>? dataDitolak = <Datum>[];
-  List<Datum>? searchData = <Datum>[].obs;
+  RxList<Datum>? dataElement = <Datum>[].obs;
+  RxList<Datum>? dataProses = <Datum>[].obs;
+  RxList<Datum>? dataMenunggu = <Datum>[].obs;
+  RxList<Datum>? dataSelesai = <Datum>[].obs;
+  RxList<Datum>? dataDitolak = <Datum>[].obs;
+  RxList<Datum>? searchData = <Datum>[].obs;
 
   // var col1 = orange1.obs;
   // var col2 = white.obs;
@@ -30,12 +33,26 @@ class RiwayatLaporanController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    tabController = TabController(length: 6, vsync: this, initialIndex: 1);
     // tabController = TabController(length: 4, vsync: this);
     getUserIdRiwayat();
     getIdStatus();
     getIdStatusProses();
     getIdStatusSelesai();
     getIdStatusDitolak();
+
+    debounce(
+      textSearch,
+      (_) => getUserIdRiwayatforSearch(),
+      time: Duration(seconds: 1),
+    );
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+
   }
 
   void getUserIdRiwayat() async {
@@ -53,7 +70,7 @@ class RiwayatLaporanController extends GetxController {
     dataId.then((value) {
       // setState(() {
       // print(value.toString());
-      PostDataSearch(value, search.value.text);
+      PostDataSearch(value, textSearch.value);
       // });
     });
   }
@@ -138,7 +155,7 @@ class RiwayatLaporanController extends GetxController {
 
   // List<Datum>? _foundData = [];
 
-  List<Datum>? searchKosong = [];
+  // List<Datum>? searchKosong = [];
 
   PostDataSearch(int id, String kata) async {
     // search.clear();
@@ -148,11 +165,11 @@ class RiwayatLaporanController extends GetxController {
       var dataSearch = dataPelaporanFromJson(result);
       if (dataSearch.data.isNotEmpty) {
         // setState(() {
-        searchData = dataSearch.data;
+        searchData?.value = dataSearch.data;
         // });
       } else {
         // setState(() {
-        searchData = searchKosong;
+        // searchData = searchKosong;
 
         print("masukan salah");
         // });
@@ -168,7 +185,7 @@ class RiwayatLaporanController extends GetxController {
       var data = dataPelaporanFromJson(result);
       if (data.data.isNotEmpty) {
         // setState(() {
-        dataMenunggu = data.data;
+        dataMenunggu?.value = data.data;
         // });
       }
     } else {
@@ -182,7 +199,7 @@ class RiwayatLaporanController extends GetxController {
       var data = dataPelaporanFromJson(result);
       if (data.data.isNotEmpty) {
         // setState(() {
-        dataProses = data.data;
+        dataProses?.value = data.data;
         // });
       }
     } else {
@@ -196,7 +213,7 @@ class RiwayatLaporanController extends GetxController {
       var data = dataPelaporanFromJson(result);
       if (data.data.isNotEmpty) {
         // setState(() {
-        dataSelesai = data.data;
+        dataSelesai?.value = data.data;
         // });
       }
     } else {
@@ -210,7 +227,7 @@ class RiwayatLaporanController extends GetxController {
       var data = dataPelaporanFromJson(result);
       if (data.data.isNotEmpty) {
         // setState(() {
-        dataDitolak = data.data;
+        dataDitolak?.value = data.data;
         // });
       }
     } else {
@@ -224,7 +241,7 @@ class RiwayatLaporanController extends GetxController {
       var dataEmer = dataPelaporanFromJson(result);
       if (dataEmer.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataEmer.data;
+        dataElement?.value = dataEmer.data;
         // });
       }
     } else {
@@ -262,7 +279,7 @@ class RiwayatLaporanController extends GetxController {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataRiwayat.data;
+        dataElement?.value = dataRiwayat.data;
         // });
       }
     } else {
@@ -311,18 +328,11 @@ class RiwayatLaporanController extends GetxController {
     return "bulan";
   }
 
-  void runSearch(String enteredKeyword) {
-    if (enteredKeyword.isEmpty) {
-      getUserIdRiwayat();
-    } else {
-      getUserIdRiwayatforSearch();
-      print("kata search : " + search.value.text);
-    }
-
-    // setState(() {
-    //   _foundData = searchData;
-    // });
+  void runSearch() {
+    textSearch.value = search.value.text;
   }
+
+  void goSearch() => tabController.animateTo(0);
 
   void goToDetail(int indexId) =>
       Get.toNamed(Routes.dtRiwayat, arguments: {'id': indexId});
