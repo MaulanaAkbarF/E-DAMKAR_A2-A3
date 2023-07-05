@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 final paddingHorozontal1 = SizeConfig.blockSizeHorizontal! * 2;
 final paddingHorozontal2 = SizeConfig.blockSizeHorizontal! * 4;
+final paddingHorozontal3 = SizeConfig.blockSizeHorizontal! * 6;
+final paddingHorozontal3_5 = SizeConfig.blockSizeHorizontal! * 8;
 final paddingHorozontal4 = SizeConfig.blockSizeHorizontal! * 10;
 final paddingHorozontal5 = SizeConfig.blockSizeHorizontal! * 12;
 final paddingHorozontal6 = SizeConfig.blockSizeHorizontal! * 24;

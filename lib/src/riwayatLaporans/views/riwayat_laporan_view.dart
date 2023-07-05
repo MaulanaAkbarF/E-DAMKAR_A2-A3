@@ -1,4 +1,6 @@
 import 'package:edamkar_1/src/riwayatLaporans/controller/riwayat_laporan_controller.dart';
+import 'package:edamkar_1/src/riwayatLaporans/views/pencarian.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
@@ -81,153 +83,148 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return WillPopScope(
-      onWillPop: () async {
-        return await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
-                actions: <Widget>[
-                  FloatingActionButton(
-                      child: Text("Tidak"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      }),
-                  FloatingActionButton(
-                      child: Text("Ya"),
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      })
-                ],
-              );
-            });
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              // for (final teks in teksLaporan)
-              //   for (final teksStyle in teksStyleLaporan)
-              Align(
-                alignment: FractionalOffset.topCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                  child: Text(
-                    "Riwayat Laporan",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 55, 65, 81),
-                        fontFamily: "font/inter_bold.ttf",
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: paddingHorozontal2, vertical: paddingVertical1),
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: controller.search,
-                      onChanged: controller.runSearch,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
-                            allow: true)
-                      ],
-                      style: TextStyle(
-                          fontFamily: "font/inter_regular.ttf",
-                          color: Color.fromARGB(255, 107, 114, 128),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search_sharp),
-                          prefixIconColor: Color.fromARGB(255, 209, 213, 219),
-                          filled: true,
-                          hintText: "Cari riwayat laporan anda",
-                          fillColor: Color.fromARGB(255, 249, 250, 251),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
-                                  width: 3,
-                                  color: Color.fromARGB(255, 209, 213, 219)))),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 40,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            TextButton(
-                                style: controller.buttonStyle,
-                                onPressed: controller.getUserIdRiwayat,
-                                child: Text("Semua")),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            TextButton(
-                                style: controller.buttonStyle,
-                                onPressed: controller.getIdStatusEmergency,
-                                child: Text("Emergency")),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            TextButton(
-                                style: controller.buttonStyle,
-                                onPressed: controller.getIdStatus,
-                                child: Text("Menunggu")),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            TextButton(
-                                style: controller.buttonStyle,
-                                onPressed: controller.getIdStatusDitolak,
-                                child: Text("Ditolak")),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            TextButton(
-                                style: controller.buttonStyle,
-                                onPressed: controller.getIdStatusSelesai,
-                                child: Text("Selesai")),
-                          ],
-                        ),
-                      ),
-                    )
+        onWillPop: () async {
+          return await showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Konfirmasi keluar !"),
+                  content: Text("Apakah anda yakin untuk Keluar ?"),
+                  actions: <Widget>[
+                    FloatingActionButton(
+                        child: Text("Tidak"),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        }),
+                    FloatingActionButton(
+                        child: Text("Ya"),
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        })
                   ],
-                ),
+                );
+              });
+        },
+        child: DefaultTabController(
+          initialIndex: 2, //optional, starts from 0, select the tab by default
+          length: 6,
+          child: Scaffold(
+            body: SafeArea(
+              child: Column(
+                children: [
+                  // for (final teks in teksLaporan)
+                  //   for (final teksStyle in teksStyleLaporan)
+                  Align(
+                    alignment: FractionalOffset.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                      child: Text(
+                        "Riwayat Laporan",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 55, 65, 81),
+                            fontFamily: "font/inter_bold.ttf",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: paddingHorozontal2,
+                        vertical: paddingVertical1),
+                    child: Column(
+                      children: <Widget>[
+                        TextField(
+                          controller: controller.search.value,
+                          onChanged: controller.runSearch,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
+                                allow: true)
+                          ],
+                          style: TextStyle(
+                              fontFamily: "font/inter_regular.ttf",
+                              color: Color.fromARGB(255, 107, 114, 128),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400),
+                          decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 10.0),
+                              prefixIcon: Icon(Icons.search_sharp),
+                              prefixIconColor:
+                                  Color.fromARGB(255, 209, 213, 219),
+                              filled: true,
+                              hintText: "Cari riwayat laporan anda",
+                              fillColor: Color.fromARGB(255, 249, 250, 251),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide(
+                                      width: 3,
+                                      color:
+                                          Color.fromARGB(255, 209, 213, 219)))),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        const TabBar(
+                            isScrollable: true,
+                            unselectedLabelColor:
+                                Color.fromARGB(255, 165, 165, 165),
+                            indicatorColor: orange1,
+                            labelColor: black,
+                            tabs: [
+                              Tab(
+                                icon: Icon(Icons.search),
+                              ),
+                              Tab(
+                                text: "Semua",
+                              ),
+                              Tab(
+                                text: "Menunggu",
+                              ),
+                              Tab(
+                                text: "Proses",
+                              ),
+                              Tab(
+                                text: "selesai",
+                              ),
+                              Tab(
+                                text: "Ditolak",
+                              ),
+                            ])
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 1,
+                    width: SizeConfig.screenWidth,
+                    color: Colors.black26,
+                  ),
+                  Expanded(
+                      child: Obx(() => TabBarView(children: [
+                            Pencarian(),
+                            isRiwayatNull(),
+                            menunggu(),
+                            proses(),
+                            selesai(),
+                            ditolak()
+                          ])))
+                ],
               ),
-              Container(
-                height: 1,
-                width: SizeConfig.screenWidth,
-                color: Colors.black26,
-              ),
-              Expanded(
-                  child: controller.search.text.isEmpty
-                      ? isRiwayatNull()
-                      : isRiwayatSeacrh())
-            ],
+              //
+            ),
+            // SingleChildScrollView(
+            //   child: isRiwayatNull(),
+            // )
+            //   ],
+            // ),
+            // ),
           ),
-          //
-        ),
-        // SingleChildScrollView(
-        //   child: isRiwayatNull(),
-        // )
-        //   ],
-        // ),
-        // ),
-      ),
-    );
+        ));
   }
 
   Widget dataSearchKosong() {
@@ -250,310 +247,706 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
               var date = controller.dataElement![index].tanggal.toString();
               final splitDate = date.split('-');
               return Padding(
-                padding: EdgeInsets.all(
-                  10,
-                ),
-                child: ListTile(
-                  onTap: () => controller
-                      .goToDetail(controller.dataElement![index].idLaporan),
-                  leading: Container(
-                    width: 70,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                  padding: EdgeInsets.all(
+                    10,
+                  ),
+                  child: GestureDetector(
+                      onTap: () => controller
+                          .goToDetail(controller.dataElement![index].idLaporan),
+                      child: Row(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              splitDate[2],
-                              style: TextStyle(
-                                fontFamily: "font/inter_semibold.tff",
-                                fontWeight: FontWeight.w600,
-                                // fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              controller.monthString(splitDate[1]),
-                              style: TextStyle(
-
-                                  // fontSize: 15,
-                                  fontFamily: "$thin1"),
-                            ),
-                            Text(
-                              splitDate[0],
-                              style: TextStyle(
-                                  // fontSize: 15,
-                                  fontFamily: "$thin1"),
-                            ),
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
                           ],
                         ),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         Container(
                           width: 5,
-                          // color: Colors.black38,
+                          height: 90,
                           decoration: BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        )
-                      ],
-                    ),
-                  ),
-                  title: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          controller.dataElement![index].kategoriLaporan
-                              .toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontFamily: "$black2",
-                            fontWeight: FontWeight.w600,
-                          ),
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
                         ),
                         SizedBox(
-                          height: 5,
+                          width: 10,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.location_on_outlined),
-                            Flexible(
-                              child: Text(
-                                controller.dataElement![index].alamat
-                                    .toString(),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                // softWrap: false,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              // padding: EdgeInsets.symmetric(
-                              //     horizontal: paddingHorozontal1),
-                              child: Card(
-                                color: () {
-                                  if (controller
-                                          .dataElement![index].statusRiwayat ==
-                                      "Menunggu") {
-                                    return Color.fromARGB(255, 250, 202, 21);
-                                  } else if (controller
-                                          .dataElement![index].statusRiwayat ==
-                                      "Ditangani") {
-                                    return Color.fromARGB(255, 63, 131, 248);
-                                  } else if (controller
-                                          .dataElement![index].statusRiwayat ==
-                                      "Selesai") {
-                                    return Color.fromARGB(255, 14, 159, 110);
-                                  } else if (controller
-                                          .dataElement![index].statusRiwayat ==
-                                      "Ditolak") {
-                                    return Color.fromARGB(255, 224, 36, 36);
-                                  } else if (controller
-                                          .dataElement![index].statusRiwayat ==
-                                      "Emergency") {
-                                    return Colors.black26; // default color
-                                  } else {
-                                    return Colors.white;
-                                  }
-                                }(),
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text(
-                                    controller.dataElement![index].statusRiwayat
-                                        .toString(),
-                                    textAlign: TextAlign.end,
-                                  ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  controller.dataElement![index].kategoriLaporan
+                                      .toString(),
+                                  style: StyleTxt.sb(size: 15),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      controller.dataElement![index].alamat
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: () {
+                                          if (controller.dataElement![index]
+                                                  .statusRiwayat ==
+                                              "Menunggu") {
+                                            return Color.fromARGB(
+                                                255, 250, 202, 21);
+                                          } else if (controller
+                                                  .dataElement![index]
+                                                  .statusRiwayat ==
+                                              "Ditangani") {
+                                            return Color.fromARGB(
+                                                255, 63, 131, 248);
+                                          } else if (controller
+                                                  .dataElement![index]
+                                                  .statusRiwayat ==
+                                              "Selesai") {
+                                            return Color.fromARGB(
+                                                255, 17, 178, 124);
+                                          } else if (controller
+                                                  .dataElement![index]
+                                                  .statusRiwayat ==
+                                              "Ditolak") {
+                                            return Color.fromARGB(
+                                                255, 224, 36, 36);
+                                          } else if (controller
+                                                  .dataElement![index]
+                                                  .statusRiwayat ==
+                                              "Emergency") {
+                                            return Colors
+                                                .black26; // default color
+                                          } else {
+                                            return Colors.white;
+                                          }
+                                        }(),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            controller.dataElement![index]
+                                                .statusRiwayat
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            ],
+                          ),
+                        ))
+                      ])));
             });
   }
 
-  Widget isRiwayatSeacrh() {
-    return controller.searchData == null
+  Widget menunggu() {
+    return controller.dataMenunggu == null
         ? Align(
             alignment: Alignment.center,
-            child: Text("Data Seacrh Kosong"),
+            child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.searchData!.length,
+            itemCount: controller.dataMenunggu!.length,
             itemBuilder: (context, index) {
-              var date = controller.searchData![index].tanggal.toString();
+              var date = controller.dataMenunggu![index].tanggal.toString();
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
                     10,
                   ),
-                  child: ListTile(
-                    onTap: () => controller
-                        .goToDetail(controller.searchData![index].idLaporan),
-                    leading: Container(
-                      width: 70,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                splitDate[2],
-                                style: TextStyle(
-                                  fontFamily: "font/inter_semibold.tff",
-                                  fontWeight: FontWeight.w600,
-                                  // fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                controller.monthString(splitDate[1]),
-                                style: TextStyle(
-
-                                    // fontSize: 15,
-                                    fontFamily: "$thin1"),
-                              ),
-                              Text(
-                                splitDate[0],
-                                style: TextStyle(
-                                    // fontSize: 15,
-                                    fontFamily: "$thin1"),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Container(
-                            width: 5,
-                            // color: Colors.black38,
-                            decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
-                          )
-                        ],
-                      ),
-                    ),
-                    title: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black26,
-                          ),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            controller.searchData![index].kategoriLaporan
-                                .toString(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontFamily: "$black2",
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Row(
+                  child: GestureDetector(
+                      onTap: () => controller.goToDetail(
+                          controller.dataMenunggu![index].idLaporan),
+                      child: Row(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(Icons.location_on_outlined),
-                              Flexible(
-                                child: Text(
-                                  controller.searchData![index].alamat
-                                      .toString(),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  // softWrap: false,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                // padding: EdgeInsets.symmetric(
-                                //     horizontal: paddingHorozontal1),
-                                child: Card(
-                                  color: () {
-                                    if (controller
-                                            .searchData![index].statusRiwayat ==
-                                        "Menunggu") {
-                                      return Color.fromARGB(255, 250, 202, 21);
-                                    } else if (controller
-                                            .searchData![index].statusRiwayat ==
-                                        "Ditangani") {
-                                      return Color.fromARGB(255, 63, 131, 248);
-                                    } else if (controller
-                                            .searchData![index].statusRiwayat ==
-                                        "Selesai") {
-                                      return Color.fromARGB(255, 14, 159, 110);
-                                    } else if (controller
-                                            .searchData![index].statusRiwayat ==
-                                        "Ditolak") {
-                                      return Color.fromARGB(255, 224, 36, 36);
-                                    } else if (controller
-                                            .searchData![index].statusRiwayat ==
-                                        "Emergency") {
-                                      return Colors.black26; // default color
-                                    } else {
-                                      return Colors.white;
-                                    }
-                                  }(),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      controller
-                                          .searchData![index].statusRiwayat
-                                          .toString(),
-                                      textAlign: TextAlign.end,
-                                    ),
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  controller
+                                      .dataMenunggu![index].kategoriLaporan
+                                      .toString(),
+                                  style: StyleTxt.sb(size: 15),
                                 ),
                               ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      controller.dataMenunggu![index].alamat
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: () {
+                                          if (controller.dataMenunggu![index]
+                                                  .statusRiwayat ==
+                                              "Menunggu") {
+                                            return Color.fromARGB(
+                                                255, 250, 202, 21);
+                                          } else if (controller
+                                                  .dataMenunggu![index]
+                                                  .statusRiwayat ==
+                                              "Ditangani") {
+                                            return Color.fromARGB(
+                                                255, 63, 131, 248);
+                                          } else if (controller
+                                                  .dataMenunggu![index]
+                                                  .statusRiwayat ==
+                                              "Selesai") {
+                                            return Color.fromARGB(
+                                                255, 17, 178, 124);
+                                          } else if (controller
+                                                  .dataMenunggu![index]
+                                                  .statusRiwayat ==
+                                              "Ditolak") {
+                                            return Color.fromARGB(
+                                                255, 224, 36, 36);
+                                          } else if (controller
+                                                  .dataMenunggu![index]
+                                                  .statusRiwayat ==
+                                              "Emergency") {
+                                            return Colors
+                                                .black26; // default color
+                                          } else {
+                                            return Colors.white;
+                                          }
+                                        }(),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            controller.dataMenunggu![index]
+                                                .statusRiwayat
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ));
+                        ))
+                      ])));
+            });
+  }
+
+  Widget proses() {
+    return controller.dataProses == null
+        ? Align(
+            alignment: Alignment.center,
+            child: Text("Anda belum pernah melakukan pelaporan"),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.dataProses!.length,
+            itemBuilder: (context, index) {
+              var date = controller.dataProses![index].tanggal.toString();
+              final splitDate = date.split('-');
+              return Padding(
+                  padding: EdgeInsets.all(
+                    10,
+                  ),
+                  child: GestureDetector(
+                      onTap: () => controller
+                          .goToDetail(controller.dataProses![index].idLaporan),
+                      child: Row(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  controller.dataProses![index].kategoriLaporan
+                                      .toString(),
+                                  style: StyleTxt.sb(size: 15),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      controller.dataProses![index].alamat
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: () {
+                                          if (controller.dataProses![index]
+                                                  .statusRiwayat ==
+                                              "Menunggu") {
+                                            return Color.fromARGB(
+                                                255, 250, 202, 21);
+                                          } else if (controller
+                                                  .dataProses![index]
+                                                  .statusRiwayat ==
+                                              "Ditangani") {
+                                            return Color.fromARGB(
+                                                255, 63, 131, 248);
+                                          } else if (controller
+                                                  .dataProses![index]
+                                                  .statusRiwayat ==
+                                              "Selesai") {
+                                            return Color.fromARGB(
+                                                255, 17, 178, 124);
+                                          } else if (controller
+                                                  .dataProses![index]
+                                                  .statusRiwayat ==
+                                              "Ditolak") {
+                                            return Color.fromARGB(
+                                                255, 224, 36, 36);
+                                          } else if (controller
+                                                  .dataProses![index]
+                                                  .statusRiwayat ==
+                                              "Emergency") {
+                                            return Colors
+                                                .black26; // default color
+                                          } else {
+                                            return Colors.white;
+                                          }
+                                        }(),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            controller.dataProses![index]
+                                                .statusRiwayat
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            ],
+                          ),
+                        ))
+                      ])));
+            });
+  }
+
+  Widget selesai() {
+    return controller.dataSelesai == null
+        ? Align(
+            alignment: Alignment.center,
+            child: Text("Anda belum pernah melakukan pelaporan"),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.dataSelesai!.length,
+            itemBuilder: (context, index) {
+              var date = controller.dataSelesai![index].tanggal.toString();
+              final splitDate = date.split('-');
+              return Padding(
+                  padding: EdgeInsets.all(
+                    10,
+                  ),
+                  child: GestureDetector(
+                      onTap: () => controller
+                          .goToDetail(controller.dataSelesai![index].idLaporan),
+                      child: Row(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  controller.dataSelesai![index].kategoriLaporan
+                                      .toString(),
+                                  style: StyleTxt.sb(size: 15),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      controller.dataSelesai![index].alamat
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: () {
+                                          if (controller.dataSelesai![index]
+                                                  .statusRiwayat ==
+                                              "Menunggu") {
+                                            return Color.fromARGB(
+                                                255, 250, 202, 21);
+                                          } else if (controller
+                                                  .dataSelesai![index]
+                                                  .statusRiwayat ==
+                                              "Ditangani") {
+                                            return Color.fromARGB(
+                                                255, 63, 131, 248);
+                                          } else if (controller
+                                                  .dataSelesai![index]
+                                                  .statusRiwayat ==
+                                              "Selesai") {
+                                            return Color.fromARGB(
+                                                255, 17, 178, 124);
+                                          } else if (controller
+                                                  .dataSelesai![index]
+                                                  .statusRiwayat ==
+                                              "Ditolak") {
+                                            return Color.fromARGB(
+                                                255, 224, 36, 36);
+                                          } else if (controller
+                                                  .dataSelesai![index]
+                                                  .statusRiwayat ==
+                                              "Emergency") {
+                                            return Colors
+                                                .black26; // default color
+                                          } else {
+                                            return Colors.white;
+                                          }
+                                        }(),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            controller.dataSelesai![index]
+                                                .statusRiwayat
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            ],
+                          ),
+                        ))
+                      ])));
+            });
+  }
+
+  Widget ditolak() {
+    return controller.dataDitolak == null
+        ? Align(
+            alignment: Alignment.center,
+            child: Text("Anda belum pernah melakukan pelaporan"),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.dataDitolak!.length,
+            itemBuilder: (context, index) {
+              var date = controller.dataDitolak![index].tanggal.toString();
+              final splitDate = date.split('-');
+              return Padding(
+                  padding: EdgeInsets.all(
+                    10,
+                  ),
+                  child: GestureDetector(
+                      onTap: () => controller
+                          .goToDetail(controller.dataDitolak![index].idLaporan),
+                      child: Row(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  controller.dataDitolak![index].kategoriLaporan
+                                      .toString(),
+                                  style: StyleTxt.sb(size: 15),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      controller.dataDitolak![index].alamat
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: () {
+                                          if (controller.dataDitolak![index]
+                                                  .statusRiwayat ==
+                                              "Menunggu") {
+                                            return Color.fromARGB(
+                                                255, 250, 202, 21);
+                                          } else if (controller
+                                                  .dataDitolak![index]
+                                                  .statusRiwayat ==
+                                              "Ditangani") {
+                                            return Color.fromARGB(
+                                                255, 63, 131, 248);
+                                          } else if (controller
+                                                  .dataDitolak![index]
+                                                  .statusRiwayat ==
+                                              "Selesai") {
+                                            return Color.fromARGB(
+                                                255, 17, 178, 124);
+                                          } else if (controller
+                                                  .dataDitolak![index]
+                                                  .statusRiwayat ==
+                                              "Ditolak") {
+                                            return Color.fromARGB(
+                                                255, 224, 36, 36);
+                                          } else if (controller
+                                                  .dataDitolak![index]
+                                                  .statusRiwayat ==
+                                              "Emergency") {
+                                            return Colors
+                                                .black26; // default color
+                                          } else {
+                                            return Colors.white;
+                                          }
+                                        }(),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            controller.dataDitolak![index]
+                                                .statusRiwayat
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            ],
+                          ),
+                        ))
+                      ])));
             });
   }
 }

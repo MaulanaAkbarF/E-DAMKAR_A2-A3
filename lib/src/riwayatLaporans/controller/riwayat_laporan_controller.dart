@@ -7,17 +7,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RiwayatLaporanController extends GetxController {
-  final search = TextEditingController();
-  TextEditingController controllerSearch = new TextEditingController();
+  var search = TextEditingController().obs;
+  // TextEditingController controllerSearch = TextEditingController();
+  // TabController tabController;
 
-  List<Datum>? dataElement = [];
-  List<Datum>? searchData = [];
+  List<Datum>? dataElement = <Datum>[];
+  List<Datum>? dataProses = <Datum>[];
+  List<Datum>? dataMenunggu = <Datum>[];
+  List<Datum>? dataSelesai = <Datum>[];
+  List<Datum>? dataDitolak = <Datum>[];
+  List<Datum>? searchData = <Datum>[].obs;
+
+  // var col1 = orange1.obs;
+  // var col2 = white.obs;
+  // var col3 = white.obs;
+  // var col4 = white.obs;
+
+  // late TabController tabController;
+  int selectedIndex = 1;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    // tabController = TabController(length: 4, vsync: this);
     getUserIdRiwayat();
+    getIdStatus();
+    getIdStatusProses();
+    getIdStatusSelesai();
+    getIdStatusDitolak();
   }
 
   void getUserIdRiwayat() async {
@@ -35,10 +53,43 @@ class RiwayatLaporanController extends GetxController {
     dataId.then((value) {
       // setState(() {
       // print(value.toString());
-      PostDataSearch(value, search.text);
+      PostDataSearch(value, search.value.text);
       // });
     });
   }
+
+  // void getMenuExec(int id) {
+  //   switch (id) {
+  //     case 1:
+  //       col1.value = orange1;
+  //       col2.value = white;
+  //       col3.value = white;
+  //       col4.value = white;
+  //       getIdStatus();
+  //       break;
+  //     case 2:
+  //       col2.value = orange1;
+  //       col1.value = white;
+  //       col3.value = white;
+  //       col4.value = white;
+  //       getIdStatusProses();
+  //       break;
+  //     case 3:
+  //       col3.value = orange1;
+  //       col1.value = white;
+  //       col2.value = white;
+  //       col4.value = white;
+  //       getIdStatusSelesai();
+  //       break;
+  //     case 4:
+  //       col4.value = orange1;
+  //       col1.value = white;
+  //       col2.value = white;
+  //       col3.value = white;
+  //       getIdStatusDitolak();
+  //       break;
+  //   }
+  // }
 
   void getIdStatus() async {
     var dataStatus = DataUser().getUserId();
@@ -114,10 +165,10 @@ class RiwayatLaporanController extends GetxController {
   PostRiwayatMenunggu(String id) async {
     var result = await APIClient().getData('filterLapMenunggu/' + id);
     if (result != null) {
-      var dataMenunggu = dataPelaporanFromJson(result);
-      if (dataMenunggu.data.isNotEmpty) {
+      var data = dataPelaporanFromJson(result);
+      if (data.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataMenunggu.data;
+        dataMenunggu = data.data;
         // });
       }
     } else {
@@ -128,10 +179,10 @@ class RiwayatLaporanController extends GetxController {
   PostRiwayatProses(String id) async {
     var result = await APIClient().getData('filterLapProses/' + id);
     if (result != null) {
-      var dataProses = dataPelaporanFromJson(result);
-      if (dataProses.data.isNotEmpty) {
+      var data = dataPelaporanFromJson(result);
+      if (data.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataProses.data;
+        dataProses = data.data;
         // });
       }
     } else {
@@ -142,10 +193,10 @@ class RiwayatLaporanController extends GetxController {
   PostRiwayatSelesai(String id) async {
     var result = await APIClient().getData('filterLapSelesai/' + id);
     if (result != null) {
-      var dataSelesai = dataPelaporanFromJson(result);
-      if (dataSelesai.data.isNotEmpty) {
+      var data = dataPelaporanFromJson(result);
+      if (data.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataSelesai.data;
+        dataSelesai = data.data;
         // });
       }
     } else {
@@ -156,10 +207,10 @@ class RiwayatLaporanController extends GetxController {
   PostRiwayatDitolak(String id) async {
     var result = await APIClient().getData('filterLapDitolak/' + id);
     if (result != null) {
-      var dataDitolak = dataPelaporanFromJson(result);
-      if (dataDitolak.data.isNotEmpty) {
+      var data = dataPelaporanFromJson(result);
+      if (data.data.isNotEmpty) {
         // setState(() {
-        dataElement = dataDitolak.data;
+        dataDitolak = data.data;
         // });
       }
     } else {
@@ -265,7 +316,7 @@ class RiwayatLaporanController extends GetxController {
       getUserIdRiwayat();
     } else {
       getUserIdRiwayatforSearch();
-      print("kata search : " + search.text);
+      print("kata search : " + search.value.text);
     }
 
     // setState(() {
