@@ -59,31 +59,45 @@ class MapsAnonymController extends GetxController {
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
-
+    // Position deflt = new Position(
+    //     longitude: -7.589149,
+    //     latitude: 111.887575,
+    //     timestamp: DateTime.now(),
+    //     accuracy: 39.5,
+    //     altitude: 0.0,
+    //     heading: 0.0,
+    //     speed: 0.0,
+    //     speedAccuracy: 0.0);
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
+      Get.snackbar("GPS Error", "GPS kamu belum dinyalakan nih :(");
       return Future.error("GPS kamu belum dinyalakan nih :(");
+      // return deflt;
     }
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        Get.snackbar("GPS Eror", "Izin GPS ditolak :(");
         return Future.error('Izin GPS ditolak :(');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
+      Get.snackbar("GPS Eror",
+          "Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS");
       return Future.error(
           'Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS');
+        
     }
 
     Position position = await Geolocator.getCurrentPosition();
 
     latitude.value = position.latitude;
     longitude.value = position.longitude;
-
+   
     return position;
   }
 

@@ -63,20 +63,24 @@ class MapsLokasiKejadianController extends GetxController {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      return Future.error("GPS kamu belum dinyalakan nih :(");
+      Get.snackbar("Gps error", "Tolong nyalakan GPS");
+      // return Future.error("null");
     }
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Izin GPS ditolak :(');
+        Get.snackbar("Gps error", "Izin GPS ditolak");
+        // return Future.error('null');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS');
+      // return Future.error(
+      //     'Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS');
+      Get.snackbar("Gps error",
+          "Izin GPS ditolak. Harap izinkan aplikasi untuk mengakses GPS");
     }
 
     Position position = await Geolocator.getCurrentPosition();
