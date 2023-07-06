@@ -68,8 +68,8 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-        inAsyncCall: controller.showSpinner,
+    return Obx(() => ModalProgressHUD(
+        inAsyncCall: controller.showSpinner.value,
         progressIndicator: CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
@@ -325,6 +325,6 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                   ],
                 ),
               ),
-            )));
+            ))));
   }
 }

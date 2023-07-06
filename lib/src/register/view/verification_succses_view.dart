@@ -51,7 +51,7 @@ class VerificationSuccess extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const SignInPage()));

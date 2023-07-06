@@ -29,7 +29,6 @@ import 'package:edamkar_1/src/register/bindings/otp_verifikasi_binding.dart';
 import 'package:edamkar_1/src/register/bindings/register_binding.dart';
 import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
 import 'package:edamkar_1/src/register/view/register_view.dart';
-import 'package:edamkar_1/src/register/view/register_view.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:edamkar_1/src/riwayatLaporans/bindings/detail_riwayat_laporan_binding.dart';
 import 'package:edamkar_1/src/riwayatLaporans/views/detail_riwayat_laporan_view.dart';

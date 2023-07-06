@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,16 +12,27 @@ class LaporanAnonymController extends GetxController {
   final noTelpCon = TextEditingController();
   final deskripsiCon = TextEditingController();
   final iduser = 1;
+  var dataArgs = Get.arguments;
   String? desa, jalan, kecamatan, kota, kodepos, latitude, longitude;
 
-  LaporanAnonymController(
-      {this.desa,
-      this.jalan,
-      this.kecamatan,
-      this.kota,
-      this.kodepos,
-      this.latitude,
-      this.longitude});
+  Rx<File?> rxImage = Rx<File?>(null);
+  String? imageName;
+  var imagePath;
+  RxBool showSpinner = false.obs;
+  final ImagePicker _picker = ImagePicker();
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    desa = dataArgs['desa'];
+    jalan = dataArgs['jalan'];
+    kecamatan = dataArgs['kecamatan'];
+    kota = dataArgs['kota'];
+    kodepos = dataArgs['kodepos'];
+    latitude = dataArgs['latitude'].toString();
+    longitude = dataArgs['longitude'].toString();
+  }
 
   void _kirimNotifikasi() async {
     // Ganti dengan URL endpoint API yang sesuai
@@ -49,6 +61,7 @@ class LaporanAnonymController extends GetxController {
   }
 
   void pushLaporan() async {
+    showSpinner.value = true;
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
@@ -61,7 +74,7 @@ class LaporanAnonymController extends GetxController {
         kota! +
         ', ' +
         kodepos!;
-    await APIClient().postMulti('addImage', image, imagePath, title);
+    await APIClient().postMulti('addImage', rxImage, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
       'user_listdata_id': "1",
       'kategori_laporan_id': '5',
@@ -75,14 +88,15 @@ class LaporanAnonymController extends GetxController {
     });
     _kirimNotifikasi();
     if (result2 != null) {
-      // FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
-      //     "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (BuildContext context) => const EmergencyCall()));
+      Get.snackbar("Berhasil",
+          "Laporan Darurat yang kamu ajukan akan segera kami tangani",
+          backgroundColor: white, colorText: black);
+      Get.offAllNamed(Routes.emergency);
     } else {
-      // FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
-      //     "Lakukan Emergency Call jika terdapat kenadala");
+      Get.snackbar("Gagal", "coba kembali dalam beberapa detik",
+          backgroundColor: white, colorText: black);
     }
+    showSpinner.value = false;
   }
 
   // void _onConfirm(context) async {
@@ -117,21 +131,16 @@ class LaporanAnonymController extends GetxController {
   //     }
   //   }
   // }
-  Rx<File?> rxImage = Rx<File?>(null);
-  File? image;
-  String? imageName;
-  var imagePath;
-  bool showSpinner = false;
-  final ImagePicker _picker = ImagePicker();
 
   Future getImage() async {
     final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
 
     if (imagePicked != null) {
       rxImage.value = File(imagePicked.path);
-      image = File(imagePicked.path);
+      rxImage.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
+      update();
     } else {
       print('no image selected');
     }

@@ -246,27 +246,30 @@ class SignUpView extends GetView<SignUpController> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.password,
-                                  obscureText: controller.passwordVisible.value,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.lock),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(controller
-                                                .passwordVisible.value
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined),
-                                        color:
-                                            Color.fromARGB(255, 143, 143, 143),
-                                      ),
-                                      suffixIconColor: Colors.black,
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                                child: Obx(() => TextFormField(
+                                      controller: controller.password,
+                                      obscureText:
+                                          controller.passwordVisible.value,
+                                      cursorColor: Colors.black,
+                                      style: teksStyle['SemiBold1'],
+                                      decoration: InputDecoration(
+                                          prefixIcon: Icon(Icons.lock),
+                                          suffixIcon: IconButton(
+                                            onPressed: () =>
+                                                controller.passVisible(),
+                                            icon: Icon(!controller
+                                                    .passwordVisible.value
+                                                ? Icons.visibility_outlined
+                                                : Icons
+                                                    .visibility_off_outlined),
+                                            color: Color.fromARGB(
+                                                255, 143, 143, 143),
+                                          ),
+                                          suffixIconColor: Colors.black,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              10, 13, 10, 7),
+                                          border: InputBorder.none),
+                                    )),
                               ),
                             ),
                           ),
@@ -293,28 +296,30 @@ class SignUpView extends GetView<SignUpController> {
                                     border: Border.all(
                                         color: Colors.grey.shade300,
                                         width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.validatepass,
-                                  obscureText:
-                                      controller.passwordVisible1.value,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.lock),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(controller
-                                                .passwordVisible1.value
-                                            ? Icons.visibility_outlined
-                                            : Icons.visibility_off_outlined),
-                                        color:
-                                            Color.fromARGB(255, 143, 143, 143),
-                                      ),
-                                      suffixIconColor: Colors.black,
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                                child: Obx(() => TextFormField(
+                                      controller: controller.validatepass,
+                                      obscureText:
+                                          controller.passwordVisible1.value,
+                                      cursorColor: Colors.black,
+                                      style: teksStyle['SemiBold1'],
+                                      decoration: InputDecoration(
+                                          prefixIcon: Icon(Icons.lock),
+                                          suffixIcon: IconButton(
+                                            onPressed: () =>
+                                                controller.validVisible(),
+                                            icon: Icon(!controller
+                                                    .passwordVisible1.value
+                                                ? Icons.visibility_outlined
+                                                : Icons
+                                                    .visibility_off_outlined),
+                                            color: Color.fromARGB(
+                                                255, 143, 143, 143),
+                                          ),
+                                          suffixIconColor: Colors.black,
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              10, 13, 10, 7),
+                                          border: InputBorder.none),
+                                    )),
                               ),
                             ),
                           ),
@@ -326,42 +331,45 @@ class SignUpView extends GetView<SignUpController> {
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 borderRadius: BorderRadius.circular(8),
-                                child: InkWell(
-                                  splashColor: Colors.red.shade700,
-                                  highlightColor: Colors.red.shade900,
-                                  onTap: controller.RegisterPost,
-                                  child: Container(
-                                      height: 50,
-                                      child: controller.isloading.value
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 30,
-                                                  width: 30,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                    width: paddingVertical2),
-                                                Text(
-                                                  'loading...',
-                                                  style: StyleTxt.b(16, white),
-                                                ),
-                                              ],
-                                            )
-                                          : Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(teks['ButtonLogin'],
-                                                    style: teksStyle['Thin2']),
-                                              ],
-                                            )),
-                                ),
+                                child: Obx(() => InkWell(
+                                      splashColor: Colors.red.shade700,
+                                      highlightColor: Colors.red.shade900,
+                                      onTap: controller.RegisterPost,
+                                      child: Container(
+                                          height: 50,
+                                          child: controller.isloading.value
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 30,
+                                                      width: 30,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                        width:
+                                                            paddingVertical2),
+                                                    Text(
+                                                      'loading...',
+                                                      style:
+                                                          StyleTxt.b(16, white),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(teks['ButtonLogin'],
+                                                        style:
+                                                            teksStyle['Thin2']),
+                                                  ],
+                                                )),
+                                    )),
                               ),
                             ),
                           )

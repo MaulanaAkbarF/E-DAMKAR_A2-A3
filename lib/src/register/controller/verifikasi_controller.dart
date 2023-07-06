@@ -1,23 +1,27 @@
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/src/register/view/verification_succses_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerificationSignUpController extends GetxController {
   final kodeotptxt = TextEditingController().obs;
-  var otpRegister = ''.obs;
-  var noHp = ''.obs;
+  String otpRegister = '';
+  String noHp = '';
+  var dataArgs = Get.arguments;
 
   @override
   void onInit() {
     super.onInit();
+    noHp = dataArgs['notel'];
+    otpRegister = dataArgs['rand'].toString();
     sendNotification();
   }
 
   void sendNotification() async {
     var data = {
-      // "kodeOtp": widget.kodeOtp,
-      // "noHp": widget.noHp,
+      "kodeOtp": otpRegister,
+      "noHp": noHp,
     };
     await APIClient().postData('verifyOtp/whatsapp', data);
     Get.snackbar("Berhasil", "Kode OTP berhasil dikirim pada nomer whatsapp mu",
@@ -30,6 +34,7 @@ class VerificationSignUpController extends GetxController {
       // Navigator.push(context,
       //     MaterialPageRoute(builder: (context) => VerificationSuccess()));
     } else {
+      Get.snackbar("Gagal", "Kode Verifikasi salah");
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(
       //       content: Text(
@@ -49,7 +54,7 @@ class VerificationSignUpController extends GetxController {
       return null;
     });
     if (result != null) {
-      print("Nomor berhasil di verifikasi");
+      Get.to(VerificationSuccess());
     } else {
       print('something error on code');
       print(result);
