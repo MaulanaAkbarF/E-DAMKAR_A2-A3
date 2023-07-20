@@ -1,10 +1,4 @@
-// import 'package:carousel_slider/carousel_slider.dart';
-// import 'package:edamkar_1/APIRequest/APIClient.dart';
-
-// import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
-// import 'package:edamkar_1/notification/toastNotif.dart';
-// import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/artikels/controller/artikel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
@@ -299,15 +293,12 @@ class ArtikelView extends GetView<ArtikleController> {
                           ? Text("data kosong")
                           : ListTile(
                               onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => DetailArtikel(
-                                //             idArtikel:
-                                //                 controller.dataHigh[index].id,
-                                //             jenisArtikel: controller
-                                //                 .dataHigh[index].jenisArtikel
-                                //                 .toString())));
+                                Get.toNamed(Routes.artikleDt, arguments: {
+                                  "idArtikel": controller.dataHigh[index].id,
+                                  "jenisArtikel": controller
+                                      .dataHigh[index].jenisArtikel
+                                      .toString()
+                                });
                               },
                               title: Container(
                                 // width: 400,

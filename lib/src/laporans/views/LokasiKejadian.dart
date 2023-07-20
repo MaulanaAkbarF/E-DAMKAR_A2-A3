@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class LokasiKejadian extends StatefulWidget {
@@ -308,7 +309,17 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                   child: InkWell(
                                     splashColor: Colors.red.shade700,
                                     highlightColor: Colors.red.shade900,
-                                    // onTap: () => kirimButtonPressed(context),
+    //                                 onTap: () => Get.toNamed(Routes.laporan, arguments : {
+    //   'idKategori': 0,
+    //   'kategori': '',
+    //   'jalan': jalanCon.text,
+    //   'desa': desaCon.text,
+    //   'kecamatan': kecamatanCon.text,
+    //   'kota': kota,
+    //   'kodepos': kodepos,
+    //   'latitude': latitude.value,
+    //   'longitude': longitude.value,
+    // };),
                                     child: Container(
                                       height: 50,
                                       child: Row(

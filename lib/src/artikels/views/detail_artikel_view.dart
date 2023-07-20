@@ -11,7 +11,6 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'
   ];
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -39,10 +38,10 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
   }
 
   Widget isDetailNull() {
-    return controller.data == null
+    return Obx(() => controller.data == null
         ? Align(
             alignment: Alignment.center,
-            child: Text("Data Artikel Kosong"),
+            child: Text("Data Artikel Kosong "),
           )
         : ListView.builder(
             itemCount: 1,
@@ -80,7 +79,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                           width: 5,
                         ),
                         Text(
-                          controller.data[index].jenisArtikel.toString(),
+                          controller.data![index].jenisArtikel.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
                             color: black2,
@@ -92,7 +91,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                       height: 5,
                     ),
                     Text(
-                      controller.data[index].judul.toString(),
+                      controller.data![index].judul.toString(),
                       // artikelElement![index].judulBerita.toString(),
                       // maxLines: 3,
                       style: TextStyle(
@@ -108,7 +107,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                     Row(
                       children: [
                         Text(
-                          controller.data[index].adminDamkar.toString(),
+                          controller.data![index].adminDamkar.toString(),
                           // artikelElement![index].adminDamkar.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -128,7 +127,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                           width: 5,
                         ),
                         Text(
-                          controller.data[index].tanggal.toString(),
+                          controller.data![index].tanggal.toString(),
                           // artikelElement![index].tanggalBerita.toString(),
                           style: TextStyle(
                             fontFamily: "$thin1",
@@ -164,7 +163,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                               style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
-                        controller.data[index].deskripsi.toString(),
+                        controller.data![index].deskripsi.toString(),
                         // artikelElement![index].deskripsiBerita.toString(),
                         style: TextStyle(
                           fontFamily: "$bold",
@@ -178,6 +177,6 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 ),
               );
             },
-          );
+          ));
   }
 }
