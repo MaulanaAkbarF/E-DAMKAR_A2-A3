@@ -1,5 +1,6 @@
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/models/DataPelaporan.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class DetailRiwayatLaporanController extends GetxController {
@@ -53,4 +54,6 @@ class DetailRiwayatLaporanController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  goToMaps() => Get.toNamed(Routes.mapsTrack);
 }

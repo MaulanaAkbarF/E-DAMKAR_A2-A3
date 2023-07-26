@@ -33,8 +33,10 @@ import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
 import 'package:edamkar_1/src/register/view/register_view.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:edamkar_1/src/riwayatLaporans/bindings/detail_riwayat_laporan_binding.dart';
+import 'package:edamkar_1/src/riwayatLaporans/bindings/track_binding.dart';
 import 'package:edamkar_1/src/riwayatLaporans/views/detail_riwayat_laporan_view.dart';
 import 'package:edamkar_1/src/resetpass/bindings/reset_pass_binding.dart';
+import 'package:edamkar_1/src/riwayatLaporans/views/track_damkar_view.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -103,10 +105,9 @@ class AppPages {
       binding: VerificationSignUpBinding(),
     ),
     GetPage(
-      name: Routes.resetPass,
-      page: () => const ResetPassView(),
-      binding: ResetPassBinding()
-    ),
+        name: Routes.resetPass,
+        page: () => const ResetPassView(),
+        binding: ResetPassBinding()),
 
     //Laporan
     GetPage(
@@ -166,5 +167,9 @@ class AppPages {
         name: Routes.artikleDt,
         page: () => DetailArtikelView(),
         binding: DetailArtikelBinding()),
+    GetPage(
+        name: Routes.mapsTrack,
+        page: () => TrackDamkarView(),
+        binding: TrackDamkarBinding()),
   ];
 }
