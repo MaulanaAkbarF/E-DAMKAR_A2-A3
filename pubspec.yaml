@@ -46,7 +46,7 @@ dependencies:
   file_picker: ^5.2.7
   awesome_snackbar_content: ^0.1.2
   google_maps_flutter: ^2.2.6
-  location: ^4.2.0
+  location: ^5.0.2+1
   geolocator: ^9.0.2
   geocoding: ^2.1.0
   latlng: ^1.0.0

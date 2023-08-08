@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://172.16.106.211:8000/';
+const String baseUrl = 'http://188.10.10.254:8000/';
 const String apiUrl = "${baseUrl}api/";
 final _headers = {"Accept": "application/json"};
 

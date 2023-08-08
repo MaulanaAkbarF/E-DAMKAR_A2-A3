@@ -72,15 +72,17 @@ class PelaporanController extends GetxController {
     //eksekuis post kirim photo
     await APIClient().postMulti('addImage', image, imagePath, title);
     var result = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
       'kategori_laporan_id': dataArgs['idKategori'].toString(),
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
+      'user_listdata_id': iduser.toString(),
       'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
+      'nama_hewan': '-',
+      'waktu_pelaporan': '12:00',
+      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+      'urgensi': namaBencanaCon.text,
+      'alamat': alamat,
       'latitude': dataArgs["latitude"].toString(),
       'longitude': dataArgs["longitude"].toString(),
-      'urgensi': namaBencanaCon.text
+      'bukti_foto_laporan_pengguna': title,
     });
     // _kirimNotifikasi();
     if (result != null) {

@@ -30,8 +30,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
         ),
       ),
       body: isDetailNull(),
-      floatingActionButton:
-          FloatingActionButton(onPressed: controller.goToMaps),
+
       // Column(
       //   children: <Widget>[
       //     Padding(
@@ -165,7 +164,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
               style: StyleTxt.m(size: 18),
             ),
           )
-        : controller.dataElement.value == null
+        : controller.dataElement.value.idLaporan == 0
             ? Align(
                 alignment: Alignment.center,
                 child: Text("Data Laporan Kosong"),
@@ -180,8 +179,8 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Laporan : ${controller.dataElement.value![index].kategoriLaporan.toString()} - ${controller.dataElement.value![index].urgensi.toString()}",
-                              // artikelElement![index].judulBerita.toString(),
+                              "Laporan : ${controller.dataElement.value.kategoriLaporan.toString()} - ${controller.dataElement.value.urgensi.toString()}",
+                              // artikelElement.judulBerita.toString(),
                               // maxLines: 3,
                               overflow: TextOverflow.fade,
                               style: const TextStyle(
@@ -201,7 +200,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${baseUrl}storage/gambar_pelaporans/${controller.dataElement.value![index].imageUrl}.jpg",
+                                        "${baseUrl}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),
@@ -243,8 +242,8 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                                   EdgeInsets.only(right: 10)),
                                           Expanded(
                                             child: Text(
-                                              controller.dataElement
-                                                  .value![index].alamat
+                                              controller
+                                                  .dataElement.value.alamat
                                                   .toString(),
                                               maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
@@ -275,8 +274,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                               padding:
                                                   EdgeInsets.only(right: 10)),
                                           Text(
-                                            controller.dataElement.value![index]
-                                                .tanggal
+                                            controller.dataElement.value.tanggal
                                                 .toString(),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
@@ -299,8 +297,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                         height: 10,
                                       ),
                                       Text(
-                                        controller
-                                            .dataElement.value![index].deskripsi
+                                        controller.dataElement.value.deskripsi
                                             .toString(),
                                         style: TextStyle(
                                           height: 1.5,
@@ -310,6 +307,18 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     ],
                                   ),
                                 )),
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                  onPressed: () => controller.goToMaps(),
+                                  child: Container(
+                                      width: paddingHorozontal1 * 16,
+                                      child: Text(
+                                        "Lacak Posisi Petugas",
+                                        textAlign: TextAlign.center,
+                                      ))),
+                            ),
+
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Column(
@@ -337,15 +346,12 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
                                         color: _getBorderColor(controller
-                                            .dataElement
-                                            .value![index]
-                                            .statusRiwayat),
+                                            .dataElement.value.statusRiwayat),
                                         width: 2,
                                       ),
                                     ),
                                     child: Text(
-                                      controller.dataElement.value![index]
-                                          .statusRiwayat
+                                      controller.dataElement.value.statusRiwayat
                                           .toString(),
                                       style: TextStyle(
                                           color:
@@ -356,7 +362,10 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   )
                                 ],
                               ),
-                            )
+                            ),
+                            // ElevatedButton(
+                            //     onPressed: controller.goToMaps(),
+                            //     child: Text("lacak Petugas Damakar"))
                           ]));
                 },
               ));

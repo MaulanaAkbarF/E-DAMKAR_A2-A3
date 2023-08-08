@@ -207,10 +207,14 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                       children: [
                     Pencarian(),
                     isRiwayatNull(),
-                    menunggu(),
-                    proses(),
-                    selesai(),
-                    ditolak()
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
+                    // menunggu(),
+                    // proses(),
+                    // selesai(),
+                    // ditolak()
                   ]))
             ],
           ),

@@ -12,13 +12,15 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
       appBar: AppBar(
         title: const Text("Damkar Map Tracking"),
       ),
-      body: Obx(() => GoogleMap(
-            initialCameraPosition: controller.initialCamPosition,
-            onMapCreated: controller.onMapCrete,
-            markers: controller.markers,
-            polylines: controller.polylines,
-          )),
-          
+      body: Obx(() => controller.isDone.value && controller.isWsDone.value
+          ? GoogleMap(
+              initialCameraPosition: controller.initialCamPosition,
+              onMapCreated: controller.onMapCreated,
+              // markers: controller.marker,
+              // polylines: controller.polylines,
+            )
+          : Align(
+              alignment: Alignment.center, child: CircularProgressIndicator())),
     );
   }
 }
