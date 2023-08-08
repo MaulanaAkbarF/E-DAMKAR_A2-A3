@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
+// import 'package:edamkar_1/src/camera/camera.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class PelaporanController extends GetxController {
   var imagePath;
   RxBool showSpinner = false.obs;
   final ImagePicker _picker = ImagePicker();
+  var img;
 
   @override
   void onInit() {
@@ -122,6 +124,11 @@ class PelaporanController extends GetxController {
       print('no image selected');
     }
   }
+
+  // void goToCamera() async {
+  //   img = await Get.to(const CameraAdmin());
+  //   update();
+  // }
 
   void pushPelaporan() {
     if (formKey.currentState?.validate() == true) {

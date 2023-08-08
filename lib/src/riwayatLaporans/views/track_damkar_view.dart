@@ -17,7 +17,7 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
               initialCameraPosition: controller.initialCamPosition,
               onMapCreated: controller.onMapCreated,
               markers: controller.marker,
-              // polylines: controller.polylines,
+              polylines: controller.polylines,
             )
           : Align(
               alignment: Alignment.center, child: CircularProgressIndicator())),

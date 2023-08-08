@@ -4,48 +4,49 @@
 
 import 'dart:convert';
 
-DetailLaporan detailLaporanFromJson(String str) => DetailLaporan.fromJson(json.decode(str));
+DetailLaporan detailLaporanFromJson(String str) =>
+    DetailLaporan.fromJson(json.decode(str));
 
 String detailLaporanToJson(DetailLaporan data) => json.encode(data.toJson());
 
 class DetailLaporan {
-    Data data;
+  Data data;
 
-    DetailLaporan({
-        required this.data,
-    });
+  DetailLaporan({
+    required this.data,
+  });
 
-    factory DetailLaporan.fromJson(Map<String, dynamic> json) => DetailLaporan(
+  factory DetailLaporan.fromJson(Map<String, dynamic> json) => DetailLaporan(
         data: Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "data": data.toJson(),
-    };
+      };
 }
 
 class Data {
-    int idLaporan;
-    String statusRiwayat;
-    String kategoriLaporan;
-    String tanggal;
-    String deskripsi;
-    String imageUrl;
-    String alamat;
-    String urgensi;
+  int idLaporan;
+  String statusRiwayat;
+  String kategoriLaporan;
+  String tanggal;
+  String deskripsi;
+  String imageUrl;
+  String alamat;
+  String urgensi;
 
-    Data({
-        required this.idLaporan,
-        required this.statusRiwayat,
-        required this.kategoriLaporan,
-        required this.tanggal,
-        required this.deskripsi,
-        required this.imageUrl,
-        required this.alamat,
-        required this.urgensi,
-    });
+  Data({
+    required this.idLaporan,
+    required this.statusRiwayat,
+    required this.kategoriLaporan,
+    required this.tanggal,
+    required this.deskripsi,
+    required this.imageUrl,
+    required this.alamat,
+    required this.urgensi,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         idLaporan: json["idLaporan"],
         statusRiwayat: json["Status_riwayat"],
         kategoriLaporan: json["kategori_laporan"],
@@ -54,9 +55,9 @@ class Data {
         imageUrl: json["image_url"],
         alamat: json["alamat"],
         urgensi: json["urgensi"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "idLaporan": idLaporan,
         "Status_riwayat": statusRiwayat,
         "kategori_laporan": kategoriLaporan,
@@ -65,5 +66,5 @@ class Data {
         "image_url": imageUrl,
         "alamat": alamat,
         "urgensi": urgensi,
-    };
+      };
 }

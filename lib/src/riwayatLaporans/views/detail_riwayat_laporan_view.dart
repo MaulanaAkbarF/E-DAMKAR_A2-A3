@@ -6,7 +6,6 @@ import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   DetailRiwayatLengkapView({super.key});
 
@@ -307,17 +306,20 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     ],
                                   ),
                                 )),
-                            Align(
-                              alignment: Alignment.center,
-                              child: ElevatedButton(
-                                  onPressed: () => controller.goToMaps(),
-                                  child: Container(
-                                      width: paddingHorozontal1 * 16,
-                                      child: Text(
-                                        "Lacak Posisi Petugas",
-                                        textAlign: TextAlign.center,
-                                      ))),
-                            ),
+                            controller.dataElement.value.statusRiwayat ==
+                                    "Ditangani"
+                                ? Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                        onPressed: () => controller.goToMaps(),
+                                        child: Container(
+                                            width: paddingHorozontal1 * 16,
+                                            child: Text(
+                                              "Lacak Posisi Petugas",
+                                              textAlign: TextAlign.center,
+                                            ))),
+                                  )
+                                : Container(),
 
                             Align(
                               alignment: Alignment.bottomCenter,

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/home/controller/home_controller.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/utils/app_style.dart';
@@ -192,15 +193,8 @@ class HomePageView extends GetView<HomeController> {
                             childAspectRatio: 0.8,
                             children: <Widget>[
                               InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           MapsLokasiKejadian(
-                                  //               kategori: "penyelamatan")),
-                                  // );
-                                },
+                                onTap: () => Get.toNamed(Routes.mpLap,
+                                    arguments: "bencanaalam"),
                                 child: Container(
                                   height: double.infinity,
                                   margin: EdgeInsets.symmetric(
@@ -256,15 +250,8 @@ class HomePageView extends GetView<HomeController> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           MapsLokasiKejadian(
-                                  //               kategori: "penyelamatan")),
-                                  // );
-                                },
+                                onTap: () => Get.toNamed(Routes.mpLap,
+                                    arguments: "kebakaran"),
                                 child: Container(
                                   height: double.infinity,
                                   margin: EdgeInsets.symmetric(
@@ -319,15 +306,8 @@ class HomePageView extends GetView<HomeController> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           MapsLokasiKejadian(
-                                  //               kategori: "penyelamatan")),
-                                  // );
-                                },
+                                onTap: () => Get.toNamed(Routes.mpLap,
+                                    arguments: "hewanbuas"),
                                 child: Container(
                                   height: double.infinity,
                                   margin: EdgeInsets.symmetric(
@@ -383,15 +363,8 @@ class HomePageView extends GetView<HomeController> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           MapsLokasiKejadian(
-                                  //               kategori: "penyelamatan")),
-                                  // );
-                                },
+                                onTap: () => Get.toNamed(Routes.mpLap,
+                                    arguments: "penyelamatan"),
                                 child: Container(
                                   height: double.infinity,
                                   margin: EdgeInsets.symmetric(

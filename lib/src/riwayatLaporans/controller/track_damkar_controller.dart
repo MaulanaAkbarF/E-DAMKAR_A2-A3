@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,7 +16,7 @@ class TrackDamkarController extends GetxController {
   var channel;
   RxBool isWsDone = false.obs;
   // List<LatLng> polyPoints = [];
-  // Set<Polyline> polylines = Set<Polyline>().obs;
+  final Set<Polyline> polylines = {};
   Set<Marker> marker = Set<Marker>().obs;
 
   @override
@@ -50,7 +51,7 @@ class TrackDamkarController extends GetxController {
           setMarker(data['latitude'], data['longitude']);
           break;
         case 'RQARot':
-          // sendRoute();
+          setPolyLines(data['route']);
           break;
       }
     });
@@ -95,5 +96,15 @@ class TrackDamkarController extends GetxController {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+
+  setPolyLines(polyPoint) {
+    Polyline polyline = Polyline(
+      polylineId: PolylineId("polyline"),
+      color: Colors.lightBlue,
+      points: polyPoint,
+    );
+    polylines.add(polyline);
+    update();
   }
 }
