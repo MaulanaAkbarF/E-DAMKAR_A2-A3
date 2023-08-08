@@ -1,4 +1,4 @@
-import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class ProfileController extends GetxController {
       return CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(
-              '${baseUrl}storage/foto_user/${url_photo.replaceAll("'", "")}'));
+              '${URLWEBAPI.urlHost}storage/foto_user/${url_photo.replaceAll("'", "")}'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));

@@ -1,14 +1,13 @@
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://188.10.10.254:8000/';
-const String apiUrl = "${baseUrl}api/";
 final _headers = {"Accept": "application/json"};
 
 class APIClient {
   var client = http.Client();
 
   Future<dynamic> getData(String api) async {
-    var url = Uri.parse(apiUrl + api);
+    var url = Uri.parse(URLWEBAPI.apiUrl + api);
     var response = await client.get(url);
 
     if (response.statusCode == 200) {
@@ -19,8 +18,8 @@ class APIClient {
   }
 
   Future<dynamic> postData(String api, dynamic object) async {
-    var url = Uri.parse(apiUrl + api);
-
+    var url = Uri.parse(URLWEBAPI.apiUrl + api);
+    print(URLWEBAPI.apiUrl + api);
     var response = await client.post(url, headers: _headers, body: object);
 
     if (response.statusCode == 200 || response.statusCode == 422) {
@@ -35,7 +34,7 @@ class APIClient {
     var stream = http.ByteStream(image!.value.openRead());
     stream.cast();
     // var length = await image!.length();
-    var uri = Uri.parse(apiUrl + api);
+    var uri = Uri.parse(URLWEBAPI.apiUrl + api);
     final request = http.MultipartRequest('POST', uri);
     request.fields['title'] = imageTitle;
     request.files.add(
@@ -53,7 +52,7 @@ class APIClient {
   }
 
   Future<dynamic> putData(String api, dynamic object) async {
-    var url = Uri.parse(apiUrl + api);
+    var url = Uri.parse(URLWEBAPI.apiUrl + api);
     var response = await client.put(url, body: object);
 
     if (response.statusCode == 200) {
@@ -64,7 +63,7 @@ class APIClient {
   }
 
   Future<dynamic> deleteData(String api) async {
-    var url = Uri.parse(apiUrl + api);
+    var url = Uri.parse(URLWEBAPI.apiUrl + api);
     var response = await client.delete(url);
 
     if (response.statusCode == 200) {

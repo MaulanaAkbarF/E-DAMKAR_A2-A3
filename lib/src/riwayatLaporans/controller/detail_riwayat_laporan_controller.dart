@@ -1,5 +1,4 @@
 import 'package:edamkar_1/config/api_client.dart';
-import 'package:edamkar_1/models/DataPelaporan.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/riwayatLaporans/models/detail_pelaporan.dart';
 import 'package:get/get.dart';

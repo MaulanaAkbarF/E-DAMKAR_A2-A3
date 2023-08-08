@@ -457,7 +457,7 @@ class HomePageView extends GetView<HomeController> {
                           textAlign: TextAlign.start, style: semibold),
                     )),
 
-                // const CardArtikelView()
+                const CardArtikelView()
                 // Allisign(alignment: Alignment.center, child: listArtikel())
               ]),
         ),

@@ -1,4 +1,5 @@
 import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/src/home/model/home_model.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
@@ -57,7 +58,7 @@ class HomeController extends GetxController {
       return CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(
-              '${baseUrl}storage/foto_user/${urlPhoto.replaceAll("'", "")}'));
+              '${URLWEBAPI.urlHost}storage/foto_user/${urlPhoto.replaceAll("'", "")}'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
