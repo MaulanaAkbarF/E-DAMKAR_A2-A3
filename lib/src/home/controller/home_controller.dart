@@ -24,7 +24,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getUserData();
-    getArtikel();
+    // getArtikel();
   }
 
   void emercall() async {

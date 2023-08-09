@@ -365,6 +365,9 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                   ),
                 ),
               ),
-            ))));
+            )
+            )
+            )
+            );
   }
 }

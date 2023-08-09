@@ -17,7 +17,7 @@ class DashboardPage extends GetView<DashboardController> {
           children: [
             const HomePageView(),
             const LaporanPage(),
-            RiwayatLaporanView(),
+            // RiwayatLaporanView(),
             ArtikelView(),
           ],
         )),
@@ -38,12 +38,12 @@ class DashboardPage extends GetView<DashboardController> {
               ),
               label: 'Laporan',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.history,
-              ),
-              label: 'Riwayat',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(
+            //     Icons.history,
+            //   ),
+            //   label: 'Riwayat',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.article_rounded,

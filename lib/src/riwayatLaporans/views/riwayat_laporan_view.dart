@@ -371,9 +371,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ])
                             ],
                           ),
-                        ))
+                        )
+                        )
                       ])));
-            }));
+            }
+            )
+            );
   }
 
   Widget menunggu() {
