@@ -9,7 +9,7 @@ class APIClient {
   Future<dynamic> getData(String api) async {
     var url = Uri.parse(URLWEBAPI.apiUrl + api);
     var response = await client.get(url);
-
+    print(URLWEBAPI.apiUrl + api);
     if (response.statusCode == 200) {
       return response.body;
     } else {

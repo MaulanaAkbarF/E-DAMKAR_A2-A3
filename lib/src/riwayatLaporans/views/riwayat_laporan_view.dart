@@ -207,14 +207,10 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                       children: [
                     Pencarian(),
                     isRiwayatNull(),
-                    Container(),
-                    Container(),
-                    Container(),
-                    Container(),
-                    // menunggu(),
-                    // proses(),
-                    // selesai(),
-                    // ditolak()
+                    menunggu(),
+                    proses(),
+                    selesai(),
+                    ditolak()
                   ]))
             ],
           ),
@@ -326,40 +322,9 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
                                       child: Card(
-                                        color: () {
-                                          if (controller.dataElement![index]
-                                                  .statusRiwayat ==
-                                              "Menunggu") {
-                                            return Color.fromARGB(
-                                                255, 250, 202, 21);
-                                          } else if (controller
-                                                  .dataElement![index]
-                                                  .statusRiwayat ==
-                                              "Ditangani") {
-                                            return Color.fromARGB(
-                                                255, 63, 131, 248);
-                                          } else if (controller
-                                                  .dataElement![index]
-                                                  .statusRiwayat ==
-                                              "Selesai") {
-                                            return Color.fromARGB(
-                                                255, 17, 178, 124);
-                                          } else if (controller
-                                                  .dataElement![index]
-                                                  .statusRiwayat ==
-                                              "Ditolak") {
-                                            return Color.fromARGB(
-                                                255, 224, 36, 36);
-                                          } else if (controller
-                                                  .dataElement![index]
-                                                  .statusRiwayat ==
-                                              "Emergency") {
-                                            return Colors
-                                                .black26; // default color
-                                          } else {
-                                            return Colors.white;
-                                          }
-                                        }(),
+                                        color: controller.setColorStatus(
+                                            controller.dataElement![index]
+                                                .statusRiwayat),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: Text(
@@ -381,24 +346,25 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget menunggu() {
-    return Obx(() => controller.dataMenunggu == null
+    return Obx(() => !controller.dataMenunggu!.value.kondisi
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.dataMenunggu!.length,
+            itemCount: controller.dataMenunggu!.value.data!.length,
             itemBuilder: (context, index) {
-              var date = controller.dataMenunggu![index].tanggal.toString();
+              var date = controller.dataMenunggu!.value.data![index].tanggal
+                  .toString();
+              var data = controller.dataMenunggu!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
                     10,
                   ),
                   child: GestureDetector(
-                      onTap: () => controller.goToDetail(
-                          controller.dataMenunggu![index].idLaporan),
+                      onTap: () => controller.goToDetail(data.idLaporan!),
                       child: Row(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -436,9 +402,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 15),
                                 child: Text(
-                                  controller
-                                      .dataMenunggu![index].kategoriLaporan
-                                      .toString(),
+                                  data.kategoriLaporan!,
                                   style: StyleTxt.sb(size: 15),
                                 ),
                               ),
@@ -453,8 +417,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                     ),
                                     Flexible(
                                         child: Text(
-                                      controller.dataMenunggu![index].alamat
-                                          .toString(),
+                                      data.alamat!,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                     )),
@@ -470,46 +433,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
                                       child: Card(
-                                        color: () {
-                                          if (controller.dataMenunggu![index]
-                                                  .statusRiwayat ==
-                                              "Menunggu") {
-                                            return Color.fromARGB(
-                                                255, 250, 202, 21);
-                                          } else if (controller
-                                                  .dataMenunggu![index]
-                                                  .statusRiwayat ==
-                                              "Ditangani") {
-                                            return Color.fromARGB(
-                                                255, 63, 131, 248);
-                                          } else if (controller
-                                                  .dataMenunggu![index]
-                                                  .statusRiwayat ==
-                                              "Selesai") {
-                                            return Color.fromARGB(
-                                                255, 17, 178, 124);
-                                          } else if (controller
-                                                  .dataMenunggu![index]
-                                                  .statusRiwayat ==
-                                              "Ditolak") {
-                                            return Color.fromARGB(
-                                                255, 224, 36, 36);
-                                          } else if (controller
-                                                  .dataMenunggu![index]
-                                                  .statusRiwayat ==
-                                              "Emergency") {
-                                            return Colors
-                                                .black26; // default color
-                                          } else {
-                                            return Colors.white;
-                                          }
-                                        }(),
+                                        color: controller.setColorStatus(
+                                            data.statusRiwayat!),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: Text(
-                                            controller.dataMenunggu![index]
-                                                .statusRiwayat
-                                                .toString(),
+                                            data.statusRiwayat!,
                                             textAlign: TextAlign.center,
                                             style: StyleTxt.m(),
                                           ),
@@ -525,24 +454,25 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget proses() {
-    return Obx(() => controller.dataProses == null
+    return Obx(() => !controller.dataProses!.value.kondisi
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.dataProses!.length,
+            itemCount: controller.dataProses!.value.data!.length,
             itemBuilder: (context, index) {
-              var date = controller.dataProses![index].tanggal.toString();
+              var date =
+                  controller.dataProses!.value.data![index].tanggal.toString();
+              var data = controller.dataProses!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
                     10,
                   ),
                   child: GestureDetector(
-                      onTap: () => controller
-                          .goToDetail(controller.dataProses![index].idLaporan),
+                      onTap: () => controller.goToDetail(data.idLaporan!),
                       child: Row(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -580,8 +510,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 15),
                                 child: Text(
-                                  controller.dataProses![index].kategoriLaporan
-                                      .toString(),
+                                  data.kategoriLaporan.toString(),
                                   style: StyleTxt.sb(size: 15),
                                 ),
                               ),
@@ -596,8 +525,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                     ),
                                     Flexible(
                                         child: Text(
-                                      controller.dataProses![index].alamat
-                                          .toString(),
+                                      data.alamat.toString(),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                     )),
@@ -613,46 +541,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
                                       child: Card(
-                                        color: () {
-                                          if (controller.dataProses![index]
-                                                  .statusRiwayat ==
-                                              "Menunggu") {
-                                            return Color.fromARGB(
-                                                255, 250, 202, 21);
-                                          } else if (controller
-                                                  .dataProses![index]
-                                                  .statusRiwayat ==
-                                              "Ditangani") {
-                                            return Color.fromARGB(
-                                                255, 63, 131, 248);
-                                          } else if (controller
-                                                  .dataProses![index]
-                                                  .statusRiwayat ==
-                                              "Selesai") {
-                                            return Color.fromARGB(
-                                                255, 17, 178, 124);
-                                          } else if (controller
-                                                  .dataProses![index]
-                                                  .statusRiwayat ==
-                                              "Ditolak") {
-                                            return Color.fromARGB(
-                                                255, 224, 36, 36);
-                                          } else if (controller
-                                                  .dataProses![index]
-                                                  .statusRiwayat ==
-                                              "Emergency") {
-                                            return Colors
-                                                .black26; // default color
-                                          } else {
-                                            return Colors.white;
-                                          }
-                                        }(),
+                                        color: controller.setColorStatus(
+                                            data.statusRiwayat!),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: Text(
-                                            controller.dataProses![index]
-                                                .statusRiwayat
-                                                .toString(),
+                                            data.statusRiwayat.toString(),
                                             textAlign: TextAlign.center,
                                             style: StyleTxt.m(),
                                           ),
@@ -668,24 +562,25 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget selesai() {
-    return Obx(() => controller.dataSelesai == null
+    return Obx(() => !controller.dataSelesai!.value.kondisi
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.dataSelesai!.length,
+            itemCount: controller.dataSelesai!.value.data!.length,
             itemBuilder: (context, index) {
-              var date = controller.dataSelesai![index].tanggal.toString();
+              var date =
+                  controller.dataSelesai!.value.data![index].tanggal.toString();
+              var data = controller.dataSelesai!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
                     10,
                   ),
                   child: GestureDetector(
-                      onTap: () => controller
-                          .goToDetail(controller.dataSelesai![index].idLaporan),
+                      onTap: () => controller.goToDetail(data.idLaporan!),
                       child: Row(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -723,8 +618,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 15),
                                 child: Text(
-                                  controller.dataSelesai![index].kategoriLaporan
-                                      .toString(),
+                                  data.kategoriLaporan.toString(),
                                   style: StyleTxt.sb(size: 15),
                                 ),
                               ),
@@ -739,8 +633,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                     ),
                                     Flexible(
                                         child: Text(
-                                      controller.dataSelesai![index].alamat
-                                          .toString(),
+                                      data.alamat.toString(),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                     )),
@@ -756,46 +649,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
                                       child: Card(
-                                        color: () {
-                                          if (controller.dataSelesai![index]
-                                                  .statusRiwayat ==
-                                              "Menunggu") {
-                                            return Color.fromARGB(
-                                                255, 250, 202, 21);
-                                          } else if (controller
-                                                  .dataSelesai![index]
-                                                  .statusRiwayat ==
-                                              "Ditangani") {
-                                            return Color.fromARGB(
-                                                255, 63, 131, 248);
-                                          } else if (controller
-                                                  .dataSelesai![index]
-                                                  .statusRiwayat ==
-                                              "Selesai") {
-                                            return Color.fromARGB(
-                                                255, 17, 178, 124);
-                                          } else if (controller
-                                                  .dataSelesai![index]
-                                                  .statusRiwayat ==
-                                              "Ditolak") {
-                                            return Color.fromARGB(
-                                                255, 224, 36, 36);
-                                          } else if (controller
-                                                  .dataSelesai![index]
-                                                  .statusRiwayat ==
-                                              "Emergency") {
-                                            return Colors
-                                                .black26; // default color
-                                          } else {
-                                            return Colors.white;
-                                          }
-                                        }(),
+                                        color: controller.setColorStatus(
+                                            data.statusRiwayat!),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: Text(
-                                            controller.dataSelesai![index]
-                                                .statusRiwayat
-                                                .toString(),
+                                            data.statusRiwayat.toString(),
                                             textAlign: TextAlign.center,
                                             style: StyleTxt.m(),
                                           ),
@@ -811,24 +670,25 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget ditolak() {
-    return Obx(() => controller.dataDitolak == null
+    return Obx(() => !controller.dataDitolak!.value.kondisi
         ? Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
         : ListView.builder(
             shrinkWrap: true,
-            itemCount: controller.dataDitolak!.length,
+            itemCount: controller.dataDitolak!.value.data!.length,
             itemBuilder: (context, index) {
-              var date = controller.dataDitolak![index].tanggal.toString();
+              var date =
+                  controller.dataDitolak!.value.data![index].tanggal.toString();
+              var data = controller.dataProses!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
                     10,
                   ),
                   child: GestureDetector(
-                      onTap: () => controller
-                          .goToDetail(controller.dataDitolak![index].idLaporan),
+                      onTap: () => controller.goToDetail(data.idLaporan!),
                       child: Row(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -866,8 +726,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 15),
                                 child: Text(
-                                  controller.dataDitolak![index].kategoriLaporan
-                                      .toString(),
+                                  data.kategoriLaporan.toString(),
                                   style: StyleTxt.sb(size: 15),
                                 ),
                               ),
@@ -882,8 +741,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                     ),
                                     Flexible(
                                         child: Text(
-                                      controller.dataDitolak![index].alamat
-                                          .toString(),
+                                      data.alamat.toString(),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                     )),
@@ -899,46 +757,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
                                       child: Card(
-                                        color: () {
-                                          if (controller.dataDitolak![index]
-                                                  .statusRiwayat ==
-                                              "Menunggu") {
-                                            return Color.fromARGB(
-                                                255, 250, 202, 21);
-                                          } else if (controller
-                                                  .dataDitolak![index]
-                                                  .statusRiwayat ==
-                                              "Ditangani") {
-                                            return Color.fromARGB(
-                                                255, 63, 131, 248);
-                                          } else if (controller
-                                                  .dataDitolak![index]
-                                                  .statusRiwayat ==
-                                              "Selesai") {
-                                            return Color.fromARGB(
-                                                255, 17, 178, 124);
-                                          } else if (controller
-                                                  .dataDitolak![index]
-                                                  .statusRiwayat ==
-                                              "Ditolak") {
-                                            return Color.fromARGB(
-                                                255, 224, 36, 36);
-                                          } else if (controller
-                                                  .dataDitolak![index]
-                                                  .statusRiwayat ==
-                                              "Emergency") {
-                                            return Colors
-                                                .black26; // default color
-                                          } else {
-                                            return Colors.white;
-                                          }
-                                        }(),
+                                        color: controller.setColorStatus(
+                                            data.statusRiwayat!),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: Text(
-                                            controller.dataDitolak![index]
-                                                .statusRiwayat
-                                                .toString(),
+                                            data.statusRiwayat.toString(),
                                             textAlign: TextAlign.center,
                                             style: StyleTxt.m(),
                                           ),
