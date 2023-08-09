@@ -14,6 +14,7 @@ abstract class URLWEBAPI {
   static const fullAppKey = '?appKey=$appKey';
   //url
   static const apiUrl = '$protocolHttp$host$portApi$type/';
-  static const custm = '$urlHost$type/';
+  static const imgeUrl = '$protocolHttp$host$portApi/';
+  // static const custm = '$urlHost$type/';
   static const wsUrl = protocolWs + host + portWs;
 }
