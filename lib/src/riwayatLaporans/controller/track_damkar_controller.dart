@@ -106,15 +106,15 @@ class TrackDamkarController extends GetxController {
   final List<LatLng> polyPoints = [];
   final Set<Polyline> polylines = {};
   setPolyLines(line) {
-    for (int i = 0; i < line.lineString.length; i++) {
-      polyPoints.add(LatLng(line.lineString[i][1], line.lineString[i][0]));
+    for (int i = 0; i < line.length; i++) {
+      polyPoints.add(LatLng(line[i][0], line[i][1]));
     }
-    // Polyline polyline = Polyline(
-    //   polylineId: PolylineId("polyline"),
-    //   color: Colors.lightBlue,
-    //   points: polyPoints,
-    // );
-    // polylines.add(polyline);
-    // update();
+    Polyline polyline = Polyline(
+      polylineId: PolylineId("polyline"),
+      color: Colors.lightBlue,
+      points: polyPoints,
+    );
+    polylines.add(polyline);
+    update();
   }
 }
