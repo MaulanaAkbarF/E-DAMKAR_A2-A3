@@ -36,6 +36,7 @@ class TrackDamkarController extends GetxController {
     listen(wsChannel);
     onSubscribe(wsChannel);
     onRouteReq(wsChannel);
+    onPositionReq(wsChannel);
     isWsDone.value = true;
   }
 
@@ -64,6 +65,11 @@ class TrackDamkarController extends GetxController {
 
   void onRouteReq(WebSocketChannel ws) {
     const req = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
+    ws.sink.add(jsonEncode(req));
+  }
+
+  void onPositionReq(WebSocketChannel ws) {
+    const req = {"command": "Request", "channel": "RLTrack", "type": "RQULoc"};
     ws.sink.add(jsonEncode(req));
   }
 
