@@ -37,7 +37,7 @@ class RiwayatLaporanController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    tabController = TabController(length: 6, vsync: this, initialIndex: 1);
+    tabController = TabController(length: 7, vsync: this, initialIndex: 1);
     idUser = await DataUser().getUserId().then((value) => idUser = value);
 
     getDataRiwayat();

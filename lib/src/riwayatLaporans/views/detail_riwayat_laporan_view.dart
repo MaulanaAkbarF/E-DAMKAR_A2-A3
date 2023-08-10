@@ -203,7 +203,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                       ),
                                       fit: BoxFit.cover)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:edamkar_1/src/riwayatLaporans/models/maps_line_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -15,8 +16,6 @@ class TrackDamkarController extends GetxController {
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
   var channel;
   RxBool isWsDone = false.obs;
-  // List<LatLng> polyPoints = [];
-  final Set<Polyline> polylines = {};
   Set<Marker> marker = Set<Marker>().obs;
 
   @override
@@ -36,6 +35,7 @@ class TrackDamkarController extends GetxController {
     wsChannel = WebSocketChannel.connect(url);
     listen(wsChannel);
     onSubscribe(wsChannel);
+    onRouteReq(wsChannel);
     isWsDone.value = true;
   }
 
@@ -60,6 +60,11 @@ class TrackDamkarController extends GetxController {
   void onSubscribe(WebSocketChannel ws) {
     const subs = {"command": "Subscribe", "channel": "RLTrack"};
     ws.sink.add(jsonEncode(subs));
+  }
+
+  void onRouteReq(WebSocketChannel ws) {
+    const req = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
+    ws.sink.add(jsonEncode(req));
   }
 
   void onMapCreated(GoogleMapController gm) {
@@ -98,13 +103,18 @@ class TrackDamkarController extends GetxController {
         .asUint8List();
   }
 
-  setPolyLines(polyPoint) {
-    Polyline polyline = Polyline(
-      polylineId: PolylineId("polyline"),
-      color: Colors.lightBlue,
-      points: polyPoint,
-    );
-    polylines.add(polyline);
-    update();
+  final List<LatLng> polyPoints = [];
+  final Set<Polyline> polylines = {};
+  setPolyLines(line) {
+    for (int i = 0; i < line.lineString.length; i++) {
+      polyPoints.add(LatLng(line.lineString[i][1], line.lineString[i][0]));
+    }
+    // Polyline polyline = Polyline(
+    //   polylineId: PolylineId("polyline"),
+    //   color: Colors.lightBlue,
+    //   points: polyPoints,
+    // );
+    // polylines.add(polyline);
+    // update();
   }
 }

@@ -145,7 +145,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                         FilteringTextInputFormatter(RegExp(r'[a-zA-Z]'),
                             allow: true)
                       ],
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontFamily: "font/inter_regular.ttf",
                           color: Color.fromARGB(255, 107, 114, 128),
                           fontSize: 16,
@@ -159,11 +159,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           fillColor: Color.fromARGB(255, 249, 250, 251),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   width: 3,
                                   color: Color.fromARGB(255, 209, 213, 219)))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TabBar(
@@ -173,7 +173,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                         indicatorColor: orange1,
                         labelColor: black,
                         controller: controller.tabController,
-                        tabs: [
+                        tabs: const [
                           Tab(
                             icon: Icon(Icons.search),
                           ),
@@ -185,6 +185,9 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           ),
                           Tab(
                             text: "Proses",
+                          ),
+                          Tab(
+                            text: "Ditangani",
                           ),
                           Tab(
                             text: "selesai",
@@ -209,6 +212,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                     isRiwayatNull(),
                     menunggu(),
                     proses(),
+                    Container(),
                     selesai(),
                     ditolak()
                   ]))
