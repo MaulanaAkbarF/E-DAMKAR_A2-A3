@@ -20,6 +20,8 @@ class RiwayatLaporanController extends GetxController
       RiwayatLaporan(kondisi: false, message: "empty").obs;
   Rx<RiwayatLaporan>? dataMenunggu =
       RiwayatLaporan(kondisi: false, message: "empty").obs;
+  Rx<RiwayatLaporan>? dataDitangani =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
   Rx<RiwayatLaporan>? dataSelesai =
       RiwayatLaporan(kondisi: false, message: "empty").obs;
   Rx<RiwayatLaporan>? dataDitolak =
@@ -43,6 +45,7 @@ class RiwayatLaporanController extends GetxController
     getDataRiwayat();
     getRiwayatMenunggu();
     getRiwayatProses();
+    getRiwayatDitangani();
     getRiwayatSelesai();
     getRiwayatDitolak();
     // debounce(
@@ -139,6 +142,20 @@ class RiwayatLaporanController extends GetxController
       if (data.kondisi) {
         // setState(() {
         dataProses?.value = data;
+        // });
+      }
+    } else {
+      print("Status Proses kosong");
+    }
+  }
+
+  getRiwayatDitangani() async {
+    var result = await APIClient().getData('filterLapDitangani/$idUser');
+    if (result != null) {
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
+        // setState(() {
+        dataDitangani?.value = data;
         // });
       }
     } else {

@@ -212,7 +212,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                     isRiwayatNull(),
                     menunggu(),
                     proses(),
-                    Container(),
+                    ditangani(),
                     selesai(),
                     ditolak()
                   ]))
@@ -470,6 +470,114 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
               var date =
                   controller.dataProses!.value.data![index].tanggal.toString();
               var data = controller.dataProses!.value.data![index];
+              final splitDate = date.split('-');
+              return Padding(
+                  padding: EdgeInsets.all(
+                    10,
+                  ),
+                  child: GestureDetector(
+                      onTap: () => controller.goToDetail(data.idLaporan!),
+                      child: Row(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(splitDate[2], style: StyleTxt.m()),
+                            Text(controller.monthString(splitDate[1]),
+                                style: StyleTxt.m()),
+                            Text(splitDate[0], style: StyleTxt.m()),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: grey1,
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 15),
+                                child: Text(
+                                  data.kategoriLaporan.toString(),
+                                  style: StyleTxt.sb(size: 15),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: orange1,
+                                    ),
+                                    Flexible(
+                                        child: Text(
+                                      data.alamat.toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      // padding: EdgeInsets.symmetric(
+                                      //     horizontal: paddingHorozontal1),
+                                      child: Card(
+                                        color: controller.setColorStatus(
+                                            data.statusRiwayat!),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            data.statusRiwayat.toString(),
+                                            textAlign: TextAlign.center,
+                                            style: StyleTxt.m(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            ],
+                          ),
+                        ))
+                      ])));
+            }));
+  }
+
+  Widget ditangani() {
+    return Obx(() => !controller.dataDitangani!.value.kondisi
+        ? Align(
+            alignment: Alignment.center,
+            child: Text("Anda belum pernah melakukan pelaporan"),
+          )
+        : ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.dataDitangani!.value.data!.length,
+            itemBuilder: (context, index) {
+              var date = controller.dataDitangani!.value.data![index].tanggal
+                  .toString();
+              var data = controller.dataDitangani!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(
