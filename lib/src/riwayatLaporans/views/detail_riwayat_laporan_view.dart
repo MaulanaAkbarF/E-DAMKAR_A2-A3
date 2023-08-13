@@ -199,7 +199,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${URLWEBAPI.urlHost}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
+                                        "${URLWEBAPI.baseUrl}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),
@@ -213,8 +213,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         color: Colors.white, width: 0)),
-                                child: Expanded(
-                                  child: Column(
+                                child:  Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -305,7 +304,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                       ),
                                     ],
                                   ),
-                                )),
+                                ),
                             controller.dataElement.value.statusRiwayat ==
                                     "Ditangani"
                                 ? Align(

@@ -27,11 +27,11 @@ class SemuaArtikelModel {
 
     factory SemuaArtikelModel.fromJson(Map<String, dynamic> json) => SemuaArtikelModel(
         jenisArtikel: json["jenis_artikel"],
-        id: json["id"],
+        id: int.parse(json["id"]),
         adminDamkar: json["admin_damkar"],
         foto: json["foto"],
         judul: json["judul"],
-        deskripsi: json["deskripsi"],
+        deskripsi: json["deskripsi"].toString(),
         tanggal: json["tanggal"],
     );
 
