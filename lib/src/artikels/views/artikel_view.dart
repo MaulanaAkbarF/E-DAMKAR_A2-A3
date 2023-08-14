@@ -404,11 +404,11 @@ class ArtikelView extends GetView<ArtikleController> {
               return Container(
                 child: ListTile(
                   onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => DetailArtikel(
-                    //         idArtikel: controller.data[index].id,
-                    //         jenisArtikel: controller.data[index].jenisArtikel
-                    //             .toString())));
+                    Get.toNamed(Routes.artikleDt, arguments: {
+                      "idArtikel": controller.data[index].id,
+                      "jenisArtikel":
+                          controller.data[index].jenisArtikel.toString()
+                    });
                   },
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

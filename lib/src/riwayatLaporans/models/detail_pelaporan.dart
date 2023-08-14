@@ -47,7 +47,7 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        idLaporan: json["idLaporan"],
+        idLaporan: int.parse(json["idLaporan"]) ,
         statusRiwayat: json["Status_riwayat"],
         kategoriLaporan: json["kategori_laporan"],
         tanggal: json["tanggal"],

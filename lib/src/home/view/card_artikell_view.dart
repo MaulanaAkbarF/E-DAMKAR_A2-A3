@@ -1,3 +1,4 @@
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/src/home/controller/home_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
@@ -137,7 +138,9 @@ class CardArtikelView extends GetView<HomeController> {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image:
-                                    AssetImage("semuaAset/gambar/damkar.png"))),
+                                     NetworkImage(
+                                        "${URLWEBAPI.urlHost}/img-berita/${controller.data.value.data![index].foto}",
+                                      ),)),
                       ),
                     ),
                   );

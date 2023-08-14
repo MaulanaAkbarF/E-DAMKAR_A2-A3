@@ -176,4 +176,5 @@ class ArtikleController extends GetxController {
       debugPrint('terdapat kesalah');
     }
   }
+  
 }

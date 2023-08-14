@@ -76,15 +76,16 @@ class LaporanAnonymController extends GetxController {
         kodepos!;
     await APIClient().postMulti('addImage', rxImage, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': "1",
-      'kategori_laporan_id': '5',
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
+      'kategori_laporan_id': 5,
+      'user_listdata_id': 1,
       'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
-      'latitude': latitude.toString(),
-      'longitude': longitude.toString(),
-      'urgensi': namaBencanaCon.text
+      'nama_hewan': '-',
+      'waktu_pelaporan': DateTime.now().hour,
+      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+      'urgensi': namaBencanaCon.text,
+      'alamat': alamat,
+      'latitude': longitude,
+      'bukti_foto_laporan_pengguna': title,
     });
     _kirimNotifikasi();
     if (result2 != null) {

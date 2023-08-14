@@ -199,7 +199,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${URLWEBAPI.baseUrl}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
+                                        "${URLWEBAPI.urlHost}/img-pelaporan/${controller.dataElement.value.imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),

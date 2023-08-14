@@ -54,7 +54,7 @@ class PelaporanController extends GetxController {
       print('Gagal mengirim data. Kode status: ${response.statusCode}');
     }
   }
-
+  
   void pushLaporan() async {
     // _kirimNotifikasi();
     showSpinner.value = true;
@@ -71,6 +71,7 @@ class PelaporanController extends GetxController {
         ', ' +
         dataArgs["kodepos"];
 
+    
     //eksekuis post kirim photo
     await APIClient().postMulti('addImage', image, imagePath, title);
     var result = await APIClient().postData('addPelaporan', {
@@ -80,7 +81,7 @@ class PelaporanController extends GetxController {
       'nama_hewan': '-',
       'waktu_pelaporan': '12:00',
       'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
-      'urgensi': namaBencanaCon.text,
+      'urgensi': dataArgs['idKategori'] != 1 ? namaBencanaCon.text : "kebakaran",
       'alamat': alamat,
       'latitude': dataArgs["latitude"].toString(),
       'longitude': dataArgs["longitude"].toString(),

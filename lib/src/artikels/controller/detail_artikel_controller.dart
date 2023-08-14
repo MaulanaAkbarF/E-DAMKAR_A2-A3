@@ -12,6 +12,16 @@ class DetailArtikelController extends GetxController {
   late int _idArt;
   late String _jenisArt;
   RxList<SemuaArtikelModel>? data = <SemuaArtikelModel>[].obs;
+  SemuaArtikelModel artikel = new SemuaArtikelModel(
+      jenisArtikel: "",
+      id: 0,
+      adminDamkar: '',
+      foto: '',
+      judul: '',
+      deskripsi: '',
+      tanggal: '');
+
+  RxBool isDone = false.obs;
 
   // void getId_Berita(String id) async {
   //   postDetailBerita(id);
@@ -48,6 +58,7 @@ class DetailArtikelController extends GetxController {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);
       // });
+      isDone.value = true;
     } else {
       print("Data Kosong");
     }
@@ -61,6 +72,7 @@ class DetailArtikelController extends GetxController {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);
       // });
+      isDone.value = true;
     } else {
       print("Data Kosong");
     }
@@ -74,6 +86,7 @@ class DetailArtikelController extends GetxController {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);
       // });
+      isDone.value = true;
     } else {
       print("Data Kosong");
     }
