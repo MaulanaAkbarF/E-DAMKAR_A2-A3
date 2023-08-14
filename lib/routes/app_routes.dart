@@ -32,8 +32,9 @@ abstract class Routes {
   //Riwayat
   static const riwayat = '/riwayat';
   static const dtRiwayat = '/detailRiwayat';
+  static const mapsTrack = '/mapsTracking';
   //artikel
-
+  static const artikleDt = '/detailArtikle';
   // profile
   static const profile = '/profile';
   static const ubProf = '/ubahProfile';

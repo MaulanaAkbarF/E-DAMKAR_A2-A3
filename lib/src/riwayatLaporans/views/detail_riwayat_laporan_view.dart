@@ -1,11 +1,10 @@
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/src/riwayatLaporans/controller/detail_riwayat_laporan_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../config/api_client.dart';
 
 class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   DetailRiwayatLengkapView({super.key});
@@ -14,145 +13,145 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-          centerTitle: true,
-          title: const Text(
-            "Detail Riwayat",
-            style: TextStyle(
-              fontSize: 20,
-              fontFamily: "font/inter_bold.ttf",
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+      appBar: AppBar(
+        backgroundColor: white,
+        foregroundColor: Colors.black87,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text(
+          "Detail Riwayat",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "font/inter_bold.ttf",
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
-        body: isDetailNull()
-        // Column(
-        //   children: <Widget>[
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        //       child: Column(
-        //         children: <Widget>[
-        //           Text(
-        //             "judul",
-        //             textAlign: TextAlign.justify,
-        //             maxLines: 3,
-        //             style: const TextStyle(
-        //               color: Color.fromARGB(255, 51, 51, 51),
-        //               fontSize: 20,
-        //               fontWeight: FontWeight.w600,
-        //             ),
-        //           ),
-        //           const SizedBox(
-        //             height: 20,
-        //           ),
-        //           Container(
-        //               width: 500,
-        //               height: 200,
-        //               // color: Colors.amberAccent,
-        //               decoration: BoxDecoration(
-        //                 borderRadius: BorderRadius.circular(8.0),
-        //                 image: const DecorationImage(
-        //                   image: NetworkImage(
-        //                       'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80'),
-        //                 ),
-        //               )),
-        //           const SizedBox(
-        //             height: 20,
-        //           ),
-        //           Container(
-        //             padding: const EdgeInsets.all(10),
-        //             width: 500,
-        //             decoration: BoxDecoration(
-        //                 borderRadius: BorderRadius.circular(8),
-        //                 border: Border.all(
-        //                     color: const Color.fromARGB(255, 156, 163, 175),
-        //                     width: 1)),
-        //             child: Column(
-        //               children: [
-        //                 Row(
-        //                   children: [
-        //                     Icon(Icons.location_city_outlined),
-        //                     Padding(padding: EdgeInsets.only(right: 10)),
-        //                     Text("alamat")
-        //                   ],
-        //                 ),
-        //                 SizedBox(
-        //                   height: 13,
-        //                 ),
-        //                 Row(
-        //                   children: [
-        //                     Icon(Icons.date_range_outlined),
-        //                     Padding(padding: EdgeInsets.only(right: 10)),
-        //                     Text(""),
-        //                   ],
-        //                 ),
-        //                 SizedBox(
-        //                   height: 13,
-        //                 ),
-        //                 Row(
-        //                   children: [
-        //                     Text("Deskripsi : "),
-        //                   ],
-        //                 ),
-        //                 SizedBox(
-        //                   height: 5,
-        //                 ),
-        //                 Text(
-        //                   "",
-        //                   maxLines: 10,
-        //                   overflow: TextOverflow.ellipsis,
-        //                   style: TextStyle(),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //     Align(
-        //         alignment: Alignment.bottomCenter,
-        //         child: Column(
-        //           children: [
-        //             Text(
-        //               "Status :",
-        //               style: TextStyle(
-        //                   color: Colors.black,
-        //                   fontSize: 14,
-        //                   fontWeight: FontWeight.w500),
-        //             ),
-        //             SizedBox(
-        //               height: 10,
-        //             ),
-        //             Container(
-        //               padding: EdgeInsets.symmetric(
-        //                 vertical: 8,
-        //                 horizontal: 157,
-        //               ),
-        //               decoration: BoxDecoration(
-        //                 borderRadius: BorderRadius.circular(8),
-        //                 border: Border.all(
-        //                   color: Color.fromARGB(255, 250, 202, 21),
-        //                   width: 2,
-        //                 ),
-        //               ),
-        //               child: Text(
-        //                 "kondisi",
-        //                 style: TextStyle(
-        //                     color: Color.fromARGB(255, 55, 65, 81),
-        //                     fontSize: 20,
-        //                     fontWeight: FontWeight.w700),
-        //               ),
-        //             )
-        //           ],
-        //         ))
-        //   ],
-        // ),
+      ),
+      body: isDetailNull(),
 
-        );
+      // Column(
+      //   children: <Widget>[
+      //     Padding(
+      //       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      //       child: Column(
+      //         children: <Widget>[
+      //           Text(
+      //             "judul",
+      //             textAlign: TextAlign.justify,
+      //             maxLines: 3,
+      //             style: const TextStyle(
+      //               color: Color.fromARGB(255, 51, 51, 51),
+      //               fontSize: 20,
+      //               fontWeight: FontWeight.w600,
+      //             ),
+      //           ),
+      //           const SizedBox(
+      //             height: 20,
+      //           ),
+      //           Container(
+      //               width: 500,
+      //               height: 200,
+      //               // color: Colors.amberAccent,
+      //               decoration: BoxDecoration(
+      //                 borderRadius: BorderRadius.circular(8.0),
+      //                 image: const DecorationImage(
+      //                   image: NetworkImage(
+      //                       'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80'),
+      //                 ),
+      //               )),
+      //           const SizedBox(
+      //             height: 20,
+      //           ),
+      //           Container(
+      //             padding: const EdgeInsets.all(10),
+      //             width: 500,
+      //             decoration: BoxDecoration(
+      //                 borderRadius: BorderRadius.circular(8),
+      //                 border: Border.all(
+      //                     color: const Color.fromARGB(255, 156, 163, 175),
+      //                     width: 1)),
+      //             child: Column(
+      //               children: [
+      //                 Row(
+      //                   children: [
+      //                     Icon(Icons.location_city_outlined),
+      //                     Padding(padding: EdgeInsets.only(right: 10)),
+      //                     Text("alamat")
+      //                   ],
+      //                 ),
+      //                 SizedBox(
+      //                   height: 13,
+      //                 ),
+      //                 Row(
+      //                   children: [
+      //                     Icon(Icons.date_range_outlined),
+      //                     Padding(padding: EdgeInsets.only(right: 10)),
+      //                     Text(""),
+      //                   ],
+      //                 ),
+      //                 SizedBox(
+      //                   height: 13,
+      //                 ),
+      //                 Row(
+      //                   children: [
+      //                     Text("Deskripsi : "),
+      //                   ],
+      //                 ),
+      //                 SizedBox(
+      //                   height: 5,
+      //                 ),
+      //                 Text(
+      //                   "",
+      //                   maxLines: 10,
+      //                   overflow: TextOverflow.ellipsis,
+      //                   style: TextStyle(),
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //     Align(
+      //         alignment: Alignment.bottomCenter,
+      //         child: Column(
+      //           children: [
+      //             Text(
+      //               "Status :",
+      //               style: TextStyle(
+      //                   color: Colors.black,
+      //                   fontSize: 14,
+      //                   fontWeight: FontWeight.w500),
+      //             ),
+      //             SizedBox(
+      //               height: 10,
+      //             ),
+      //             Container(
+      //               padding: EdgeInsets.symmetric(
+      //                 vertical: 8,
+      //                 horizontal: 157,
+      //               ),
+      //               decoration: BoxDecoration(
+      //                 borderRadius: BorderRadius.circular(8),
+      //                 border: Border.all(
+      //                   color: Color.fromARGB(255, 250, 202, 21),
+      //                   width: 2,
+      //                 ),
+      //               ),
+      //               child: Text(
+      //                 "kondisi",
+      //                 style: TextStyle(
+      //                     color: Color.fromARGB(255, 55, 65, 81),
+      //                     fontSize: 20,
+      //                     fontWeight: FontWeight.w700),
+      //               ),
+      //             )
+      //           ],
+      //         ))
+      //   ],
+      // ),
+    );
   }
 
   Widget isDetailNull() {
@@ -164,7 +163,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
               style: StyleTxt.m(size: 18),
             ),
           )
-        : controller.dataElement.value == null
+        : controller.dataElement.value.idLaporan == 0
             ? Align(
                 alignment: Alignment.center,
                 child: Text("Data Laporan Kosong"),
@@ -179,8 +178,8 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Laporan : ${controller.dataElement.value![index].kategoriLaporan.toString()} - ${controller.dataElement.value![index].urgensi.toString()}",
-                              // artikelElement![index].judulBerita.toString(),
+                              "Laporan : ${controller.dataElement.value.kategoriLaporan.toString()} - ${controller.dataElement.value.urgensi.toString()}",
+                              // artikelElement.judulBerita.toString(),
                               // maxLines: 3,
                               overflow: TextOverflow.fade,
                               style: const TextStyle(
@@ -200,7 +199,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${baseUrl}storage/gambar_pelaporans/${controller.dataElement.value![index].imageUrl}.jpg",
+                                        "${URLWEBAPI.urlHost}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),
@@ -242,8 +241,8 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                                   EdgeInsets.only(right: 10)),
                                           Expanded(
                                             child: Text(
-                                              controller.dataElement
-                                                  .value![index].alamat
+                                              controller
+                                                  .dataElement.value.alamat
                                                   .toString(),
                                               maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
@@ -274,8 +273,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                               padding:
                                                   EdgeInsets.only(right: 10)),
                                           Text(
-                                            controller.dataElement.value![index]
-                                                .tanggal
+                                            controller.dataElement.value.tanggal
                                                 .toString(),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
@@ -298,8 +296,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                         height: 10,
                                       ),
                                       Text(
-                                        controller
-                                            .dataElement.value![index].deskripsi
+                                        controller.dataElement.value.deskripsi
                                             .toString(),
                                         style: TextStyle(
                                           height: 1.5,
@@ -309,6 +306,21 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     ],
                                   ),
                                 )),
+                            controller.dataElement.value.statusRiwayat ==
+                                    "Ditangani"
+                                ? Align(
+                                    alignment: Alignment.center,
+                                    child: ElevatedButton(
+                                        onPressed: () => controller.goToMaps(),
+                                        child: Container(
+                                            width: paddingHorozontal1 * 16,
+                                            child: Text(
+                                              "Lacak Posisi Petugas",
+                                              textAlign: TextAlign.center,
+                                            ))),
+                                  )
+                                : Container(),
+
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Column(
@@ -336,15 +348,12 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
                                         color: _getBorderColor(controller
-                                            .dataElement
-                                            .value![index]
-                                            .statusRiwayat),
+                                            .dataElement.value.statusRiwayat),
                                         width: 2,
                                       ),
                                     ),
                                     child: Text(
-                                      controller.dataElement.value![index]
-                                          .statusRiwayat
+                                      controller.dataElement.value.statusRiwayat
                                           .toString(),
                                       style: TextStyle(
                                           color:
@@ -355,7 +364,10 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   )
                                 ],
                               ),
-                            )
+                            ),
+                            // ElevatedButton(
+                            //     onPressed: controller.goToMaps(),
+                            //     child: Text("lacak Petugas Damakar"))
                           ]));
                 },
               ));

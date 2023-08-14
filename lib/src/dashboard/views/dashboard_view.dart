@@ -17,8 +17,8 @@ class DashboardPage extends GetView<DashboardController> {
           children: [
             const HomePageView(),
             const LaporanPage(),
-            // RiwayatLaporanView(),
-            ArtikelView(),
+            RiwayatLaporanView(),
+            // ArtikelView(),
           ],
         )),
         bottomNavigationBar: BottomNavigationBar(

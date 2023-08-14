@@ -1,5 +1,6 @@
 import 'package:edamkar_1/config/api_client.dart';
-import 'package:edamkar_1/models/DataPelaporan.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/src/riwayatLaporans/models/detail_pelaporan.dart';
 import 'package:get/get.dart';
 
 class DetailRiwayatLaporanController extends GetxController {
@@ -9,7 +10,16 @@ class DetailRiwayatLaporanController extends GetxController {
   RxBool isDone = false.obs;
   RxBool isLoading = false.obs;
   RxString loadingTxt = "Loading".obs;
-  Rx<List<Datum>?> dataElement = Rx<List<Datum>?>(null);
+  Rx<Data> dataElement = Data(
+          idLaporan: 0,
+          statusRiwayat: '',
+          kategoriLaporan: '',
+          tanggal: '',
+          deskripsi: '',
+          imageUrl: '',
+          alamat: '',
+          urgensi: '')
+      .obs;
 
   @override
   void onInit() {
@@ -40,17 +50,19 @@ class DetailRiwayatLaporanController extends GetxController {
     isDone.value = true;
     isLoading.value = false;
     if (result != null) {
-      var detailRiwayat = dataPelaporanFromJson(result);
-      if (detailRiwayat.data.isNotEmpty) {
-        // setState(() {
-        dataElement.value = detailRiwayat.data;
-        // });
+      var detailRiwayat = detailLaporanFromJson(result);
+      // if (detailRiwayat.data) {
+      // setState(() {
+      dataElement.value = detailRiwayat.data;
+      // });
 
-        update();
-      }
+      update();
+      // }
     } else {
       isDone.value = true;
       isLoading.value = false;
     }
   }
+
+  goToMaps() => Get.toNamed(Routes.mapsTrack);
 }

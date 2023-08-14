@@ -67,7 +67,7 @@ final List<Map> teksStyleSignIn = [
 
 class SignInPage extends GetView<LoginController> {
   const SignInPage({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

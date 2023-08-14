@@ -36,10 +36,10 @@ class RiwayatLaporanController extends GetxController
     tabController = TabController(length: 6, vsync: this, initialIndex: 1);
     // tabController = TabController(length: 4, vsync: this);
     getUserIdRiwayat();
-    getIdStatus();
-    getIdStatusProses();
-    getIdStatusSelesai();
-    getIdStatusDitolak();
+    // getIdStatus();
+    // getIdStatusProses();
+    // getIdStatusSelesai();
+    // getIdStatusDitolak();
 
     debounce(
       textSearch,

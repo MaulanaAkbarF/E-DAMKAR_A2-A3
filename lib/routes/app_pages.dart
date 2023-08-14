@@ -1,3 +1,5 @@
+import 'package:edamkar_1/src/artikels/bindings/detail_artikel_binding.dart';
+import 'package:edamkar_1/src/artikels/views/detail_artikel_view.dart';
 import 'package:edamkar_1/src/dashboard/bindings/dashboard_binding.dart';
 import 'package:edamkar_1/src/dashboard/views/dashboard_view.dart';
 import 'package:edamkar_1/src/emergency/bindings/emergency_page_binding.dart';
@@ -31,7 +33,10 @@ import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
 import 'package:edamkar_1/src/register/view/register_view.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:edamkar_1/src/riwayatLaporans/bindings/detail_riwayat_laporan_binding.dart';
+import 'package:edamkar_1/src/riwayatLaporans/bindings/track_binding.dart';
 import 'package:edamkar_1/src/riwayatLaporans/views/detail_riwayat_laporan_view.dart';
+import 'package:edamkar_1/src/resetpass/bindings/reset_pass_binding.dart';
+import 'package:edamkar_1/src/riwayatLaporans/views/track_damkar_view.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -100,9 +105,9 @@ class AppPages {
       binding: VerificationSignUpBinding(),
     ),
     GetPage(
-      name: Routes.resetPass,
-      page: () => const ResetPassView(),
-    ),
+        name: Routes.resetPass,
+        page: () => const ResetPassView(),
+        binding: ResetPassBinding()),
 
     //Laporan
     GetPage(
@@ -157,5 +162,14 @@ class AppPages {
         name: Routes.ubPsProf,
         page: () => const UbahSandiView(),
         binding: UbahSandiBinding()),
+
+    GetPage(
+        name: Routes.artikleDt,
+        page: () => DetailArtikelView(),
+        binding: DetailArtikelBinding()),
+    GetPage(
+        name: Routes.mapsTrack,
+        page: () => TrackDamkarView(),
+        binding: TrackDamkarBinding()),
   ];
 }

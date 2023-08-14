@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -13,9 +13,9 @@ class UpdateProfil {
 
   UpdateProfil({this.kode, this.status});
 
-   static Future<UpdateProfil> ubahProfil(
-    String id, String namaLengkap, String noHp) async {
-    Uri url = Uri.parse("${apiUrl}user");
+  static Future<UpdateProfil> ubahProfil(
+      String id, String namaLengkap, String noHp) async {
+    Uri url = Uri.parse("${URLWEBAPI.urlHost}user");
     var HasilRespon = await http
         .post(url, body: {"id": id, "namaLengkap": namaLengkap, "noHp": noHp});
     var data = json.decode(HasilRespon.body);
@@ -28,8 +28,8 @@ class UpdateProfil {
       String? nama,
       String? nomorHp,
       File? file}) async {
-    var request =
-        http.MultipartRequest('POST', Uri.parse("${apiUrl}user/foto"));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse("${URLWEBAPI.urlHost}user/foto"));
     // tambahkan text sebagai field pada request
     request.fields['foto_user'] = delPic.toString();
     request.fields['namaLengkap'] = nama.toString();

@@ -12,7 +12,7 @@ class LoginController extends GetxController {
   var isLoading = false.obs;
   var passwordVisible = true.obs;
 
-  String title = 'pesan';
+  String title = 'Pesan';
 
   @override
   void onClose() {

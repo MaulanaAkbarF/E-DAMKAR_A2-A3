@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
+// import 'package:edamkar_1/src/camera/camera.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class PelaporanController extends GetxController {
   var imagePath;
   RxBool showSpinner = false.obs;
   final ImagePicker _picker = ImagePicker();
+  var img;
 
   @override
   void onInit() {
@@ -72,15 +74,17 @@ class PelaporanController extends GetxController {
     //eksekuis post kirim photo
     await APIClient().postMulti('addImage', image, imagePath, title);
     var result = await APIClient().postData('addPelaporan', {
-      'user_listdata_id': iduser.toString(),
       'kategori_laporan_id': dataArgs['idKategori'].toString(),
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
+      'user_listdata_id': iduser.toString(),
       'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
+      'nama_hewan': '-',
+      'waktu_pelaporan': '12:00',
+      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+      'urgensi': namaBencanaCon.text,
+      'alamat': alamat,
       'latitude': dataArgs["latitude"].toString(),
       'longitude': dataArgs["longitude"].toString(),
-      'urgensi': namaBencanaCon.text
+      'bukti_foto_laporan_pengguna': title,
     });
     // _kirimNotifikasi();
     if (result != null) {
@@ -120,6 +124,11 @@ class PelaporanController extends GetxController {
       print('no image selected');
     }
   }
+
+  // void goToCamera() async {
+  //   img = await Get.to(const CameraAdmin());
+  //   update();
+  // }
 
   void pushPelaporan() {
     if (formKey.currentState?.validate() == true) {

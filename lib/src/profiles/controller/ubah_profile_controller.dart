@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -100,7 +100,7 @@ class EditProfileController extends GetxController {
         return AssetImage("semuaAset/gambar/user1.png") as ImageProvider;
       } else {
         return NetworkImage(
-                "${baseUrl}storage/foto_user/${urlGambar.replaceAll("'", "")}")
+                "${URLWEBAPI.urlHost}storage/foto_user/${urlGambar.replaceAll("'", "")}")
             as ImageProvider;
       }
     } else {

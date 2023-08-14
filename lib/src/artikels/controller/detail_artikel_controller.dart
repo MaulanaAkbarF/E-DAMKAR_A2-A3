@@ -1,17 +1,17 @@
 import 'package:edamkar_1/config/api_client.dart';
-import 'package:edamkar_1/models/ArtikelModel.dart';
+// import 'package:edamkar_1/models/ArtikelModel.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
 import 'package:get/get.dart';
 
 class DetailArtikelController extends GetxController {
   final dataArg = Get.arguments;
 
-  final idArtikel = '';
-  final jenisArtikel = '';
+  // final idArtikel = '';
+  // final jenisArtikel = '';
 
   late int _idArt;
   late String _jenisArt;
-  List<ArtikelDatum>? artikelElement = [];
+  RxList<SemuaArtikelModel>? data = <SemuaArtikelModel>[].obs;
 
   // void getId_Berita(String id) async {
   //   postDetailBerita(id);
@@ -24,8 +24,8 @@ class DetailArtikelController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    // _jenisArt = widget.jenisArtikel;
-    // _idArt = widget.idArtikel;
+    _jenisArt = dataArg["jenisArtikel"];
+    _idArt = dataArg["idArtikel"];
 
     if (_jenisArt == "Berita") {
       postDetailBerita(_idArt);
@@ -40,14 +40,13 @@ class DetailArtikelController extends GetxController {
     // print("id berita: " + _idArt.toString());
   }
 
-  var data;
   postDetailBerita(int id) async {
     var result = await APIClient().getData('getDetailBerita/' + id.toString());
 
     print("id berita" + id.toString());
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      data?.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("Data Kosong");
@@ -60,7 +59,7 @@ class DetailArtikelController extends GetxController {
     print("id berita" + id.toString());
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      data?.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("Data Kosong");
@@ -73,7 +72,7 @@ class DetailArtikelController extends GetxController {
     print("id berita" + id.toString());
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      data?.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("Data Kosong");
