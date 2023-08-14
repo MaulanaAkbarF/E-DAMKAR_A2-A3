@@ -1,7 +1,8 @@
 import 'package:edamkar_1/config/api_client.dart';
-import 'package:edamkar_1/models/DataPelaporan.dart';
+import 'package:edamkar_1/src/riwayatLaporans/models/DataPelaporan.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
+import 'package:edamkar_1/src/riwayatLaporans/models/rirayat_laporan_model.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +14,18 @@ class RiwayatLaporanController extends GetxController
   late TabController tabController;
   // TextEditingController controllerSearch = TextEditingController();
   // TabController tabController;
-
+  var idUser = 0;
   RxList<Datum>? dataElement = <Datum>[].obs;
-  RxList<Datum>? dataProses = <Datum>[].obs;
-  RxList<Datum>? dataMenunggu = <Datum>[].obs;
-  RxList<Datum>? dataSelesai = <Datum>[].obs;
-  RxList<Datum>? dataDitolak = <Datum>[].obs;
+  Rx<RiwayatLaporan>? dataProses =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
+  Rx<RiwayatLaporan>? dataMenunggu =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
+  Rx<RiwayatLaporan>? dataDitangani =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
+  Rx<RiwayatLaporan>? dataSelesai =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
+  Rx<RiwayatLaporan>? dataDitolak =
+      RiwayatLaporan(kondisi: false, message: "empty").obs;
   RxList<Datum>? searchData = <Datum>[].obs;
 
   // var col1 = orange1.obs;
@@ -30,176 +37,111 @@ class RiwayatLaporanController extends GetxController
   int selectedIndex = 1;
 
   @override
-  void onInit() {
-    // TODO: implement onInit
+  void onInit() async {
     super.onInit();
-    tabController = TabController(length: 6, vsync: this, initialIndex: 1);
-    // tabController = TabController(length: 4, vsync: this);
-    getUserIdRiwayat();
-    // getIdStatus();
-    // getIdStatusProses();
-    // getIdStatusSelesai();
-    // getIdStatusDitolak();
+    tabController = TabController(length: 7, vsync: this, initialIndex: 1);
+    idUser = await DataUser().getUserId().then((value) => idUser = value);
 
-    debounce(
-      textSearch,
-      (_) => getUserIdRiwayatforSearch(),
-      time: Duration(seconds: 1),
-    );
+    getDataRiwayat();
+    getRiwayatMenunggu();
+    getRiwayatProses();
+    getRiwayatDitangani();
+    getRiwayatSelesai();
+    getRiwayatDitolak();
+    // debounce(
+    //   textSearch,
+    //   (_) => getUserIdRiwayatforSearch(),
+    //   time: Duration(seconds: 1),
+    // );
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
     super.onClose();
-
   }
 
-  void getUserIdRiwayat() async {
-    var dataId = DataUser().getUserId();
-    dataId.then((value) {
-      // setState(() {
-      print(value.toString());
-      PostDataRiwayat(value.toString());
-      // });
-    });
+  setColorStatus(String status) {
+    if (status == "Menunggu") {
+      return Color.fromARGB(255, 250, 202, 21);
+    }
+    if (status == "Ditangani") {
+      return Color.fromARGB(255, 63, 131, 248);
+    }
+    if (status == "Selesai") {
+      return Color.fromARGB(255, 17, 178, 124);
+    }
+    if (status == "Ditolak") {
+      return Color.fromARGB(255, 224, 36, 36);
+    }
+    if (status == "Emergency") {
+      return Colors.black26; // default color
+    }
+    return Colors.white;
   }
 
-  void getUserIdRiwayatforSearch() async {
-    var dataId = DataUser().getUserId();
-    dataId.then((value) {
-      // setState(() {
-      // print(value.toString());
-      PostDataSearch(value, textSearch.value);
-      // });
-    });
-  }
+  // void getUserIdRiwayatforSearch() async {
+  //   var dataId = DataUser().getUserId();
+  //   dataId.then((value) {
+  //     PostDataSearch(value, textSearch.value);
+  //     // });
+  //   });
+  // }
 
-  // void getMenuExec(int id) {
-  //   switch (id) {
-  //     case 1:
-  //       col1.value = orange1;
-  //       col2.value = white;
-  //       col3.value = white;
-  //       col4.value = white;
-  //       getIdStatus();
-  //       break;
-  //     case 2:
-  //       col2.value = orange1;
-  //       col1.value = white;
-  //       col3.value = white;
-  //       col4.value = white;
-  //       getIdStatusProses();
-  //       break;
-  //     case 3:
-  //       col3.value = orange1;
-  //       col1.value = white;
-  //       col2.value = white;
-  //       col4.value = white;
-  //       getIdStatusSelesai();
-  //       break;
-  //     case 4:
-  //       col4.value = orange1;
-  //       col1.value = white;
-  //       col2.value = white;
-  //       col3.value = white;
-  //       getIdStatusDitolak();
-  //       break;
+  // void getIdStatusEmergency() async {
+  //   var dataStatus = DataUser().getUserId();
+  //   dataStatus.then((value) {
+  //     // setState(() {
+  //     getRiwayatEmergency(value.toString());
+  //     // });
+  //   });
+  // }
+
+  // List<RiwayatLaporan>? _foundData = [];
+
+  // List<RiwayatLaporan>? searchKosong = [];
+
+  // PostDataSearch(int id, String kata) async {
+  //   // search.clear();
+  //   var result =
+  //       await APIClient().getData('searchLapp/' + id.toString() + "/" + kata);
+  //   if (result != null) {
+  //     var dataSearch = dataPelaporanFromJson(result);
+  //     if (dataSearch.data.isNotEmpty) {
+  //       // setState(() {
+  //       searchData?.value = dataSearch.data;
+  //       // });
+  //     } else {
+  //       // setState(() {
+  //       // searchData = searchKosong;
+
+  //       print("masukan salah");
+  //       // });
+  //     }
+  //   } else {
+  //     print("masukan salah");
   //   }
   // }
 
-  void getIdStatus() async {
-    var dataStatus = DataUser().getUserId();
-    dataStatus.then((value) {
-      // setState(() {
-      PostRiwayatMenunggu(value.toString());
-      // });
-    });
-  }
-
-  void getIdStatusProses() async {
-    var dataStatus = DataUser().getUserId();
-    dataStatus.then((value) {
-      // setState(() {
-      PostRiwayatProses(value.toString());
-      // });
-    });
-  }
-
-  void getIdStatusSelesai() async {
-    var dataStatus = DataUser().getUserId();
-    dataStatus.then((value) {
-      // setState(() {
-      PostRiwayatSelesai(value.toString());
-      // });
-    });
-  }
-
-  void getIdStatusDitolak() async {
-    var dataStatus = DataUser().getUserId();
-    dataStatus.then((value) {
-      // setState(() {
-      PostRiwayatDitolak(value.toString());
-      // });
-    });
-  }
-
-  void getIdStatusEmergency() async {
-    var dataStatus = DataUser().getUserId();
-    dataStatus.then((value) {
-      // setState(() {
-      PostRiwayatEmergency(value.toString());
-      // });
-    });
-  }
-
-  // List<Datum>? _foundData = [];
-
-  // List<Datum>? searchKosong = [];
-
-  PostDataSearch(int id, String kata) async {
-    // search.clear();
-    var result =
-        await APIClient().getData('searchLapp/' + id.toString() + "/" + kata);
+  getRiwayatMenunggu() async {
+    var result = await APIClient().getData('filterLapMenunggu/$idUser');
     if (result != null) {
-      var dataSearch = dataPelaporanFromJson(result);
-      if (dataSearch.data.isNotEmpty) {
-        // setState(() {
-        searchData?.value = dataSearch.data;
-        // });
-      } else {
-        // setState(() {
-        // searchData = searchKosong;
-
-        print("masukan salah");
-        // });
-      }
-    } else {
-      print("masukan salah");
-    }
-  }
-
-  PostRiwayatMenunggu(String id) async {
-    var result = await APIClient().getData('filterLapMenunggu/' + id);
-    if (result != null) {
-      var data = dataPelaporanFromJson(result);
-      if (data.data.isNotEmpty) {
-        // setState(() {
-        dataMenunggu?.value = data.data;
-        // });
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
+        dataMenunggu?.value = data;
+        print(data);
       }
     } else {
       print("Status Menunggu kosong");
     }
   }
 
-  PostRiwayatProses(String id) async {
-    var result = await APIClient().getData('filterLapProses/' + id);
+  getRiwayatProses() async {
+    var result = await APIClient().getData('filterLapProses/$idUser');
     if (result != null) {
-      var data = dataPelaporanFromJson(result);
-      if (data.data.isNotEmpty) {
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
         // setState(() {
-        dataProses?.value = data.data;
+        dataProses?.value = data;
         // });
       }
     } else {
@@ -207,13 +149,27 @@ class RiwayatLaporanController extends GetxController
     }
   }
 
-  PostRiwayatSelesai(String id) async {
-    var result = await APIClient().getData('filterLapSelesai/' + id);
+  getRiwayatDitangani() async {
+    var result = await APIClient().getData('filterLapDitangani/$idUser');
     if (result != null) {
-      var data = dataPelaporanFromJson(result);
-      if (data.data.isNotEmpty) {
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
         // setState(() {
-        dataSelesai?.value = data.data;
+        dataDitangani?.value = data;
+        // });
+      }
+    } else {
+      print("Status Proses kosong");
+    }
+  }
+
+  getRiwayatSelesai() async {
+    var result = await APIClient().getData('filterLapSelesai/$idUser');
+    if (result != null) {
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
+        // setState(() {
+        dataSelesai?.value = data;
         // });
       }
     } else {
@@ -221,33 +177,31 @@ class RiwayatLaporanController extends GetxController
     }
   }
 
-  PostRiwayatDitolak(String id) async {
-    var result = await APIClient().getData('filterLapDitolak/' + id);
+  getRiwayatDitolak() async {
+    var result = await APIClient().getData('filterLapDitolak/$idUser');
     if (result != null) {
-      var data = dataPelaporanFromJson(result);
-      if (data.data.isNotEmpty) {
-        // setState(() {
-        dataDitolak?.value = data.data;
-        // });
+      var data = riwayatLaporanFromJson(result);
+      if (data.kondisi) {
+        dataDitolak?.value = data;
       }
     } else {
       print("Status Ditolak kosong");
     }
   }
 
-  PostRiwayatEmergency(String id) async {
-    var result = await APIClient().getData('filterLapEmergency/' + id);
-    if (result != null) {
-      var dataEmer = dataPelaporanFromJson(result);
-      if (dataEmer.data.isNotEmpty) {
-        // setState(() {
-        dataElement?.value = dataEmer.data;
-        // });
-      }
-    } else {
-      print("Status Ditolak kosong");
-    }
-  }
+  // getRiwayatEmergency(String id) async {
+  //   var result = await APIClient().getData('filterLapEmergency/$id');
+  //   if (result != null) {
+  //     var dataEmer = dataPelaporanFromJson(result);
+  //     if (dataEmer.data.isNotEmpty) {
+  //       // setState(() {
+  //       dataElement?.value = dataEmer.data;
+  //       // });
+  //     }
+  //   } else {
+  //     print("Status Ditolak kosong");
+  //   }
+  // }
 
   // PostDetailRiwayat() async {
   //   var result = await APIClient().getData('getPelaporan/' + '11');
@@ -269,18 +223,14 @@ class RiwayatLaporanController extends GetxController
   //   }
   // }
 
-  PostDataRiwayat(String id) async {
+  getDataRiwayat() async {
     dataElement!.clear();
-    var result = await APIClient().getData('getPelaporan/' + id);
-
-    print("asda0" + id);
+    var result = await APIClient().getData('getPelaporan/$idUser');
 
     if (result != null) {
       var dataRiwayat = dataPelaporanFromJson(result);
       if (dataRiwayat.data.isNotEmpty) {
-        // setState(() {
         dataElement?.value = dataRiwayat.data;
-        // });
       }
     } else {
       print("data kosong");

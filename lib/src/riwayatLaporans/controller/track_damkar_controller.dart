@@ -15,8 +15,6 @@ class TrackDamkarController extends GetxController {
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
   var channel;
   RxBool isWsDone = false.obs;
-  // List<LatLng> polyPoints = [];
-  final Set<Polyline> polylines = {};
   Set<Marker> marker = Set<Marker>().obs;
 
   @override
@@ -36,7 +34,8 @@ class TrackDamkarController extends GetxController {
     wsChannel = WebSocketChannel.connect(url);
     listen(wsChannel);
     onSubscribe(wsChannel);
-    // onRouteReq(wsChannel);
+    onRouteReq(wsChannel);
+    onPositionReq(wsChannel);
     isWsDone.value = true;
   }
 
@@ -64,8 +63,13 @@ class TrackDamkarController extends GetxController {
   }
 
   void onRouteReq(WebSocketChannel ws) {
-    const subs = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
-    ws.sink.add(jsonEncode(subs));
+    const req = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
+    ws.sink.add(jsonEncode(req));
+  }
+
+  void onPositionReq(WebSocketChannel ws) {
+    const req = {"command": "Request", "channel": "RLTrack", "type": "RQULoc"};
+    ws.sink.add(jsonEncode(req));
   }
 
   void onMapCreated(GoogleMapController gm) {
@@ -104,11 +108,16 @@ class TrackDamkarController extends GetxController {
         .asUint8List();
   }
 
-  setPolyLines(polyPoint) {
+  final List<LatLng> polyPoints = [];
+  final Set<Polyline> polylines = {};
+  setPolyLines(line) {
+    for (int i = 0; i < line.length; i++) {
+      polyPoints.add(LatLng(line[i][0], line[i][1]));
+    }
     Polyline polyline = Polyline(
       polylineId: PolylineId("polyline"),
       color: Colors.lightBlue,
-      points: polyPoint,
+      points: polyPoints,
     );
     polylines.add(polyline);
     update();

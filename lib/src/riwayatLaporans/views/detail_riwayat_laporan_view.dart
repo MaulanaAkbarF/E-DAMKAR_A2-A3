@@ -203,7 +203,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                       ),
                                       fit: BoxFit.cover)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -213,7 +213,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         color: Colors.white, width: 0)),
-                                child:  Column(
+                                child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -295,78 +295,86 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                         height: 10,
                                       ),
                                       Text(
-                                        controller.dataElement.value.deskripsi
-                                            .toString(),
-                                        style: TextStyle(
-                                          height: 1.5,
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            controller.dataElement.value.statusRiwayat ==
-                                    "Ditangani"
-                                ? Align(
-                                    alignment: Alignment.center,
-                                    child: ElevatedButton(
-                                        onPressed: () => controller.goToMaps(),
-                                        child: Container(
-                                            width: paddingHorozontal1 * 16,
-                                            child: Text(
-                                              "Lacak Posisi Petugas",
-                                              textAlign: TextAlign.center,
-                                            ))),
-                                  )
-                                : Container(),
+                                          controller.dataElement.value.deskripsi
+                                              .toString(),
+                                          style: TextStyle(
+                                            height: 1.5,
+                                          )),
 
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: paddingVertical1)),
-                                  Text(
-                                    "Status :",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: paddingVertical1,
-                                      horizontal: paddingHorozontal5,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: _getBorderColor(controller
-                                            .dataElement.value.statusRiwayat),
-                                        width: 2,
+                                      controller.dataElement.value
+                                                  .statusRiwayat ==
+                                              "Ditangani"
+                                          ? Align(
+                                              alignment: Alignment.center,
+                                              child: ElevatedButton(
+                                                  onPressed: () =>
+                                                      controller.goToMaps(),
+                                                  child: Container(
+                                                      width:
+                                                          paddingHorozontal1 *
+                                                              16,
+                                                      child: Text(
+                                                        "Lacak Posisi Petugas",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ))),
+                                            )
+                                          : Container(),
+
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        paddingVertical1)),
+                                            Text(
+                                              "Status :",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: paddingVertical1,
+                                                horizontal: paddingHorozontal5,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                  color: _getBorderColor(
+                                                      controller.dataElement
+                                                          .value.statusRiwayat),
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                controller.dataElement.value
+                                                    .statusRiwayat
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 55, 65, 81),
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    child: Text(
-                                      controller.dataElement.value.statusRiwayat
-                                          .toString(),
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 55, 65, 81),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            // ElevatedButton(
-                            //     onPressed: controller.goToMaps(),
-                            //     child: Text("lacak Petugas Damakar"))
+                                      // ElevatedButton(
+                                      //     onPressed: controller.goToMaps(),
+                                      //     child: Text("lacak Petugas Damakar"))
+                                    ]))
                           ]));
                 },
               ));

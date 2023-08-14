@@ -13,8 +13,10 @@ abstract class URLWEBAPI {
   static const appKey = 'EDKNGKServer';
   static const fullAppKey = '?appKey=$appKey';
   //url
+
   static const purl = protocolHttp + host + portApi + type + '/';
   static const baseUrl = protocolHttp + host + portApi + '/';
   static const apiUrl = '$urlHost$type/';
+
   static const wsUrl = protocolWs + host + portWs;
 }
