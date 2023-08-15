@@ -117,16 +117,16 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
                   padding: EdgeInsets.only(left: 16, right: 16, top: 20),
-                  child: Obx(() => Text(
-                        controller.textSearch.value,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 55, 65, 81),
-                            fontFamily: "font/inter_bold.ttf",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      )),
+                  child: Text(
+                    "Riwayat Pelaporan",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 55, 65, 81),
+                        fontFamily: "font/inter_bold.ttf",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
               SizedBox(
