@@ -4,18 +4,17 @@ import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 // import 'package:edamkar_1/src/camera/camera.dart';
 import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 class PelaporanController extends GetxController {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
-  late SingleValueDropDownController urgenCtr;
   final formKey = GlobalKey<FormState>();
   var iduser;
   var namaUser = '';
@@ -31,7 +30,6 @@ class PelaporanController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    urgenCtr = SingleValueDropDownController();
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
     DataUser().getUserId().then((value) => iduser = value);
     DataUser().getNama().then((value) => namaUser = value);
@@ -162,5 +160,150 @@ class PelaporanController extends GetxController {
     if (formKey.currentState?.validate() == true) {
       pushLaporan();
     }
+  }
+
+  // List<DropdownMenuItem<String>> listhewanBuas = <String>[
+  //   'Ular',
+  //   'Biawak',
+  //   'Monyet',
+  //   'Sapi',
+  //   'kerbau'
+  // ].map((String value) {
+  //   return DropdownMenuItem<String>(
+  //     value: value,
+  //     child: Text(value),
+  //   );
+  // }).toList();
+  // List<DropdownMenuItem<String>> listBencanaAlam = <String>[
+  //   'Gempa',
+  //   'Banjir',
+  //   'Longsor',
+  // ].map((String value) {
+  //   return DropdownMenuItem<String>(
+  //     value: value,
+  //     child: Text(value),
+  //   );
+  // }).toList();
+  // List<DropdownMenuItem<String>> listPenyelamatan = <String>[
+  //   'evakusi',
+  //   'penyelamatan orang',
+  // ].map((String value) {
+  //   return DropdownMenuItem<String>(
+  //     value: value,
+  //     child: Text(value),
+  //   );
+  // }).toList();
+
+  void onUrgenChange(String? newValue) => namaBencanaCon.text = newValue!;
+
+  showDialogListBencanaAlam(context) {
+    final List<PopupMenuEntry> menuList = [
+      const PopupMenuItem(
+        value: 0,
+        child: Text("Gempa"),
+      ),
+      const PopupMenuItem(
+        value: 1,
+        child: Text("Banjir"),
+      ),
+      const PopupMenuItem(
+        value: 2,
+        child: Text("Longsor"),
+      ),
+    ];
+    return PopupMenuButton(
+      constraints:
+          BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
+      offset: Offset(-90, 10),
+      itemBuilder: ((context) => menuList),
+      icon: const Icon(Icons.arrow_drop_down),
+      onSelected: (value) {
+        switch (value) {
+          case 0:
+            namaBencanaCon.text = "Gempa";
+            break;
+          case 1:
+            namaBencanaCon.text = "Banjir";
+            break;
+          case 2:
+            namaBencanaCon.text = "Longsor";
+            break;
+        }
+      },
+    );
+  }
+
+  showDialogListhewanBuas(context) {
+    final List<PopupMenuEntry> menuList = [
+      const PopupMenuItem(
+        value: 0,
+        child: Text("Ular"),
+      ),
+      const PopupMenuItem(
+        value: 1,
+        child: Text("Biawak"),
+      ),
+      const PopupMenuItem(
+        value: 2,
+        child: Text("Lebah"),
+      ),
+      const PopupMenuItem(
+        value: 3,
+        child: Text("Monyet"),
+      ),
+    ];
+    return PopupMenuButton(
+      constraints:
+          BoxConstraints.expand(width: SizeConfig.screenWidth, height: 200),
+      offset: Offset(-90, 10),
+      itemBuilder: ((context) => menuList),
+      icon: const Icon(Icons.arrow_drop_down),
+      onSelected: (value) {
+        switch (value) {
+          case 0:
+            namaBencanaCon.text = "Ular";
+            break;
+          case 1:
+            namaBencanaCon.text = "Biawak";
+            break;
+          case 3:
+            namaBencanaCon.text = "Lebah";
+            break;
+          case 4:
+            namaBencanaCon.text = "Monyet";
+            break;
+        }
+      },
+    );
+  }
+
+  showDialogListPenyelamatan(context) {
+    final List<PopupMenuEntry> menuList = [
+      const PopupMenuItem(
+        value: 0,
+        child: Text("Evakuasi"),
+      ),
+      const PopupMenuItem(
+        value: 1,
+        child: Text("Penyelamatan orang"),
+      ),
+    ];
+    return PopupMenuButton(
+      constraints:
+          BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
+      offset: Offset(-90, 10),
+      itemBuilder: ((context) => menuList),
+      icon: const Icon(Icons.arrow_drop_down),
+      onSelected: (value) {
+        switch (value) {
+          case 0:
+            namaBencanaCon.text = "Evakuasi";
+            break;
+          case 1:
+            namaBencanaCon.text = "Penyelamatan Orang";
+            break;
+        }
+      },
+    );
   }
 }

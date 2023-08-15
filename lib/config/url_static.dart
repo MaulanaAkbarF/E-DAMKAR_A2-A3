@@ -1,5 +1,6 @@
 abstract class URLWEBAPI {
   static const host = "192.168.43.21";
+  static const hostWs = '116.193.190.50';
   static const urlHost = "https://edamkar.wsjti.id";
 
   //http request
@@ -9,7 +10,7 @@ abstract class URLWEBAPI {
 
   //websocket
   static const protocolWs = 'ws://';
-  static const portWs = ':6001';
+  static const portWs = ':3000';
   static const appKey = 'EDKNGKServer';
   static const fullAppKey = '?appKey=$appKey';
   //url
@@ -18,5 +19,5 @@ abstract class URLWEBAPI {
   static const baseUrl = protocolHttp + host + portApi + '/';
   static const apiUrl = '$urlHost$type/';
 
-  static const wsUrl = protocolWs + host + portWs;
+  static const wsUrl = protocolWs + hostWs + portWs;
 }

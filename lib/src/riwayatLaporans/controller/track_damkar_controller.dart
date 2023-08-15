@@ -30,10 +30,9 @@ class TrackDamkarController extends GetxController {
   late final wsChannel;
 
   void initWs() {
-    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/rlt/lokasi${URLWEBAPI.fullAppKey}');
+    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/lokasi${URLWEBAPI.fullAppKey}');
     wsChannel = WebSocketChannel.connect(url);
     listen(wsChannel);
-    onSubscribe(wsChannel);
     onRouteReq(wsChannel);
     onPositionReq(wsChannel);
     isWsDone.value = true;
@@ -57,18 +56,13 @@ class TrackDamkarController extends GetxController {
     });
   }
 
-  void onSubscribe(WebSocketChannel ws) {
-    const subs = {"command": "Subscribe", "channel": "RLTrack"};
-    ws.sink.add(jsonEncode(subs));
-  }
-
   void onRouteReq(WebSocketChannel ws) {
-    const req = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
+    const req = {"command": "Request", "type": "RQURot"};
     ws.sink.add(jsonEncode(req));
   }
 
   void onPositionReq(WebSocketChannel ws) {
-    const req = {"command": "Request", "channel": "RLTrack", "type": "RQULoc"};
+    const req = {"command": "Request", "type": "RQULoc"};
     ws.sink.add(jsonEncode(req));
   }
 
