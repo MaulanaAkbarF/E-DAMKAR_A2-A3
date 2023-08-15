@@ -213,51 +213,51 @@ class ArtikelView extends GetView<ArtikleController> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 40,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          TextButton(
-                              style: controller.buttonStyle,
-                              onPressed: () => controller.getData,
-                              child: Text("Semua")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: controller.buttonStyle,
-                              onPressed: controller.postDataBerita,
-                              child: Text("Berita")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: controller.buttonStyle,
-                              onPressed: controller.postDataEdukasi,
-                              child: Text("Edukasi")),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          TextButton(
-                              style: controller.buttonStyle,
-                              onPressed: controller.postDataAgenda,
-                              child: Text("Agenda")),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+            //   child: Column(
+            //     children: <Widget>[
+            //       Container(
+            //         height: 40,
+            //         child: SingleChildScrollView(
+            //           scrollDirection: Axis.horizontal,
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.start,
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: <Widget>[
+            //               TextButton(
+            //                   style: controller.buttonStyle,
+            //                   onPressed: () => controller.getData,
+            //                   child: Text("Semua")),
+            //              const  SizedBox(
+            //                 width: 50,
+            //               ),
+            //               TextButton(
+            //                   style: controller.buttonStyle,
+            //                   onPressed: controller.postDataBerita,
+            //                   child: Text("Berita")),
+            //               const SizedBox(
+            //                 width: 50,
+            //               ),
+            //               TextButton(
+            //                   style: controller.buttonStyle,
+            //                   onPressed: controller.postDataEdukasi,
+            //                   child: Text("Edukasi")),
+            //              const SizedBox(
+            //                 width: 50,
+            //               ),
+            //               TextButton(
+            //                   style: controller.buttonStyle,
+            //                   onPressed: controller.postDataAgenda,
+            //                   child: Text("Agenda")),
+            //             ],
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            const SizedBox(
               height: 5,
             ),
             Container(
@@ -305,10 +305,10 @@ class ArtikelView extends GetView<ArtikleController> {
                                 height: 150,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "semuaAset/gambar/damkar.png"),
-                                        fit: BoxFit.cover)),
+                                    image: controller.imgArtikel(
+                                        controller.dataHigh[index].foto,
+                                        controller
+                                            .dataHigh[index].jenisArtikel)),
                               ),
                               subtitle: Container(
                                 padding: EdgeInsets.symmetric(
@@ -470,8 +470,9 @@ class ArtikelView extends GetView<ArtikleController> {
                     // color: clr[index],
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage("semuaAset/gambar/damkar.png"))),
+                        image: controller.imgArtikel(
+                            controller.data![index].foto,
+                            controller.data![index].jenisArtikel)),
                   ),
                 ),
               );

@@ -31,7 +31,7 @@ class SemuaArtikelModel {
         adminDamkar: json["admin_damkar"],
         foto: json["foto"],
         judul: json["judul"],
-        deskripsi: json["deskripsi"].toString(),
+        deskripsi: json["deskripsi"] ?? '',
         tanggal: json["tanggal"],
     );
 
