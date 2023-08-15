@@ -793,7 +793,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             itemBuilder: (context, index) {
               var date =
                   controller.dataDitolak!.value.data![index].tanggal.toString();
-              var data = controller.dataProses!.value.data![index];
+              var data = controller.dataDitolak!.value.data![index];
               final splitDate = date.split('-');
               return Padding(
                   padding: EdgeInsets.all(

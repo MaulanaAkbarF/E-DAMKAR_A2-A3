@@ -136,7 +136,7 @@ class PelaporanController extends GetxController {
 
     var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
-    String cdate2 = DateFormat("dd - MMMM - yyyy").format(DateTime.now());
+    String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
     String day = DateFormat("EEEEE").format(DateTime.now());
     img.drawString(decodeImg!,
         "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
