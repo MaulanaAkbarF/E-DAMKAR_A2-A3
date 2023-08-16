@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 // class LaporanHewanBuas extends StatefulWidget {
 //   // const BuatLaporan({Key? key}) : super(key: key);
@@ -205,35 +206,33 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                     child: Padding(
                                       padding: EdgeInsets.only(top: 8),
                                       child: Container(
-                                        width: double.infinity,
-                                        margin: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey.shade100,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
-                                                color: Colors.grey.shade300,
-                                                width: 1.2)),
-                                        child: TextFormField(
-                                          controller: controller.namaBencanaCon,
-                                          // validator: (value) {
-                                          //   if (value == null ||
-                                          //       value.isEmpty) {
-                                          //     return 'Urgensi tidak boleh kosong';
-                                          //   }
-                                          // },
-                                          cursorColor: Colors.black,
-                                          style: teksStyle['SemiBold1'],
-                                          decoration: InputDecoration(
-                                              hintText: teks['namaBencanaHint'],
-                                              prefixIcon:
-                                                  Icon(Icons.fire_truck),
-                                              contentPadding:
-                                                  EdgeInsets.fromLTRB(
-                                                      10, 13, 10, 7),
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
+                                          width: double.infinity,
+                                          margin: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                              color: Colors.grey.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                  color: Colors.grey.shade300,
+                                                  width: 1.2)),
+                                          child: DropDownTextField(
+                                              controller: controller.urgenCtr,
+                                              // initialValue: ,
+                                              // isEnabled: false,
+                                              dropDownList: const [
+                                                DropDownValueModel(
+                                                    name: 'Ular',
+                                                    value: 'Ular'),
+                                                DropDownValueModel(
+                                                    name: 'Monyet',
+                                                    value: 'Monyet'),
+                                                DropDownValueModel(
+                                                    name: 'Anjing',
+                                                    value: 'Anjing'),
+                                                DropDownValueModel(
+                                                    name: "yang lain",
+                                                    value: "lainya")
+                                              ])),
                                     ),
                                   ),
                                   Align(

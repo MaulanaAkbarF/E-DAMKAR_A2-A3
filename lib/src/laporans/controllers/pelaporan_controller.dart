@@ -9,11 +9,13 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 class PelaporanController extends GetxController {
   final TextEditingController namaBencanaCon = TextEditingController();
   final TextEditingController noTelpCon = TextEditingController();
   final TextEditingController deskripsiCon = TextEditingController();
+  late SingleValueDropDownController urgenCtr;
   final formKey = GlobalKey<FormState>();
   var iduser;
   var namaUser = '';
@@ -29,6 +31,7 @@ class PelaporanController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    urgenCtr = SingleValueDropDownController();
     DataUser().getNoHp().then((value) => noTelpCon.text = value);
     DataUser().getUserId().then((value) => iduser = value);
     DataUser().getNama().then((value) => namaUser = value);
