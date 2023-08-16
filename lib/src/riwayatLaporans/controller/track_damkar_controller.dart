@@ -19,18 +19,14 @@ class TrackDamkarController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     initWs();
     super.onInit();
-    // excWebsocket();
-    // getLineJsonData();
-    // getCurrentLocation();
   }
 
   late final wsChannel;
 
   void initWs() {
-    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/lokasi${URLWEBAPI.fullAppKey}');
+    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/tracking');
     wsChannel = WebSocketChannel.connect(url);
     listen(wsChannel);
     onRouteReq(wsChannel);

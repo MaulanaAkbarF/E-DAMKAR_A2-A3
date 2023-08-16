@@ -1,4 +1,5 @@
 import 'package:edamkar_1/src/riwayatLaporans/controller/track_damkar_controller.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,6 +11,9 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: black),
+        titleTextStyle: TextStyle(color: black),
         title: const Text("Damkar Map Tracking"),
       ),
       body: Obx(() => controller.isWsDone.value
@@ -21,6 +25,7 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
             )
           : Align(
               alignment: Alignment.center, child: CircularProgressIndicator())),
+      
     );
   }
 }
