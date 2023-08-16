@@ -1,3 +1,4 @@
+
 import 'package:edamkar_1/src/profiles/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
@@ -59,12 +60,7 @@ class ProfileView extends GetView<ProfileController> {
                     title: Text(controller.userName.value),
                     subtitle: Text(controller.noHp.value),
                     trailing: GestureDetector(
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => EditProfilePage(1)));
-                      },
+                      onTap: () => controller.goTOUpdateProfil(),
                       child: Text(
                         "Ubah",
                         style: TextStyle(color: Colors.blue),
