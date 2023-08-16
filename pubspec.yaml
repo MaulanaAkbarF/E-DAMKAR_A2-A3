@@ -62,6 +62,7 @@ dependencies:
   web_socket_channel: ^2.4.0
   camera: ^0.10.5+2
   image: ^4.0.17
+  dropdown_textfield: ^1.0.8
 
 dev_dependencies:
   flutter_test:

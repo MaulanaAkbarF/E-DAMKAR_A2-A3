@@ -54,23 +54,23 @@ class ProfileView extends GetView<ProfileController> {
                 border: Border.all(color: Colors.grey),
                 color: Colors.transparent,
               ),
-              child: ListTile(
-                leading: controller.image(),
-                title: Text(controller.userName),
-                subtitle: Text(controller.noHp),
-                trailing: GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => EditProfilePage(1)));
-                  },
-                  child: Text(
-                    "Ubah",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ),
+              child: Obx(() => ListTile(
+                    leading: controller.image(),
+                    title: Text(controller.userName.value),
+                    subtitle: Text(controller.noHp.value),
+                    trailing: GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => EditProfilePage(1)));
+                      },
+                      child: Text(
+                        "Ubah",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  )),
             ),
           ),
           SizedBox(

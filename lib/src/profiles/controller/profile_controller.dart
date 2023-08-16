@@ -5,40 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  var userName = 'user1';
-  var noTelp = '08..';
-  var url_photo = "";
-  var noHp = "0800000000001";
+  var userName = 'user1'.obs;
+  // var noTelp = '08..'.obs;
+  var url_photo = "".obs;
+  var noHp = "0800000000001".obs;
+
+  @override
+  void onInit() {
+    getUserData();
+    super.onInit();
+  }
 
   // var _iduser;
   void getUserData() async {
-    // var idData = DataUser().getUserId();
-    var data = DataUser().getNama();
-    var data1 = DataUser().getNoHp();
-    var gambar = DataUser().getGambar();
-    var noHpV = DataUser().getNoHp();
-
-    // idData.then((value) {
-    //   setState(() {
-    //     _iduser = value;
-    //   });
-    // });
-
-    gambar.then((value) {
-      url_photo = value;
-    });
-
-    data.then((value) {
-      userName = value.toString();
-    });
-
-    data1.then((value) {
-      noTelp = value.toString();
-    });
-
-    noHpV.then((value) {
-      noHp = value.toString();
-    });
+    DataUser().getNama().then((value) => userName.value = value);
+    DataUser().getNoHp().then((value) => noHp.value = value);
+    DataUser().getGambar().then((value) => url_photo.value = value);
   }
 
   CircleAvatar image() {
@@ -81,4 +63,6 @@ class ProfileController extends GetxController {
   }
 
   goPop() => Get.back();
+
+  goTOUpdateProfil() => Get.toNamed(Routes.ubProf);
 }
