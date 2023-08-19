@@ -86,7 +86,7 @@ class EditProfileController extends GetxController {
       if (UserPic == "") {
         return AssetImage("semuaAset/gambar/user1.png") as ImageProvider;
       } else {
-        return NetworkImage("${URLWEBAPI.urlHost}/img-user/$UserPic");
+        return NetworkImage("${URLWEBAPI.urlHost}/img-user/$UserPic.jpg");
       }
     } else {
       return FileImage(imageShow.value!) as ImageProvider;

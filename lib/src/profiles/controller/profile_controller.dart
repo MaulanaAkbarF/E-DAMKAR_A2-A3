@@ -27,8 +27,8 @@ class ProfileController extends GetxController {
     if (url_photo != "" || url_photo.isNotEmpty) {
       return CircleAvatar(
           radius: 30,
-          backgroundImage: NetworkImage(
-              '${URLWEBAPI.urlHost}storage/foto_user/${url_photo.replaceAll("'", "")}'));
+          backgroundImage:
+              NetworkImage('${URLWEBAPI.urlHost}/img-user/$url_photo.jpg'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
@@ -65,4 +65,6 @@ class ProfileController extends GetxController {
   goPop() => Get.back();
 
   goTOUpdateProfil() => Get.toNamed(Routes.ubProf);
+  goToResetPass() => Get.toNamed(Routes.ubPsProf);
+  goToTentangKami() => Get.toNamed(Routes.aboutUs);
 }

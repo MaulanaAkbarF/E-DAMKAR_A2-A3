@@ -11,6 +11,7 @@ import 'package:edamkar_1/src/emergency/view/maps_anonym_view.dart';
 import 'package:edamkar_1/src/home/bindings/home_binding.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
+import 'package:edamkar_1/src/informations/views/tentang_kami_view.dart';
 import 'package:edamkar_1/src/laporans/bindings/maps_lokasi_kejadiaan_binding.dart';
 import 'package:edamkar_1/src/laporans/bindings/pelaporan_binding.dart';
 import 'package:edamkar_1/src/laporans/views/LaporanBencanaAlam.dart';
@@ -162,6 +163,11 @@ class AppPages {
         name: Routes.ubPsProf,
         page: () => const UbahSandiView(),
         binding: UbahSandiBinding()),
+
+    GetPage(
+      name: Routes.aboutUs,
+      page: () => const TentangKami(),
+    ),
 
     GetPage(
         name: Routes.artikleDt,

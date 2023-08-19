@@ -39,4 +39,5 @@ abstract class Routes {
   static const profile = '/profile';
   static const ubProf = '/ubahProfile';
   static const ubPsProf = '/ubahPasswordProfile';
+  static const aboutUs = '/tentangKami';
 }
