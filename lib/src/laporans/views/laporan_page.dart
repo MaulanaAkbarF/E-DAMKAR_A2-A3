@@ -1,4 +1,5 @@
 import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -153,7 +154,11 @@ class _LaporanPageState extends State<LaporanPage> {
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
-                                        style: teksStyle['SemiBold1']),
+                                        style: TextStyle(
+                                            fontFamily: "font/inter_bold.ttf",
+                                            color: Colors.black45,
+                                            fontSize:
+                                                paddingHorozontal1 / 1.5)),
                                   ),
                                 ),
                               ],
@@ -211,7 +216,10 @@ class _LaporanPageState extends State<LaporanPage> {
                                       teks['deskripsiLaporan'],
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
-                                      style: teksStyle['SemiBold1'],
+                                      style: TextStyle(
+                                          fontFamily: "font/inter_bold.ttf",
+                                          color: Colors.black45,
+                                          fontSize: paddingHorozontal1 / 1.5),
                                     ),
                                   ),
                                 ),
@@ -270,7 +278,11 @@ class _LaporanPageState extends State<LaporanPage> {
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
-                                        style: teksStyle['SemiBold1']),
+                                        style: TextStyle(
+                                            fontFamily: "font/inter_bold.ttf",
+                                            color: Colors.black45,
+                                            fontSize:
+                                                paddingHorozontal1 / 1.5)),
                                   ),
                                 ),
                               ],
@@ -328,7 +340,11 @@ class _LaporanPageState extends State<LaporanPage> {
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
-                                        style: teksStyle['SemiBold1']),
+                                        style: TextStyle(
+                                            fontFamily: "font/inter_bold.ttf",
+                                            color: Colors.black45,
+                                            fontSize:
+                                                paddingHorozontal1 / 1.5)),
                                   ),
                                 ),
                               ],

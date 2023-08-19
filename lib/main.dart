@@ -1,4 +1,4 @@
-import 'package:camera/camera.dart';
+// import 'package:camera/camera.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +6,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 // import 'package:get/get.dart';
 
-late List<CameraDescription> cameras;
+// late List<CameraDescription> cameras;
 
 void main() async {
   AwesomeNotifications().initialize(null, [
@@ -16,7 +16,7 @@ void main() async {
         channelDescription: 'channelDescription')
   ]);
 
-  cameras = await availableCameras();
+  // cameras = await availableCameras();
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
