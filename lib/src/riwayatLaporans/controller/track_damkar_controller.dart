@@ -16,7 +16,7 @@ class TrackDamkarController extends GetxController {
   var channel;
   RxBool isWsDone = false.obs;
   Set<Marker> marker = Set<Marker>().obs;
-
+  var dataArg = Get.arguments;
   @override
   void onInit() {
     initWs();
@@ -67,6 +67,8 @@ class TrackDamkarController extends GetxController {
   }
 
   void setMarker(double lat, double lng) async {
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, lng), zoom: 18)));
     marker.add(Marker(
         markerId: MarkerId("origin"),
         position: LatLng(lat, lng),
@@ -74,7 +76,7 @@ class TrackDamkarController extends GetxController {
             'semuaAset/gambar/damkar_example.png', 100))));
     marker.add(Marker(
         markerId: MarkerId("destination"),
-        position: LatLng(-7.603006, 111.900885),
+        position: LatLng(-7.5932817, 111.91509),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
   }
 
