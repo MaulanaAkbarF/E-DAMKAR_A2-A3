@@ -4,28 +4,31 @@
 
 import 'dart:convert';
 
-List<SemuaArtikelModel> semuaArtikelModelFromJson(String str) => List<SemuaArtikelModel>.from(json.decode(str).map((x) => SemuaArtikelModel.fromJson(x)));
+List<SemuaArtikelModel> semuaArtikelModelFromJson(String str) =>
+    List<SemuaArtikelModel>.from(
+        json.decode(str).map((x) => SemuaArtikelModel.fromJson(x)));
 
 class SemuaArtikelModel {
-    String jenisArtikel;
-    int id;
-    String adminDamkar;
-    String foto;
-    String judul;
-    String deskripsi;
-    String tanggal;
+  String jenisArtikel;
+  int id;
+  String adminDamkar;
+  String foto;
+  String judul;
+  String deskripsi;
+  String tanggal;
 
-    SemuaArtikelModel({
-        required this.jenisArtikel,
-        required this.id,
-        required this.adminDamkar,
-        required this.foto,
-        required this.judul,
-        required this.deskripsi,
-        required this.tanggal,
-    });
+  SemuaArtikelModel({
+    required this.jenisArtikel,
+    required this.id,
+    required this.adminDamkar,
+    required this.foto,
+    required this.judul,
+    required this.deskripsi,
+    required this.tanggal,
+  });
 
-    factory SemuaArtikelModel.fromJson(Map<String, dynamic> json) => SemuaArtikelModel(
+  factory SemuaArtikelModel.fromJson(Map<String, dynamic> json) =>
+      SemuaArtikelModel(
         jenisArtikel: json["jenis_artikel"],
         id: int.parse(json["id"]),
         adminDamkar: json["admin_damkar"],
@@ -33,7 +36,5 @@ class SemuaArtikelModel {
         judul: json["judul"],
         deskripsi: json["deskripsi"] ?? '',
         tanggal: json["tanggal"],
-    );
-
-
+      );
 }
