@@ -49,15 +49,15 @@ class PelaporanController extends GetxController {
 
     // Data yang akan dikirim
     var data = {
-      // "desa": widget.desa,
-      // "jalan": widget.jalan,
-      // "kecamatan": widget.kecamatan,
-      // "kota": widget.kota,
-      // "kodepos": widget.kodepos,
-      // "latitude": widget.latitude.toString(),
-      // "longitude": widget.longitude.toString(),
-      // "namaBencana": namaBencanaCon.text,
-      // "noTelp": noTelpCon.text.toString(),
+      "desa": dataArgs["desa"],
+      "jalan": dataArgs["jalan"],
+      "kecamatan": dataArgs["kecamatan"],
+      "kota": dataArgs["kota"],
+      "kodepos": dataArgs["kodepos"],
+      "latitude": dataArgs["latitude"].toString(),
+      "longitude": dataArgs["longitude"].toString(),
+      "namaBencana": namaBencanaCon.text,
+      "noTelp": noTelpCon.text.toString(),
     };
 
     // Mengirim data ke server menggunakan metode POST
@@ -75,7 +75,7 @@ class PelaporanController extends GetxController {
     String title = "${iduser.toString()}_image_${getRandomString(30)}";
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
-
+    String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
     //eksekuis post kirim photo
     await APIClient().postMulti('addImage', image, imagePath, title);
     var result = await APIClient().postData('addPelaporan', {
@@ -83,7 +83,7 @@ class PelaporanController extends GetxController {
       'user_listdata_id': iduser.toString(),
       'deskripsi_laporan': deskripsiCon.text,
       'nama_hewan': '-',
-      'waktu_pelaporan': '12:00',
+      'waktu_pelaporan': tdata,
       'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
       'urgensi':
           dataArgs['idKategori'] != 1 ? namaBencanaCon.text : "kebakaran",
@@ -92,11 +92,11 @@ class PelaporanController extends GetxController {
       'longitude': dataArgs["longitude"].toString(),
       'bukti_foto_laporan_pengguna': title,
     });
-    // _kirimNotifikasi();
+    _kirimNotifikasi();
     if (result != null) {
       Get.snackbar("Laporan Berhasil dikirim!",
           "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!",
-          icon: Icon(
+          icon: const Icon(
             Icons.check,
             color: Colors.white,
           ),
