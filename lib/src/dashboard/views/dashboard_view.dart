@@ -1,4 +1,3 @@
-import 'package:edamkar_1/src/artikels/views/artikel_view.dart';
 import 'package:edamkar_1/src/dashboard/controller/dashboard_controller.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
 import 'package:edamkar_1/src/laporans/views/laporan_page.dart';

@@ -1,5 +1,5 @@
 abstract class URLWEBAPI {
-  static const host = "192.168.43.64";
+  static const host = "192.168.18.74";
   static const urlHost = "https://edamkar.wsjti.id";
 
   //http request
@@ -13,7 +13,8 @@ abstract class URLWEBAPI {
   static const appKey = 'EDKNGKServer';
   static const fullAppKey = '?appKey=$appKey';
   //url
-  static const apiUrl = protocolHttp + host + portApi + type + '/';
-  static const custm = '$urlHost$type/';
+  static const apiUrl = '$protocolHttp$host$portApi$type/';
+  static const imgeUrl = '$protocolHttp$host$portApi/';
+  // static const custm = '$urlHost$type/';
   static const wsUrl = protocolWs + host + portWs;
 }

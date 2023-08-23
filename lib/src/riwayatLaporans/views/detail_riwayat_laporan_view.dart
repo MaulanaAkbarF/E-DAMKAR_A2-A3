@@ -199,11 +199,11 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${URLWEBAPI.urlHost}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
+                                        "${URLWEBAPI.imgeUrl}storage/gambar_pelaporans/${controller.dataElement.value.imageUrl}.jpg",
                                       ),
                                       fit: BoxFit.cover)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -213,98 +213,96 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         color: Colors.white, width: 0)),
-                                child: Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                            Icons.location_on_outlined,
-                                            color: Colors.red,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            height: paddingVertical4,
-                                            width: 2,
-                                            color: Colors.redAccent,
-                                          ),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 10)),
-                                          Expanded(
-                                            child: Text(
-                                              controller
-                                                  .dataElement.value.alamat
-                                                  .toString(),
-                                              maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.justify,
-                                              style: TextStyle(height: 1.5),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 13,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.date_range_outlined,
-                                            color: Colors.red,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            height: paddingVertical4,
-                                            width: 2,
-                                            color: Colors.redAccent,
-                                          ),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 10)),
-                                          Text(
-                                            controller.dataElement.value.tanggal
-                                                .toString(),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              height: 1.8,
-                                            ),
-                                            textAlign: TextAlign.justify,
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 13,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text("Deskripsi : "),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        controller.dataElement.value.deskripsi
-                                            .toString(),
-                                        style: TextStyle(
-                                          height: 1.5,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.location_on_outlined,
+                                          color: Colors.red,
                                         ),
-                                        textAlign: TextAlign.justify,
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          height: paddingVertical4,
+                                          width: 2,
+                                          color: Colors.redAccent,
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10)),
+                                        Expanded(
+                                          child: Text(
+                                            controller
+                                                .dataElement.value.alamat
+                                                .toString(),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(height: 1.5),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 13,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.date_range_outlined,
+                                          color: Colors.red,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          height: paddingVertical4,
+                                          width: 2,
+                                          color: Colors.redAccent,
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10)),
+                                        Text(
+                                          controller.dataElement.value.tanggal
+                                              .toString(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            height: 1.8,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 13,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Deskripsi : "),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      controller.dataElement.value.deskripsi
+                                          .toString(),
+                                      style: TextStyle(
+                                        height: 1.5,
                                       ),
-                                    ],
-                                  ),
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                  ],
                                 )),
                             controller.dataElement.value.statusRiwayat ==
                                     "Ditangani"
