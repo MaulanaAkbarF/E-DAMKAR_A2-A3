@@ -58,7 +58,7 @@ class HomeController extends GetxController {
       return CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(
-              '${URLWEBAPI.urlHost}storage/foto_user/${urlPhoto.replaceAll("'", "")}'));
+              '${URLWEBAPI.urlHost}/img-user/$urlPhoto.jpg'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));

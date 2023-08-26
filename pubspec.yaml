@@ -60,7 +60,6 @@ dependencies:
   flutter_local_notifications: ^14.1.0
   awesome_notifications: ^0.6.19
   web_socket_channel: ^2.4.0
-  camera: ^0.10.5+2
   image: ^4.0.17
 
 dev_dependencies:

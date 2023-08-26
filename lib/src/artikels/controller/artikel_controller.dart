@@ -1,4 +1,5 @@
 import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/models/ArtikelEdukasiModel.dart';
 import 'package:edamkar_1/models/ArtikelModel.dart';
 import 'package:edamkar_1/models/SemuaArtikelBerita.dart';
@@ -175,5 +176,26 @@ class ArtikleController extends GetxController {
     } else {
       debugPrint('terdapat kesalah');
     }
+  }
+
+  DecorationImage imgArtikel(String imgUrl, String condition) {
+    if (imgUrl == 'foto/gambar') {
+      return const DecorationImage(
+          image: AssetImage("semuaAset/gambar/damkar.png"), fit: BoxFit.cover);
+    }
+    if (condition == 'Berita') {
+      return DecorationImage(
+          image: NetworkImage("${URLWEBAPI.urlHost}/img-berita/$imgUrl"),
+          fit: BoxFit.cover);
+    }
+
+    if (condition == 'Edukasi') {
+      return DecorationImage(
+          image: NetworkImage("${URLWEBAPI.urlHost}/img-edukasi/$imgUrl"),
+          fit: BoxFit.cover);
+    }
+
+    return const DecorationImage(
+        image: AssetImage("semuaAset/gambar/damkar.png"), fit: BoxFit.cover);
   }
 }

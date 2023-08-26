@@ -54,23 +54,18 @@ class ProfileView extends GetView<ProfileController> {
                 border: Border.all(color: Colors.grey),
                 color: Colors.transparent,
               ),
-              child: ListTile(
-                leading: controller.image(),
-                title: Text(controller.userName),
-                subtitle: Text(controller.noHp),
-                trailing: GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => EditProfilePage(1)));
-                  },
-                  child: Text(
-                    "Ubah",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ),
+              child: Obx(() => ListTile(
+                    leading: controller.image(),
+                    title: Text(controller.userName.value),
+                    subtitle: Text(controller.noHp.value),
+                    trailing: GestureDetector(
+                      onTap: () => controller.goTOUpdateProfil(),
+                      child: Text(
+                        "Ubah",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  )),
             ),
           ),
           SizedBox(
@@ -118,13 +113,7 @@ class ProfileView extends GetView<ProfileController> {
             child: ListTile(
               leading: Icon(Icons.lock),
               title: TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             UbahSandi(_iduser.toString())));
-                  },
+                  onPressed: controller.goToResetPass,
                   child: const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -138,13 +127,7 @@ class ProfileView extends GetView<ProfileController> {
                   )),
               horizontalTitleGap: 0,
               trailing: GestureDetector(
-                onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) =>
-                  //             UbahSandi(_iduser.toString())));
-                },
+                onTap: controller.goToResetPass,
                 child: Icon(Icons.chevron_right),
               ),
             ),
@@ -211,12 +194,7 @@ class ProfileView extends GetView<ProfileController> {
             child: ListTile(
               leading: Icon(Icons.help),
               title: TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => TentangKami()));
-                  },
+                  onPressed: controller.goToTentangKami,
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -230,10 +208,7 @@ class ProfileView extends GetView<ProfileController> {
                   )),
               horizontalTitleGap: 0,
               trailing: GestureDetector(
-                onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => TentangKami()));
-                },
+                onTap: controller.goToTentangKami,
                 child: Icon(Icons.chevron_right),
               ),
               //trailing: Icon(Icons.chevron_right),

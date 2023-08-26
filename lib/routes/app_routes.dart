@@ -5,6 +5,7 @@ abstract class Routes {
   static const emergency = '/emergency';
   static const emeMaps = '/mapsAnonym';
   static const emePelaporan = '/pelaporanAnonym';
+  static const emepelapData = '/pelaporanAnonymFirst';
 
   //login
   static const login = '/login';
@@ -39,4 +40,5 @@ abstract class Routes {
   static const profile = '/profile';
   static const ubProf = '/ubahProfile';
   static const ubPsProf = '/ubahPasswordProfile';
+  static const aboutUs = '/tentangKami';
 }

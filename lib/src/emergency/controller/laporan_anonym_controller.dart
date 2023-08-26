@@ -6,11 +6,16 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
+import 'package:intl/intl.dart';
 
 class LaporanAnonymController extends GetxController {
   final namaBencanaCon = TextEditingController();
   final noTelpCon = TextEditingController();
   final deskripsiCon = TextEditingController();
+  final namaAnymCon = TextEditingController();
+  final nikAnymCon = TextEditingController();
+  final umurAnymCon = TextEditingController();
   final iduser = 1;
   var dataArgs = Get.arguments;
   String? desa, jalan, kecamatan, kota, kodepos, latitude, longitude;
@@ -65,26 +70,21 @@ class LaporanAnonymController extends GetxController {
     String title = iduser.toString() + "_image_" + getRandomString(30);
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
-    String alamat = jalan! +
-        ', ' +
-        desa! +
-        ', ' +
-        kecamatan! +
-        ', ' +
-        kota! +
-        ', ' +
-        kodepos!;
+    String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
+    String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
     await APIClient().postMulti('addImage', rxImage, imagePath, title);
     var result2 = await APIClient().postData('addPelaporan', {
+      'kategori_laporan_id': "5",
       'user_listdata_id': "1",
-      'kategori_laporan_id': '5',
-      'tgl_lap': date.toString().replaceAll("00:00:00.000", ""),
       'deskripsi_laporan': deskripsiCon.text,
-      'gambar_bukti_pelaporan': title,
-      'alamat_kejadian': alamat,
-      'latitude': latitude.toString(),
-      'longitude': longitude.toString(),
-      'urgensi': namaBencanaCon.text
+      'nama_hewan': '-',
+      'waktu_pelaporan': tdata,
+      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+      'urgensi': namaBencanaCon.text,
+      'alamat': alamat,
+      'latitude': latitude,
+      'longitude': longitude,
+      'bukti_foto_laporan_pengguna': title,
     });
     _kirimNotifikasi();
     if (result2 != null) {
@@ -133,11 +133,11 @@ class LaporanAnonymController extends GetxController {
   // }
 
   Future getImage() async {
-    final imagePicked = await _picker.pickImage(source: ImageSource.gallery);
+    final imagePicked = await _picker.pickImage(source: ImageSource.camera);
 
     if (imagePicked != null) {
-      rxImage.value = File(imagePicked.path);
-      rxImage.value = File(imagePicked.path);
+      rxImage.value = await drawTextOnImage(imagePicked);
+      // rxImage.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
       update();
@@ -146,6 +146,51 @@ class LaporanAnonymController extends GetxController {
     }
   }
 
+  Future<File> drawTextOnImage(XFile xFile) async {
+    // var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
+    String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
+    String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
+    String day = DateFormat("EEEEE").format(DateTime.now());
+    String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
+    img.drawString(decodeImg!,
+        "Pelapor : ${namaAnymCon.text} \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
+        font: img.arial48, x: 40);
+    // img.drawString(decodeImg!, arial24, 0, 0, DateTime.now().toString());
+
+    var encodeImage = img.encodeJpg(decodeImg, quality: 100);
+
+    var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
+
+    return finalImage;
+  }
+
+  goToLaporanAnonymView() =>
+      checkFieldFPage() ? Get.toNamed(Routes.emePelaporan) : none();
+
+  bool checkFieldFPage() {
+    if (namaAnymCon.text.length < 5 || namaAnymCon.text.length > 30) {
+      Get.snackbar(
+          "Gagal", "Tolong isi nama harus lebih dari 5 dan kurang dari 30",
+          backgroundColor: white, colorText: black);
+      return false;
+    }
+    if (nikAnymCon.text.length != 16) {
+      Get.snackbar("Gagal", "Tolong isi NIK harus 16 digit",
+          backgroundColor: white, colorText: black);
+      return false;
+    }
+    if (umurAnymCon.text.isEmpty || umurAnymCon.text.length > 2) {
+      Get.snackbar("Gagal", "digit umur tidak sesuai",
+          backgroundColor: white, colorText: black);
+      return false;
+    }
+
+    return true;
+  }
+
+  void none() {}
   // Future<void> uploadImage() async {
   //   setState(() {
   //     showSpinner = true;

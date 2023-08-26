@@ -57,7 +57,7 @@ class DatumRiwayat {
   });
 
   factory DatumRiwayat.fromJson(Map<String, dynamic> json) => DatumRiwayat(
-        idLaporan: json["idLaporan"],
+        idLaporan: int.parse(json["idLaporan"]),
         statusRiwayat: json["status_riwayat"],
         kategoriLaporan: json["kategori_laporan"],
         tanggal: json["tanggal"],

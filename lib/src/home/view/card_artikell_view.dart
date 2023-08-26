@@ -1,3 +1,4 @@
+import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/src/home/controller/home_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
@@ -61,88 +62,93 @@ class CardArtikelView extends GetView<HomeController> {
         SizedBox(
           height: 10,
         ),
-        controller.data.value.data == null
-            ? const Text("Artikel Kosong")
-            : ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: controller.data.value.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: ListTile(
-                      onTap: () {},
-                      title: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            controller.data.value.data![index].jenisArtikel
-                                .toString(),
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: "$thin1",
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: black2,
+        Obx(
+          () => controller.data.value.data == null
+              ? const Text("Artikel Kosong")
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: controller.data.value.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: ListTile(
+                        onTap: () {},
+                        title: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              controller.data.value.data![index].jenisArtikel
+                                  .toString(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontFamily: "$thin1",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: black2,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            controller.data.value.data![index].judul.toString(),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: black3,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "$semibold",
+                            const SizedBox(
+                              height: 10,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                        ],
+                            Text(
+                              controller.data.value.data![index].judul
+                                  .toString(),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: black3,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "$semibold",
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
+                        subtitle: Row(
+                          children: [
+                            Text(
+                              controller.data.value.data![index].adminDamkar
+                                  .toString(),
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            const Icon(
+                              Icons.circle,
+                              size: 5,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              controller.data.value.data![index].tanggal
+                                  .toString(),
+                            )
+                          ],
+                        ),
+                        trailing: Container(
+                          alignment: Alignment.topCenter,
+                          height: paddingVertical4,
+                          width: paddingHorozontal4,
+                          // color: clr[index],
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  "${URLWEBAPI.urlHost}/img-berita/${controller.data.value.data![index].foto}",
+                                ),
+                              )),
+                        ),
                       ),
-                      subtitle: Row(
-                        children: [
-                          Text(
-                            controller.data.value.data![index].adminDamkar
-                                .toString(),
-                          ),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          const Icon(
-                            Icons.circle,
-                            size: 5,
-                          ),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            controller.data.value.data![index].tanggal
-                                .toString(),
-                          )
-                        ],
-                      ),
-                      trailing: Container(
-                        alignment: Alignment.topCenter,
-                        height: paddingVertical4,
-                        width: paddingHorozontal4,
-                        // color: clr[index],
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image:
-                                    AssetImage("semuaAset/gambar/damkar.png"))),
-                      ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  }),
+        ),
       ],
     );
   }

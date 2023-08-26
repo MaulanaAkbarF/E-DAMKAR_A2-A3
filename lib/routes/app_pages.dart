@@ -5,12 +5,15 @@ import 'package:edamkar_1/src/dashboard/views/dashboard_view.dart';
 import 'package:edamkar_1/src/emergency/bindings/emergency_page_binding.dart';
 import 'package:edamkar_1/src/emergency/bindings/laporan_eme_page_binding.dart';
 import 'package:edamkar_1/src/emergency/bindings/maps_page_binding.dart';
+import 'package:edamkar_1/src/emergency/controller/laporan_anonym_controller.dart';
 import 'package:edamkar_1/src/emergency/view/emergency_call_view.dart';
+import 'package:edamkar_1/src/emergency/view/laporan_anonym_first_view.dart';
 import 'package:edamkar_1/src/emergency/view/laporan_anonym_view.dart';
 import 'package:edamkar_1/src/emergency/view/maps_anonym_view.dart';
 import 'package:edamkar_1/src/home/bindings/home_binding.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
+import 'package:edamkar_1/src/informations/views/tentang_kami_view.dart';
 import 'package:edamkar_1/src/laporans/bindings/maps_lokasi_kejadiaan_binding.dart';
 import 'package:edamkar_1/src/laporans/bindings/pelaporan_binding.dart';
 import 'package:edamkar_1/src/laporans/views/LaporanBencanaAlam.dart';
@@ -63,10 +66,16 @@ class AppPages {
       binding: MapsAnonymBinding(),
     ),
     GetPage(
-      name: Routes.emePelaporan,
-      page: () => const LaporanAnonym(),
+      name: Routes.emepelapData,
+      page: () => const LaporanAnonymDataView(),
       binding: LaporanAnonymBinding(),
     ),
+    GetPage(
+        name: Routes.emePelaporan,
+        page: () => const LaporanAnonym(),
+        binding: BindingsBuilder(() {
+          Get.put(LaporanAnonymController());
+        })),
 
     GetPage(
       name: Routes.login,
@@ -162,6 +171,11 @@ class AppPages {
         name: Routes.ubPsProf,
         page: () => const UbahSandiView(),
         binding: UbahSandiBinding()),
+
+    GetPage(
+      name: Routes.aboutUs,
+      page: () => const TentangKami(),
+    ),
 
     GetPage(
         name: Routes.artikleDt,

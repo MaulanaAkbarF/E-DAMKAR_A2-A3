@@ -16,24 +16,19 @@ class TrackDamkarController extends GetxController {
   var channel;
   RxBool isWsDone = false.obs;
   Set<Marker> marker = Set<Marker>().obs;
-
+  var dataArg = Get.arguments;
   @override
   void onInit() {
-    // TODO: implement onInit
     initWs();
     super.onInit();
-    // excWebsocket();
-    // getLineJsonData();
-    // getCurrentLocation();
   }
 
   late final wsChannel;
 
   void initWs() {
-    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/rlt/lokasi${URLWEBAPI.fullAppKey}');
+    Uri url = Uri.parse('${URLWEBAPI.wsUrl}/tracking');
     wsChannel = WebSocketChannel.connect(url);
     listen(wsChannel);
-    onSubscribe(wsChannel);
     onRouteReq(wsChannel);
     onPositionReq(wsChannel);
     isWsDone.value = true;
@@ -57,18 +52,13 @@ class TrackDamkarController extends GetxController {
     });
   }
 
-  void onSubscribe(WebSocketChannel ws) {
-    const subs = {"command": "Subscribe", "channel": "RLTrack"};
-    ws.sink.add(jsonEncode(subs));
-  }
-
   void onRouteReq(WebSocketChannel ws) {
-    const req = {"command": "Request", "channel": "RLTrack", "type": "RQURot"};
+    const req = {"command": "Request", "type": "RQURot"};
     ws.sink.add(jsonEncode(req));
   }
 
   void onPositionReq(WebSocketChannel ws) {
-    const req = {"command": "Request", "channel": "RLTrack", "type": "RQULoc"};
+    const req = {"command": "Request", "type": "RQULoc"};
     ws.sink.add(jsonEncode(req));
   }
 
@@ -77,6 +67,8 @@ class TrackDamkarController extends GetxController {
   }
 
   void setMarker(double lat, double lng) async {
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, lng), zoom: 18)));
     marker.add(Marker(
         markerId: MarkerId("origin"),
         position: LatLng(lat, lng),
@@ -84,7 +76,7 @@ class TrackDamkarController extends GetxController {
             'semuaAset/gambar/damkar_example.png', 100))));
     marker.add(Marker(
         markerId: MarkerId("destination"),
-        position: LatLng(-7.603006, 111.900885),
+        position: LatLng(-7.5932817, 111.91509),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
   }
 

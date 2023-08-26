@@ -79,324 +79,322 @@ class SignUpView extends GetView<SignUpController> {
         body: SafeArea(
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Expanded(
-          child: Column(
-            children: [
-              for (final teks in teksSignUp)
-                for (final teksStyle in teksStyleSignUp)
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Text("random: $randomNumber"),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Text(teks['Header'],
+        child: Column(
+          children: [
+            for (final teks in teksSignUp)
+              for (final teksStyle in teksStyleSignUp)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // Text("random: $randomNumber"),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Text(teks['Header'],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: teksStyle['Bold1']),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Text(teks['SubHeader'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                                style: teksStyle['SemiBold1']),
+                          ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 24),
+                            child: Text(teks['Nama'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
-                                style: teksStyle['Bold1']),
+                                style: teksStyle['Thin1']),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Text(teks['SubHeader'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                  style: teksStyle['SemiBold1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 24),
-                              child: Text(teks['Nama'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.namalengkap,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['NamaHint'],
-                                      prefixIcon: Icon(Icons.person),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.2)),
+                              child: TextFormField(
+                                controller: controller.namalengkap,
+                                cursorColor: Colors.black,
+                                style: teksStyle['SemiBold1'],
+                                decoration: InputDecoration(
+                                    hintText: teks['NamaHint'],
+                                    prefixIcon: Icon(Icons.person),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                    border: InputBorder.none),
                               ),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Text(teks['Email'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(teks['Email'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: teksStyle['Thin1']),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.username,
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.mail),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.2)),
+                              child: TextFormField(
+                                controller: controller.username,
+                                cursorColor: Colors.black,
+                                style: teksStyle['SemiBold1'],
+                                decoration: InputDecoration(
+                                    hintText: teks['EmailHint'],
+                                    prefixIcon: Icon(Icons.mail),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                    border: InputBorder.none),
                               ),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Text(teks['Telepon'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(teks['Telepon'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: teksStyle['Thin1']),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.notelp,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter(
-                                        RegExp(r'[0-9]'),
-                                        allow: true)
-                                  ],
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['TeleponHint'],
-                                      prefixIcon: Icon(Icons.phone),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
-                                ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.2)),
+                              child: TextFormField(
+                                controller: controller.notelp,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter(
+                                      RegExp(r'[0-9]'),
+                                      allow: true)
+                                ],
+                                cursorColor: Colors.black,
+                                style: teksStyle['SemiBold1'],
+                                decoration: InputDecoration(
+                                    hintText: teks['TeleponHint'],
+                                    prefixIcon: Icon(Icons.phone),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                    border: InputBorder.none),
                               ),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Text(teks['Password1'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(teks['Password1'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: teksStyle['Thin1']),
+                          ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.2)),
+                              child: Obx(() => TextFormField(
+                                    controller: controller.password,
+                                    obscureText:
+                                        controller.passwordVisible.value,
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: IconButton(
+                                          onPressed: () =>
+                                              controller.passVisible(),
+                                          icon: Icon(!controller
+                                                  .passwordVisible.value
+                                              ? Icons.visibility_outlined
+                                              : Icons
+                                                  .visibility_off_outlined),
+                                          color: Color.fromARGB(
+                                              255, 143, 143, 143),
+                                        ),
+                                        suffixIconColor: Colors.black,
+                                        contentPadding: EdgeInsets.fromLTRB(
+                                            10, 13, 10, 7),
+                                        border: InputBorder.none),
+                                  )),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: Obx(() => TextFormField(
-                                      controller: controller.password,
-                                      obscureText:
-                                          controller.passwordVisible.value,
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['SemiBold1'],
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.lock),
-                                          suffixIcon: IconButton(
-                                            onPressed: () =>
-                                                controller.passVisible(),
-                                            icon: Icon(!controller
-                                                    .passwordVisible.value
-                                                ? Icons.visibility_outlined
-                                                : Icons
-                                                    .visibility_off_outlined),
-                                            color: Color.fromARGB(
-                                                255, 143, 143, 143),
-                                          ),
-                                          suffixIconColor: Colors.black,
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    )),
-                              ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(teks['Password2'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: teksStyle['Thin1']),
+                          ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8),
+                            child: Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.2)),
+                              child: Obx(() => TextFormField(
+                                    controller: controller.validatepass,
+                                    obscureText:
+                                        controller.passwordVisible1.value,
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.lock),
+                                        suffixIcon: IconButton(
+                                          onPressed: () =>
+                                              controller.validVisible(),
+                                          icon: Icon(!controller
+                                                  .passwordVisible1.value
+                                              ? Icons.visibility_outlined
+                                              : Icons
+                                                  .visibility_off_outlined),
+                                          color: Color.fromARGB(
+                                              255, 143, 143, 143),
+                                        ),
+                                        suffixIconColor: Colors.black,
+                                        contentPadding: EdgeInsets.fromLTRB(
+                                            10, 13, 10, 7),
+                                        border: InputBorder.none),
+                                  )),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Text(teks['Password2'],
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: teksStyle['Thin1']),
-                            ),
-                          ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: Obx(() => TextFormField(
-                                      controller: controller.validatepass,
-                                      obscureText:
-                                          controller.passwordVisible1.value,
-                                      cursorColor: Colors.black,
-                                      style: teksStyle['SemiBold1'],
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.lock),
-                                          suffixIcon: IconButton(
-                                            onPressed: () =>
-                                                controller.validVisible(),
-                                            icon: Icon(!controller
-                                                    .passwordVisible1.value
-                                                ? Icons.visibility_outlined
-                                                : Icons
-                                                    .visibility_off_outlined),
-                                            color: Color.fromARGB(
-                                                255, 143, 143, 143),
-                                          ),
-                                          suffixIconColor: Colors.black,
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              10, 13, 10, 7),
-                                          border: InputBorder.none),
-                                    )),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 40),
-                              child: Material(
-                                color: Colors.red.shade400,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                borderRadius: BorderRadius.circular(8),
-                                child: Obx(() => InkWell(
-                                      splashColor: Colors.red.shade700,
-                                      highlightColor: Colors.red.shade900,
-                                      onTap: controller.RegisterPost,
-                                      child: Container(
-                                          height: 50,
-                                          child: controller.isloading.value
-                                              ? Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 30,
-                                                      width: 30,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color: Colors.white,
-                                                      ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 40),
+                            child: Material(
+                              color: Colors.red.shade400,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              borderRadius: BorderRadius.circular(8),
+                              child: Obx(() => InkWell(
+                                    splashColor: Colors.red.shade700,
+                                    highlightColor: Colors.red.shade900,
+                                    onTap: controller.RegisterPost,
+                                    child: Container(
+                                        height: 50,
+                                        child: controller.isloading.value
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 30,
+                                                    width: 30,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.white,
                                                     ),
-                                                    SizedBox(
-                                                        width:
-                                                            paddingVertical2),
-                                                    Text(
-                                                      'loading...',
+                                                  ),
+                                                  SizedBox(
+                                                      width:
+                                                          paddingVertical2),
+                                                  Text(
+                                                    'loading...',
+                                                    style:
+                                                        StyleTxt.b(16, white),
+                                                  ),
+                                                ],
+                                              )
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(teks['ButtonLogin'],
                                                       style:
-                                                          StyleTxt.b(16, white),
-                                                    ),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(teks['ButtonLogin'],
-                                                        style:
-                                                            teksStyle['Thin2']),
-                                                  ],
-                                                )),
-                                    )),
-                              ),
+                                                          teksStyle['Thin2']),
+                                                ],
+                                              )),
+                                  )),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-              for (final teks in teksSignUp)
-                for (final teksStyle in teksStyleSignUp)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(teks['Footer'], style: teksStyle['SemiBold3']),
-                        GestureDetector(
-                          onTap: () {
-                            navToSignInPage(context);
-                          },
-                          child: Text(teks['FooterButton'],
-                              style: teksStyle['SemiBold2']),
+                          ),
                         )
                       ],
                     ),
-                  )
-            ],
-          ),
+                  ),
+                ),
+            for (final teks in teksSignUp)
+              for (final teksStyle in teksStyleSignUp)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(teks['Footer'], style: teksStyle['SemiBold3']),
+                      GestureDetector(
+                        onTap: () {
+                          navToSignInPage(context);
+                        },
+                        child: Text(teks['FooterButton'],
+                            style: teksStyle['SemiBold2']),
+                      )
+                    ],
+                  ),
+                )
+          ],
         ),
       ),
     ));

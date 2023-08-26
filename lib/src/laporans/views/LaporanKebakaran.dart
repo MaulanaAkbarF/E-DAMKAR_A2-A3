@@ -189,52 +189,52 @@ class LaporanKebakaran extends GetView<PelaporanController> {
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 24),
-                                      child: Text(teks['namaBencana'],
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          style: teksStyle['Thin1']),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: FractionalOffset.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 8),
-                                      child: Container(
-                                        width: double.infinity,
-                                        margin: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.shade100,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          border: Border.all(
-                                              color: Colors.grey.shade300,
-                                              width: 1.2),
-                                        ),
-                                        child: TextFormField(
-                                          controller: controller.namaBencanaCon,
-                                          // validator: (value) {
-                                          //   if (value == null || value.isEmpty) {
-                                          //     return 'Urgensi tidak boleh kosong';
-                                          //   }
-                                          // },
-                                          cursorColor: Colors.black,
-                                          style: teksStyle['SemiBold1'],
-                                          decoration: InputDecoration(
-                                              hintText: teks['namaBencanaHint'],
-                                              prefixIcon:
-                                                  Icon(Icons.fire_truck),
-                                              contentPadding:
-                                                  EdgeInsets.fromLTRB(
-                                                      10, 13, 10, 7),
-                                              border: InputBorder.none),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Align(
+                                  //   alignment: FractionalOffset.topLeft,
+                                  //   child: Padding(
+                                  //     padding: EdgeInsets.only(top: 24),
+                                  //     child: Text(teks['namaBencana'],
+                                  //         overflow: TextOverflow.ellipsis,
+                                  //         maxLines: 1,
+                                  //         style: teksStyle['Thin1']),
+                                  //   ),
+                                  // ),
+                                  // Align(
+                                  //   alignment: FractionalOffset.topLeft,
+                                  //   child: Padding(
+                                  //     padding: EdgeInsets.only(top: 8),
+                                  //     child: Container(
+                                  //       width: double.infinity,
+                                  //       margin: EdgeInsets.all(2),
+                                  //       decoration: BoxDecoration(
+                                  //         color: Colors.grey.shade100,
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(8),
+                                  //         border: Border.all(
+                                  //             color: Colors.grey.shade300,
+                                  //             width: 1.2),
+                                  //       ),
+                                  //       child: TextFormField(
+                                  //         controller: controller.namaBencanaCon,
+                                  //         // validator: (value) {
+                                  //         //   if (value == null || value.isEmpty) {
+                                  //         //     return 'Urgensi tidak boleh kosong';
+                                  //         //   }
+                                  //         // },
+                                  //         cursorColor: Colors.black,
+                                  //         style: teksStyle['SemiBold1'],
+                                  //         decoration: InputDecoration(
+                                  //             hintText: teks['namaBencanaHint'],
+                                  //             prefixIcon:
+                                  //                 Icon(Icons.fire_truck),
+                                  //             contentPadding:
+                                  //                 EdgeInsets.fromLTRB(
+                                  //                     10, 13, 10, 7),
+                                  //             border: InputBorder.none),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(

@@ -48,11 +48,11 @@ class RiwayatLaporanController extends GetxController
     getRiwayatDitangani();
     getRiwayatSelesai();
     getRiwayatDitolak();
-    // debounce(
-    //   textSearch,
-    //   (_) => getUserIdRiwayatforSearch(),
-    //   time: Duration(seconds: 1),
-    // );
+    debounce(
+      textSearch,
+      (_) => PostDataSearch(textSearch.value),
+      time: Duration(seconds: 1),
+    );
   }
 
   @override
@@ -100,27 +100,29 @@ class RiwayatLaporanController extends GetxController
 
   // List<RiwayatLaporan>? searchKosong = [];
 
-  // PostDataSearch(int id, String kata) async {
-  //   // search.clear();
-  //   var result =
-  //       await APIClient().getData('searchLapp/' + id.toString() + "/" + kata);
-  //   if (result != null) {
-  //     var dataSearch = dataPelaporanFromJson(result);
-  //     if (dataSearch.data.isNotEmpty) {
-  //       // setState(() {
-  //       searchData?.value = dataSearch.data;
-  //       // });
-  //     } else {
-  //       // setState(() {
-  //       // searchData = searchKosong;
+  PostDataSearch(String kata) async {
+    if (kata.isNotEmpty) {
+      var result = await APIClient()
+          .getData('searchLapp/' + idUser.toString() + "/" + kata);
+      if (result != null) {
+        var dataSearch = dataPelaporanFromJson(result);
+        if (dataSearch.data.isNotEmpty) {
+          // setState(() {
+          searchData?.value = dataSearch.data;
+          // });
+        } else {
+          // setState(() {
+          // searchData = searchKosong;
 
-  //       print("masukan salah");
-  //       // });
-  //     }
-  //   } else {
-  //     print("masukan salah");
-  //   }
-  // }
+          print("masukan salah");
+          // });
+        }
+      } else {
+        print("masukan salah");
+      }
+    }
+    // search.clear();
+  }
 
   getRiwayatMenunggu() async {
     var result = await APIClient().getData('filterLapMenunggu/$idUser');

@@ -126,7 +126,7 @@ class MapsAnonymController extends GetxController {
         'latitude': latitude.value,
         'longitude': longitude.value
       };
-      Get.toNamed(Routes.emePelaporan, arguments: dataMaps);
+      Get.toNamed(Routes.emepelapData, arguments: dataMaps);
     }
   }
 }
