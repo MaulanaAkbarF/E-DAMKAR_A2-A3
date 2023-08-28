@@ -2,6 +2,7 @@ import 'package:edamkar_1/src/emergency/controller/laporan_anonym_controller.dar
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
@@ -48,10 +49,13 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                             color: Colors.grey.shade300, width: 1.2)),
                     child: TextFormField(
                       controller: controller.namaAnymCon,
+                      
+                      keyboardType: TextInputType.name,
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
                           hintText: 'Contoh: ipul',
+                          
                           prefixIcon: Icon(Icons.account_box_rounded),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
@@ -83,11 +87,21 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                             color: Colors.grey.shade300, width: 1.2)),
                     child: TextFormField(
                       controller: controller.nikAnymCon,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          Get.snackbar("Kosong", "NIK tidak boleh kosong !");
+                          return 'NIK tidak boleh kosong';
+                        }
+                      },
                       keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
-                          hintText: '',
+                          hintText: 'Isikan 16 digit NIK anda',
                           prefixIcon: Icon(Icons.pin),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
@@ -119,11 +133,22 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                             color: Colors.grey.shade300, width: 1.2)),
                     child: TextFormField(
                       controller: controller.umurAnymCon,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          Get.snackbar(
+                              "Kosong", "Umur tidak boleh kosong !");
+                          return 'Umur tidak boleh kosong';
+                        }
+                      },
                       keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
-                          hintText: '29',
+                          hintText: 'Contoh : 20',
                           prefixIcon: Icon(Icons.person_2_outlined),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),

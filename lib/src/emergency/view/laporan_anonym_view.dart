@@ -1,4 +1,6 @@
 import 'package:edamkar_1/src/emergency/controller/laporan_anonym_controller.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -200,6 +202,13 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                               width: 1.2)),
                                       child: TextFormField(
                                         controller: controller.namaBencanaCon,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            Get.snackbar("Kosong",
+                                                "Urgensi tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                            return 'Urgensi tidak boleh kosong';
+                                          }
+                                        },
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -238,6 +247,18 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                               width: 1.2)),
                                       child: TextFormField(
                                         controller: controller.noTelpCon,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            Get.snackbar("Kosong",
+                                                "Nomor Telepon tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                            return 'Nomor Telepon tidak boleh kosong';
+                                          }
+                                        },
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -278,6 +299,13 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         keyboardType: TextInputType.multiline,
                                         maxLines: 6,
                                         controller: controller.deskripsiCon,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            Get.snackbar("Kosong",
+                                                "Deskripsi tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                            return 'Deskripsi tidak boleh kosong';
+                                          }
+                                        },
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(

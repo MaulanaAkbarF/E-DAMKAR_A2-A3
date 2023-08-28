@@ -72,31 +72,61 @@ class LaporanAnonymController extends GetxController {
     DateTime date = DateTime(now.year, now.month, now.day);
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
     String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
-    await APIClient().postMulti('addImage', rxImage, imagePath, title);
-    var result2 = await APIClient().postData('addPelaporan', {
-      'kategori_laporan_id': "5",
-      'user_listdata_id': "1",
-      'deskripsi_laporan': deskripsiCon.text,
-      'nama_hewan': '-',
-      'waktu_pelaporan': tdata,
-      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
-      'urgensi': namaBencanaCon.text,
-      'alamat': alamat,
-      'latitude': latitude,
-      'longitude': longitude,
-      'bukti_foto_laporan_pengguna': title,
-    });
-    _kirimNotifikasi();
-    if (result2 != null) {
-      Get.snackbar("Berhasil",
-          "Laporan Darurat yang kamu ajukan akan segera kami tangani",
-          backgroundColor: white, colorText: black);
-      Get.offAllNamed(Routes.emergency);
-    } else {
-      Get.snackbar("Gagal", "coba kembali dalam beberapa detik",
-          backgroundColor: white, colorText: black);
+
+    if (imagePath == null) {
+      Get.snackbar("Gambar bukti Kosong !", "Harus melampirkan bukti kejadian",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
+
+    } else if (namaBencanaCon == null || namaBencanaCon == "" || namaBencanaCon.text.isEmpty) {
+      Get.snackbar("Urgensi Kosong !", "Harap isikan urgensi",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
+
+    } else if (noTelpCon == null || noTelpCon == "" || noTelpCon.text.isEmpty) {
+      Get.snackbar("Nomor telepon Kosong !", "Harap isikan nomor telepon anda",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
+
+    }else if (noTelpCon.text.length < 9 || noTelpCon.text.length > 14) {
+      Get.snackbar("Input nomor telepon salah!", "Input No.Telp harus lebih dari 9 dan kurang dari 14",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
+
+    } 
+    else if (deskripsiCon == null || deskripsiCon == "" || deskripsiCon.text.isEmpty) {
+      Get.snackbar("Deskripsi Kosong !", "Harap isikan deskripsi laporan anda",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
+
+    } 
+    else {
+      await APIClient().postMulti('addImage', rxImage, imagePath, title);
+      var result2 = await APIClient().postData('addPelaporan', {
+        'kategori_laporan_id': "5",
+        'user_listdata_id': "1",
+        'deskripsi_laporan': deskripsiCon.text,
+        'nama_hewan': '-',
+        'waktu_pelaporan': tdata,
+        'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+        'urgensi': namaBencanaCon.text,
+        'alamat': alamat,
+        'latitude': latitude,
+        'longitude': longitude,
+        'bukti_foto_laporan_pengguna': title,
+      });
+      _kirimNotifikasi();
+      if (result2 != null) {
+        Get.snackbar("Berhasil",
+            "Laporan Darurat yang kamu ajukan akan segera kami tangani",
+            backgroundColor: white, colorText: black);
+        Get.offAllNamed(Routes.emergency);
+      } else {
+        Get.snackbar("Gagal", "coba kembali dalam beberapa detik",
+            backgroundColor: white, colorText: black);
+      }
+      showSpinner.value = false;
     }
-    showSpinner.value = false;
   }
 
   // void _onConfirm(context) async {
@@ -182,7 +212,7 @@ class LaporanAnonymController extends GetxController {
       return false;
     }
     if (umurAnymCon.text.isEmpty || umurAnymCon.text.length > 2) {
-      Get.snackbar("Gagal", "digit umur tidak sesuai",
+      Get.snackbar("Gagal", "Digit umur tidak sesuai",
           backgroundColor: white, colorText: black);
       return false;
     }

@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/config/url_static.dart';
 import 'package:edamkar_1/src/home/model/home_model.dart';
@@ -16,7 +17,7 @@ class HomeController extends GetxController {
 
 //admin contact
   final String message =
-      "setelah melakukan panggilan tolong kembali ke aplikasi";
+      "Setelah melakukan panggilan tolong kembali ke aplikasi dan buka halaman Laporan";
   final String countryCode = "+62";
   final String phone = "81252277680";
   final String phoneNumber = "085708574368";
@@ -31,6 +32,15 @@ class HomeController extends GetxController {
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
+    // Get.toNamed(Routes.laporan);
+
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'channelKey',
+        title: "Emergency Call",
+        body: 'Kembali ke aplikasi dan buka halaman Laporan sebagai bukti laporan anda!'));
+    
   }
 
   void emerCallWA() async {
@@ -38,6 +48,14 @@ class HomeController extends GetxController {
         "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
+      // Get.toNamed(Routes.laporan);
+
+      AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'channelKey',
+        title: "Emergency Call",
+        body: 'Kembali ke aplikasi dan buka halaman Laporan sebagai bukti laporan anda!'));
     } else {
       // FloatNotif()
       //     .snackBarFail(context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
@@ -57,8 +75,8 @@ class HomeController extends GetxController {
     if (urlPhoto.isNotEmpty) {
       return CircleAvatar(
           radius: 30,
-          backgroundImage: NetworkImage(
-              '${URLWEBAPI.urlHost}/img-user/$urlPhoto.jpg'));
+          backgroundImage:
+              NetworkImage('${URLWEBAPI.urlHost}/img-user/$urlPhoto.jpg'));
     }
     return const CircleAvatar(
         radius: 30, backgroundImage: AssetImage("semuaAset/gambar/user1.png"));
