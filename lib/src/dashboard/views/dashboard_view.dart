@@ -38,24 +38,18 @@ class DashboardPage extends GetView<DashboardController> {
               ),
               label: 'Laporan',
             ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     Icons.history,
-            //   ),
-            //   label: 'Riwayat',
-            // ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history,
+              ),
+              label: 'Riwayat',
+            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.article_rounded,
               ),
               label: 'Artikel',
             ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     Icons.settings,
-            //   ),
-            //   label: 'Setting',
-            // ),
           ],
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeSelectedIndex,

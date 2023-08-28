@@ -272,10 +272,11 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                                  Get.snackbar("Kosong",
+                                              Get.snackbar("Kosong",
                                                   "Nomor telepon tidak boleh kosong !");
                                               return 'No telepon tidak boleh kosong';
                                             }
+                                            return null;
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -321,10 +322,11 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                                  Get.snackbar("Kosong",
+                                              Get.snackbar("Kosong",
                                                   "Deskripsi tidak boleh kosong !");
                                               return 'Deskripsi tidak boleh kosong';
                                             }
+                                            return null;
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -376,9 +378,6 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                   ),
                 ),
               ),
-            )
-            )
-            )
-            );
+            ))));
   }
 }

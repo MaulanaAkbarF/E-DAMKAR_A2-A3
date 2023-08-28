@@ -266,7 +266,7 @@ class LaporanKebakaran extends GetView<PelaporanController> {
                                               Get.snackbar("Kosong",
                                                   "Nomor telepon tidak boleh kosong !");
                                               return 'Nomor Telepon tidak boleh kosong';
-                                            }
+                                            }return null;
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
@@ -314,7 +314,7 @@ class LaporanKebakaran extends GetView<PelaporanController> {
                                               Get.snackbar("Kosong",
                                                   "Deskripsi tidak boleh kosong !");
                                               return 'Deskripsi tidak boleh kosong';
-                                            }
+                                            }return null;
                                           },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],

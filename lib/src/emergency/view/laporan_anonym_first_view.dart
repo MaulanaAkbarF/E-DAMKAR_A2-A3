@@ -49,13 +49,11 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                             color: Colors.grey.shade300, width: 1.2)),
                     child: TextFormField(
                       controller: controller.namaAnymCon,
-                      
                       keyboardType: TextInputType.name,
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
                           hintText: 'Contoh: ipul',
-                          
                           prefixIcon: Icon(Icons.account_box_rounded),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
@@ -92,12 +90,12 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                           Get.snackbar("Kosong", "NIK tidak boleh kosong !");
                           return 'NIK tidak boleh kosong';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
@@ -135,16 +133,15 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                       controller: controller.umurAnymCon,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          Get.snackbar(
-                              "Kosong", "Umur tidak boleh kosong !");
+                          Get.snackbar("Kosong", "Umur tidak boleh kosong !");
                           return 'Umur tidak boleh kosong';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       cursorColor: Colors.black,
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
