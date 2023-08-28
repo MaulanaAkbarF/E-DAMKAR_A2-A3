@@ -65,104 +65,6 @@ class ArtikelView extends GetView<ArtikleController> {
     Colors.red
   ];
 
-  // List<Widget> imageSliders = kat
-  //     .map(
-  //       (item) => Builder(builder: (context) {
-  //         return Container(
-  //           margin: EdgeInsets.symmetric(vertical: 10, horizontal: 3),
-  //           child: GestureDetector(
-  //             onTap: () {
-  //               Navigator.of(context).push(MaterialPageRoute(
-  //                   builder: (context) => DetailArtikel(
-  //                         idArtikel:
-  //                             artikelHigh![int.parse(item, radix: 16)].idBerita,
-  //                       )));
-  //             },
-  //             child: Column(
-  //               children: [
-  //                 Container(
-  //                   width: 400,
-  //                   height: 170,
-  //                   decoration: BoxDecoration(
-  //                       borderRadius: BorderRadius.circular(10),
-  //                       image: DecorationImage(
-  //                           image: NetworkImage(
-  //                               'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'),
-  //                           fit: BoxFit.cover)),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 10,
-  //                 ),
-  //                 Expanded(
-  //                   child: ListView.builder(
-  //                     itemCount: artikelHigh!.length,
-  //                     itemBuilder: (context, index) {
-  //                       return Container(
-  //                         margin:
-  //                             EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-  //                         child: Column(
-  //                           children: [
-  //                             Row(
-  //                               mainAxisSize: MainAxisSize.max,
-  //                               mainAxisAlignment:
-  //                                   MainAxisAlignment.spaceBetween,
-  //                               children: [
-  //                                 Text(
-  //                                   artikelHigh![index].adminDamkar.toString(),
-  //                                   style: TextStyle(
-  //                                       fontFamily: "font/inter_medium.tff",
-  //                                       color:
-  //                                           Color.fromARGB(255, 107, 114, 128),
-  //                                       fontSize: 14,
-  //                                       fontWeight: FontWeight.w500),
-  //                                 ),
-  //                                 Text(
-  //                                   artikelHigh![index].idBerita.toString(),
-  //                                   style: TextStyle(
-  //                                       fontFamily: "font/inter_medium.tff",
-  //                                       color:
-  //                                           Color.fromARGB(255, 107, 114, 128),
-  //                                       fontSize: 14,
-  //                                       fontWeight: FontWeight.w500),
-  //                                 )
-  //                               ],
-  //                             ),
-  //                             SizedBox(
-  //                               height: 10,
-  //                             ),
-  //                             Text(
-  //                               artikelHigh![index].judulBerita.toString(),
-  //                               style: TextStyle(
-  //                                   fontFamily: "font/inter_semibold.tff",
-  //                                   color: Color.fromARGB(255, 55, 65, 81),
-  //                                   fontSize: 18,
-  //                                   fontWeight: FontWeight.w600),
-  //                             ),
-  //                             SizedBox(
-  //                               height: 10,
-  //                             ),
-  //                             Text(
-  //                               artikelHigh![index].deskripsiBerita.toString(),
-  //                               maxLines: 3,
-  //                               style: TextStyle(
-  //                                   fontFamily: "font/inter_medium.tff",
-  //                                   color: Color.fromARGB(255, 107, 114, 128),
-  //                                   fontSize: 16,
-  //                                   fontWeight: FontWeight.w400),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       );
-  //                     },
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       }),
-  //     )
-  //     .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +96,6 @@ class ArtikelView extends GetView<ArtikleController> {
         body: SafeArea(
             child: Column(
           children: [
-            // for (final teks in teksLaporan)
-            //   for (final teksStyle in teksStyleLaporan)
             Align(
               alignment: FractionalOffset.topCenter,
               child: Padding(
@@ -213,50 +113,6 @@ class ArtikelView extends GetView<ArtikleController> {
                 ),
               ),
             ),
-            // Container(
-            //   padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-            //   child: Column(
-            //     children: <Widget>[
-            //       Container(
-            //         height: 40,
-            //         child: SingleChildScrollView(
-            //           scrollDirection: Axis.horizontal,
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.start,
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: <Widget>[
-            //               TextButton(
-            //                   style: controller.buttonStyle,
-            //                   onPressed: () => controller.getData,
-            //                   child: Text("Semua")),
-            //              const  SizedBox(
-            //                 width: 50,
-            //               ),
-            //               TextButton(
-            //                   style: controller.buttonStyle,
-            //                   onPressed: controller.postDataBerita,
-            //                   child: Text("Berita")),
-            //               const SizedBox(
-            //                 width: 50,
-            //               ),
-            //               TextButton(
-            //                   style: controller.buttonStyle,
-            //                   onPressed: controller.postDataEdukasi,
-            //                   child: Text("Edukasi")),
-            //              const SizedBox(
-            //                 width: 50,
-            //               ),
-            //               TextButton(
-            //                   style: controller.buttonStyle,
-            //                   onPressed: controller.postDataAgenda,
-            //                   child: Text("Agenda")),
-            //             ],
-            //           ),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
             const SizedBox(
               height: 5,
             ),
