@@ -12,7 +12,7 @@ class ArtikleController extends GetxController
   List<ArtikelDatum>? artikelElement = [];
   List<EdukasiDatum>? artikelEdukasi = [];
   List<dynamic> beritaE = [];
-  // late TabController tabController;
+  late TabController tabController;
 
   void pemabatasanLoad() {
     artikelElement!.clear();
@@ -24,7 +24,7 @@ class ArtikleController extends GetxController
 
   @override
   void onInit() {
-    // tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
     super.onInit();
     //   if (mounted) {
     getData();
@@ -68,6 +68,9 @@ class ArtikleController extends GetxController
   //     animateToMaxMin(max, min, direction, second, scrollController);
   //   });
   // }
+
+
+  
 
   void postDataBerita() async {
     var result = await APIClient().getData('getBerita');
