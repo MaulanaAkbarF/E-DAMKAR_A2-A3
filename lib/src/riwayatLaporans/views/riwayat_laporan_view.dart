@@ -190,7 +190,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                             text: "Ditangani",
                           ),
                           Tab(
-                            text: "selesai",
+                            text: "Selesai",
                           ),
                           Tab(
                             text: "Ditolak",

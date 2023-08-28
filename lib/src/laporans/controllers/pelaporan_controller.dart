@@ -266,10 +266,10 @@ class PelaporanController extends GetxController {
           case 1:
             namaBencanaCon.text = "Biawak";
             break;
-          case 3:
+          case 2:
             namaBencanaCon.text = "Lebah";
             break;
-          case 4:
+          case 3:
             namaBencanaCon.text = "Monyet";
             break;
         }
