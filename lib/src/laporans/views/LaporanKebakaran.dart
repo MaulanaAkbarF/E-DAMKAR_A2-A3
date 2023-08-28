@@ -261,11 +261,13 @@ class LaporanKebakaran extends GetView<PelaporanController> {
                                                 width: 1.2)),
                                         child: TextFormField(
                                           controller: controller.noTelpCon,
-                                          // validator: (value) {
-                                          //   if (value == null || value.isEmpty) {
-                                          //     return 'Nomor Telepon tidak boleh kosong';
-                                          //   }
-                                          // },
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              Get.snackbar("Kosong",
+                                                  "Nomor telepon tidak boleh kosong !");
+                                              return 'Nomor Telepon tidak boleh kosong';
+                                            }
+                                          },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
@@ -307,11 +309,13 @@ class LaporanKebakaran extends GetView<PelaporanController> {
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 6,
                                           controller: controller.deskripsiCon,
-                                          // validator: (value) {
-                                          //   if (value == null || value.isEmpty) {
-                                          //     return 'Deskripsi tidak boleh kosong';
-                                          //   }
-                                          // },
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              Get.snackbar("Kosong",
+                                                  "Deskripsi tidak boleh kosong !");
+                                              return 'Deskripsi tidak boleh kosong';
+                                            }
+                                          },
                                           cursorColor: Colors.black,
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(

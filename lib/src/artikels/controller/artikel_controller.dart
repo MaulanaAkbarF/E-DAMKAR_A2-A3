@@ -7,10 +7,12 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ArtikleController extends GetxController {
+class ArtikleController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   List<ArtikelDatum>? artikelElement = [];
   List<EdukasiDatum>? artikelEdukasi = [];
   List<dynamic> beritaE = [];
+  // late TabController tabController;
 
   void pemabatasanLoad() {
     artikelElement!.clear();
@@ -22,6 +24,7 @@ class ArtikleController extends GetxController {
 
   @override
   void onInit() {
+    // tabController = TabController(length: 4, vsync: this, initialIndex: 0);
     super.onInit();
     //   if (mounted) {
     getData();

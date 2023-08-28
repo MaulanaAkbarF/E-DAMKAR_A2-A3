@@ -19,5 +19,5 @@ abstract class URLWEBAPI {
   // static const urlHost = '$protocolHttp$host$portApi';
   static const apiUrl = '$urlHost$type/';
 
-  static const wsUrl = protocolWs + host + portWs;
+  static const wsUrl = "wss://wsdamkarngk.my.id";
 }
