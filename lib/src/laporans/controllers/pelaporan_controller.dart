@@ -77,45 +77,52 @@ class PelaporanController extends GetxController {
     DateTime date = DateTime(now.year, now.month, now.day);
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
     //eksekuis post kirim photo
-    await APIClient().postMulti('addImage', image, imagePath, title);
-    var result = await APIClient().postData('addPelaporan', {
-      'kategori_laporan_id': dataArgs['idKategori'].toString(),
-      'user_listdata_id': iduser.toString(),
-      'deskripsi_laporan': deskripsiCon.text,
-      'nama_hewan': '-',
-      'waktu_pelaporan': tdata,
-      'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
-      'urgensi':
-          dataArgs['idKategori'] != 1 ? namaBencanaCon.text : "kebakaran",
-      'alamat': alamat,
-      'latitude': dataArgs["latitude"].toString(),
-      'longitude': dataArgs["longitude"].toString(),
-      'bukti_foto_laporan_pengguna': title,
-    });
-    _kirimNotifikasi();
-    if (result != null) {
-      Get.snackbar("Laporan Berhasil dikirim!",
-          "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!",
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.green,
-          colorText: Colors.white);
-      // Get.back();
-      Get.offAllNamed(Routes.dashboard, arguments: 2);
-      // FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
-      //     "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (BuildContext context) => const AppMenu()));
+    if (imagePath == null) {
+      Get.snackbar(
+          "Gambar bukti Kosong !", "Harus melampirkan bukti penanganan",
+          backgroundColor: red1, colorText: white);
+      showSpinner.value = false;
     } else {
-      // FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
-      //     "Lakukan Emergency Call jika terdapat kenadala");
+      await APIClient().postMulti('addImage', image, imagePath, title);
+      var result = await APIClient().postData('addPelaporan', {
+        'kategori_laporan_id': dataArgs['idKategori'].toString(),
+        'user_listdata_id': iduser.toString(),
+        'deskripsi_laporan': deskripsiCon.text,
+        'nama_hewan': '-',
+        'waktu_pelaporan': tdata,
+        'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
+        'urgensi':
+            dataArgs['idKategori'] != 1 ? namaBencanaCon.text : "kebakaran",
+        'alamat': alamat,
+        'latitude': dataArgs["latitude"].toString(),
+        'longitude': dataArgs["longitude"].toString(),
+        'bukti_foto_laporan_pengguna': title,
+      });
+      _kirimNotifikasi();
+      if (result != null) {
+        Get.snackbar("Laporan Berhasil dikirim!",
+            "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!",
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+            backgroundColor: Colors.green,
+            colorText: Colors.white);
+        // Get.back();
+        Get.offAllNamed(Routes.dashboard, arguments: 2);
+        // FloatNotif().snackBar(context, "Laporan Berhasil dikirim!",
+        //     "Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!");
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //     builder: (BuildContext context) => const AppMenu()));
+      } else {
+        // FloatNotif().snackBarFail(context, "Laporan gagal dikirim!",
+        //     "Lakukan Emergency Call jika terdapat kenadala");
 
-      Get.snackbar("Laporan gagal dikirim!",
-          "Lakukan Emergency Call jika terdapat kenadala");
+        Get.snackbar("Laporan gagal dikirim!",
+            "Lakukan Emergency Call jika terdapat kenadala");
+      }
+      showSpinner.value = false;
     }
-    showSpinner.value = false;
   }
 
   Future getImage() async {
@@ -129,6 +136,7 @@ class PelaporanController extends GetxController {
       update();
     } else {
       print('no image selected');
+      Get.snackbar("Foto tidak boleh kosong", "Masukan foto bukti penanganan");
     }
   }
 

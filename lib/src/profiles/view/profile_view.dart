@@ -5,10 +5,13 @@ import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
@@ -127,7 +130,10 @@ class ProfileView extends GetView<ProfileController> {
                   )),
               horizontalTitleGap: 0,
               trailing: GestureDetector(
-                onTap: controller.goToResetPass,
+                onTap: () {
+                  controller.goToResetPass;
+                  print("nilai id :" );
+                },
                 child: Icon(Icons.chevron_right),
               ),
             ),

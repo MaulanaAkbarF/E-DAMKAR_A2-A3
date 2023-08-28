@@ -11,6 +11,7 @@ class UbahSandiController extends GetxController {
   var passwordVisible2 = true.obs;
 
   var pwOld = "";
+  var id = "";
 
   // late final _id;
 
@@ -21,10 +22,18 @@ class UbahSandiController extends GetxController {
     });
   }
 
+  void getId() async {
+    var dataId = DataUser().getUserId();
+    dataId.then((value) {
+      id = value.toString();
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
     getUserpw();
+    getId();
   }
 
   // final _formKey = GlobalKey<FormState>();
@@ -43,15 +52,20 @@ class UbahSandiController extends GetxController {
   postUbahSandi() async {
     if (checkInput()) {
       var result = await APIClient().postData('user/password', {
-        // "id": id,
-        // "password_lama": pwLama,
-        // "password_baru": pwBaru
+        "id": id.toString(),
+        "password_lama": pwOld,
+        "password_baru": newPasswordController.text
       }).catchError((err) {});
 
       if (result != null && result != false) {
         var data = changePwFromJson(result);
         if (data.kode == "200") {
-        } else {}
+          Get.snackbar("Berhasil",
+              "Password anda berhasil diubah!, gunakan password baru untuk login!");
+        } else {
+          Get.snackbar("Gagal", "Password gagal diubah!");
+          
+        }
       }
     }
   }

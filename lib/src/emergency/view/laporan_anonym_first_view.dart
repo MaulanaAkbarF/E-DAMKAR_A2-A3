@@ -52,7 +52,7 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
                           hintText: 'Contoh: ipul',
-                          prefixIcon: Icon(Icons.phone),
+                          prefixIcon: Icon(Icons.account_box_rounded),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
                     ),
@@ -88,7 +88,7 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
                           hintText: '',
-                          prefixIcon: Icon(Icons.phone),
+                          prefixIcon: Icon(Icons.pin),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
                     ),
@@ -124,7 +124,7 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                       style: StyleTxt.m(size: 16),
                       decoration: const InputDecoration(
                           hintText: '29',
-                          prefixIcon: Icon(Icons.phone),
+                          prefixIcon: Icon(Icons.person_2_outlined),
                           contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
                           border: InputBorder.none),
                     ),
