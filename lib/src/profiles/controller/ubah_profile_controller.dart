@@ -16,6 +16,7 @@ class EditProfileController extends GetxController {
   var UserPic = "".obs;
   var nohp = "".obs;
   var iduser = 0;
+  RxBool showSpinner = false.obs;
 
   Rx<File?> imageShow = Rx<File?>(null);
   String? namaFile;
@@ -94,6 +95,7 @@ class EditProfileController extends GetxController {
   }
 
   void pushUpdate() async {
+    showSpinner.value = true;
     var stream = http.ByteStream(imageShow.value!.openRead());
     stream.cast();
     // var length = await image!.length();
@@ -113,6 +115,7 @@ class EditProfileController extends GetxController {
     await request.send();
     Get.snackbar("berhasil", 'perubahan foto profile berhasil');
     Get.back();
+    showSpinner.value = false;
   }
 
   // toss() {

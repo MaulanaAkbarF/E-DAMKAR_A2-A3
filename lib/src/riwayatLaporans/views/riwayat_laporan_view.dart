@@ -243,110 +243,113 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataElement!.length,
-            itemBuilder: (context, index) {
-              var date = controller.dataElement![index].tanggal.toString();
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller
-                          .goToDetail(controller.dataElement![index].idLaporan),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  controller.dataElement![index].kategoriLaporan
-                                      .toString(),
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
-                                    ),
-                                    Flexible(
-                                        child: Text(
-                                      controller.dataElement![index].alamat
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                itemCount: controller.dataElement!.length,
+                itemBuilder: (context, index) {
+                  var date = controller.dataElement![index].tanggal.toString();
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(
+                              controller.dataElement![index].idLaporan),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      controller
+                                          .dataElement![index].kategoriLaporan
                                           .toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            controller.dataElement![index]
-                                                .statusRiwayat),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            controller.dataElement![index]
-                                                .statusRiwayat
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                      style: StyleTxt.sb(size: 15),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          controller.dataElement![index].alamat
+                                              .toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                controller.dataElement![index]
+                                                    .statusRiwayat),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                controller.dataElement![index]
+                                                    .statusRiwayat
+                                                    .toString(),
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 
   Widget menunggu() {
@@ -355,106 +358,108 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataMenunggu!.value.data!.length,
-            itemBuilder: (context, index) {
-              var date = controller.dataMenunggu!.value.data![index].tanggal
-                  .toString();
-              var data = controller.dataMenunggu!.value.data![index];
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller.goToDetail(data.idLaporan!),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  data.kategoriLaporan!,
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                itemCount: controller.dataMenunggu!.value.data!.length,
+                itemBuilder: (context, index) {
+                  var date = controller.dataMenunggu!.value.data![index].tanggal
+                      .toString();
+                  var data = controller.dataMenunggu!.value.data![index];
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(data.idLaporan!),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      data.kategoriLaporan!,
+                                      style: StyleTxt.sb(size: 15),
                                     ),
-                                    Flexible(
-                                        child: Text(
-                                      data.alamat!,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            data.statusRiwayat!),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            data.statusRiwayat!,
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          data.alamat!,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                data.statusRiwayat!),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                data.statusRiwayat!,
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 
   Widget proses() {
@@ -463,106 +468,108 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataProses!.value.data!.length,
-            itemBuilder: (context, index) {
-              var date =
-                  controller.dataProses!.value.data![index].tanggal.toString();
-              var data = controller.dataProses!.value.data![index];
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller.goToDetail(data.idLaporan!),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  data.kategoriLaporan.toString(),
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                itemCount: controller.dataProses!.value.data!.length,
+                itemBuilder: (context, index) {
+                  var date = controller.dataProses!.value.data![index].tanggal
+                      .toString();
+                  var data = controller.dataProses!.value.data![index];
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(data.idLaporan!),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      data.kategoriLaporan.toString(),
+                                      style: StyleTxt.sb(size: 15),
                                     ),
-                                    Flexible(
-                                        child: Text(
-                                      data.alamat.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            data.statusRiwayat!),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            data.statusRiwayat.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          data.alamat.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                data.statusRiwayat!),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                data.statusRiwayat.toString(),
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 
   Widget ditangani() {
@@ -571,106 +578,109 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataDitangani!.value.data!.length,
-            itemBuilder: (context, index) {
-              var date = controller.dataDitangani!.value.data![index].tanggal
-                  .toString();
-              var data = controller.dataDitangani!.value.data![index];
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller.goToDetail(data.idLaporan!),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  data.kategoriLaporan.toString(),
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                itemCount: controller.dataDitangani!.value.data!.length,
+                itemBuilder: (context, index) {
+                  var date = controller
+                      .dataDitangani!.value.data![index].tanggal
+                      .toString();
+                  var data = controller.dataDitangani!.value.data![index];
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(data.idLaporan!),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      data.kategoriLaporan.toString(),
+                                      style: StyleTxt.sb(size: 15),
                                     ),
-                                    Flexible(
-                                        child: Text(
-                                      data.alamat.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            data.statusRiwayat!),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            data.statusRiwayat.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          data.alamat.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                data.statusRiwayat!),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                data.statusRiwayat.toString(),
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 
   Widget selesai() {
@@ -679,106 +689,108 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataSelesai!.value.data!.length,
-            itemBuilder: (context, index) {
-              var date =
-                  controller.dataSelesai!.value.data![index].tanggal.toString();
-              var data = controller.dataSelesai!.value.data![index];
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller.goToDetail(data.idLaporan!),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  data.kategoriLaporan.toString(),
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                itemCount: controller.dataSelesai!.value.data!.length,
+                itemBuilder: (context, index) {
+                  var date = controller.dataSelesai!.value.data![index].tanggal
+                      .toString();
+                  var data = controller.dataSelesai!.value.data![index];
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(data.idLaporan!),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      data.kategoriLaporan.toString(),
+                                      style: StyleTxt.sb(size: 15),
                                     ),
-                                    Flexible(
-                                        child: Text(
-                                      data.alamat.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            data.statusRiwayat!),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            data.statusRiwayat.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          data.alamat.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                data.statusRiwayat!),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                data.statusRiwayat.toString(),
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 
   Widget ditolak() {
@@ -787,105 +799,108 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
-        : ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.dataDitolak!.value.data!.length,
-            itemBuilder: (context, index) {
-              var date =
-                  controller.dataDitolak!.value.data![index].tanggal.toString();
-              var data = controller.dataDitolak!.value.data![index];
-              final splitDate = date.split('-');
-              return Padding(
-                  padding: EdgeInsets.all(
-                    10,
-                  ),
-                  child: GestureDetector(
-                      onTap: () => controller.goToDetail(data.idLaporan!),
-                      child: Row(children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(splitDate[2], style: StyleTxt.m()),
-                            Text(controller.monthString(splitDate[1]),
-                                style: StyleTxt.m()),
-                            Text(splitDate[0], style: StyleTxt.m()),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 5,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: grey1,
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                            child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 15),
-                                child: Text(
-                                  data.kategoriLaporan.toString(),
-                                  style: StyleTxt.sb(size: 15),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: orange1,
+        : RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: ListView.builder(
+                
+                itemCount: controller.dataDitolak!.value.data!.length,
+                itemBuilder: (context, index) {
+                  var date = controller.dataDitolak!.value.data![index].tanggal
+                      .toString();
+                  var data = controller.dataDitolak!.value.data![index];
+                  final splitDate = date.split('-');
+                  return Padding(
+                      padding: EdgeInsets.all(
+                        10,
+                      ),
+                      child: GestureDetector(
+                          onTap: () => controller.goToDetail(data.idLaporan!),
+                          child: Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(splitDate[2], style: StyleTxt.m()),
+                                Text(controller.monthString(splitDate[1]),
+                                    style: StyleTxt.m()),
+                                Text(splitDate[0], style: StyleTxt.m()),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 5,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: grey1,
+                                  borderRadius: BorderRadius.circular(5)),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: black),
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 15),
+                                    child: Text(
+                                      data.kategoriLaporan.toString(),
+                                      style: StyleTxt.sb(size: 15),
                                     ),
-                                    Flexible(
-                                        child: Text(
-                                      data.alamat.toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      // padding: EdgeInsets.symmetric(
-                                      //     horizontal: paddingHorozontal1),
-                                      child: Card(
-                                        color: controller.setColorStatus(
-                                            data.statusRiwayat!),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            data.statusRiwayat.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: StyleTxt.m(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.location_on_outlined,
+                                          color: orange1,
+                                        ),
+                                        Flexible(
+                                            child: Text(
+                                          data.alamat.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          // padding: EdgeInsets.symmetric(
+                                          //     horizontal: paddingHorozontal1),
+                                          child: Card(
+                                            color: controller.setColorStatus(
+                                                data.statusRiwayat!),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: Text(
+                                                data.statusRiwayat.toString(),
+                                                textAlign: TextAlign.center,
+                                                style: StyleTxt.m(),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ])
-                            ],
-                          ),
-                        ))
-                      ])));
-            }));
+                                      ])
+                                ],
+                              ),
+                            ))
+                          ])));
+                })));
   }
 }

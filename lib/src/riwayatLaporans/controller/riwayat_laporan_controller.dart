@@ -191,6 +191,15 @@ class RiwayatLaporanController extends GetxController
     }
   }
 
+  Future<void> onRefresh() async {
+    getDataRiwayat();
+    getRiwayatMenunggu();
+    getRiwayatProses();
+    getRiwayatDitangani();
+    getRiwayatSelesai();
+    getRiwayatDitolak();
+  }
+
   // getRiwayatEmergency(String id) async {
   //   var result = await APIClient().getData('filterLapEmergency/$id');
   //   if (result != null) {
