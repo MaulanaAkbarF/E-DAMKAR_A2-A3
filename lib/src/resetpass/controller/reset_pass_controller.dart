@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class ResetPassController extends GetxController {
   final notelp = TextEditingController().obs;
-  // final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
@@ -35,7 +35,7 @@ class ResetPassController extends GetxController {
   }
 
   Future<bool> validasiNomer(String noHP) async {
-    var apiUrl = Uri.parse('http://192.168.225.39:8000/api/getNoHp/$noHP');
+    var apiUrl = Uri.parse('https://edamkar.wsjti.id/api/getNoHp/$noHP');
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
@@ -54,6 +54,9 @@ class ResetPassController extends GetxController {
   }
 
   void konfirmasiData() async {
+    if (formKey.currentState!.validate()){
+
+    
     bool isnumberValid = await validasiNomer(noHP);
     if (isnumberValid) {
       _kirimNotifikasi();
@@ -88,6 +91,7 @@ class ResetPassController extends GetxController {
       //     textAlign: TextAlign.center,
       //   )),
       // );
+    }
     }
   }
 }

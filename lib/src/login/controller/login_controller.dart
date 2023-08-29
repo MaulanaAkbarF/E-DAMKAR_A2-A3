@@ -72,7 +72,8 @@ class LoginController extends GetxController {
               data.data!.namaLengkap.toString(),
               data.data!.noHp.toString(),
               data.token.toString(),
-              data.data!.fotoUser.toString());
+              data.data!.fotoUser.toString(),
+              data.data!.password.toString());
           Get.snackbar(
             
               "Berhasil Login", "Selamat Datang ${data.data!.namaLengkap}",

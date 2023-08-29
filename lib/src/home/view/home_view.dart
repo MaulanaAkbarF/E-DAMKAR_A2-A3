@@ -9,6 +9,7 @@ import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class HomePageView extends GetView<HomeController> {
   const HomePageView({Key? key}) : super(key: key);
@@ -108,7 +109,10 @@ class HomePageView extends GetView<HomeController> {
                       horizontal: paddingHorozontal1,
                       vertical: paddingVertical1),
                   child: ElevatedButton(
-                      onPressed: () => controller.emercall(),
+                      onPressed: () {
+                        controller.emercall();
+                        // Navigator.pushNamed(context, '/laporan');
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: red1,
                           shape: RoundedRectangleBorder(
@@ -140,7 +144,10 @@ class HomePageView extends GetView<HomeController> {
                       padding:
                           EdgeInsets.symmetric(horizontal: paddingHorozontal1),
                       child: ElevatedButton(
-                          onPressed: controller.emerCallWA,
+                          onPressed: () {
+                            controller.emerCallWA;
+                            // Navigator.pushNamed(context, '/laporan');
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: green1,
                               shape: RoundedRectangleBorder(
