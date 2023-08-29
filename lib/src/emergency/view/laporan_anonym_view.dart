@@ -205,9 +205,12 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             Get.snackbar("Kosong",
-                                                "Urgensi tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                                "Urgensi tidak boleh kosong !",
+                                                backgroundColor: red1,
+                                                colorText: white);
                                             return 'Urgensi tidak boleh kosong';
                                           }
+                                          return null;
                                         },
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
@@ -250,15 +253,17 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             Get.snackbar("Kosong",
-                                                "Nomor Telepon tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                                "Nomor Telepon tidak boleh kosong !",
+                                                backgroundColor: red1,
+                                                colorText: white);
                                             return 'Nomor Telepon tidak boleh kosong';
                                           }
+                                          return null;
                                         },
                                         keyboardType: TextInputType.number,
                                         inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
@@ -302,9 +307,12 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             Get.snackbar("Kosong",
-                                                "Deskripsi tidak boleh kosong !",backgroundColor: red1, colorText: white);
+                                                "Deskripsi tidak boleh kosong !",
+                                                backgroundColor: red1,
+                                                colorText: white);
                                             return 'Deskripsi tidak boleh kosong';
                                           }
+                                          return null;
                                         },
                                         cursorColor: Colors.black,
                                         style: teksStyle['SemiBold1'],

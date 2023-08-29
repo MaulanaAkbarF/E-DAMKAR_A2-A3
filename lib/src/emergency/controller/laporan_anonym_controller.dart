@@ -77,30 +77,24 @@ class LaporanAnonymController extends GetxController {
       Get.snackbar("Gambar bukti Kosong !", "Harus melampirkan bukti kejadian",
           backgroundColor: red1, colorText: white);
       showSpinner.value = false;
-
-    } else if (namaBencanaCon == null || namaBencanaCon == "" || namaBencanaCon.text.isEmpty) {
+    } else if (namaBencanaCon == "" || namaBencanaCon.text.isEmpty) {
       Get.snackbar("Urgensi Kosong !", "Harap isikan urgensi",
           backgroundColor: red1, colorText: white);
       showSpinner.value = false;
-
-    } else if (noTelpCon == null || noTelpCon == "" || noTelpCon.text.isEmpty) {
+    } else if (noTelpCon == "" || noTelpCon.text.isEmpty) {
       Get.snackbar("Nomor telepon Kosong !", "Harap isikan nomor telepon anda",
           backgroundColor: red1, colorText: white);
       showSpinner.value = false;
-
-    }else if (noTelpCon.text.length < 9 || noTelpCon.text.length > 14) {
-      Get.snackbar("Input nomor telepon salah!", "Input No.Telp harus lebih dari 9 dan kurang dari 14",
+    } else if (noTelpCon.text.length < 9 || noTelpCon.text.length > 14) {
+      Get.snackbar("Input nomor telepon salah!",
+          "Input No.Telp harus lebih dari 9 dan kurang dari 14",
           backgroundColor: red1, colorText: white);
       showSpinner.value = false;
-
-    } 
-    else if (deskripsiCon == null || deskripsiCon == "" || deskripsiCon.text.isEmpty) {
+    } else if (deskripsiCon == "" || deskripsiCon.text.isEmpty) {
       Get.snackbar("Deskripsi Kosong !", "Harap isikan deskripsi laporan anda",
           backgroundColor: red1, colorText: white);
       showSpinner.value = false;
-
-    } 
-    else {
+    } else {
       await APIClient().postMulti('addImage', rxImage, imagePath, title);
       var result2 = await APIClient().postData('addPelaporan', {
         'kategori_laporan_id': "5",
