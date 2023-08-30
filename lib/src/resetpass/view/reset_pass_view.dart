@@ -1,5 +1,6 @@
 import 'package:edamkar_1/src/resetpass/controller/reset_pass_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 final List<Map> teksResetPass = [
@@ -91,51 +92,58 @@ class ResetPassView extends GetView<ResetPassController> {
                                   style: teksStyle['Thin1']),
                             ),
                           ),
-                          Align(
-                            alignment: FractionalOffset.topLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.2)),
-                                child: TextFormField(
-                                  controller: controller.notelp.value,
-                                  // onChanged: (value) async {
-                                  //   bool isnumberValid =
-                                  //       await validasiNomer(value);
-                                  //   if (isnumberValid) {
-                                  //     setState(() {
-                                  //       noHP = value.toString();
-                                  //     });
-                                  //   } else {
-                                  //     setState(() {
-                                  //       noHP = "";
-                                  //     });
-                                  //   }
-                                  // },
-                                  // validator: (value) {
-                                  //   if (value == null || value.isEmpty) {
-                                  //     return 'Nomor WhatsApp tidak boleh kosong';
-                                  //   } else if (value.length > 13) {
-                                  //     return 'no telepon terlalu panjang';
-                                  //   } else if (value.length < 9) {
-                                  //     return 'no telepon terlalu pendek';
-                                  //   }
-                                  // },
-                                  cursorColor: Colors.black,
-                                  style: teksStyle['SemiBold1'],
-                                  decoration: InputDecoration(
-                                      hintText: teks['EmailHint'],
-                                      prefixIcon: Icon(Icons.phone),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(10, 13, 10, 7),
-                                      border: InputBorder.none),
+                          Form(
+                            key: controller.formKey,
+                            child: Align(
+                              alignment: FractionalOffset.topLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.2)),
+                                  child: TextFormField(
+                                    controller: controller.notelp.value,
+                                    // onChanged: (value) async {
+                                    //   bool isnumberValid =
+                                    //       await validasiNomer(value);
+                                    //   if (isnumberValid) {
+                                    //     setState(() {
+                                    //       noHP = value.toString();
+                                    //     });
+                                    //   } else {
+                                    //     setState(() {
+                                    //       noHP = "";
+                                    //     });
+                                    //   }
+                                    // },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Nomor WhatsApp tidak boleh kosong';
+                                      } else if (value.length > 13) {
+                                        return 'no telepon terlalu panjang';
+                                      } else if (value.length < 9) {
+                                        return 'no telepon terlalu pendek';
+                                      }
+                                    },
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    cursorColor: Colors.black,
+                                    style: teksStyle['SemiBold1'],
+                                    decoration: InputDecoration(
+                                        hintText: teks['EmailHint'],
+                                        prefixIcon: Icon(Icons.phone),
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        border: InputBorder.none),
+                                  ),
                                 ),
                               ),
                             ),
@@ -152,9 +160,7 @@ class ResetPassView extends GetView<ResetPassController> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () {
-                                    // if (_formKey.currentState!.validate()) {
-                                    //   konfirmasiData();
-                                    // }
+                                    controller.konfirmasiData();
                                   },
                                   child: Container(
                                     height: 50,

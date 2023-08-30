@@ -4,7 +4,7 @@ class DataUser {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> addUser(int? userid, String username, String nama, String noHp,
-      String token, String gambar) async {
+      String token, String gambar, String pw) async {
     final SharedPreferences prefs = await _prefs;
     await prefs.setInt('userId', userid!);
     await prefs.setString('username', username);
@@ -12,6 +12,7 @@ class DataUser {
     await prefs.setString('noHp', noHp);
     await prefs.setString('token', token);
     await prefs.setString('gambar', gambar);
+    await prefs.setString('password', pw);
   }
 
   Future<void> udpateUser(String nama, String noHp, String gambar) async {

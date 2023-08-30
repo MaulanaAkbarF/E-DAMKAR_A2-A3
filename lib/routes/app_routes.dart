@@ -9,7 +9,12 @@ abstract class Routes {
 
   //login
   static const login = '/login';
+
+  //lupa password
   static const resetPass = '/resetPass';
+  static const otpResetpw = '/otpResetPw';
+  static const remakePw = '/remakePw';
+  static const succesResetPw = '/succesResetPw';
 
   //register
   static const register = '/register';

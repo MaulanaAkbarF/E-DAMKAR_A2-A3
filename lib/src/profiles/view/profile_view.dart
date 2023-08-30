@@ -60,7 +60,7 @@ class ProfileView extends GetView<ProfileController> {
               child: Obx(() => ListTile(
                     leading: controller.image(),
                     title: Text(controller.userName.value),
-                    subtitle: Text(controller.noHp.value),
+                    subtitle: Text(controller.id.value.toString()),
                     trailing: GestureDetector(
                       onTap: () => controller.goTOUpdateProfil(),
                       child: Text(

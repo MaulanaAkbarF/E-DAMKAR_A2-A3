@@ -1,5 +1,6 @@
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/models/changePw.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,36 +11,31 @@ class UbahSandiController extends GetxController {
   var passwordVisible1 = true.obs;
   var passwordVisible2 = true.obs;
 
-  var pwOld = "";
-  var id = "";
+  var pwOld = "".obs;
+  var pwLama = "superone";
+  var id = 0.obs;
 
   // late final _id;
 
-  void getUserpw() async {
-    var dataPw = DataUser().getPassword();
-    dataPw.then((value) {
-      pwOld = value.toString();
-    });
-  }
-
-  void getId() async {
-    var dataId = DataUser().getUserId();
-    dataId.then((value) {
-      id = value.toString();
-    });
-  }
-
   @override
   void onInit() {
+    print("id : " + id.toString());
+    print("pw lama :" + pwOld.toString());
+    getUser();
+
     super.onInit();
-    getUserpw();
-    getId();
   }
 
-  // final _formKey = GlobalKey<FormState>();
-  final oldPasswordController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  void getUser() async {
+    DataUser().getPassword().then((value) => pwOld.value = value);
+    DataUser().getUserId().then((value) => id.value = value);
+  }
+
+  final formKey = GlobalKey<FormState>();
+
+  final oldPasswordController = TextEditingController().obs;
+  final newPasswordController = TextEditingController().obs;
+  final confirmPasswordController = TextEditingController().obs;
 
   showHidePass() => passwordVisible.value = !passwordVisible.value;
   showHidePass2() => passwordVisible1.value = !passwordVisible1.value;
@@ -50,23 +46,35 @@ class UbahSandiController extends GetxController {
   }
 
   postUbahSandi() async {
-    if (checkInput()) {
+    if (formKey.currentState!.validate()) {
+      
+     if (newPasswordController.value.text ==
+        confirmPasswordController.value.text) {
       var result = await APIClient().postData('user/password', {
         "id": id.toString(),
-        "password_lama": pwOld,
-        "password_baru": newPasswordController.text
+        "password_lama": oldPasswordController.value.text,
+        "password_baru": newPasswordController.value.text
       }).catchError((err) {});
 
       if (result != null && result != false) {
+        print("nilai result" + result.toString());
         var data = changePwFromJson(result);
-        if (data.kode == "200") {
+        if (data.status == null ||data.status == "gagal" || data.kode != "200") {
+          Get.snackbar("Gagal", "Password anda gagal diubah!. Coba cek kembali inputan anda!");
+          print("eror code : " + data.kode.toString());
+          // throw Exception('error' + data.status.toString());
+        } else if (data.status == "berhasil" || data.kode == "200") {
           Get.snackbar("Berhasil",
-              "Password anda berhasil diubah!, gunakan password baru untuk login!");
-        } else {
-          Get.snackbar("Gagal", "Password gagal diubah!");
-          
+              "Password berhasil diubah!, gunakan password baru untuk login !");
+          Get.offNamed(Routes.dashboard);
         }
+      } else {
+        Get.snackbar("Kesalahan", "Terdapat kesalahan dalam ubah passwor!");
       }
+    } else {
+      Get.snackbar(
+          "Gagal", "Konfirmasi password tidak sama dengan password baru !");
+    }
     }
   }
 

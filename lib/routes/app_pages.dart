@@ -34,6 +34,11 @@ import 'package:edamkar_1/src/register/bindings/otp_verifikasi_binding.dart';
 import 'package:edamkar_1/src/register/bindings/register_binding.dart';
 import 'package:edamkar_1/src/register/view/otp_verification_view.dart';
 import 'package:edamkar_1/src/register/view/register_view.dart';
+import 'package:edamkar_1/src/resetpass/bindings/otp_reset_pw_binding.dart';
+import 'package:edamkar_1/src/resetpass/bindings/remake_pw_binding.dart';
+import 'package:edamkar_1/src/resetpass/view/UpdatePasswordSuccess.dart';
+import 'package:edamkar_1/src/resetpass/view/otp_resetpass_view.dart';
+import 'package:edamkar_1/src/resetpass/view/remake_pass_view.dart';
 import 'package:edamkar_1/src/resetpass/view/reset_pass_view.dart';
 import 'package:edamkar_1/src/riwayatLaporans/bindings/detail_riwayat_laporan_binding.dart';
 import 'package:edamkar_1/src/riwayatLaporans/bindings/track_binding.dart';
@@ -113,10 +118,27 @@ class AppPages {
       page: () => const OtpVerificationView(),
       binding: VerificationSignUpBinding(),
     ),
+
+    //lupa pw
     GetPage(
         name: Routes.resetPass,
         page: () => const ResetPassView(),
         binding: ResetPassBinding()),
+
+        GetPage(
+        name: Routes.otpResetpw,
+        page: () => const OtpResetPasswordView(),
+        binding: OtpResetPassBinding()),
+
+        GetPage(
+        name: Routes.remakePw,
+        page: () => const RemakePassView(),
+        binding: RemakePassBinding()),
+
+        GetPage(
+        name: Routes.succesResetPw,
+        page: () => UpdatePasswordSuccess(),
+       ),
 
     //Laporan
     GetPage(

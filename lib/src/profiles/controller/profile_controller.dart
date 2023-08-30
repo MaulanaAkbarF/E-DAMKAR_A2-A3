@@ -9,6 +9,7 @@ class ProfileController extends GetxController {
   // var noTelp = '08..'.obs;
   var url_photo = "".obs;
   var noHp = "0800000000001".obs;
+  var id = 0.obs;
 
   @override
   void onInit() {
@@ -21,6 +22,7 @@ class ProfileController extends GetxController {
     DataUser().getNama().then((value) => userName.value = value);
     DataUser().getNoHp().then((value) => noHp.value = value);
     DataUser().getGambar().then((value) => url_photo.value = value);
+    DataUser().getUserId().then((value) => id.value = value);
   }
 
   CircleAvatar image() {
