@@ -130,6 +130,7 @@ class ResetPassView extends GetView<ResetPassController> {
                                       } else if (value.length < 9) {
                                         return 'no telepon terlalu pendek';
                                       }
+                                      return null;
                                     },
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[

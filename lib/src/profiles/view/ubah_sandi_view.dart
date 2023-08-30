@@ -27,7 +27,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
           ),
         ),
         body: Form(
-          key : controller.formKey,
+          key: controller.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,12 +62,11 @@ class UbahSandiView extends GetView<UbahSandiController> {
                           controller: controller.oldPasswordController.value,
                           obscureText: controller.passwordVisible.value,
                           validator: (value) {
-                            if (controller.oldPasswordController.value.text ==
-                                    null ||
-                                controller
-                                    .oldPasswordController.value.text.isEmpty) {
+                            if (controller
+                                .oldPasswordController.value.text.isEmpty) {
                               return "Paswword lama haru di isi";
                             }
+                            return null;
                           },
                           cursorColor: Colors.black,
                           style: TextStyle(),
@@ -119,16 +118,15 @@ class UbahSandiView extends GetView<UbahSandiController> {
                         () => TextFormField(
                           controller: controller.newPasswordController.value,
                           validator: (value) {
-                            if (controller.newPasswordController.value.text ==
-                                    null ||
-                                controller
-                                    .newPasswordController.value.text.isEmpty) {
+                            if (controller
+                                .newPasswordController.value.text.isEmpty) {
                               return "Paswword baru haru di isi";
                             } else if (controller
                                     .newPasswordController.value.text.length <
                                 8) {
                               return "Password baru anda harus lebih dari 8 karakter !";
                             }
+                            return null;
                           },
                           obscureText: controller.passwordVisible1.value,
                           cursorColor: Colors.black,
@@ -145,7 +143,8 @@ class UbahSandiView extends GetView<UbahSandiController> {
                                 color: Color.fromARGB(255, 143, 143, 143),
                               ),
                               suffixIconColor: Colors.black,
-                              contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(10, 13, 10, 7),
                               border: InputBorder.none),
                         ),
                       ),
@@ -179,18 +178,18 @@ class UbahSandiView extends GetView<UbahSandiController> {
                               color: Colors.grey.shade300, width: 1.2)),
                       child: Obx(
                         () => TextFormField(
-                          controller: controller.confirmPasswordController.value,
+                          controller:
+                              controller.confirmPasswordController.value,
                           validator: (value) {
-                            if (controller.confirmPasswordController.value.text ==
-                                    null ||
-                                controller.confirmPasswordController.value.text
-                                    .isEmpty) {
+                            if (controller
+                                .confirmPasswordController.value.text.isEmpty) {
                               return "Konfirmasi password haru di isi";
-                            } else if (controller
-                                    .confirmPasswordController.value.text.length <
+                            } else if (controller.confirmPasswordController
+                                    .value.text.length <
                                 8) {
                               return "Password baru anda harus lebih dari 8 karakter!";
                             }
+                            return null;
                           },
                           obscureText: controller.passwordVisible2.value,
                           cursorColor: Colors.black,
@@ -205,7 +204,8 @@ class UbahSandiView extends GetView<UbahSandiController> {
                                 color: Color.fromARGB(255, 143, 143, 143),
                               ),
                               suffixIconColor: Colors.black,
-                              contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(10, 13, 10, 7),
                               border: InputBorder.none),
                         ),
                       ),

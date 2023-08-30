@@ -59,7 +59,7 @@ class UbahSandiController extends GetxController {
       if (result != null && result != false) {
         print("nilai result" + result.toString());
         var data = changePwFromJson(result);
-        if (data.status == null ||data.status == "gagal" || data.kode != "200") {
+        if (data.status == "gagal" || data.kode != "200") {
           Get.snackbar("Gagal", "Password anda gagal diubah!. Coba cek kembali inputan anda!");
           print("eror code : " + data.kode.toString());
           // throw Exception('error' + data.status.toString());

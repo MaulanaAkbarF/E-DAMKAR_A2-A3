@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/home/controller/home_controller.dart';
 import 'package:edamkar_1/src/home/view/card_artikell_view.dart';
@@ -9,7 +7,6 @@ import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class HomePageView extends GetView<HomeController> {
   const HomePageView({Key? key}) : super(key: key);

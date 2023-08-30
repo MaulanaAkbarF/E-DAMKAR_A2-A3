@@ -1,6 +1,8 @@
 part of 'app_pages.dart';
 
 abstract class Routes {
+  
+
   //emergency
   static const emergency = '/emergency';
   static const emeMaps = '/mapsAnonym';
