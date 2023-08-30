@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -54,44 +55,48 @@ class ResetPassController extends GetxController {
   }
 
   void konfirmasiData() async {
-    if (formKey.currentState!.validate()){
+    if (formKey.currentState!.validate()) {
+      bool isnumberValid = await validasiNomer(notelp.value.text);
+      if (isnumberValid) {
+        _kirimNotifikasi();
 
-    
-    bool isnumberValid = await validasiNomer(noHP);
-    if (isnumberValid) {
-      _kirimNotifikasi();
-      // Navigator.push(
-      //     context,
-      //     PageRouteBuilder(
-      //       pageBuilder: (_, __, ___) => OTPResetPassword(
-      //         kodeOtp: randomNumber.toString(),
-      //         noHp: notelp.text,
-      //       ),
-      //       transitionsBuilder:
-      //           (context, animation, secondaryAnimation, child) {
-      //         return SlideTransition(
-      //           position: Tween<Offset>(
-      //             begin: Offset(-1, 0),
-      //             end: Offset.zero,
-      //           ).animate(
-      //             CurvedAnimation(
-      //               parent: animation,
-      //               curve: Curves.easeInOut,
-      //             ),
-      //           ),
-      //           child: child,
-      //         );
-      //       },
-      //     ));
-    } else {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //       content: Text(
-      //     "Nomor telepon tidak terdaftar!",
-      //     textAlign: TextAlign.center,
-      //   )),
-      // );
-    }
+        Get.toNamed(Routes.otpResetpw, arguments: {
+        'kodeOtp': randomNumber.toString(),
+        'noHp': notelp.value.text,
+      });
+        // Navigator.push(
+        //     context,
+        //     PageRouteBuilder(
+        //       pageBuilder: (_, __, ___) => OTPResetPassword(
+        //         kodeOtp: randomNumber.toString(),
+        //         noHp: notelp.text,
+        //       ),
+        //       transitionsBuilder:
+        //           (context, animation, secondaryAnimation, child) {
+        //         return SlideTransition(
+        //           position: Tween<Offset>(
+        //             begin: Offset(-1, 0),
+        //             end: Offset.zero,
+        //           ).animate(
+        //             CurvedAnimation(
+        //               parent: animation,
+        //               curve: Curves.easeInOut,
+        //             ),
+        //           ),
+        //           child: child,
+        //         );
+        //       },
+        //     ));
+      } else {
+        Get.snackbar("Gagal", "Periksa kembali nomor anda !");
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //       content: Text(
+        //     "Nomor telepon tidak terdaftar!",
+        //     textAlign: TextAlign.center,
+        //   )),
+        // );
+      }
     }
   }
 }

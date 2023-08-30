@@ -1,15 +1,31 @@
 import 'package:edamkar_1/config/api_client.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+Map<String, dynamic> arguments = Get.arguments;
+
 class OtpResetPasswordController extends GetxController {
+  // String kodeOtp = arguments['kodeOtp'];
+  // String noHp = arguments['noHp'];
+
   final kodeotptxt = TextEditingController().obs;
-  var noHp = ''.obs;
-  var kodeOtp = ''.obs;
+  var noHp = arguments['noHp'];
+  var kodeOtp = arguments['kodeOtp'];
+
+  @override
+  void onInit() {
+    print("nilai otp : " + kodeOtp.toString());
+    // TODO: implement onInit
+    super.onInit();
+  }
 
   void verifyCode() {
     if (kodeOtp.toString() == kodeotptxt.value.text) {
-      whenVerified();
+      // whenVerified();
+      Get.toNamed(Routes.remakePw, arguments: {
+        'noHp': noHp,
+      });
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(
@@ -17,6 +33,7 @@ class OtpResetPasswordController extends GetxController {
       //               noHp: noHp,
       //             )));
     } else {
+      Get.snackbar("Gagal", "Kode OTP anda tidak sesuai !");
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(
       //       content: Text(

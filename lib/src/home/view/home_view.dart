@@ -33,7 +33,7 @@ class HomePageView extends GetView<HomeController> {
                 ),
               ),
               GestureDetector(
-                onTap: () => exit(0),
+                onTap: () => Get.offAllNamed(Routes.emergency),
                 child: const Text('Ya'),
               ),
               const SizedBox(

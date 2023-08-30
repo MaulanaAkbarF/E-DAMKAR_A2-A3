@@ -51,11 +51,16 @@ class UpdatePasswordSuccess extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignInPage()));
+                   
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => SignInPage()),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   child: const Text(
-                    'Kembali ke Login',
+                    'Kembali ke Halaman Login',
                     style: TextStyle(
                       // Properti gaya teks
                       color: Colors.white,
