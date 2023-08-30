@@ -21,7 +21,8 @@ class EditProfilePage extends GetView<EditProfileController> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                Get.back(); 
               },
             ),
             centerTitle: true,
@@ -74,6 +75,9 @@ class EditProfilePage extends GetView<EditProfileController> {
                         ),
                       ),
                       SizedBox(height: 20),
+                      Text(
+                          "Catatan : untuk mengganti data profile hubungi petugas"),
+                      SizedBox(height: 10),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: paddingHorozontal4),

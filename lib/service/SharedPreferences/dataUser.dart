@@ -25,6 +25,17 @@ class DataUser {
     await pref.setString("gambar", gambar);
   }
 
+  Future<void> deleteUser() async {
+    final SharedPreferences pref = await _prefs;
+    await pref.remove("userId");
+    await pref.remove("username");
+    await pref.remove("nama");
+    await pref.remove("noHp");
+    await pref.remove("token");
+    await pref.remove("gambar");
+    await pref.remove("password");
+  }
+
   Future<int> getUserId() async {
     return _prefs.then((SharedPreferences pref) {
       return pref.getInt('userId') ?? 0;
