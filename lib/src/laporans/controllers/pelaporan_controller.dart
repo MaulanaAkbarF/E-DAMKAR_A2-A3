@@ -20,6 +20,7 @@ class PelaporanController extends GetxController {
   var namaUser = '';
   var dataArgs = Get.arguments;
   String alamat = '';
+  RxBool onImageLoading = false.obs;
 
   Rx<File?> image = Rx<File?>(null);
   String? imageName;
@@ -126,6 +127,7 @@ class PelaporanController extends GetxController {
   }
 
   Future getImage() async {
+    onImageLoading.value = true;
     final imagePicked = await _picker.pickImage(source: ImageSource.camera);
 
     if (imagePicked != null) {
@@ -133,11 +135,13 @@ class PelaporanController extends GetxController {
       // image.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
-      update();
+
+      // update();
     } else {
       print('no image selected');
       Get.snackbar("Foto tidak boleh kosong", "Masukan foto bukti penanganan");
     }
+    onImageLoading.value = false;
   }
 
   Future<File> drawTextOnImage(XFile xFile) async {
@@ -147,9 +151,9 @@ class PelaporanController extends GetxController {
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
     String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
     String day = DateFormat("EEEEE").format(DateTime.now());
-    img.drawString(decodeImg!,
-        "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
-        font: img.arial48, x: 40);
+    String message =
+        "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat";
+    img.drawString(decodeImg!, message, font: img.arial48, x: 40);
     // img.drawString(decodeImg!, arial24, 0, 0, DateTime.now().toString());
 
     var encodeImage = img.encodeJpg(decodeImg, quality: 100);
@@ -159,48 +163,11 @@ class PelaporanController extends GetxController {
     return finalImage;
   }
 
-  // void goToCamera() async {
-  //   img = await Get.to(const CameraAdmin());
-  //   update();
-  // }
-
   void pushPelaporan() {
     if (formKey.currentState?.validate() == true) {
       pushLaporan();
     }
   }
-
-  // List<DropdownMenuItem<String>> listhewanBuas = <String>[
-  //   'Ular',
-  //   'Biawak',
-  //   'Monyet',
-  //   'Sapi',
-  //   'kerbau'
-  // ].map((String value) {
-  //   return DropdownMenuItem<String>(
-  //     value: value,
-  //     child: Text(value),
-  //   );
-  // }).toList();
-  // List<DropdownMenuItem<String>> listBencanaAlam = <String>[
-  //   'Gempa',
-  //   'Banjir',
-  //   'Longsor',
-  // ].map((String value) {
-  //   return DropdownMenuItem<String>(
-  //     value: value,
-  //     child: Text(value),
-  //   );
-  // }).toList();
-  // List<DropdownMenuItem<String>> listPenyelamatan = <String>[
-  //   'evakusi',
-  //   'penyelamatan orang',
-  // ].map((String value) {
-  //   return DropdownMenuItem<String>(
-  //     value: value,
-  //     child: Text(value),
-  //   );
-  // }).toList();
 
   void onUrgenChange(String? newValue) => namaBencanaCon.text = newValue!;
 

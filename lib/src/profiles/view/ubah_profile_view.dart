@@ -11,7 +11,7 @@ class EditProfilePage extends GetView<EditProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
+    return Obx(() => ModalProgressHUD(
         inAsyncCall: controller.showSpinner.value,
         progressIndicator: CircularProgressIndicator(),
         child: Scaffold(
@@ -114,6 +114,6 @@ class EditProfilePage extends GetView<EditProfileController> {
               ),
             ]),
           ),
-        ));
+        )));
   }
 }

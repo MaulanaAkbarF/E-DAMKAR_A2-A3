@@ -15,7 +15,7 @@ class MapsLokasiKejadianController extends GetxController {
   late GoogleMapController googleMapController;
   final CameraPosition initialCameraPosition =
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
-
+  RxBool showSpinner = false.obs;
   Set<Marker> markers = {};
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
@@ -32,6 +32,7 @@ class MapsLokasiKejadianController extends GetxController {
   }
 
   void userRePotition() async {
+    showSpinner.value = true;
     Position position = await _determinePosition();
     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
@@ -57,6 +58,7 @@ class MapsLokasiKejadianController extends GetxController {
     address.value =
         "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.postalCode}";
     // });
+    showSpinner.value = false;
   }
 
   Future<void> showSnackbar(String title, String message) {
