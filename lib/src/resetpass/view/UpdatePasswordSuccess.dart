@@ -64,7 +64,7 @@ class UpdatePasswordSuccess extends StatelessWidget {
                     // );
                   },
                   child: const Text(
-                    'Kembali ke Halaman Login',
+                    'Kembali ke Halaman Awal',
                     style: TextStyle(
                       // Properti gaya teks
                       color: Colors.white,
