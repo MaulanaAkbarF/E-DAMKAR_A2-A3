@@ -143,6 +143,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           onTap: () => controller.getImage(),
                                           child: Container(
                                             height: 200,
+                                            width: double.infinity,
                                             decoration: BoxDecoration(
                                               color: Colors.grey.shade100,
                                               borderRadius:
@@ -152,37 +153,44 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                                 width: 1.2,
                                               ),
                                             ),
-                                            child: Stack(
-                                              children: [
-                                                if (controller.image.value !=
-                                                    null)
-                                                  Positioned.fill(
-                                                    child: Image.file(
-                                                      controller.image.value!,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                if (controller.image.value ==
-                                                    null)
-                                                  Align(
-                                                    alignment: Alignment.center,
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Icon(Icons.image,
-                                                            color: Colors
-                                                                .grey.shade400,
-                                                            size: 24),
-                                                        SizedBox(width: 8),
-                                                        Text(
-                                                            'Pilih Photo Bukti Kejadian',
-                                                            style: teksStyle[
-                                                                'Thin3']),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
+                                            child: Obx(
+                                              () => controller
+                                                      .onImageLoading.value
+                                                  ? Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text("Loading...",
+                                                          style: teksStyle[
+                                                              'Thin3']))
+                                                  : controller.image.value !=
+                                                          null
+                                                      ? Image.file(
+                                                          controller
+                                                              .image.value!,
+                                                          fit: BoxFit.cover,
+                                                        )
+                                                      : Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              Icon(Icons.image,
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade400,
+                                                                  size: 24),
+                                                              SizedBox(
+                                                                  width: 8),
+                                                              Text(
+                                                                  'Pilih Photo Bukti Kejadian',
+                                                                  style: teksStyle[
+                                                                      'Thin3']),
+                                                            ],
+                                                          ),
+                                                        ),
                                             ),
                                           ),
                                         ),

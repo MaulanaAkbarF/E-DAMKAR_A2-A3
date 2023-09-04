@@ -52,6 +52,7 @@ part 'app_routes.dart';
 class AppPages {
   //initial merupakan route halaman yang akan pertaman kali ditampilkan
   static const initial = Routes.emergency;
+  static const initialWLogin = Routes.dashboard;
 
   /*halaman navigasi routing
     Name -> berfungsi sebagai nama dari route
@@ -125,20 +126,20 @@ class AppPages {
         page: () => const ResetPassView(),
         binding: ResetPassBinding()),
 
-        GetPage(
+    GetPage(
         name: Routes.otpResetpw,
         page: () => const OtpResetPasswordView(),
         binding: OtpResetPassBinding()),
 
-        GetPage(
+    GetPage(
         name: Routes.remakePw,
         page: () => const RemakePassView(),
         binding: RemakePassBinding()),
 
-        GetPage(
-        name: Routes.succesResetPw,
-        page: () => UpdatePasswordSuccess(),
-       ),
+    GetPage(
+      name: Routes.succesResetPw,
+      page: () => UpdatePasswordSuccess(),
+    ),
 
     //Laporan
     GetPage(

@@ -52,7 +52,10 @@ class ProfileController extends GetxController {
             "Ya",
             style: TextStyle(color: Colors.black),
           ),
-          onPressed: () => Get.offAllNamed(Routes.login),
+          onPressed: () {
+            Get.offAllNamed(Routes.login);
+            DataUser().deleteUser();
+          },
         ),
       ],
     );

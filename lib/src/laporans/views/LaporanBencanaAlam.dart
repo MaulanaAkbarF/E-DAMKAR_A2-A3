@@ -103,12 +103,6 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // Text('Name: ${widget.kecamatan}'),
-                                  // Text('Name: ${widget.desa}'),
-                                  // Text('Name: ${widget.jalan}'),
-                                  // Text('Name: ${widget.kota}'),
-                                  // Text('Name: ${widget.latitude}'),
-                                  // Text('Name: ${widget.longitude}'),
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
@@ -133,6 +127,7 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                                           },
                                           child: Container(
                                             height: 200,
+                                            width: double.infinity,
                                             decoration: BoxDecoration(
                                               color: Colors.grey.shade100,
                                               borderRadius:
@@ -142,43 +137,45 @@ class LaporanBencanaAlam extends GetView<PelaporanController> {
                                                 width: 1.2,
                                               ),
                                             ),
-                                            child: Obx(() => Stack(
-                                                  children: [
-                                                    if (controller
-                                                            .image.value !=
-                                                        null)
-                                                      Positioned.fill(
-                                                        child: Image.file(
+                                            child: Obx(
+                                              () => controller
+                                                      .onImageLoading.value
+                                                  ? Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text("Loading...",
+                                                          style: teksStyle[
+                                                              'Thin3']))
+                                                  : controller.image.value !=
+                                                          null
+                                                      ? Image.file(
                                                           controller
                                                               .image.value!,
                                                           fit: BoxFit.cover,
+                                                        )
+                                                      : Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              Icon(Icons.image,
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade400,
+                                                                  size: 24),
+                                                              SizedBox(
+                                                                  width: 8),
+                                                              Text(
+                                                                  'Pilih Photo Bukti Kejadian',
+                                                                  style: teksStyle[
+                                                                      'Thin3']),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    if (controller
-                                                            .image.value ==
-                                                        null)
-                                                      Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(Icons.image,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade400,
-                                                                size: 24),
-                                                            SizedBox(width: 8),
-                                                            Text(
-                                                                'Pilih Photo Bukti Kejadian',
-                                                                style: teksStyle[
-                                                                    'Thin3']),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                  ],
-                                                )),
+                                            ),
                                           ),
                                         ),
                                       ),

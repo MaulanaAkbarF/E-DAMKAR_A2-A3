@@ -30,7 +30,7 @@ class APIClient {
 
   Future<dynamic> postMulti(
       String api, image, String path, String imageTitle) async {
-    var stream = http.ByteStream(image!.value.openRead());
+    var stream = http.ByteStream(image.value!.openRead());
     stream.cast();
     // var length = await image!.length();
     var uri = Uri.parse(URLWEBAPI.apiUrl + api);

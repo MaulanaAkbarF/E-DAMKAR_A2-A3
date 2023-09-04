@@ -26,13 +26,14 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     getUserData();
-    // getArtikel();
+    getArtikel();
   }
 
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
     // Get.toNamed(Routes.laporan);
+    Get.toNamed(Routes.mpLap, arguments: "custom");
 
     AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -49,6 +50,7 @@ class HomeController extends GetxController {
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
       // Get.toNamed(Routes.laporan);
+      Get.toNamed(Routes.mpLap, arguments: "custom");
 
       AwesomeNotifications().createNotification(
       content: NotificationContent(
