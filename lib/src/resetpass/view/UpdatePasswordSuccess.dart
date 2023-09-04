@@ -1,5 +1,8 @@
+import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/src/emergency/view/emergency_call_view.dart';
 import 'package:edamkar_1/src/login/view/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class UpdatePasswordSuccess extends StatelessWidget {
@@ -51,13 +54,14 @@ class UpdatePasswordSuccess extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                   ),
                   onPressed: () {
-                   
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => SignInPage()),
-                      (Route<dynamic> route) => false,
-                    );
+                    Get.offAllNamed(Routes.emergency);
+
+                    // Navigator.pushAndRemoveUntil(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (BuildContext context) => EmergencyCall()),
+                    //   (Route<dynamic> route) => false,
+                    // );
                   },
                   child: const Text(
                     'Kembali ke Halaman Login',
