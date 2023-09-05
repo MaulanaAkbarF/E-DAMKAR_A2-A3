@@ -12,8 +12,10 @@ class DashboardPage extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
         body: SafeArea(
-            child: IndexedStack(
-          index: controller.selectedIndex.value,
+            child: PageView(
+          controller: controller.pccontroller,
+          onPageChanged: controller.onPageChange,
+          // index: controller.selectedIndex.value,
           children: [
             const HomePageView(),
             const LaporanPage(),

@@ -12,7 +12,12 @@ class ArtikleController extends GetxController
   List<ArtikelDatum>? artikelElement = [];
   List<EdukasiDatum>? artikelEdukasi = [];
   List<dynamic> beritaE = [];
-  // late TabController tabController;
+  late TabController tabController;
+  RxList<SemuaArtikelModel> data = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataHigh = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataEdukasi = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataAgenda = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataBerita = <SemuaArtikelModel>[].obs;
 
   void pemabatasanLoad() {
     artikelElement!.clear();
@@ -24,11 +29,14 @@ class ArtikleController extends GetxController
 
   @override
   void onInit() {
-    // tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
     super.onInit();
     //   if (mounted) {
     getData();
     getDataHigh();
+    getDataAgenda();
+    getDataBerita();
+    getDataEdukasi();
     //   }
     // PostDataArtikel();
     // PostDataArtikelHigh();
@@ -69,12 +77,12 @@ class ArtikleController extends GetxController
   //   });
   // }
 
-  void postDataBerita() async {
+  void getDataBerita() async {
     var result = await APIClient().getData('getBerita');
 
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      dataBerita.value = semuaArtikelModelFromJson(result);
       // });
       // debugPrint(data.length.toString());
     } else {
@@ -82,24 +90,24 @@ class ArtikleController extends GetxController
     }
   }
 
-  void postDataEdukasi() async {
+  void getDataEdukasi() async {
     var result = await APIClient().getData('getEdukasi');
 
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      dataEdukasi.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("data kosong");
     }
   }
 
-  void postDataAgenda() async {
+  void getDataAgenda() async {
     var result = await APIClient().getData('getAgenda');
 
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      dataAgenda.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("data kosong");
@@ -153,14 +161,11 @@ class ArtikleController extends GetxController
     )),
   );
 
-  var data;
-  var dataHigh;
-
   void getData() async {
     var result = await APIClient().getData('getAllArtikel');
     if (result != null) {
       // setState(() {
-      data = semuaArtikelModelFromJson(result);
+      data.value = semuaArtikelModelFromJson(result);
       debugPrint(data.length.toString());
       // });
     } else {
@@ -171,11 +176,7 @@ class ArtikleController extends GetxController
   void getDataHigh() async {
     var result = await APIClient().getData('getAllArtikelHigh');
     if (result != null) {
-      // setState(() {
-      dataHigh = semuaArtikelModelFromJson(result);
-
-      debugPrint(dataHigh.length.toString());
-      // });
+      dataHigh.value = semuaArtikelModelFromJson(result);
     } else {
       debugPrint('terdapat kesalah');
     }
