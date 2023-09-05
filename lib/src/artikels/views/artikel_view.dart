@@ -134,7 +134,7 @@ class ArtikelView extends GetView<ArtikleController> {
                     text: "Berita",
                   ),
                   Tab(
-                    text: "Artikel",
+                    text: "Edukasi",
                   ),
                   Tab(
                     text: "Agenda",
@@ -167,7 +167,11 @@ class ArtikelView extends GetView<ArtikleController> {
                         items: controller.dataHigh.map(
                           (i) {
                             return GestureDetector(
-                              onTap: () => print("ontap in ${i.jenisArtikel}"),
+                              onTap: () => Get.toNamed(Routes.artikleDt,
+                                  arguments: {
+                                    "idArtikel": i.id,
+                                    "jenisArtikel": i.jenisArtikel.toString()
+                                  }),
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 margin: EdgeInsets.symmetric(horizontal: 5.0),
@@ -209,9 +213,9 @@ class ArtikelView extends GetView<ArtikleController> {
                   listArtikel(controller.data),
                 ],
               ),
-              Container(),
-              Container(),
-              Container(),
+              listArtikel(controller.dataBerita),
+              listArtikel(controller.dataEdukasi),
+              listAgenda(controller.dataAgenda)
             ]))
             // Expanded(child: listArtikel())
           ],
@@ -301,6 +305,93 @@ class ArtikelView extends GetView<ArtikleController> {
                           image: controller.imgArtikel(
                               value![index].foto, value![index].jenisArtikel)),
                     ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: Colors.black38,
+                );
+              },
+            ),
+    );
+  }
+
+  Widget listAgenda(value) {
+    return Obx(
+      () => value == null
+          ? Text("Artikel Kosong")
+          : ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              // scrollDirection: Axis.vertical,
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  child: ListTile(
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          value[index].jenisArtikel.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: "$thin1",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: black2,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          value![index].judul.toString(),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: black3,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "$semibold",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Text(
+                          value![index].adminDamkar.toString(),
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          size: 5,
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          value![index].tanggal.toString(),
+                        )
+                      ],
+                    ),
+                    // trailing: Container(
+                    //   alignment: Alignment.topCenter,
+                    //   height: paddingVertical4,
+                    //   width: paddingHorozontal4,
+                    //   // color: clr[index],
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //       image: controller.imgArtikel(
+                    //           value![index].foto, value![index].jenisArtikel)),
+                    // ),
                   ),
                 );
               },

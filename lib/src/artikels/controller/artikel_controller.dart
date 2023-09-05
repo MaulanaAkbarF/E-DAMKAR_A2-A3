@@ -13,6 +13,11 @@ class ArtikleController extends GetxController
   List<EdukasiDatum>? artikelEdukasi = [];
   List<dynamic> beritaE = [];
   late TabController tabController;
+  RxList<SemuaArtikelModel> data = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataHigh = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataEdukasi = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataAgenda = <SemuaArtikelModel>[].obs;
+  RxList<SemuaArtikelModel> dataBerita = <SemuaArtikelModel>[].obs;
 
   void pemabatasanLoad() {
     artikelElement!.clear();
@@ -29,6 +34,9 @@ class ArtikleController extends GetxController
     //   if (mounted) {
     getData();
     getDataHigh();
+    getDataAgenda();
+    getDataBerita();
+    getDataEdukasi();
     //   }
     // PostDataArtikel();
     // PostDataArtikelHigh();
@@ -69,12 +77,12 @@ class ArtikleController extends GetxController
   //   });
   // }
 
-  void postDataBerita() async {
+  void getDataBerita() async {
     var result = await APIClient().getData('getBerita');
 
     if (result != null) {
       // setState(() {
-      data.value = semuaArtikelModelFromJson(result);
+      dataBerita.value = semuaArtikelModelFromJson(result);
       // });
       // debugPrint(data.length.toString());
     } else {
@@ -82,24 +90,24 @@ class ArtikleController extends GetxController
     }
   }
 
-  void postDataEdukasi() async {
+  void getDataEdukasi() async {
     var result = await APIClient().getData('getEdukasi');
 
     if (result != null) {
       // setState(() {
-      data.value = semuaArtikelModelFromJson(result);
+      dataEdukasi.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("data kosong");
     }
   }
 
-  void postDataAgenda() async {
+  void getDataAgenda() async {
     var result = await APIClient().getData('getAgenda');
 
     if (result != null) {
       // setState(() {
-      data.value = semuaArtikelModelFromJson(result);
+      dataAgenda.value = semuaArtikelModelFromJson(result);
       // });
     } else {
       print("data kosong");
@@ -152,9 +160,6 @@ class ArtikleController extends GetxController
       Radius.circular(20),
     )),
   );
-
-  RxList<SemuaArtikelModel> data = <SemuaArtikelModel>[].obs;
-  RxList<SemuaArtikelModel> dataHigh = <SemuaArtikelModel>[].obs;
 
   void getData() async {
     var result = await APIClient().getData('getAllArtikel');
