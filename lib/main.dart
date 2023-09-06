@@ -12,7 +12,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var userId = await DataUser().getUserId();
-  print(userId);
   AwesomeNotifications().initialize(null, [
     NotificationChannel(
         channelKey: 'channelKey',

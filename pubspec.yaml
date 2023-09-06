@@ -99,9 +99,9 @@ flutter:
           weight: 500
         - asset: semuaAset/font/inter_semibold.ttf
           weight: 600
-        - asset: SemuaAset/font/inter_bold.ttf
+        - asset: semuaAset/font/inter_bold.ttf
           weight: 700
-        - asset: SemuaAset/font/inter_extrabold.ttf
+        - asset: semuaAset/font/inter_extrabold.ttf
           weight: 800
         - asset: semuaAset/font/inter_black.ttf
           weight: 900

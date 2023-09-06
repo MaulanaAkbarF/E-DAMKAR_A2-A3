@@ -1,3 +1,4 @@
+import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/artikels/views/artikel_view.dart';
 import 'package:edamkar_1/src/dashboard/controller/dashboard_controller.dart';
 import 'package:edamkar_1/src/home/view/home_view.dart';
@@ -10,7 +11,34 @@ import 'package:get/get.dart';
 class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        return await Get.dialog(
+          AlertDialog(
+            title: const Text("Notice"),
+            content: const Text(
+                "apakah anda sudah yakin untuk keluar dari aplikasi"),
+            actions: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: paddingHorozontal1, vertical: paddingVertical2),
+                child: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Text('Tidak'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Get.offAllNamed(Routes.emergency),
+                child: const Text('Ya'),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        );
+      },
+      child: Obx(() => Scaffold(
         body: SafeArea(
             child: PageView(
           controller: controller.pccontroller,
@@ -55,6 +83,6 @@ class DashboardPage extends GetView<DashboardController> {
           ],
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeSelectedIndex,
-        )));
+        ))));
   }
 }
