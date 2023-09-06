@@ -141,10 +141,7 @@ class HomePageView extends GetView<HomeController> {
                       padding:
                           EdgeInsets.symmetric(horizontal: paddingHorozontal1),
                       child: ElevatedButton(
-                          onPressed: () {
-                            controller.emerCallWA;
-                            // Navigator.pushNamed(context, '/laporan');
-                          },
+                          onPressed: controller.emerCallWA,
                           style: ElevatedButton.styleFrom(
                               primary: green1,
                               shape: RoundedRectangleBorder(
