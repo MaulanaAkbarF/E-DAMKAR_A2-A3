@@ -16,13 +16,13 @@ class EmergencyController extends GetxController {
 
   //pesan gagal
   final String title = "Gagal";
-  final String message = "coba kembali dalam beberapa saat";
+  final String message = "Coba kembali dalam beberapa saat";
 
   void emercall() async {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(phoneUrl)) {
       await launchUrl(phoneUrl);
-      Get.offNamed(Routes.emeMaps);
+      Get.offNamed(Routes.emeMaps, arguments: 'Kebakaran');
 
       AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -40,7 +40,7 @@ class EmergencyController extends GetxController {
         "whatsapp://send?phone=${countryCode + waPhoneNumber}&text=${Uri.encodeComponent(templateMessage)}";
     if (await canLaunchUrlString(whatsappUrl)) {
       await launchUrlString(whatsappUrl);
-      Get.offNamed(Routes.emeMaps);
+      Get.offNamed(Routes.emeMaps,arguments: 'Kebakaran');
 
       AwesomeNotifications().createNotification(
       content: NotificationContent(

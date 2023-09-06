@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/src/emergency/view/lokasi_kejadian_manual_view.dart';
+import 'package:edamkar_1/src/laporans/views/LokasiKejadian.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -9,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsAnonymController extends GetxController {
+  late String kategori = Get.arguments;
   late GoogleMapController googleMapController;
   CameraPosition initialCameraPosition =
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
@@ -128,5 +131,26 @@ class MapsAnonymController extends GetxController {
       };
       Get.toNamed(Routes.emepelapData, arguments: dataMaps);
     }
+  }
+
+  goToPelaporanManual() {
+    if (jalan.isEmpty) {
+      Get.snackbar(title, message, backgroundColor: black3, colorText: white);
+    } else {
+      Map<String, dynamic> dataMaps = {
+        'desa': desa,
+        'jalan': jalan,
+        'kecamatan': kecamatan,
+        'kota': kota,
+        'kodepos': kodepos,
+      };
+      Get.toNamed(Routes.emepelapData, arguments: dataMaps);
+    }
+  }
+
+  void goToLokasiKejadian() {
+    Get.to(lokasiKejadianManualPage(
+      kategori: kategori,
+    ));
   }
 }

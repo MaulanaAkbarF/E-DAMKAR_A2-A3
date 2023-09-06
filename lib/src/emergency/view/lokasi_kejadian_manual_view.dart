@@ -1,15 +1,16 @@
+
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class LokasiKejadian extends StatefulWidget {
+class lokasiKejadianManualPage extends StatefulWidget {
   final String kategori;
-  const LokasiKejadian({Key? key, required this.kategori}) : super(key: key);
+  const lokasiKejadianManualPage({Key? key, required this.kategori}) : super(key: key);
 
   @override
-  State<LokasiKejadian> createState() => _LokasiKejadianState();
+  State<lokasiKejadianManualPage> createState() => _LokasiKejadianState();
 }
 
 final List<Map> teksLokasiKejadian = [
@@ -67,8 +68,8 @@ final List<Map> teksStyleLokasiKejadian = [
   }
 ];
 
-class _LokasiKejadianState extends State<LokasiKejadian> {
-  final TextEditingController kecamatanCon = TextEditingController();
+class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
+   final TextEditingController kecamatanCon = TextEditingController();
   final TextEditingController desaCon = TextEditingController();
   final TextEditingController jalanCon = TextEditingController();
   final TextEditingController kodePosCon = TextEditingController();
@@ -421,108 +422,12 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                             backgroundColor: black3,
                                             colorText: white);
                                       } else{
-                                        if (kategori == "bencanaalam") {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) =>
-                                          //         LaporanBencanaAl(
-                                          //       jalan: jalan,
-                                          //       desa: desa,
-                                          //       kecamatan: kecamatan,
-                                          //       kota: kota,
-                                          //       kodepos: kodepos,
-                                          //       latitude: latitude,
-                                          //       longitude: longitude,
-                                          //     ),
-                                          //   ),
-                                          // );
-                                          data['idKategori'] = 2;
-                                          data['kategori'] = kategori;
-                                          Get.toNamed(Routes.lpBencanaAlam,
-                                              arguments: data);
-                                        } else if (kategori == "kebakaran") {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => LaporanKebakaran(
-                                          //       jalan: jalan,
-                                          //       desa: desa,
-                                          //       kecamatan: kecamatan,
-                                          //       kota: kota,
-                                          //       kodepos: kodepos,
-                                          //       latitude: latitude,
-                                          //       longitude: longitude,
-                                          //     ),
-                                          //   ),
-                                          // );
-
                                           data['idKategori'] = 1;
                                           data['kategori'] = kategori;
-                                          Get.toNamed(Routes.lpKebakaran,
-                                              arguments: data);
-                                        } else if (kategori == "hewanbuas") {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => LaporanHewanBuas(
-                                          //       jalan: jalan,
-                                          //       desa: desa,
-                                          //       kecamatan: kecamatan,
-                                          //       kota: kota,
-                                          //       kodepos: kodepos,
-                                          //       latitude: latitude,
-                                          //       longitude: longitude,
-                                          //     ),
-                                          //   ),
-                                          // );
-
-                                          data['idKategori'] = 4;
-                                          data['kategori'] = kategori;
-                                          Get.toNamed(Routes.lpHewanBuas,
-                                              arguments: data);
-                                        } else if (kategori == "penyelamatan") {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => LaporanPenyelamatan(
-                                          //       jalan: jalan,
-                                          //       desa: desa,
-                                          //       kecamatan: kecamatan,
-                                          //       kota: kota,
-                                          //       kodepos: kodepos,
-                                          //       latitude: latitude,
-                                          //       longitude: longitude,
-                                          //     ),
-                                          //   ),
-                                          // );
-
-                                          data['idKategori'] = 3;
-                                          data['kategori'] = kategori;
-                                          Get.toNamed(Routes.lpPenyelamatan,
-                                              arguments: data);
-                                        } else if (kategori == "custom") {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => LaporanCustom(
-                                          //       jalan: jalan,
-                                          //       desa: desa,
-                                          //       kecamatan: kecamatan,
-                                          //       kota: kota,
-                                          //       kodepos: kodepos,
-                                          //       latitude: latitude,
-                                          //       longitude: longitude,
-                                          //     ),
-                                          //   ),
-                                          // );
-
-                                          data['idKategori'] = 5;
-                                          data['kategori'] = kategori;
-                                          Get.toNamed(Routes.lpCustom,
+                                          Get.toNamed(Routes.emepelapData,
                                               arguments: data);
                                         }
-                                      }
+                                      
                                     },
                                     child: Container(
                                       height: 50,

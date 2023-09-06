@@ -10,7 +10,7 @@ final List<Map> teksSignUp = [
     'Header': 'Kirimkan laporan anda!',
     'SubHeader': 'Pastikan data yang anda masukkan sudah benar',
     'namaBencana': 'Urgensi',
-    'namaBencanaHint': 'Contoh: Kesurupan, Kepala tersangkut di pagar, dll',
+    'namaBencanaHint': 'Contoh : Kebakaran rumah warga',
     'noTelp': 'Nomor Telepon',
     'noTelpHint': 'Masukkan nomor telepon aktif',
     'deskripsi': 'Deskripsi Laporan',

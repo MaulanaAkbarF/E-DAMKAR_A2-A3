@@ -97,7 +97,7 @@ class LaporanAnonymController extends GetxController {
     } else {
       await APIClient().postMulti('addImage', rxImage, imagePath, title);
       var result2 = await APIClient().postData('addPelaporan', {
-        'kategori_laporan_id': "5",
+        'kategori_laporan_id': "1",
         'user_listdata_id': "1",
         'deskripsi_laporan': deskripsiCon.text,
         'nama_hewan': '-',
@@ -200,11 +200,7 @@ class LaporanAnonymController extends GetxController {
           backgroundColor: white, colorText: black);
       return false;
     }
-    if (nikAnymCon.text.length != 16) {
-      Get.snackbar("Gagal", "Tolong isi NIK harus 16 digit",
-          backgroundColor: white, colorText: black);
-      return false;
-    }
+    
     if (umurAnymCon.text.isEmpty || umurAnymCon.text.length > 2) {
       Get.snackbar("Gagal", "Digit umur tidak sesuai",
           backgroundColor: white, colorText: black);

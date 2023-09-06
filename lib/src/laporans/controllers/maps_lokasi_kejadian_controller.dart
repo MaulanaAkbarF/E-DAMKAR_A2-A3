@@ -232,7 +232,9 @@ class MapsLokasiKejadianController extends GetxController {
     }
   }
 
-  void goToLokasiKejadian() => Get.to(LokasiKejadian(
+  void goToLokasiKejadian() { 
+    Get.to(LokasiKejadian(
         kategori: kategori,
       ));
+}
 }

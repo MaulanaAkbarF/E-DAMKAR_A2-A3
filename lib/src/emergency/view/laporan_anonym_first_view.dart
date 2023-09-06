@@ -65,52 +65,6 @@ class LaporanAnonymDataView extends GetView<LaporanAnonymController> {
                 alignment: FractionalOffset.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
-                  child: Text("NIK",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: StyleTxt.sb()),
-                ),
-              ),
-              Align(
-                alignment: FractionalOffset.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                            color: Colors.grey.shade300, width: 1.2)),
-                    child: TextFormField(
-                      controller: controller.nikAnymCon,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          Get.snackbar("Kosong", "NIK tidak boleh kosong !");
-                          return 'NIK tidak boleh kosong';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      cursorColor: Colors.black,
-                      style: StyleTxt.m(size: 16),
-                      decoration: const InputDecoration(
-                          hintText: 'Isikan 16 digit NIK anda',
-                          prefixIcon: Icon(Icons.pin),
-                          contentPadding: EdgeInsets.fromLTRB(10, 13, 10, 7),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: FractionalOffset.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
                   child: Text("Umur",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

@@ -56,7 +56,7 @@ class EmergencyCall extends GetView<EmergencyController> {
                 const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Panggilan Darurat',
+                    'Panggilan Darurat Kebakaran',
                     style: TextStyle(
                         fontFamily: "font/inter_black.ttf",
                         color: Colors.black87,

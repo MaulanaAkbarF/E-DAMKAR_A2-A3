@@ -182,7 +182,9 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          controller.goToLokasiKejadian();
+                                        },
                                         child: const Text(
                                           'Tidak ketemu? Isi alamat secara manual',
                                           style: TextStyle(
