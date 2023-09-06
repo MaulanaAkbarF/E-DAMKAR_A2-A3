@@ -1,4 +1,4 @@
-import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

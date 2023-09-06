@@ -23,7 +23,7 @@ import 'package:edamkar_1/src/laporans/views/LaporanKebakaran.dart';
 import 'package:edamkar_1/src/laporans/views/LaporanPenyelamatan.dart';
 import 'package:edamkar_1/src/laporans/views/MapsLokasiKejadian.dart';
 import 'package:edamkar_1/src/login/bindings/login_binding.dart';
-import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/src/profiles/bindings/profile_binding.dart';
 import 'package:edamkar_1/src/profiles/bindings/ubah_profile_binding.dart';
 import 'package:edamkar_1/src/profiles/bindings/ubah_sandi_binding.dart';

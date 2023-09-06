@@ -45,11 +45,12 @@ class HomeController extends GetxController {
   }
 
   void emerCallWA() async {
+    print("inHere");
     var whatsappUrl =
         "whatsapp://send?phone=${countryCode + phone}&text=${Uri.encodeComponent(message)}";
     if (await canLaunchUrlString(whatsappUrl)) {
+      print("in Here");
       await launchUrlString(whatsappUrl);
-      // Get.toNamed(Routes.laporan);
       Get.toNamed(Routes.mpLap, arguments: "custom");
 
       AwesomeNotifications().createNotification(
@@ -59,6 +60,7 @@ class HomeController extends GetxController {
         title: "Emergency Call",
         body: 'Kembali ke aplikasi dan buka halaman Laporan sebagai bukti laporan anda!'));
     } else {
+      print("some error");
       // FloatNotif()
       //     .snackBarFail(context, "Gagal", "Tunggu beberapa saat lalu coba lagi");
     }

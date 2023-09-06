@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:edamkar_1/src/login/view/login_view.dart';
+import 'package:edamkar_1/src/login/view/Login_View.dart';
 import 'package:edamkar_1/src/register/controller/register_controller.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';

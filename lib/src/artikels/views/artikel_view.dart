@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/artikels/controller/artikel_controller.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
@@ -65,7 +67,6 @@ class ArtikelView extends GetView<ArtikleController> {
     Colors.red
   ];
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -116,262 +117,291 @@ class ArtikelView extends GetView<ArtikleController> {
             const SizedBox(
               height: 5,
             ),
+
+            TabBar(
+                isScrollable: true,
+                unselectedLabelColor: Color.fromARGB(255, 165, 165, 165),
+                indicatorColor: orange1,
+                labelColor: black,
+                controller: controller.tabController,
+                labelPadding:
+                    EdgeInsets.symmetric(horizontal: paddingHorozontal1),
+                tabs: const [
+                  Tab(
+                    text: "Semua",
+                  ),
+                  Tab(
+                    text: "Berita",
+                  ),
+                  Tab(
+                    text: "Edukasi",
+                  ),
+                  Tab(
+                    text: "Agenda",
+                  ),
+                ]),
+            SizedBox(
+              height: 10,
+            ),
             Container(
               height: 1,
               width: SizeConfig.screenWidth,
               color: Colors.black26,
             ),
+
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: SizeConfig.screenHeightHalf,
-              width: SizeConfig.screenWidth,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: paddingHorozontal1),
-                scrollDirection: Axis.horizontal,
-                itemCount: 9,
-                // shrinkWrap: true,
-                // controller: _scrollController,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 10,
-                ),
-                itemBuilder: (context, index) {
-                  return AnimatedContainer(
-                      duration: Duration(seconds: 50),
-                      padding: EdgeInsets.symmetric(vertical: paddingVertical1),
-                      height: 400,
-                      width: 400,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black26),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: controller.dataHigh == null
-                          ? Text("data kosong")
-                          : ListTile(
-                              onTap: () {
-                                Get.toNamed(Routes.artikleDt, arguments: {
-                                  "idArtikel": controller.dataHigh[index].id,
-                                  "jenisArtikel": controller
-                                      .dataHigh[index].jenisArtikel
-                                      .toString()
-                                });
-                              },
-                              title: Container(
-                                // width: 400,
-                                height: 150,
+            Expanded(
+                child:
+                    TabBarView(controller: controller.tabController, children: [
+              ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  Obx(() => CarouselSlider(
+                        options: CarouselOptions(
+                          height: 180,
+                          autoPlay: true,
+                        ),
+                        items: controller.dataHigh.map(
+                          (i) {
+                            return GestureDetector(
+                              onTap: () => Get.toNamed(Routes.artikleDt,
+                                  arguments: {
+                                    "idArtikel": i.id,
+                                    "jenisArtikel": i.jenisArtikel.toString()
+                                  }),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
                                     image: controller.imgArtikel(
-                                        controller.dataHigh[index].foto,
-                                        controller
-                                            .dataHigh[index].jenisArtikel)),
-                              ),
-                              subtitle: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: paddingVertical1),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                        i.foto, i.jenisArtikel),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: paddingHorozontal1,
+                                      vertical: paddingVertical1),
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          controller.dataHigh[index].adminDamkar
-                                              .toString(),
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  "font/inter_medium.tff",
-                                              color: Color.fromARGB(
-                                                  255, 107, 114, 128),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
+                                          i.judul,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: StyleTxt.sb(
+                                              color: white, size: 14),
                                         ),
                                         Text(
-                                          controller
-                                              .dataHigh[index].jenisArtikel
-                                              .toString(),
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  "font/inter_medium.tff",
-                                              color: Color.fromARGB(
-                                                  255, 107, 114, 128),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        controller.dataHigh[index].judul
-                                            .toString(),
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            fontFamily:
-                                                "font/inter_semibold.tff",
-                                            color:
-                                                Color.fromARGB(255, 55, 65, 81),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        controller.dataHigh[index].deskripsi
-                                            .toString(),
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            fontFamily: "font/inter_medium.tff",
-                                            color: Color.fromARGB(
-                                                255, 107, 114, 128),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                  ],
+                                          "${i.adminDamkar} | ${i.tanggal} ",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: StyleTxt.m(
+                                              color: white, size: 12),
+                                        ),
+                                      ]),
                                 ),
-                              )));
-                },
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      )),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  listArtikel(controller.data),
+                ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(child: listArtikel())
+              listArtikel(controller.dataBerita),
+              listArtikel(controller.dataEdukasi),
+              listAgenda(controller.dataAgenda)
+            ]))
+            // Expanded(child: listArtikel())
           ],
         )),
       ),
     );
   }
 
-  Widget listArtikel() {
-    return controller.data == null
-        ? Text("Artikel Kosong")
-        : ListView.separated(
-            itemCount: controller.data.length,
-            itemBuilder: (context, index) {
-              return Container(
-                child: ListTile(
-                  onTap: () {
-                    Get.toNamed(Routes.artikleDt, arguments: {
-                      "idArtikel": controller.data[index].id,
-                      "jenisArtikel":
-                          controller.data[index].jenisArtikel.toString()
-                    });
-                  },
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.data[index].jenisArtikel.toString(),
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "$thin1",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: black2,
+  Widget listArtikel(value) {
+    return Obx(
+      () => value == null
+          ? Text("Artikel Kosong")
+          : ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              // scrollDirection: Axis.vertical,
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  child: ListTile(
+                    onTap: () {
+                      Get.toNamed(Routes.artikleDt, arguments: {
+                        "idArtikel": value[index].id,
+                        "jenisArtikel": value[index].jenisArtikel.toString()
+                      });
+                    },
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          value[index].jenisArtikel.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: "$thin1",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: black2,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        controller.data![index].judul.toString(),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: black3,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "$semibold",
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
+                        Text(
+                          value![index].judul.toString(),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: black3,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "$semibold",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Text(
+                          value![index].adminDamkar.toString(),
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          size: 5,
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          value![index].tanggal.toString(),
+                        )
+                      ],
+                    ),
+                    trailing: Container(
+                      alignment: Alignment.topCenter,
+                      height: paddingVertical4,
+                      width: paddingHorozontal4,
+                      // color: clr[index],
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: controller.imgArtikel(
+                              value![index].foto, value![index].jenisArtikel)),
+                    ),
                   ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        controller.data![index].adminDamkar.toString(),
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: 5,
-                      ),
-                      SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        controller.data![index].tanggal.toString(),
-                      )
-                    ],
-                  ),
-                  trailing: Container(
-                    alignment: Alignment.topCenter,
-                    height: paddingVertical4,
-                    width: paddingHorozontal4,
-                    // color: clr[index],
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: controller.imgArtikel(
-                            controller.data![index].foto,
-                            controller.data![index].jenisArtikel)),
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.black38,
-              );
-            },
-          );
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: Colors.black38,
+                );
+              },
+            ),
+    );
   }
 
-  Widget listArtikelHigh() {
-    return ListView.builder(
-        itemCount: controller.dataHigh.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            child: ListTile(
-              onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => DetailArtikel(
-                //             idArtikel: controller.dataHigh[index].id,
-                //             jenisArtikel: controller
-                //                 .dataHigh[index].jenisArtikel
-                //                 .toString())));
+  Widget listAgenda(value) {
+    return Obx(
+      () => value == null
+          ? Text("Artikel Kosong")
+          : ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              // scrollDirection: Axis.vertical,
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  child: ListTile(
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          value[index].jenisArtikel.toString(),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: "$thin1",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: black2,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          value![index].judul.toString(),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: black3,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "$semibold",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Text(
+                          value![index].adminDamkar.toString(),
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Icon(
+                          Icons.circle,
+                          size: 5,
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          value![index].tanggal.toString(),
+                        )
+                      ],
+                    ),
+                    // trailing: Container(
+                    //   alignment: Alignment.topCenter,
+                    //   height: paddingVertical4,
+                    //   width: paddingHorozontal4,
+                    //   // color: clr[index],
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //       image: controller.imgArtikel(
+                    //           value![index].foto, value![index].jenisArtikel)),
+                    // ),
+                  ),
+                );
               },
-              title: Container(
-                width: 400,
-                height: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'),
-                        fit: BoxFit.cover)),
-              ),
-              subtitle: Container(),
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: Colors.black38,
+                );
+              },
             ),
-          );
-        });
+    );
   }
 }
 

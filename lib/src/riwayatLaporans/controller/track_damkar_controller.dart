@@ -49,7 +49,13 @@ class TrackDamkarController extends GetxController {
           setPolyLines(data['route']);
           break;
       }
-    });
+    }, onDone: () async {
+      await Future.delayed(const Duration(seconds: 2));
+      initWs();
+    }, onError: (e) async {
+      await Future.delayed(const Duration(seconds: 2));
+      initWs();
+    },);
   }
 
   void onRouteReq(WebSocketChannel ws) {

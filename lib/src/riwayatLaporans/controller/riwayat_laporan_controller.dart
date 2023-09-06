@@ -130,7 +130,7 @@ class RiwayatLaporanController extends GetxController
       var data = riwayatLaporanFromJson(result);
       if (data.kondisi) {
         dataMenunggu?.value = data;
-        print(data);
+       
       }
     } else {
       print("Status Menunggu kosong");

@@ -18,7 +18,6 @@ class APIClient {
 
   Future<dynamic> postData(String api, dynamic object) async {
     var url = Uri.parse(URLWEBAPI.apiUrl + api);
-    print(URLWEBAPI.apiUrl + api);
     var response = await client.post(url, headers: _headers, body: object);
 
     if (response.statusCode == 200 || response.statusCode == 422) {
@@ -44,9 +43,7 @@ class APIClient {
     );
     final response = await request.send();
     if (response.statusCode == 200) {
-      // print(await response.stream.bytesToString());
     } else {
-      // print(response.statusCode);
     }
   }
 
