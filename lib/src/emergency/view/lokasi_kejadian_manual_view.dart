@@ -1,4 +1,3 @@
-
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,8 @@ import 'package:get/get.dart';
 
 class lokasiKejadianManualPage extends StatefulWidget {
   final String kategori;
-  const lokasiKejadianManualPage({Key? key, required this.kategori}) : super(key: key);
+  const lokasiKejadianManualPage({Key? key, required this.kategori})
+      : super(key: key);
 
   @override
   State<lokasiKejadianManualPage> createState() => _LokasiKejadianState();
@@ -69,7 +69,7 @@ final List<Map> teksStyleLokasiKejadian = [
 ];
 
 class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
-   final TextEditingController kecamatanCon = TextEditingController();
+  final TextEditingController kecamatanCon = TextEditingController();
   final TextEditingController desaCon = TextEditingController();
   final TextEditingController jalanCon = TextEditingController();
   final TextEditingController kodePosCon = TextEditingController();
@@ -223,6 +223,7 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                       if (value == null || value.isEmpty) {
                                         return 'Alamat kecamatan tidak boleh kosong';
                                       }
+                                      return null;
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
@@ -264,6 +265,7 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                       if (value == null || value.isEmpty) {
                                         return 'Alamat Desa tidak boleh kosong';
                                       }
+                                      return null;
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
@@ -307,6 +309,7 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                       if (value == null || value.isEmpty) {
                                         return 'Alamat Jalan tidak boleh kosong';
                                       }
+                                      return null;
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['Semibold1'],
@@ -355,6 +358,7 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                       } else if (value.length != 5) {
                                         return 'Kode pos harus berisikan 5 digit';
                                       }
+                                      return null;
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['Semibold1'],
@@ -401,7 +405,10 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                         'latitude': 1,
                                         'longitude': 1,
                                       };
-                                      if (jalanCon.text.isEmpty || kecamatanCon.text.isEmpty || desaCon.text.isEmpty || kodePosCon.text.isEmpty) {
+                                      if (jalanCon.text.isEmpty ||
+                                          kecamatanCon.text.isEmpty ||
+                                          desaCon.text.isEmpty ||
+                                          kodePosCon.text.isEmpty) {
                                         // Tampilkan notifikasi "Pilih alamat"
                                         // ScaffoldMessenger.of(context).showSnackBar(
                                         //   SnackBar(
@@ -416,18 +423,17 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
                                             "Tentukan alamat terlebih dahulu",
                                             backgroundColor: black3,
                                             colorText: white);
-                                      } else if(kodePosCon.text.length != 5){
+                                      } else if (kodePosCon.text.length != 5) {
                                         Get.snackbar('Digit salah',
                                             "Kode pos harus berisikan 5 digit",
                                             backgroundColor: black3,
                                             colorText: white);
-                                      } else{
-                                          data['idKategori'] = 1;
-                                          data['kategori'] = kategori;
-                                          Get.toNamed(Routes.emepelapData,
-                                              arguments: data);
-                                        }
-                                      
+                                      } else {
+                                        data['idKategori'] = 1;
+                                        data['kategori'] = kategori;
+                                        Get.toNamed(Routes.emepelapData,
+                                            arguments: data);
+                                      }
                                     },
                                     child: Container(
                                       height: 50,
