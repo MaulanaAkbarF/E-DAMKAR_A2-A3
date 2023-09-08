@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/src/emergency/view/lokasi_kejadian_manual_view.dart';
-import 'package:edamkar_1/src/laporans/views/LokasiKejadian.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
