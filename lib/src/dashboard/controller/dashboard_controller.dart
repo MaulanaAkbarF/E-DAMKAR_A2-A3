@@ -23,7 +23,7 @@ class DashboardController extends GetxController {
   void checkIsPreferedIndex() {
     if (dataArgs != null) {
       selectedIndex.value = dataArgs;
-      update();
+      pccontroller = PageController(initialPage: dataArgs);
     }
   }
 }

@@ -38,12 +38,11 @@ class DashboardPage extends GetView<DashboardController> {
           ),
         );
       },
-      child: Obx(() => Scaffold(
+      child: Scaffold(
         body: SafeArea(
             child: PageView(
           controller: controller.pccontroller,
           onPageChanged: controller.onPageChange,
-          // index: controller.selectedIndex.value,
           children: [
             const HomePageView(),
             const LaporanPage(),
@@ -51,7 +50,7 @@ class DashboardPage extends GetView<DashboardController> {
             ArtikelView(),
           ],
         )),
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: Obx((() =>  BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: orange1,
           unselectedItemColor: Colors.black.withOpacity(.30),
@@ -83,6 +82,6 @@ class DashboardPage extends GetView<DashboardController> {
           ],
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeSelectedIndex,
-        ))));
+        )))));
   }
 }
