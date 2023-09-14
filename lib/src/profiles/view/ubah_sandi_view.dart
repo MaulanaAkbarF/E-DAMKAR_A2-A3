@@ -37,9 +37,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: Text("Masukan Kata Sandi Lama" +
-                        controller.id.toString() +
-                        controller.pwOld.toString()),
+                    child: Text("Masukan Kata Sandi Lama"),
                   ),
                 ),
               ),
