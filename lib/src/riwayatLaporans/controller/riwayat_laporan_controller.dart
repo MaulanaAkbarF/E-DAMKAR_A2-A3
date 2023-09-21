@@ -51,7 +51,7 @@ class RiwayatLaporanController extends GetxController
     debounce(
       textSearch,
       (_) => PostDataSearch(textSearch.value),
-      time: Duration(seconds: 1),
+      time: const Duration(seconds: 1),
     );
   }
 
@@ -62,16 +62,16 @@ class RiwayatLaporanController extends GetxController
 
   setColorStatus(String status) {
     if (status == "Menunggu") {
-      return Color.fromARGB(255, 250, 202, 21);
+      return const Color.fromARGB(255, 250, 202, 21);
     }
     if (status == "Ditangani") {
-      return Color.fromARGB(255, 63, 131, 248);
+      return const Color.fromARGB(255, 63, 131, 248);
     }
     if (status == "Selesai") {
-      return Color.fromARGB(255, 17, 178, 124);
+      return const Color.fromARGB(255, 17, 178, 124);
     }
     if (status == "Ditolak") {
-      return Color.fromARGB(255, 224, 36, 36);
+      return const Color.fromARGB(255, 224, 36, 36);
     }
     if (status == "Emergency") {
       return Colors.black26; // default color
@@ -107,21 +107,14 @@ class RiwayatLaporanController extends GetxController
       if (result != null) {
         var dataSearch = dataPelaporanFromJson(result);
         if (dataSearch.data.isNotEmpty) {
-          // setState(() {
           searchData?.value = dataSearch.data;
-          // });
         } else {
-          // setState(() {
-          // searchData = searchKosong;
-
           print("masukan salah");
-          // });
         }
       } else {
         print("masukan salah");
       }
     }
-    // search.clear();
   }
 
   getRiwayatMenunggu() async {
@@ -130,7 +123,6 @@ class RiwayatLaporanController extends GetxController
       var data = riwayatLaporanFromJson(result);
       if (data.kondisi) {
         dataMenunggu?.value = data;
-       
       }
     } else {
       print("Status Menunggu kosong");
@@ -142,9 +134,7 @@ class RiwayatLaporanController extends GetxController
     if (result != null) {
       var data = riwayatLaporanFromJson(result);
       if (data.kondisi) {
-        // setState(() {
         dataProses?.value = data;
-        // });
       }
     } else {
       print("Status Proses kosong");
@@ -170,9 +160,7 @@ class RiwayatLaporanController extends GetxController
     if (result != null) {
       var data = riwayatLaporanFromJson(result);
       if (data.kondisi) {
-        // setState(() {
         dataSelesai?.value = data;
-        // });
       }
     } else {
       print("Status Selesai kosong");
@@ -249,8 +237,8 @@ class RiwayatLaporanController extends GetxController
   }
 
   final ButtonStyle buttonStyle = TextButton.styleFrom(
-    primary: Colors.white,
-    backgroundColor: Color.fromARGB(255, 224, 36, 36),
+    foregroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(255, 224, 36, 36),
     padding: EdgeInsets.symmetric(
         horizontal: paddingHorozontal1, vertical: paddingVertical1),
     shape: const RoundedRectangleBorder(

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
+// import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,27 +35,31 @@ class TrackDamkarController extends GetxController {
   }
 
   void listen(WebSocketChannel ws) {
-    ws.stream.listen((event) {
-      var decode = jsonDecode(event);
-      var data = decode['message'];
-      switch (decode['type']) {
-        case 'connect':
-          print(decode);
-          break;
-        case 'RQALoc':
-          setMarker(data['latitude'], data['longitude']);
-          break;
-        case 'RQARot':
-          setPolyLines(data['route']);
-          break;
-      }
-    }, onDone: () async {
-      await Future.delayed(const Duration(seconds: 2));
-      initWs();
-    }, onError: (e) async {
-      await Future.delayed(const Duration(seconds: 2));
-      initWs();
-    },);
+    ws.stream.listen(
+      (event) {
+        var decode = jsonDecode(event);
+        var data = decode['message'];
+        switch (decode['type']) {
+          case 'connect':
+            print(decode);
+            break;
+          case 'RQALoc':
+            setMarker(data['latitude'], data['longitude']);
+            break;
+          case 'RQARot':
+            setPolyLines(data['route']);
+            break;
+        }
+      },
+      onDone: () async {
+        await Future.delayed(const Duration(seconds: 2));
+        initWs();
+      },
+      onError: (e) async {
+        await Future.delayed(const Duration(seconds: 2));
+        initWs();
+      },
+    );
   }
 
   void onRouteReq(WebSocketChannel ws) {
@@ -76,25 +80,15 @@ class TrackDamkarController extends GetxController {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: LatLng(lat, lng), zoom: 18)));
     marker.add(Marker(
-        markerId: MarkerId("origin"),
+        markerId: const MarkerId("origin"),
         position: LatLng(lat, lng),
         icon: BitmapDescriptor.fromBytes(await getBytesFromAsset(
             'semuaAset/gambar/damkar_example.png', 100))));
     marker.add(Marker(
-        markerId: MarkerId("destination"),
-        position: LatLng(-7.5932817, 111.91509),
+        markerId: const MarkerId("destination"),
+        position: const LatLng(-7.5932817, 111.91509),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
   }
-
-  // void updatePosition(double latd, double long) async {
-  //   marker
-  //       .removeWhere((element) => element.markerId == const MarkerId("origin"));
-  //   marker.add(Marker(
-  //       markerId: MarkerId("origin"),
-  //       position: LatLng(latd, long),
-  //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan)));
-  //   // marker.elementAt(0).copyWith(positionParam: LatLng(latd, long));
-  // }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
@@ -113,7 +107,7 @@ class TrackDamkarController extends GetxController {
       polyPoints.add(LatLng(line[i][0], line[i][1]));
     }
     Polyline polyline = Polyline(
-      polylineId: PolylineId("polyline"),
+      polylineId: const PolylineId("polyline"),
       color: Colors.lightBlue,
       points: polyPoints,
     );
