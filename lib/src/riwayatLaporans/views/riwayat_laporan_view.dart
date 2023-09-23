@@ -151,9 +151,11 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 10.0),
                           prefixIcon: const Icon(Icons.search_sharp),
-                          prefixIconColor: const Color.fromARGB(255, 209, 213, 219),
+                          prefixIconColor:
+                              const Color.fromARGB(255, 209, 213, 219),
                           filled: true,
                           hintText: "Cari riwayat laporan anda",
                           fillColor: const Color.fromARGB(255, 249, 250, 251),
@@ -353,554 +355,599 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget menunggu() {
-    return Obx(() => !controller.dataMenunggu!.value.kondisi
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
-        : RefreshIndicator(
-            onRefresh: controller.onRefresh,
-            child: ListView.builder(
-                itemCount: controller.dataMenunggu!.value.data!.length,
-                itemBuilder: (context, index) {
-                  var date = controller.dataMenunggu!.value.data![index].tanggal
-                      .toString();
-                  var data = controller.dataMenunggu!.value.data![index];
-                  final splitDate = date.split('-');
-                  return Padding(
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: GestureDetector(
-                          onTap: () => controller.goToDetail(data.idLaporan!),
-                          child: Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(splitDate[2], style: StyleTxt.m()),
-                                Text(controller.monthString(splitDate[1]),
-                                    style: StyleTxt.m()),
-                                Text(splitDate[0], style: StyleTxt.m()),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: 5,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                  color: grey1,
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: black),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    child: Text(
-                                      data.kategoriLaporan!,
-                                      style: StyleTxt.sb(size: 15),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          color: orange1,
+    return controller.dataMenunggu != null
+        ? Obx(() => controller.dataMenunggu!.value.data!.isEmpty
+            ? const Align(
+                alignment: Alignment.center,
+                child: Text("Belum ada laporan yang menunggu"),
+              )
+            : RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: ListView.builder(
+                    itemCount: controller.dataMenunggu!.value.data!.length,
+                    itemBuilder: (context, index) {
+                      var date = controller
+                          .dataMenunggu!.value.data![index].tanggal
+                          .toString();
+                      var data = controller.dataMenunggu!.value.data![index];
+                      final splitDate = date.split('-');
+                      return Padding(
+                          padding: const EdgeInsets.all(
+                            10,
+                          ),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  controller.goToDetail(data.idLaporan!),
+                              child: Row(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(splitDate[2], style: StyleTxt.m()),
+                                    Text(controller.monthString(splitDate[1]),
+                                        style: StyleTxt.m()),
+                                    Text(splitDate[0], style: StyleTxt.m()),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 5,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      color: grey1,
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        child: Text(
+                                          data.kategoriLaporan!,
+                                          style: StyleTxt.sb(size: 15),
                                         ),
-                                        Flexible(
-                                            child: Text(
-                                          data.alamat!,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          // padding: EdgeInsets.symmetric(
-                                          //     horizontal: paddingHorozontal1),
-                                          child: Card(
-                                            color: controller.setColorStatus(
-                                                data.statusRiwayat!),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Text(
-                                                data.statusRiwayat!,
-                                                textAlign: TextAlign.center,
-                                                style: StyleTxt.m(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.location_on_outlined,
+                                              color: orange1,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              data.alamat!,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              width: 80,
+                                              // padding: EdgeInsets.symmetric(
+                                              //     horizontal: paddingHorozontal1),
+                                              child: Card(
+                                                color:
+                                                    controller.setColorStatus(
+                                                        data.statusRiwayat!),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Text(
+                                                    data.statusRiwayat!,
+                                                    textAlign: TextAlign.center,
+                                                    style: StyleTxt.m(),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ])
-                                ],
-                              ),
-                            ))
-                          ])));
-                })));
+                                          ])
+                                    ],
+                                  ),
+                                ))
+                              ])));
+                    })))
+        : const CircularProgressIndicator();
   }
 
   Widget proses() {
-    return Obx(() => !controller.dataProses!.value.kondisi
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
-        : RefreshIndicator(
-            onRefresh: controller.onRefresh,
-            child: ListView.builder(
-                itemCount: controller.dataProses!.value.data!.length,
-                itemBuilder: (context, index) {
-                  var date = controller.dataProses!.value.data![index].tanggal
-                      .toString();
-                  var data = controller.dataProses!.value.data![index];
-                  final splitDate = date.split('-');
-                  return Padding(
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: GestureDetector(
-                          onTap: () => controller.goToDetail(data.idLaporan!),
-                          child: Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(splitDate[2], style: StyleTxt.m()),
-                                Text(controller.monthString(splitDate[1]),
-                                    style: StyleTxt.m()),
-                                Text(splitDate[0], style: StyleTxt.m()),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: 5,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                  color: grey1,
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: black),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    child: Text(
-                                      data.kategoriLaporan.toString(),
-                                      style: StyleTxt.sb(size: 15),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          color: orange1,
+    return controller.dataProses != null
+        ? Obx(() => controller.dataProses!.value.data!.isEmpty
+            ? const Align(
+                alignment: Alignment.center,
+                child: Text("Belum ada laporan yang di proses"),
+              )
+            : RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: ListView.builder(
+                    itemCount: controller.dataProses!.value.data!.length,
+                    itemBuilder: (context, index) {
+                      var date = controller
+                          .dataProses!.value.data![index].tanggal
+                          .toString();
+                      var data = controller.dataProses!.value.data![index];
+                      final splitDate = date.split('-');
+                      return Padding(
+                          padding: const EdgeInsets.all(
+                            10,
+                          ),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  controller.goToDetail(data.idLaporan!),
+                              child: Row(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(splitDate[2], style: StyleTxt.m()),
+                                    Text(controller.monthString(splitDate[1]),
+                                        style: StyleTxt.m()),
+                                    Text(splitDate[0], style: StyleTxt.m()),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 5,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      color: grey1,
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        child: Text(
+                                          data.kategoriLaporan.toString(),
+                                          style: StyleTxt.sb(size: 15),
                                         ),
-                                        Flexible(
-                                            child: Text(
-                                          data.alamat.toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          // padding: EdgeInsets.symmetric(
-                                          //     horizontal: paddingHorozontal1),
-                                          child: Card(
-                                            color: controller.setColorStatus(
-                                                data.statusRiwayat!),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Text(
-                                                data.statusRiwayat.toString(),
-                                                textAlign: TextAlign.center,
-                                                style: StyleTxt.m(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.location_on_outlined,
+                                              color: orange1,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              data.alamat.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              width: 80,
+                                              // padding: EdgeInsets.symmetric(
+                                              //     horizontal: paddingHorozontal1),
+                                              child: Card(
+                                                color:
+                                                    controller.setColorStatus(
+                                                        data.statusRiwayat!),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Text(
+                                                    data.statusRiwayat
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: StyleTxt.m(),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ])
-                                ],
-                              ),
-                            ))
-                          ])));
-                })));
+                                          ])
+                                    ],
+                                  ),
+                                ))
+                              ])));
+                    })))
+        : const CircularProgressIndicator();
   }
 
   Widget ditangani() {
-    return Obx(() => !controller.dataDitangani!.value.kondisi
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
-        : RefreshIndicator(
-            onRefresh: controller.onRefresh,
-            child: ListView.builder(
-                itemCount: controller.dataDitangani!.value.data!.length,
-                itemBuilder: (context, index) {
-                  var date = controller
-                      .dataDitangani!.value.data![index].tanggal
-                      .toString();
-                  var data = controller.dataDitangani!.value.data![index];
-                  final splitDate = date.split('-');
-                  return Padding(
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: GestureDetector(
-                          onTap: () => controller.goToDetail(data.idLaporan!),
-                          child: Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(splitDate[2], style: StyleTxt.m()),
-                                Text(controller.monthString(splitDate[1]),
-                                    style: StyleTxt.m()),
-                                Text(splitDate[0], style: StyleTxt.m()),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: 5,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                  color: grey1,
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: black),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    child: Text(
-                                      data.kategoriLaporan.toString(),
-                                      style: StyleTxt.sb(size: 15),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          color: orange1,
+    return controller.dataDitangani != null
+        ? Obx(() => controller.dataDitangani!.value.data!.isEmpty
+            ? const Align(
+                alignment: Alignment.center,
+                child: Text("Belum ada Laporan yang ditangani"),
+              )
+            : RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: ListView.builder(
+                    itemCount: controller.dataDitangani!.value.data!.length,
+                    itemBuilder: (context, index) {
+                      var date = controller
+                          .dataDitangani!.value.data![index].tanggal
+                          .toString();
+                      var data = controller.dataDitangani!.value.data![index];
+                      final splitDate = date.split('-');
+                      return Padding(
+                          padding: const EdgeInsets.all(
+                            10,
+                          ),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  controller.goToDetail(data.idLaporan!),
+                              child: Row(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(splitDate[2], style: StyleTxt.m()),
+                                    Text(controller.monthString(splitDate[1]),
+                                        style: StyleTxt.m()),
+                                    Text(splitDate[0], style: StyleTxt.m()),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 5,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      color: grey1,
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        child: Text(
+                                          data.kategoriLaporan.toString(),
+                                          style: StyleTxt.sb(size: 15),
                                         ),
-                                        Flexible(
-                                            child: Text(
-                                          data.alamat.toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          // padding: EdgeInsets.symmetric(
-                                          //     horizontal: paddingHorozontal1),
-                                          child: Card(
-                                            color: controller.setColorStatus(
-                                                data.statusRiwayat!),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Text(
-                                                data.statusRiwayat.toString(),
-                                                textAlign: TextAlign.center,
-                                                style: StyleTxt.m(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.location_on_outlined,
+                                              color: orange1,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              data.alamat.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              width: 80,
+                                              // padding: EdgeInsets.symmetric(
+                                              //     horizontal: paddingHorozontal1),
+                                              child: Card(
+                                                color:
+                                                    controller.setColorStatus(
+                                                        data.statusRiwayat!),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Text(
+                                                    data.statusRiwayat
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: StyleTxt.m(),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ])
-                                ],
-                              ),
-                            ))
-                          ])));
-                })));
+                                          ])
+                                    ],
+                                  ),
+                                ))
+                              ])));
+                    })))
+        : const CircularProgressIndicator();
   }
 
   Widget selesai() {
-    return Obx(() => !controller.dataSelesai!.value.kondisi
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
-        : RefreshIndicator(
-            onRefresh: controller.onRefresh,
-            child: ListView.builder(
-                itemCount: controller.dataSelesai!.value.data!.length,
-                itemBuilder: (context, index) {
-                  var date = controller.dataSelesai!.value.data![index].tanggal
-                      .toString();
-                  var data = controller.dataSelesai!.value.data![index];
-                  final splitDate = date.split('-');
-                  return Padding(
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: GestureDetector(
-                          onTap: () => controller.goToDetail(data.idLaporan!),
-                          child: Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(splitDate[2], style: StyleTxt.m()),
-                                Text(controller.monthString(splitDate[1]),
-                                    style: StyleTxt.m()),
-                                Text(splitDate[0], style: StyleTxt.m()),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: 5,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                  color: grey1,
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: black),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    child: Text(
-                                      data.kategoriLaporan.toString(),
-                                      style: StyleTxt.sb(size: 15),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          color: orange1,
+    return controller.dataSelesai != null
+        ? Obx(() => controller.dataSelesai!.value.data!.isEmpty
+            ? const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Laporan selesai masih kosong",
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: ListView.builder(
+                    itemCount: controller.dataSelesai!.value.data!.length,
+                    itemBuilder: (context, index) {
+                      var date = controller
+                          .dataSelesai!.value.data![index].tanggal
+                          .toString();
+                      var data = controller.dataSelesai!.value.data![index];
+                      final splitDate = date.split('-');
+                      return Padding(
+                          padding: const EdgeInsets.all(
+                            10,
+                          ),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  controller.goToDetail(data.idLaporan!),
+                              child: Row(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(splitDate[2], style: StyleTxt.m()),
+                                    Text(controller.monthString(splitDate[1]),
+                                        style: StyleTxt.m()),
+                                    Text(splitDate[0], style: StyleTxt.m()),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 5,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      color: grey1,
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        child: Text(
+                                          data.kategoriLaporan.toString(),
+                                          style: StyleTxt.sb(size: 15),
                                         ),
-                                        Flexible(
-                                            child: Text(
-                                          data.alamat.toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          // padding: EdgeInsets.symmetric(
-                                          //     horizontal: paddingHorozontal1),
-                                          child: Card(
-                                            color: controller.setColorStatus(
-                                                data.statusRiwayat!),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Text(
-                                                data.statusRiwayat.toString(),
-                                                textAlign: TextAlign.center,
-                                                style: StyleTxt.m(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.location_on_outlined,
+                                              color: orange1,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              data.alamat.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              width: 80,
+                                              // padding: EdgeInsets.symmetric(
+                                              //     horizontal: paddingHorozontal1),
+                                              child: Card(
+                                                color:
+                                                    controller.setColorStatus(
+                                                        data.statusRiwayat!),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Text(
+                                                    data.statusRiwayat
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: StyleTxt.m(),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ])
-                                ],
-                              ),
-                            ))
-                          ])));
-                })));
+                                          ])
+                                    ],
+                                  ),
+                                ))
+                              ])));
+                    })))
+        : const CircularProgressIndicator();
   }
 
   Widget ditolak() {
-    return Obx(() => !controller.dataDitolak!.value.kondisi
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
-        : RefreshIndicator(
-            onRefresh: controller.onRefresh,
-            child: ListView.builder(
-                
-                itemCount: controller.dataDitolak!.value.data!.length,
-                itemBuilder: (context, index) {
-                  var date = controller.dataDitolak!.value.data![index].tanggal
-                      .toString();
-                  var data = controller.dataDitolak!.value.data![index];
-                  final splitDate = date.split('-');
-                  return Padding(
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
-                      child: GestureDetector(
-                          onTap: () => controller.goToDetail(data.idLaporan!),
-                          child: Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(splitDate[2], style: StyleTxt.m()),
-                                Text(controller.monthString(splitDate[1]),
-                                    style: StyleTxt.m()),
-                                Text(splitDate[0], style: StyleTxt.m()),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              width: 5,
-                              height: 90,
-                              decoration: BoxDecoration(
-                                  color: grey1,
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: black),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    child: Text(
-                                      data.kategoriLaporan.toString(),
-                                      style: StyleTxt.sb(size: 15),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on_outlined,
-                                          color: orange1,
+    return controller.dataDitolak != null
+        ? Obx(() => controller.dataDitolak!.value.data!.isEmpty
+            ? const Align(
+                alignment: Alignment.center,
+                child: Text("Tidak ada pelaporan yang ditolak"),
+              )
+            : RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: ListView.builder(
+                    itemCount: controller.dataDitolak!.value.data!.length,
+                    itemBuilder: (context, index) {
+                      var date = controller
+                          .dataDitolak!.value.data![index].tanggal
+                          .toString();
+                      var data = controller.dataDitolak!.value.data![index];
+                      final splitDate = date.split('-');
+                      return Padding(
+                          padding: const EdgeInsets.all(
+                            10,
+                          ),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  controller.goToDetail(data.idLaporan!),
+                              child: Row(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(splitDate[2], style: StyleTxt.m()),
+                                    Text(controller.monthString(splitDate[1]),
+                                        style: StyleTxt.m()),
+                                    Text(splitDate[0], style: StyleTxt.m()),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 5,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      color: grey1,
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: black),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        child: Text(
+                                          data.kategoriLaporan.toString(),
+                                          style: StyleTxt.sb(size: 15),
                                         ),
-                                        Flexible(
-                                            child: Text(
-                                          data.alamat.toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 80,
-                                          // padding: EdgeInsets.symmetric(
-                                          //     horizontal: paddingHorozontal1),
-                                          child: Card(
-                                            color: controller.setColorStatus(
-                                                data.statusRiwayat!),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Text(
-                                                data.statusRiwayat.toString(),
-                                                textAlign: TextAlign.center,
-                                                style: StyleTxt.m(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.location_on_outlined,
+                                              color: orange1,
+                                            ),
+                                            Flexible(
+                                                child: Text(
+                                              data.alamat.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              width: 80,
+                                              // padding: EdgeInsets.symmetric(
+                                              //     horizontal: paddingHorozontal1),
+                                              child: Card(
+                                                color:
+                                                    controller.setColorStatus(
+                                                        data.statusRiwayat!),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  child: Text(
+                                                    data.statusRiwayat
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: StyleTxt.m(),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ])
-                                ],
-                              ),
-                            ))
-                          ])));
-                })));
+                                          ])
+                                    ],
+                                  ),
+                                ))
+                              ])));
+                    })))
+        : const CircularProgressIndicator();
   }
 }
