@@ -67,7 +67,7 @@ class LaporanAnonymController extends GetxController {
 
   void pushLaporan() async {
     showSpinner.value = true;
-    String title = iduser.toString() + "_image_" + getRandomString(30);
+    String title = "${iduser}_image_${getRandomString(30)}";
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());

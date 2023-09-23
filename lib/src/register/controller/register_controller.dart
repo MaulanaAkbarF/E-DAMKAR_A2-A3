@@ -186,7 +186,7 @@ class SignUpController extends GetxController {
   // }
 
   void random() {
-    var rng = new Random();
+    var rng = Random();
     randomNumber.value = rng.nextInt(900000) + 100000;
     print(rng.nextInt(900000) + 100000);
   }

@@ -26,9 +26,9 @@ class ProfileView extends GetView<ProfileController> {
                   splashColor: Colors.grey.shade400,
                   highlightColor: Colors.grey.shade600,
                   onTap: () => controller.goPop(),
-                  child: Padding(
+                  child: const Padding(
                     padding: EdgeInsets.only(right: 10),
-                    child: Container(
+                    child: SizedBox(
                       width: 40,
                       height: 40,
                       child: Icon(Icons.arrow_back_ios_new),
@@ -45,7 +45,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 18,
           ),
           Padding(
@@ -63,7 +63,7 @@ class ProfileView extends GetView<ProfileController> {
                     subtitle: Text(controller.noHp.value.toString()),
                     trailing: GestureDetector(
                       onTap: () => controller.goTOUpdateProfil(),
-                      child: Text(
+                      child: const Text(
                         "Ubah",
                         style: TextStyle(color: Colors.blue),
                       ),
@@ -71,11 +71,11 @@ class ProfileView extends GetView<ProfileController> {
                   )),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               "Akun",
               style: TextStyle(
@@ -111,10 +111,10 @@ class ProfileView extends GetView<ProfileController> {
           // Divider(
           //   thickness: 1,
           // ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: ListTile(
-              leading: Icon(Icons.lock),
+              leading: const Icon(Icons.lock),
               title: TextButton(
                   onPressed: controller.goToResetPass,
                   child: const Align(
@@ -134,14 +134,14 @@ class ProfileView extends GetView<ProfileController> {
                   controller.goToResetPass;
                   print("nilai id :" );
                 },
-                child: Icon(Icons.chevron_right),
+                child: const Icon(Icons.chevron_right),
               ),
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 4,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           // Padding(
@@ -182,11 +182,11 @@ class ProfileView extends GetView<ProfileController> {
           // Divider(
           //   thickness: 5,
           // ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               "Bantuan",
               style: TextStyle(
@@ -195,13 +195,13 @@ class ProfileView extends GetView<ProfileController> {
                   fontFamily: "font/inter_bold.ttf"),
             ),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: ListTile(
-              leading: Icon(Icons.help),
+              leading: const Icon(Icons.help),
               title: TextButton(
                   onPressed: controller.goToTentangKami,
-                  child: Align(
+                  child: const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Tentang Kami",
@@ -215,12 +215,12 @@ class ProfileView extends GetView<ProfileController> {
               horizontalTitleGap: 0,
               trailing: GestureDetector(
                 onTap: controller.goToTentangKami,
-                child: Icon(Icons.chevron_right),
+                child: const Icon(Icons.chevron_right),
               ),
               //trailing: Icon(Icons.chevron_right),
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 4,
           ),
           // SizedBox(
@@ -233,8 +233,8 @@ class ProfileView extends GetView<ProfileController> {
                 onPressed: () => controller.showLogoutDialog(context),
                 style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    backgroundColor: Color.fromARGB(255, 250, 250, 250),
-                    minimumSize: Size.fromHeight(50),
+                    backgroundColor: const Color.fromARGB(255, 250, 250, 250),
+                    minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.red.shade500, width: 1),
                         borderRadius: BorderRadiusDirectional.circular(100))),

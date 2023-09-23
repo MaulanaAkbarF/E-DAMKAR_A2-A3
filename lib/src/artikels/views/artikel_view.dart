@@ -20,12 +20,12 @@ class ArtikelView extends GetView<ArtikleController> {
     {
       'Bold1': const TextStyle(
           fontFamily: "font/inter_black.ttf",
-          color: Color(0x374151),
+          color: Color(0x00374151),
           fontSize: (20),
           fontWeight: FontWeight.w700),
       'TittleBold': const TextStyle(
           fontFamily: "font/inter_bold.ttf",
-          color: Color(0x374151),
+          color: Color(0x00374151),
           fontSize: (20),
           fontWeight: FontWeight.w700),
       'SemiBold1': const TextStyle(
@@ -76,16 +76,16 @@ class ArtikelView extends GetView<ArtikleController> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
+                title: const Text("Konfirmasi keluar !"),
+                content: const Text("Apakah anda yakin untuk Keluar ?"),
                 actions: <Widget>[
                   FloatingActionButton(
-                      child: Text("Tidak"),
+                      child: const Text("Tidak"),
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       }),
                   FloatingActionButton(
-                      child: Text("Ya"),
+                      child: const Text("Ya"),
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       })
@@ -120,7 +120,7 @@ class ArtikelView extends GetView<ArtikleController> {
 
             TabBar(
                 isScrollable: true,
-                unselectedLabelColor: Color.fromARGB(255, 165, 165, 165),
+                unselectedLabelColor: const Color.fromARGB(255, 165, 165, 165),
                 indicatorColor: orange1,
                 labelColor: black,
                 controller: controller.tabController,
@@ -140,7 +140,7 @@ class ArtikelView extends GetView<ArtikleController> {
                     text: "Agenda",
                   ),
                 ]),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -149,7 +149,7 @@ class ArtikelView extends GetView<ArtikleController> {
               color: Colors.black26,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -174,7 +174,7 @@ class ArtikelView extends GetView<ArtikleController> {
                                   }),
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
                                     image: controller.imgArtikel(
                                         i.foto, i.jenisArtikel),
@@ -227,7 +227,7 @@ class ArtikelView extends GetView<ArtikleController> {
   Widget listArtikel(value) {
     return Obx(
       () => value == null
-          ? Text("Artikel Kosong")
+          ? const Text("Artikel Kosong")
           : ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -256,7 +256,7 @@ class ArtikelView extends GetView<ArtikleController> {
                             color: black2,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -270,7 +270,7 @@ class ArtikelView extends GetView<ArtikleController> {
                             fontFamily: "$semibold",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                       ],
@@ -280,14 +280,14 @@ class ArtikelView extends GetView<ArtikleController> {
                         Text(
                           value![index].adminDamkar.toString(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.circle,
                           size: 5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
                         Text(
@@ -309,7 +309,7 @@ class ArtikelView extends GetView<ArtikleController> {
                 );
               },
               separatorBuilder: (context, index) {
-                return Divider(
+                return const Divider(
                   color: Colors.black38,
                 );
               },
@@ -320,7 +320,7 @@ class ArtikelView extends GetView<ArtikleController> {
   Widget listAgenda(value) {
     return Obx(
       () => value == null
-          ? Text("Artikel Kosong")
+          ? const Text("Artikel Kosong")
           : ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -343,7 +343,7 @@ class ArtikelView extends GetView<ArtikleController> {
                             color: black2,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -357,7 +357,7 @@ class ArtikelView extends GetView<ArtikleController> {
                             fontFamily: "$semibold",
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                       ],
@@ -367,14 +367,14 @@ class ArtikelView extends GetView<ArtikleController> {
                         Text(
                           value![index].adminDamkar.toString(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.circle,
                           size: 5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
                         Text(
@@ -396,7 +396,7 @@ class ArtikelView extends GetView<ArtikleController> {
                 );
               },
               separatorBuilder: (context, index) {
-                return Divider(
+                return const Divider(
                   color: Colors.black38,
                 );
               },

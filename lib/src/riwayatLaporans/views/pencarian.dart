@@ -1,12 +1,13 @@
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../controller/riwayat_laporan_controller.dart';
 
 class Pencarian extends StatelessWidget {
+  const Pencarian({super.key});
+
   @override
   Widget build(BuildContext context) {
     final rwtController = Get.put(RiwayatLaporanController());
@@ -24,7 +25,7 @@ class Pencarian extends StatelessWidget {
               final splitDate = date.split('-');
               var data = rwtController.searchData![index];
               return Padding(
-                  padding: EdgeInsets.all(
+                  padding: const EdgeInsets.all(
                     10,
                   ),
                   child: GestureDetector(
@@ -40,7 +41,7 @@ class Pencarian extends StatelessWidget {
                             Text(splitDate[0], style: StyleTxt.m()),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Container(
@@ -50,7 +51,7 @@ class Pencarian extends StatelessWidget {
                               color: grey1,
                               borderRadius: BorderRadius.circular(5)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Expanded(
@@ -92,7 +93,7 @@ class Pencarian extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 80,
                                       // padding: EdgeInsets.symmetric(
                                       //     horizontal: paddingHorozontal1),
@@ -100,19 +101,19 @@ class Pencarian extends StatelessWidget {
                                         color: () {
                                           if (data.statusRiwayat ==
                                               "Menunggu") {
-                                            return Color.fromARGB(
+                                            return const Color.fromARGB(
                                                 255, 250, 202, 21);
                                           } else if (data.statusRiwayat ==
                                               "Ditangani") {
-                                            return Color.fromARGB(
+                                            return const Color.fromARGB(
                                                 255, 63, 131, 248);
                                           } else if (data.statusRiwayat ==
                                               "Selesai") {
-                                            return Color.fromARGB(
+                                            return const Color.fromARGB(
                                                 255, 17, 178, 124);
                                           } else if (data.statusRiwayat ==
                                               "Ditolak") {
-                                            return Color.fromARGB(
+                                            return const Color.fromARGB(
                                                 255, 224, 36, 36);
                                           } else if (data.statusRiwayat ==
                                               "Emergency") {
@@ -123,7 +124,7 @@ class Pencarian extends StatelessWidget {
                                           }
                                         }(),
                                         child: Padding(
-                                          padding: EdgeInsets.all(5),
+                                          padding: const EdgeInsets.all(5),
                                           child: Text(
                                             data.statusRiwayat.toString(),
                                             textAlign: TextAlign.center,

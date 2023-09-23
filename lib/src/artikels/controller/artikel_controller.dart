@@ -151,8 +151,7 @@ class ArtikleController extends GetxController
   // }
 
   final ButtonStyle buttonStyle = TextButton.styleFrom(
-    primary: Colors.white,
-    backgroundColor: Color.fromARGB(255, 224, 36, 36),
+    foregroundColor: Colors.white, backgroundColor: const Color.fromARGB(255, 224, 36, 36),
     padding: EdgeInsets.symmetric(
         horizontal: paddingHorozontal1, vertical: paddingVertical1),
     shape: const RoundedRectangleBorder(

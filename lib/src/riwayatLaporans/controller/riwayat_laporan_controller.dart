@@ -55,11 +55,6 @@ class RiwayatLaporanController extends GetxController
     );
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   setColorStatus(String status) {
     if (status == "Menunggu") {
       return const Color.fromARGB(255, 250, 202, 21);
@@ -102,8 +97,8 @@ class RiwayatLaporanController extends GetxController
 
   PostDataSearch(String kata) async {
     if (kata.isNotEmpty) {
-      var result = await APIClient()
-          .getData('searchLapp/' + idUser.toString() + "/" + kata);
+      var result =
+          await APIClient().getData("searchLapp/${idUser.toString()}/$kata");
       if (result != null) {
         var dataSearch = dataPelaporanFromJson(result);
         if (dataSearch.data.isNotEmpty) {

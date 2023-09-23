@@ -78,7 +78,7 @@ class SignUpView extends GetView<SignUpController> {
     return Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             for (final teks in teksSignUp)
@@ -98,7 +98,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Text(teks['SubHeader'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 4,
@@ -108,7 +108,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 24),
+                            padding: const EdgeInsets.only(top: 24),
                             child: Text(teks['Nama'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
@@ -118,10 +118,10 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Container(
                               width: double.infinity,
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(8),
@@ -134,9 +134,9 @@ class SignUpView extends GetView<SignUpController> {
                                 style: teksStyle['SemiBold1'],
                                 decoration: InputDecoration(
                                     hintText: teks['NamaHint'],
-                                    prefixIcon: Icon(Icons.person),
+                                    prefixIcon: const Icon(Icons.person),
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                     border: InputBorder.none),
                               ),
                             ),
@@ -145,7 +145,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Text(teks['Email'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
@@ -155,10 +155,10 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Container(
                               width: double.infinity,
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(8),
@@ -171,9 +171,9 @@ class SignUpView extends GetView<SignUpController> {
                                 style: teksStyle['SemiBold1'],
                                 decoration: InputDecoration(
                                     hintText: teks['EmailHint'],
-                                    prefixIcon: Icon(Icons.mail),
+                                    prefixIcon: const Icon(Icons.mail),
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                     border: InputBorder.none),
                               ),
                             ),
@@ -182,7 +182,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Text(teks['Telepon'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
@@ -192,10 +192,10 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Container(
                               width: double.infinity,
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(8),
@@ -214,9 +214,9 @@ class SignUpView extends GetView<SignUpController> {
                                 style: teksStyle['SemiBold1'],
                                 decoration: InputDecoration(
                                     hintText: teks['TeleponHint'],
-                                    prefixIcon: Icon(Icons.phone),
+                                    prefixIcon: const Icon(Icons.phone),
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                        const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                     border: InputBorder.none),
                               ),
                             ),
@@ -225,7 +225,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Text(teks['Password1'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
@@ -235,10 +235,10 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Container(
                               width: double.infinity,
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(8),
@@ -252,7 +252,7 @@ class SignUpView extends GetView<SignUpController> {
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         suffixIcon: IconButton(
                                           onPressed: () =>
                                               controller.passVisible(),
@@ -261,11 +261,11 @@ class SignUpView extends GetView<SignUpController> {
                                               ? Icons.visibility_outlined
                                               : Icons
                                                   .visibility_off_outlined),
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 143, 143, 143),
                                         ),
                                         suffixIconColor: Colors.black,
-                                        contentPadding: EdgeInsets.fromLTRB(
+                                        contentPadding: const EdgeInsets.fromLTRB(
                                             10, 13, 10, 7),
                                         border: InputBorder.none),
                                   )),
@@ -275,7 +275,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.only(top: 20),
                             child: Text(teks['Password2'],
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
@@ -285,10 +285,10 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: FractionalOffset.topLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 8),
                             child: Container(
                               width: double.infinity,
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(8),
@@ -302,7 +302,7 @@ class SignUpView extends GetView<SignUpController> {
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         suffixIcon: IconButton(
                                           onPressed: () =>
                                               controller.validVisible(),
@@ -311,11 +311,11 @@ class SignUpView extends GetView<SignUpController> {
                                               ? Icons.visibility_outlined
                                               : Icons
                                                   .visibility_off_outlined),
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 143, 143, 143),
                                         ),
                                         suffixIconColor: Colors.black,
-                                        contentPadding: EdgeInsets.fromLTRB(
+                                        contentPadding: const EdgeInsets.fromLTRB(
                                             10, 13, 10, 7),
                                         border: InputBorder.none),
                                   )),
@@ -325,7 +325,7 @@ class SignUpView extends GetView<SignUpController> {
                         Align(
                           alignment: Alignment.center,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 40),
+                            padding: const EdgeInsets.only(top: 40),
                             child: Material(
                               color: Colors.red.shade400,
                               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -334,7 +334,7 @@ class SignUpView extends GetView<SignUpController> {
                                     splashColor: Colors.red.shade700,
                                     highlightColor: Colors.red.shade900,
                                     onTap: controller.RegisterPost,
-                                    child: Container(
+                                    child: SizedBox(
                                         height: 50,
                                         child: controller.isloading.value
                                             ? Row(
@@ -403,15 +403,15 @@ class SignUpView extends GetView<SignUpController> {
 
 // fungsi
 void navToSignInPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
+  Timer(const Duration(seconds: 0), () {
     Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => SignInPage(),
+          pageBuilder: (_, __, ___) => const SignInPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(
-                begin: Offset(1, 0),
+                begin: const Offset(1, 0),
                 end: Offset.zero,
               ).animate(
                 CurvedAnimation(

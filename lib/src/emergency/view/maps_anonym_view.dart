@@ -56,15 +56,15 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                           padding: const EdgeInsets.only(bottom: 24, right: 16),
                           child: FloatingActionButton(
                             onPressed: controller.userRePotition,
+                            backgroundColor: Colors.red.shade400,
+                            elevation: 0,
+                            splashColor: Colors.red.shade800,
                             child: SvgPicture.asset(
                               'semuaAset/icon/Discovery.svg',
                               width: 24,
                               height: 24,
                               color: white,
                             ),
-                            backgroundColor: Colors.red.shade400,
-                            elevation: 0,
-                            splashColor: Colors.red.shade800,
                           ),
                         ),
                         Card(
@@ -123,7 +123,7 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 32, left: 16, right: 16),
                                     child: Material(
                                       color: Colors.red.shade400,
@@ -138,8 +138,8 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                                                 BorderRadius.circular(8),
                                           ),
                                           elevation: 0,
-                                          minimumSize: Size.fromHeight(50),
-                                          padding: EdgeInsets.symmetric(
+                                          minimumSize: const Size.fromHeight(50),
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
                                         onPressed: controller.goToPelaporan,
@@ -159,7 +159,7 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 16,
                                         left: 16,
                                         right: 16,
@@ -178,8 +178,8 @@ class MapsAnonym extends GetView<MapsAnonymController> {
                                                 BorderRadius.circular(8),
                                           ),
                                           elevation: 0,
-                                          minimumSize: Size.fromHeight(50),
-                                          padding: EdgeInsets.symmetric(
+                                          minimumSize: const Size.fromHeight(50),
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
                                         onPressed: () {

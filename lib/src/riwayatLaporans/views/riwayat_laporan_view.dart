@@ -37,12 +37,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
     {
       'Bold1': const TextStyle(
           fontFamily: "font/inter_black.ttf",
-          color: Color(0x374151),
+          color: Color(0x00374151),
           fontSize: (20),
           fontWeight: FontWeight.w700),
       'TittleBold': const TextStyle(
           fontFamily: "font/inter_bold.ttf",
-          color: Color(0x374151),
+          color: Color(0x00374151),
           fontSize: (20),
           fontWeight: FontWeight.w700),
       'SemiBold1': const TextStyle(
@@ -90,16 +90,16 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Konfirmasi keluar !"),
-                content: Text("Apakah anda yakin untuk Keluar ?"),
+                title: const Text("Konfirmasi keluar !"),
+                content: const Text("Apakah anda yakin untuk Keluar ?"),
                 actions: <Widget>[
                   FloatingActionButton(
-                      child: Text("Tidak"),
+                      child: const Text("Tidak"),
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       }),
                   FloatingActionButton(
-                      child: Text("Ya"),
+                      child: const Text("Ya"),
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       })
@@ -113,7 +113,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
             children: [
               // for (final teks in teksLaporan)
               //   for (final teksStyle in teksStyleLaporan)
-              Align(
+              const Align(
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
                   padding: EdgeInsets.only(left: 16, right: 16, top: 20),
@@ -129,7 +129,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -151,12 +151,12 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                          prefixIcon: Icon(Icons.search_sharp),
-                          prefixIconColor: Color.fromARGB(255, 209, 213, 219),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                          prefixIcon: const Icon(Icons.search_sharp),
+                          prefixIconColor: const Color.fromARGB(255, 209, 213, 219),
                           filled: true,
                           hintText: "Cari riwayat laporan anda",
-                          fillColor: Color.fromARGB(255, 249, 250, 251),
+                          fillColor: const Color.fromARGB(255, 249, 250, 251),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(
@@ -169,7 +169,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                     TabBar(
                         isScrollable: true,
                         unselectedLabelColor:
-                            Color.fromARGB(255, 165, 165, 165),
+                            const Color.fromARGB(255, 165, 165, 165),
                         indicatorColor: orange1,
                         labelColor: black,
                         controller: controller.tabController,
@@ -208,7 +208,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   child: TabBarView(
                       controller: controller.tabController,
                       children: [
-                    Pencarian(),
+                    const Pencarian(),
                     isRiwayatNull(),
                     menunggu(),
                     proses(),
@@ -231,7 +231,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget dataSearchKosong() {
-    return Align(
+    return const Align(
       alignment: Alignment.center,
       child: Text("Kata kunci tidak ada hasil !"),
     );
@@ -239,7 +239,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget isRiwayatNull() {
     return Obx(() => controller.dataElement == null
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -251,7 +251,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var date = controller.dataElement![index].tanggal.toString();
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -268,7 +268,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -278,7 +278,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -324,7 +324,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -333,7 +333,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                                 controller.dataElement![index]
                                                     .statusRiwayat),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 controller.dataElement![index]
                                                     .statusRiwayat
@@ -354,7 +354,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget menunggu() {
     return Obx(() => !controller.dataMenunggu!.value.kondisi
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -368,7 +368,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var data = controller.dataMenunggu!.value.data![index];
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -384,7 +384,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -394,7 +394,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -437,7 +437,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -445,7 +445,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                             color: controller.setColorStatus(
                                                 data.statusRiwayat!),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 data.statusRiwayat!,
                                                 textAlign: TextAlign.center,
@@ -464,7 +464,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget proses() {
     return Obx(() => !controller.dataProses!.value.kondisi
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -478,7 +478,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var data = controller.dataProses!.value.data![index];
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -494,7 +494,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -504,7 +504,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -547,7 +547,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -555,7 +555,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                             color: controller.setColorStatus(
                                                 data.statusRiwayat!),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 data.statusRiwayat.toString(),
                                                 textAlign: TextAlign.center,
@@ -574,7 +574,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget ditangani() {
     return Obx(() => !controller.dataDitangani!.value.kondisi
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -589,7 +589,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var data = controller.dataDitangani!.value.data![index];
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -605,7 +605,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -615,7 +615,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -658,7 +658,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -666,7 +666,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                             color: controller.setColorStatus(
                                                 data.statusRiwayat!),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 data.statusRiwayat.toString(),
                                                 textAlign: TextAlign.center,
@@ -685,7 +685,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget selesai() {
     return Obx(() => !controller.dataSelesai!.value.kondisi
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -699,7 +699,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var data = controller.dataSelesai!.value.data![index];
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -715,7 +715,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -725,7 +725,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -768,7 +768,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -776,7 +776,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                             color: controller.setColorStatus(
                                                 data.statusRiwayat!),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 data.statusRiwayat.toString(),
                                                 textAlign: TextAlign.center,
@@ -795,7 +795,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget ditolak() {
     return Obx(() => !controller.dataDitolak!.value.kondisi
-        ? Align(
+        ? const Align(
             alignment: Alignment.center,
             child: Text("Anda belum pernah melakukan pelaporan"),
           )
@@ -810,7 +810,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                   var data = controller.dataDitolak!.value.data![index];
                   final splitDate = date.split('-');
                   return Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                         10,
                       ),
                       child: GestureDetector(
@@ -826,7 +826,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                 Text(splitDate[0], style: StyleTxt.m()),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
@@ -836,7 +836,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   color: grey1,
                                   borderRadius: BorderRadius.circular(5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Expanded(
@@ -879,7 +879,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                           CrossAxisAlignment.end,
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 80,
                                           // padding: EdgeInsets.symmetric(
                                           //     horizontal: paddingHorozontal1),
@@ -887,7 +887,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                             color: controller.setColorStatus(
                                                 data.statusRiwayat!),
                                             child: Padding(
-                                              padding: EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(5),
                                               child: Text(
                                                 data.statusRiwayat.toString(),
                                                 textAlign: TextAlign.center,

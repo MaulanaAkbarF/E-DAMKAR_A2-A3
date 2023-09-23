@@ -54,7 +54,7 @@ class VerificationSignUpController extends GetxController {
       return null;
     });
     if (result != null) {
-      Get.to(VerificationSuccess());
+      Get.to(const VerificationSuccess());
     } else {
       print('something error on code');
       print(result);

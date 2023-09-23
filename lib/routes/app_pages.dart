@@ -63,7 +63,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.emergency,
-      page: () => EmergencyCall(),
+      page: () => const EmergencyCall(),
       binding: EmergencyBinding(),
     ),
     GetPage(
@@ -93,7 +93,7 @@ class AppPages {
 
     GetPage(
       name: Routes.dashboard,
-      page: () => DashboardPage(),
+      page: () => const DashboardPage(),
       binding: DashboardBinding(),
     ),
 
@@ -138,7 +138,7 @@ class AppPages {
 
     GetPage(
       name: Routes.succesResetPw,
-      page: () => UpdatePasswordSuccess(),
+      page: () => const UpdatePasswordSuccess(),
     ),
 
     //Laporan
@@ -154,7 +154,7 @@ class AppPages {
 
     GetPage(
         name: Routes.lpHewanBuas,
-        page: () => LaporanHewanBuas(),
+        page: () => const LaporanHewanBuas(),
         binding: PelaporanBinding()),
 
     GetPage(
@@ -164,7 +164,7 @@ class AppPages {
 
     GetPage(
         name: Routes.lpPenyelamatan,
-        page: () => LaporanPenyelamatan(),
+        page: () => const LaporanPenyelamatan(),
         binding: PelaporanBinding()),
 
     GetPage(
@@ -175,7 +175,7 @@ class AppPages {
     //riwayat pelaporan
     GetPage(
         name: Routes.dtRiwayat,
-        page: () => DetailRiwayatLengkapView(),
+        page: () => const DetailRiwayatLengkapView(),
         binding: DetailRiwayatLaporanBinding()),
 
     //profile
@@ -202,11 +202,11 @@ class AppPages {
 
     GetPage(
         name: Routes.artikleDt,
-        page: () => DetailArtikelView(),
+        page: () => const DetailArtikelView(),
         binding: DetailArtikelBinding()),
     GetPage(
         name: Routes.mapsTrack,
-        page: () => TrackDamkarView(),
+        page: () => const TrackDamkarView(),
         binding: TrackDamkarBinding()),
   ];
 }

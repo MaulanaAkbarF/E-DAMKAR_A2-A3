@@ -15,7 +15,7 @@ class OtpResetPasswordController extends GetxController {
 
   @override
   void onInit() {
-    print("nilai otp : " + kodeOtp.toString());
+    print("nilai otp : $kodeOtp");
     // TODO: implement onInit
     super.onInit();
   }

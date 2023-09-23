@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 Map<String, String> emeLab = {'label1': 'Panggilan Darurat'};
 
 class EmergencyCall extends GetView<EmergencyController> {
-  EmergencyCall({super.key});
+  const EmergencyCall({super.key});
   // final emerController = Get.put(EmergencyController());
 
   @override
@@ -47,7 +47,7 @@ class EmergencyCall extends GetView<EmergencyController> {
         child: Scaffold(
           body: SafeArea(
               child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: <Widget>[
                 SizedBox(
@@ -86,8 +86,7 @@ class EmergencyCall extends GetView<EmergencyController> {
                       onPressed: () => controller.emercall(),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          primary: red1,
+                              borderRadius: BorderRadius.circular(10)), backgroundColor: red1,
                           elevation: 0),
                       child: Padding(
                           padding:
@@ -121,8 +120,7 @@ class EmergencyCall extends GetView<EmergencyController> {
                       onPressed: () => controller.emerCallWA(),
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          primary: green1,
+                              borderRadius: BorderRadius.circular(10)), backgroundColor: green1,
                           elevation: 0),
                       child: Padding(
                           padding:
@@ -170,8 +168,7 @@ class EmergencyCall extends GetView<EmergencyController> {
                 ElevatedButton(
                     onPressed: () => controller.goLogin(),
                     style: ElevatedButton.styleFrom(
-                        primary: white,
-                        onPrimary: red1,
+                        foregroundColor: red1, backgroundColor: white,
                         padding:
                             EdgeInsets.symmetric(vertical: paddingVertical2),
                         elevation: 0,

@@ -38,17 +38,17 @@ class ProfileController extends GetxController {
 
   showLogoutDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      title: Text("Keluar"),
-      content: Text("Apakah Kamu Yakin Akan Keluar?"),
+      title: const Text("Keluar"),
+      content: const Text("Apakah Kamu Yakin Akan Keluar?"),
       actions: [
         TextButton(
-          child: Text("Tidak", style: TextStyle(color: Colors.black)),
+          child: const Text("Tidak", style: TextStyle(color: Colors.black)),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: Text(
+          child: const Text(
             "Ya",
             style: TextStyle(color: Colors.black),
           ),

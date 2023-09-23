@@ -189,7 +189,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {
@@ -230,7 +230,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 200),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {
@@ -266,7 +266,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {

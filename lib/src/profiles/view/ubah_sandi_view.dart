@@ -13,7 +13,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
           automaticallyImplyLeading: false,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -21,7 +21,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.black,
-          title: Text(
+          title: const Text(
             "Ubah Kata Sandi",
             style: TextStyle(color: Colors.black87, fontSize: 20),
           ),
@@ -31,8 +31,8 @@ class UbahSandiView extends GetView<UbahSandiController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
@@ -46,10 +46,10 @@ class UbahSandiView extends GetView<UbahSandiController> {
                 child: Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Container(
                       width: double.infinity,
-                      margin: EdgeInsets.all(2),
+                      margin: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
@@ -67,9 +67,9 @@ class UbahSandiView extends GetView<UbahSandiController> {
                             return null;
                           },
                           cursorColor: Colors.black,
-                          style: TextStyle(),
+                          style: const TextStyle(),
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 onPressed: () => controller.showHidePass(),
                                 icon: Obx(() => Icon(
@@ -88,7 +88,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
                   alignment: FractionalOffset.topLeft,
@@ -103,10 +103,10 @@ class UbahSandiView extends GetView<UbahSandiController> {
                 child: Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Container(
                       width: double.infinity,
-                      margin: EdgeInsets.all(2),
+                      margin: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
@@ -128,21 +128,21 @@ class UbahSandiView extends GetView<UbahSandiController> {
                           },
                           obscureText: controller.passwordVisible1.value,
                           cursorColor: Colors.black,
-                          style: TextStyle(),
+                          style: const TextStyle(),
                           decoration: InputDecoration(
                               hintText: 'Minimal 8 Karakter',
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 onPressed: () => controller.showHidePass2(),
                                 icon: Obx(() => Icon(
                                     controller.passwordVisible1.value
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined)),
-                                color: Color.fromARGB(255, 143, 143, 143),
+                                color: const Color.fromARGB(255, 143, 143, 143),
                               ),
                               suffixIconColor: Colors.black,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                  const EdgeInsets.fromLTRB(10, 13, 10, 7),
                               border: InputBorder.none),
                         ),
                       ),
@@ -150,8 +150,8 @@ class UbahSandiView extends GetView<UbahSandiController> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
@@ -165,10 +165,10 @@ class UbahSandiView extends GetView<UbahSandiController> {
                 child: Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Container(
                       width: double.infinity,
-                      margin: EdgeInsets.all(2),
+                      margin: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
@@ -193,17 +193,17 @@ class UbahSandiView extends GetView<UbahSandiController> {
                           cursorColor: Colors.black,
                           decoration: InputDecoration(
                               hintText: 'Minimal 8 Karakter',
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 onPressed: () => controller.showHidePass3(),
                                 icon: Icon(controller.passwordVisible2.value
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined),
-                                color: Color.fromARGB(255, 143, 143, 143),
+                                color: const Color.fromARGB(255, 143, 143, 143),
                               ),
                               suffixIconColor: Colors.black,
                               contentPadding:
-                                  EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                  const EdgeInsets.fromLTRB(10, 13, 10, 7),
                               border: InputBorder.none),
                         ),
                       ),
@@ -216,7 +216,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
                 child: Align(
                   alignment: Alignment.center,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: const EdgeInsets.only(top: 40),
                     child: Material(
                       color: Colors.red.shade400,
                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -225,7 +225,7 @@ class UbahSandiView extends GetView<UbahSandiController> {
                         splashColor: Colors.red.shade700,
                         highlightColor: Colors.red.shade900,
                         onTap: () => controller.postUbahSandi(),
-                        child: Container(
+                        child: const SizedBox(
                           height: 50,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

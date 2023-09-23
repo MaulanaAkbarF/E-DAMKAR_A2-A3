@@ -14,7 +14,7 @@ class DetailArtikelController extends GetxController {
   late int _idArt;
   late String _jenisArt;
   RxList<SemuaArtikelModel>? data = <SemuaArtikelModel>[].obs;
-  SemuaArtikelModel artikel = new SemuaArtikelModel(
+  SemuaArtikelModel artikel = SemuaArtikelModel(
       jenisArtikel: "",
       id: 0,
       adminDamkar: '',
@@ -53,9 +53,9 @@ class DetailArtikelController extends GetxController {
   }
 
   postDetailBerita(int id) async {
-    var result = await APIClient().getData('getDetailBerita/' + id.toString());
+    var result = await APIClient().getData('getDetailBerita/$id');
 
-    print("id berita" + id.toString());
+    print("id berita$id");
     if (result != null) {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);
@@ -67,9 +67,9 @@ class DetailArtikelController extends GetxController {
   }
 
   postDetailEdukasi(int id) async {
-    var result = await APIClient().getData('getDetailEdukasi/' + id.toString());
+    var result = await APIClient().getData('getDetailEdukasi/$id');
 
-    print("id berita" + id.toString());
+    print("id berita$id");
     if (result != null) {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);
@@ -81,9 +81,9 @@ class DetailArtikelController extends GetxController {
   }
 
   postDetailAgenda(int id) async {
-    var result = await APIClient().getData('getDetailAgenda/' + id.toString());
+    var result = await APIClient().getData('getDetailAgenda/$id');
 
-    print("id berita" + id.toString());
+    print("id berita$id");
     if (result != null) {
       // setState(() {
       data?.value = semuaArtikelModelFromJson(result);

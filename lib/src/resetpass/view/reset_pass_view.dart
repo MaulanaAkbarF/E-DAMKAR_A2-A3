@@ -62,7 +62,7 @@ class ResetPassView extends GetView<ResetPassController> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               for (final teks in teksResetPass)
@@ -75,7 +75,7 @@ class ResetPassView extends GetView<ResetPassController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 0),
+                              padding: const EdgeInsets.only(top: 0),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -85,7 +85,7 @@ class ResetPassView extends GetView<ResetPassController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 24),
+                              padding: const EdgeInsets.only(top: 24),
                               child: Text(teks['Email'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -97,10 +97,10 @@ class ResetPassView extends GetView<ResetPassController> {
                             child: Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -140,9 +140,9 @@ class ResetPassView extends GetView<ResetPassController> {
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
                                         hintText: teks['EmailHint'],
-                                        prefixIcon: Icon(Icons.phone),
+                                        prefixIcon: const Icon(Icons.phone),
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                            const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -152,7 +152,7 @@ class ResetPassView extends GetView<ResetPassController> {
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 32),
+                              padding: const EdgeInsets.only(top: 32),
                               child: Material(
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -163,7 +163,7 @@ class ResetPassView extends GetView<ResetPassController> {
                                   onTap: () {
                                     controller.konfirmasiData();
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 50,
                                     child: Row(
                                       mainAxisAlignment:

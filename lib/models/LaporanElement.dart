@@ -7,13 +7,13 @@ class LaporanElement {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -50,14 +50,14 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idLaporan'] = this.idLaporan;
-    data['Status_riwayat'] = this.statusRiwayat;
-    data['kategori_laporan'] = this.kategoriLaporan;
-    data['tanggal'] = this.tanggal;
-    data['deskripsi'] = this.deskripsi;
-    data['image_url'] = this.imageUrl;
-    data['alamat'] = this.alamat;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['idLaporan'] = idLaporan;
+    data['Status_riwayat'] = statusRiwayat;
+    data['kategori_laporan'] = kategoriLaporan;
+    data['tanggal'] = tanggal;
+    data['deskripsi'] = deskripsi;
+    data['image_url'] = imageUrl;
+    data['alamat'] = alamat;
     return data;
   }
 }

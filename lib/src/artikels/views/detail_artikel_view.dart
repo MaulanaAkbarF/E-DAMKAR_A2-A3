@@ -5,7 +5,7 @@ import 'package:edamkar_1/utils/app_style.dart';
 import 'package:get/get.dart';
 
 class DetailArtikelView extends GetView<DetailArtikelController> {
-  DetailArtikelView({super.key});
+  const DetailArtikelView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,9 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
 
   Widget isDetailNull() {
     return Obx(() => !controller.isDone.value
-        ? Center(child: Text("loading"))
+        ? const Center(child: Text("loading"))
         : controller.data == null
-            ? Align(
+            ? const Align(
                 alignment: Alignment.center,
                 child: Text("Data Artikel Kosong "),
               )
@@ -46,15 +46,15 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 itemBuilder: (context, index) {
                   return Container(
                     padding: EdgeInsets.symmetric(vertical: paddingVertical1),
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Divider(
+                        const Divider(
                           height: 5,
                           color: Colors.black26,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
@@ -66,14 +66,14 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                                 color: black2,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.keyboard_arrow_right_rounded,
                               color: black2,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -85,21 +85,21 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
                           controller.data![index].judul.toString(),
                           // artikelElement![index].judulBerita.toString(),
                           // maxLines: 3,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: "inter-semibold",
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
                             color: black3,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
@@ -112,16 +112,16 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                                 color: black2,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.circle,
                               size: 5,
                               weight: 3,
                               color: black2,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -134,7 +134,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -146,12 +146,12 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                                   controller.data![index].foto,
                                   controller.data![index].jenisArtikel)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
                           width: SizeConfig.screenWidth,
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               border: Border.all(
                                   color: Colors.white,
