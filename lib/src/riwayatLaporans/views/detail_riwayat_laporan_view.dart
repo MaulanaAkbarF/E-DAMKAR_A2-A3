@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
-  DetailRiwayatLengkapView({super.key});
+  const DetailRiwayatLengkapView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
             ),
           )
         : controller.dataElement.value.idLaporan == 0
-            ? Align(
+            ? const Align(
                 alignment: Alignment.center,
                 child: Text("Data Laporan Kosong"),
               )
@@ -173,7 +173,8 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                 itemBuilder: (context, index) {
                   return Container(
                       padding: EdgeInsets.symmetric(vertical: paddingVertical1),
-                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -189,7 +190,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                 color: black3,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Container(
@@ -223,11 +224,11 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_on_outlined,
                                             color: Colors.red,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Container(
@@ -235,7 +236,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                             width: 2,
                                             color: Colors.redAccent,
                                           ),
-                                          Padding(
+                                          const Padding(
                                               padding:
                                                   EdgeInsets.only(right: 10)),
                                           Expanded(
@@ -246,21 +247,22 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                               maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.justify,
-                                              style: TextStyle(height: 1.5),
+                                              style:
+                                                  const TextStyle(height: 1.5),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 13,
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.date_range_outlined,
                                             color: Colors.red,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Container(
@@ -268,7 +270,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                             width: 2,
                                             color: Colors.redAccent,
                                           ),
-                                          Padding(
+                                          const Padding(
                                               padding:
                                                   EdgeInsets.only(right: 10)),
                                           Text(
@@ -276,28 +278,28 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                                 .toString(),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               height: 1.8,
                                             ),
                                             textAlign: TextAlign.justify,
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 13,
                                       ),
-                                      Row(
+                                      const Row(
                                         children: [
                                           Text("Deskripsi : "),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Text(
                                           controller.dataElement.value.deskripsi
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             height: 1.5,
                                           )),
 
@@ -309,11 +311,11 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                               child: ElevatedButton(
                                                   onPressed: () =>
                                                       controller.goToMaps(),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       width:
                                                           paddingHorozontal1 *
                                                               16,
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Lacak Posisi Petugas",
                                                         textAlign:
                                                             TextAlign.center,
@@ -331,14 +333,14 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                                 padding: EdgeInsets.symmetric(
                                                     vertical:
                                                         paddingVertical1)),
-                                            Text(
+                                            const Text(
                                               "Status :",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
                                             Container(
@@ -360,7 +362,7 @@ class DetailRiwayatLengkapView extends GetView<DetailRiwayatLaporanController> {
                                                 controller.dataElement.value
                                                     .statusRiwayat
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 55, 65, 81),
                                                     fontSize: 20,
