@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class DetailRiwayatLaporanController extends GetxController {
   var dataArg = Get.arguments;
 
-  late RxInt id = 0.obs;
+  late int id = 0;
   RxBool isDone = false.obs;
   RxBool isLoading = false.obs;
   RxString loadingTxt = "Loading".obs;
@@ -24,8 +24,8 @@ class DetailRiwayatLaporanController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    id.value = dataArg['id'];
-    postDetailRiwayat(id.value);
+    id = dataArg['id'];
+    postDetailRiwayat(id);
   }
 
   loadingAnim() async {
