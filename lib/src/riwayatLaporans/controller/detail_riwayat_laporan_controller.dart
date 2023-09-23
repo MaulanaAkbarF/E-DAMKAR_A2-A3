@@ -26,8 +26,6 @@ class DetailRiwayatLaporanController extends GetxController {
     super.onInit();
     id.value = dataArg['id'];
     postDetailRiwayat(id.value);
-
-    // ever(isLoading, (_) => print("sedang loading"));
   }
 
   loadingAnim() async {
@@ -39,25 +37,18 @@ class DetailRiwayatLaporanController extends GetxController {
       await Future.delayed(const Duration(milliseconds: 300));
       loadingTxt.value = "Loading";
     }
-
-    // loadingTxt.value = 'Loading';
   }
 
   postDetailRiwayat(int id) async {
     isLoading.value = true;
     loadingAnim();
-    var result = await APIClient().getData('getDetailLap/' + id.toString());
+    var result = await APIClient().getData('getDetailLap/$id');
     isDone.value = true;
     isLoading.value = false;
     if (result != null) {
       var detailRiwayat = detailLaporanFromJson(result);
-      // if (detailRiwayat.data) {
-      // setState(() {
       dataElement.value = detailRiwayat.data;
-      // });
-
-      update();
-      // }
+      // update();
     } else {
       isDone.value = true;
       isLoading.value = false;
