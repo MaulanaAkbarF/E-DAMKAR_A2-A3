@@ -25,6 +25,11 @@ class TrackDamkarController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
   var wsChannel;
 
   void initWs() {
@@ -52,6 +57,8 @@ class TrackDamkarController extends GetxController {
           case 'RQARot':
             setPolyLines(data['route']);
             break;
+          case "RQADone":
+            print("selesai");
         }
       },
       onDone: () async {
@@ -67,6 +74,11 @@ class TrackDamkarController extends GetxController {
 
   void join(WebSocketChannel ws) {
     const req = {"command": "Join", "id": 1};
+    ws.sink.add(jsonEncode(req));
+  }
+
+  leave(WebSocketChannel ws) {
+    const req = {"command": "Leave", "id": 1};
     ws.sink.add(jsonEncode(req));
   }
 
