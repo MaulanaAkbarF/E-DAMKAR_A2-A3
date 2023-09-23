@@ -137,10 +137,13 @@ class LaporanCustom extends GetView<PelaporanController> {
                                             child: Obx(
                                               () => controller
                                                       .onImageLoading.value
-                                                  ?  Align(
+                                                  ? Align(
                                                       alignment:
                                                           Alignment.center,
-                                                      child: Text("Loading...",
+                                                      child: Text(
+                                                          "Loading... \nTunggu hingga gambar muncul",
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: teksStyle[
                                                               'Thin3']))
                                                   : controller.image.value !=
@@ -266,7 +269,8 @@ class LaporanCustom extends GetView<PelaporanController> {
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
                                               hintText: teks['noTelpHint'],
-                                              prefixIcon: const Icon(Icons.phone),
+                                              prefixIcon:
+                                                  const Icon(Icons.phone),
                                               contentPadding:
                                                   const EdgeInsets.fromLTRB(
                                                       10, 13, 10, 7),

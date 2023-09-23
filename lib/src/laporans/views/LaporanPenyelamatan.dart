@@ -161,7 +161,10 @@ class LaporanPenyelamatan extends GetView<PelaporanController> {
                                                   ? Align(
                                                       alignment:
                                                           Alignment.center,
-                                                      child: Text("Loading...",
+                                                      child: Text(
+                                                          "Loading...\nTunggu hingga gambar muncul",
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: teksStyle[
                                                               'Thin3']))
                                                   : controller.image.value !=
@@ -238,7 +241,8 @@ class LaporanPenyelamatan extends GetView<PelaporanController> {
                                                       prefixIcon: const Icon(
                                                           Icons.fire_truck),
                                                       contentPadding:
-                                                          const EdgeInsets.fromLTRB(
+                                                          const EdgeInsets
+                                                              .fromLTRB(
                                                               10, 13, 10, 7),
                                                       border: InputBorder.none),
                                                 ),
@@ -292,7 +296,8 @@ class LaporanPenyelamatan extends GetView<PelaporanController> {
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
                                               hintText: teks['noTelpHint'],
-                                              prefixIcon: const Icon(Icons.phone),
+                                              prefixIcon:
+                                                  const Icon(Icons.phone),
                                               contentPadding:
                                                   const EdgeInsets.fromLTRB(
                                                       10, 13, 10, 7),
