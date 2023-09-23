@@ -13,7 +13,7 @@ class TrackDamkarController extends GetxController {
   late GoogleMapController mapController;
   final initialCamPosition =
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
-  var channel;
+  // var channel;
   RxBool isWsDone = false.obs;
   Set<Marker> marker = <Marker>{}.obs;
   var dataArg = Get.arguments;
@@ -25,7 +25,7 @@ class TrackDamkarController extends GetxController {
     super.onInit();
   }
 
-  late final wsChannel;
+  var wsChannel;
 
   void initWs() {
     Uri url = Uri.parse('${URLWEBAPI.wsUrl}/tracking');
@@ -69,7 +69,6 @@ class TrackDamkarController extends GetxController {
     const req = {"command": "Join", "id": 1};
     ws.sink.add(jsonEncode(req));
   }
-  
 
   void onRouteReq(WebSocketChannel ws) {
     const req = {"command": "Message", "id": 1, "type": "RQURot"};

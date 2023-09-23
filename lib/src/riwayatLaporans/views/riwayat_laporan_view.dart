@@ -355,8 +355,8 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   }
 
   Widget menunggu() {
-    return controller.dataMenunggu != null
-        ? Obx(() => controller.dataMenunggu!.value.data!.isEmpty
+    return Obx(() => controller.dataMenunggu != null
+        ? controller.dataMenunggu!.value.data!.isEmpty
             ? const Align(
                 alignment: Alignment.center,
                 child: Text("Belum ada laporan yang menunggu"),
@@ -468,13 +468,13 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ),
                                 ))
                               ])));
-                    })))
-        : const CircularProgressIndicator();
+                    }))
+        : const CircularProgressIndicator());
   }
 
   Widget proses() {
-    return controller.dataProses != null
-        ? Obx(() => controller.dataProses!.value.data!.isEmpty
+    return Obx(() => controller.dataProses != null
+        ? controller.dataProses!.value.data!.isEmpty
             ? const Align(
                 alignment: Alignment.center,
                 child: Text("Belum ada laporan yang di proses"),
@@ -587,13 +587,13 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ),
                                 ))
                               ])));
-                    })))
-        : const CircularProgressIndicator();
+                    }))
+        : const CircularProgressIndicator());
   }
 
   Widget ditangani() {
-    return controller.dataDitangani != null
-        ? Obx(() => controller.dataDitangani!.value.data!.isEmpty
+    return Obx(() => controller.dataDitangani != null
+        ? controller.dataDitangani!.value.data!.isEmpty
             ? const Align(
                 alignment: Alignment.center,
                 child: Text("Belum ada Laporan yang ditangani"),
@@ -706,13 +706,13 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ),
                                 ))
                               ])));
-                    })))
-        : const CircularProgressIndicator();
+                    }))
+        : const CircularProgressIndicator());
   }
 
   Widget selesai() {
-    return controller.dataSelesai != null
-        ? Obx(() => controller.dataSelesai!.value.data!.isEmpty
+    return Obx(() => controller.dataSelesai != null
+        ? controller.dataSelesai!.value.data!.isEmpty
             ? const Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -828,13 +828,13 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ),
                                 ))
                               ])));
-                    })))
-        : const CircularProgressIndicator();
+                    }))
+        : const CircularProgressIndicator());
   }
 
   Widget ditolak() {
-    return controller.dataDitolak != null
-        ? Obx(() => controller.dataDitolak!.value.data!.isEmpty
+    return Obx(() => controller.dataDitolak != null
+        ? controller.dataDitolak!.value.data!.isEmpty
             ? const Align(
                 alignment: Alignment.center,
                 child: Text("Tidak ada pelaporan yang ditolak"),
@@ -947,7 +947,7 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
                                   ),
                                 ))
                               ])));
-                    })))
-        : const CircularProgressIndicator();
+                    }))
+        : const CircularProgressIndicator());
   }
 }
