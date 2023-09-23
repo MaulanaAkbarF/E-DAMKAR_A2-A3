@@ -1,6 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
-// import 'dart:typed_data';
 
+// import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/routes/app_pages.dart';
+import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/style_n_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,7 +14,7 @@ import 'package:edamkar_1/config/url_static.dart';
 import 'dart:ui' as ui;
 
 class TrackDamkarController extends GetxController {
-  late GoogleMapController mapController;
+  Completer<GoogleMapController> mapController = Completer();
   final initialCamPosition =
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
   // var channel;
@@ -27,6 +31,7 @@ class TrackDamkarController extends GetxController {
 
   @override
   void onClose() {
+    mapController = Completer();
     super.onClose();
   }
 
@@ -58,7 +63,7 @@ class TrackDamkarController extends GetxController {
             setPolyLines(data['route']);
             break;
           case "RQADone":
-            print("selesai");
+            doneTracking();
         }
       },
       onDone: () async {
@@ -77,6 +82,55 @@ class TrackDamkarController extends GetxController {
     ws.sink.add(jsonEncode(req));
   }
 
+  void doneTracking() {
+    Get.dialog(Dialog(
+      backgroundColor: white,
+      child: SizedBox(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: paddingVertical1),
+                child: Center(
+                  child: Text(
+                    "Pelaporan anda telah di selesaikan",
+                    textAlign: TextAlign.center,
+                    style: StyleTxt.b(16, black),
+                  ),
+                ),
+              ),
+              const Divider(thickness: 2, color: grey1),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: paddingVertical1),
+                child: Center(
+                  child: Text(
+                    "Kembali untuk melihat data penanganan",
+                    textAlign: TextAlign.center,
+                    style: StyleTxt.m(),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    leave(wsChannel);
+                    Get.offAllNamed(Routes.dashboard, arguments: 2);
+                  },
+                  child: const Text("Kembali"))
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
+
   leave(WebSocketChannel ws) {
     const req = {"command": "Leave", "id": 1};
     ws.sink.add(jsonEncode(req));
@@ -93,12 +147,15 @@ class TrackDamkarController extends GetxController {
   }
 
   void onMapCreated(GoogleMapController gm) {
-    mapController = gm;
+    if (!mapController.isCompleted) {
+      mapController.complete(gm);
+    }
   }
 
   void setMarker(double lat, double lng) async {
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 18)));
+    mapController.future.then((value) => value.animateCamera(
+        CameraUpdate.newCameraPosition(
+            CameraPosition(target: LatLng(lat, lng), zoom: 18))));
     marker.add(Marker(
         markerId: const MarkerId("origin"),
         position: LatLng(lat, lng),
