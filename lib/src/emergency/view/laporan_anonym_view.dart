@@ -72,7 +72,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
   Widget build(BuildContext context) {
     return Obx(() => ModalProgressHUD(
         inAsyncCall: controller.showSpinner.value,
-        progressIndicator: CircularProgressIndicator(),
+        progressIndicator: const CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -91,7 +91,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
             ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     for (final teks in teksSignUp)
@@ -103,7 +103,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 0),
+                                    padding: const EdgeInsets.only(top: 0),
                                     child: Text(teks['SubHeader'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
@@ -113,7 +113,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 32),
+                                    padding: const EdgeInsets.only(top: 32),
                                     child: Material(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       borderRadius: BorderRadius.circular(8),
@@ -157,7 +157,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                                                     .grey
                                                                     .shade400,
                                                                 size: 24),
-                                                            SizedBox(width: 8),
+                                                            const SizedBox(width: 8),
                                                             Text(
                                                                 'Pilih Photo Bukti Kejadian',
                                                                 style: teksStyle[
@@ -179,7 +179,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 24),
+                                    padding: const EdgeInsets.only(top: 24),
                                     child: Text(teks['namaBencana'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -189,10 +189,10 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 8),
+                                    padding: const EdgeInsets.only(top: 8),
                                     child: Container(
                                       width: double.infinity,
-                                      margin: EdgeInsets.all(2),
+                                      margin: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade100,
                                           borderRadius:
@@ -216,8 +216,8 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
                                             hintText: teks['namaBencanaHint'],
-                                            prefixIcon: Icon(Icons.fire_truck),
-                                            contentPadding: EdgeInsets.fromLTRB(
+                                            prefixIcon: const Icon(Icons.fire_truck),
+                                            contentPadding: const EdgeInsets.fromLTRB(
                                                 10, 13, 10, 7),
                                             border: InputBorder.none),
                                       ),
@@ -227,7 +227,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16),
+                                    padding: const EdgeInsets.only(top: 16),
                                     child: Text(teks['noTelp'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -237,10 +237,10 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 8),
+                                    padding: const EdgeInsets.only(top: 8),
                                     child: Container(
                                       width: double.infinity,
-                                      margin: EdgeInsets.all(2),
+                                      margin: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade100,
                                           borderRadius:
@@ -268,8 +268,8 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                         style: teksStyle['SemiBold1'],
                                         decoration: InputDecoration(
                                             hintText: teks['noTelpHint'],
-                                            prefixIcon: Icon(Icons.phone),
-                                            contentPadding: EdgeInsets.fromLTRB(
+                                            prefixIcon: const Icon(Icons.phone),
+                                            contentPadding: const EdgeInsets.fromLTRB(
                                                 10, 13, 10, 7),
                                             border: InputBorder.none),
                                       ),
@@ -279,7 +279,7 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16),
+                                    padding: const EdgeInsets.only(top: 16),
                                     child: Text(teks['deskripsi'],
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -289,10 +289,10 @@ class LaporanAnonym extends GetView<LaporanAnonymController> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 8),
+                                    padding: const EdgeInsets.only(top: 8),
                                     child: Container(
                                       width: double.infinity,
-                                      margin: EdgeInsets.all(2),
+                                      margin: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade100,
                                           borderRadius:

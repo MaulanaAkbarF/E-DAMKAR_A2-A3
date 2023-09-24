@@ -6,6 +6,7 @@ import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 import 'package:edamkar_1/utils/app_style.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
@@ -145,8 +146,6 @@ class PelaporanController extends GetxController {
   }
 
   Future<File> drawTextOnImage(XFile xFile) async {
-    // var image = await ImagePicker.pickImage(source: ImageSource.camera);
-
     var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
     String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
     String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
@@ -154,11 +153,13 @@ class PelaporanController extends GetxController {
     String message =
         "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat";
     img.drawString(decodeImg!, message, font: img.arial48, x: 40);
-    // img.drawString(decodeImg!, arial24, 0, 0, DateTime.now().toString());
 
-    var encodeImage = img.encodeJpg(decodeImg, quality: 100);
+    // Kompres gambar sebelum menyimpannya
+    final compressedImage = await FlutterImageCompress.compressWithList(
+        img.encodeJpg(decodeImg, quality: 100),
+        quality: 20);
 
-    var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
+    var finalImage = File(xFile.path)..writeAsBytesSync(compressedImage);
 
     return finalImage;
   }
@@ -189,7 +190,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {
@@ -230,7 +231,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 200),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {
@@ -266,7 +267,7 @@ class PelaporanController extends GetxController {
     return PopupMenuButton(
       constraints:
           BoxConstraints.expand(width: SizeConfig.screenWidth, height: 160),
-      offset: Offset(-90, 10),
+      offset: const Offset(-90, 10),
       itemBuilder: ((context) => menuList),
       icon: const Icon(Icons.arrow_drop_down),
       onSelected: (value) {

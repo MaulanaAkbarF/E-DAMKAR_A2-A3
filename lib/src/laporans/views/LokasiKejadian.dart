@@ -75,10 +75,11 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
   final _formKey = GlobalKey<FormState>();
 
   late String kategori;
+  @override
   void initState() {
     super.initState();
     kategori = widget.kategori;
-    print('lategori : ' + kategori.toString());
+    print('lategori : $kategori');
   }
 
   // void kirimButtonPressed(BuildContext context) {
@@ -161,8 +162,8 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Tentukan Lokasi Kejadian" + kategori.toString(),
-          style: TextStyle(
+          "Tentukan Lokasi Kejadian$kategori",
+          style: const TextStyle(
             fontSize: 20,
             fontFamily: "font/inter_bold.ttf",
             fontWeight: FontWeight.bold,
@@ -174,7 +175,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 for (final teks in teksLokasiKejadian)
@@ -186,7 +187,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 0),
+                                padding: const EdgeInsets.only(top: 0),
                                 child: Text(teks['SubHeader'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
@@ -196,7 +197,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 16),
+                                padding: const EdgeInsets.only(top: 16),
                                 child: Text(teks['namaKecamatan'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -206,10 +207,10 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -229,7 +230,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                     decoration: InputDecoration(
                                         hintText: teks['namaKecamatanHint'],
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                            const EdgeInsets.fromLTRB(10, 10, 10, 10),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -238,7 +239,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 16),
+                                padding: const EdgeInsets.only(top: 16),
                                 child: Text(teks['namaDesa'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -248,10 +249,10 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -271,7 +272,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                     decoration: InputDecoration(
                                         hintText: teks['namaDesaHint'],
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                            const EdgeInsets.fromLTRB(10, 10, 10, 10),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -280,7 +281,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 16),
+                                padding: const EdgeInsets.only(top: 16),
                                 child: Text(teks['namaJalan'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -290,10 +291,10 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -315,7 +316,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                     decoration: InputDecoration(
                                         hintText: teks['namaJalanHint'],
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                            const EdgeInsets.fromLTRB(10, 10, 10, 10),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -324,7 +325,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 16),
+                                padding: const EdgeInsets.only(top: 16),
                                 child: Text('Kode Pos',
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -334,10 +335,10 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -361,7 +362,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                     },
                                     cursorColor: Colors.black,
                                     style: teksStyle['Semibold1'],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         hintText: 'Contoh : 64119',
                                         contentPadding:
                                             EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -373,7 +374,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                             Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 40),
+                                padding: const EdgeInsets.only(top: 40),
                                 child: Material(
                                   color: Colors.red.shade400,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -531,7 +532,7 @@ class _LokasiKejadianState extends State<LokasiKejadian> {
                                         }
                                       }
                                     },
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 50,
                                       child: Row(
                                         mainAxisAlignment:

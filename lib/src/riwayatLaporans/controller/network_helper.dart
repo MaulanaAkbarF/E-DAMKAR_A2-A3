@@ -20,7 +20,7 @@ class NetworkHelper {
 
   getData() async {
     Uri ur = Uri.parse(
-        '${url}api_key=${apiKey}&start=${startlng},${startLat}&end=${endlng},${endlat}');
+        '${url}api_key=$apiKey&start=$startlng,$startLat&end=$endlng,$endlat');
     http.Response response = await http.get(ur);
 
     if (response.statusCode == 200) {

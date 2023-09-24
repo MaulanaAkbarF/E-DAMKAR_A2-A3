@@ -13,7 +13,7 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: black),
-        titleTextStyle: TextStyle(color: black),
+        titleTextStyle: const TextStyle(color: black),
         title: const Text("Damkar Map Tracking"),
       ),
       body: Obx(() => controller.isWsDone.value
@@ -23,7 +23,7 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
               markers: controller.marker,
               polylines: controller.polylines,
             )
-          : Align(
+          : const Align(
               alignment: Alignment.center, child: CircularProgressIndicator())),
       
     );

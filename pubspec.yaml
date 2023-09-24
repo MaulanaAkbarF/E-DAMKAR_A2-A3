@@ -61,6 +61,7 @@ dependencies:
   awesome_notifications: ^0.6.19
   web_socket_channel: ^2.4.0
   image: ^4.0.17
+  flutter_image_compress: ^2.0.4
 
 dev_dependencies:
   flutter_test:

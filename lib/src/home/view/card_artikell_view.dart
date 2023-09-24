@@ -59,7 +59,7 @@ class CardArtikelView extends GetView<HomeController> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Obx(
@@ -71,7 +71,7 @@ class CardArtikelView extends GetView<HomeController> {
                   itemCount: controller.data.value.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
                       child: ListTile(
                         onTap: () {},
                         title: Column(

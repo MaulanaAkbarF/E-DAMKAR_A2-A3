@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class UpdatePasswordSuccess extends StatelessWidget {
+  const UpdatePasswordSuccess({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

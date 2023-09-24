@@ -81,7 +81,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               for (final teks in teksOtpVerification)
@@ -93,7 +93,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 0),
+                              padding: const EdgeInsets.only(top: 0),
                               child: Text(teks['SubHeader'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 4,
@@ -103,7 +103,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                           Align(
                             alignment: FractionalOffset.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 24),
+                              padding: const EdgeInsets.only(top: 24),
                               child: Text(teks['Email'],
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
@@ -113,7 +113,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                           Align(
                             alignment: FractionalOffset.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 16),
+                              padding: const EdgeInsets.only(top: 16),
                               child: PinCodeTextField(
                                 controller: controller.kodeotptxt.value,
                                 appContext: context,
@@ -136,7 +136,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                                     selectedColor: Colors.blue.shade500,
                                     selectedFillColor: Colors.white,
                                     borderWidth: 1.5),
-                                animationDuration: Duration(milliseconds: 300),
+                                animationDuration: const Duration(milliseconds: 300),
                                 textStyle: teksStyle['SemiBold1'],
                                 // backgroundColor: Colors.grey.shade100,
                                 enableActiveFill: true,
@@ -157,7 +157,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                           Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 32),
+                              padding: const EdgeInsets.only(top: 32),
                               child: Material(
                                 color: Colors.red.shade400,
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -166,7 +166,7 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
                                   splashColor: Colors.red.shade700,
                                   highlightColor: Colors.red.shade900,
                                   onTap: () => controller.verifyCode(),
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 50,
                                     child: Row(
                                       mainAxisAlignment:
@@ -195,15 +195,15 @@ class OtpVerificationView extends GetView<VerificationSignUpController> {
 
 // fungsi
 void navToResetPassPage(BuildContext context) {
-  Timer(Duration(seconds: 0), () {
+  Timer(const Duration(seconds: 0), () {
     Navigator.push(
         context,
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => ResetPassView(),
+          pageBuilder: (_, __, ___) => const ResetPassView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(
-                begin: Offset(-1, 0),
+                begin: const Offset(-1, 0),
                 end: Offset.zero,
               ).animate(
                 CurvedAnimation(

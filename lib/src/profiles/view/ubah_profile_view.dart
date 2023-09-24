@@ -13,13 +13,13 @@ class EditProfilePage extends GetView<EditProfileController> {
   Widget build(BuildContext context) {
     return Obx(() => ModalProgressHUD(
         inAsyncCall: controller.showSpinner.value,
-        progressIndicator: CircularProgressIndicator(),
+        progressIndicator: const CircularProgressIndicator(),
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 // Navigator.pop(context);
                 Get.back(); 
@@ -28,7 +28,7 @@ class EditProfilePage extends GetView<EditProfileController> {
             centerTitle: true,
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
-            title: Text(
+            title: const Text(
               "Ubah Profil",
               style: TextStyle(color: Colors.black87, fontSize: 20),
             ),
@@ -36,7 +36,7 @@ class EditProfilePage extends GetView<EditProfileController> {
           body: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
@@ -61,7 +61,7 @@ class EditProfilePage extends GetView<EditProfileController> {
                                         color: Colors.red.shade400,
                                         shape: BoxShape.circle),
                                     child: IconButton(
-                                        icon: Icon(Icons.edit),
+                                        icon: const Icon(Icons.edit),
                                         onPressed: () {
                                           // print("tesss");
                                           controller
@@ -74,17 +74,17 @@ class EditProfilePage extends GetView<EditProfileController> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                           "Catatan : untuk mengganti data profile hubungi petugas"),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: paddingHorozontal4),
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
-                            padding: EdgeInsets.only(top: 40),
+                            padding: const EdgeInsets.only(top: 40),
                             child: Material(
                               color: Colors.red.shade400,
                               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -93,7 +93,7 @@ class EditProfilePage extends GetView<EditProfileController> {
                                 splashColor: Colors.red.shade700,
                                 highlightColor: Colors.red.shade900,
                                 onTap: controller.pushUpdate,
-                                child: Container(
+                                child: const SizedBox(
                                   height: 50,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

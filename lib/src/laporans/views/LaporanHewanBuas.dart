@@ -1,6 +1,5 @@
 import 'package:edamkar_1/src/laporans/controllers/pelaporan_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -87,11 +86,13 @@ final List<Map> teksStyleSignUp = [
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
 class LaporanHewanBuas extends GetView<PelaporanController> {
+  const LaporanHewanBuas({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(() => ModalProgressHUD(
         inAsyncCall: controller.showSpinner.value,
-        progressIndicator: CircularProgressIndicator(),
+        progressIndicator: const CircularProgressIndicator(),
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -112,7 +113,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
               child: Form(
                 key: controller.formKey,
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
                       for (final teks in teksSignUp)
@@ -124,7 +125,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 0),
+                                      padding: const EdgeInsets.only(top: 0),
                                       child: Text(teks['SubHeader'],
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 4,
@@ -134,7 +135,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: Alignment.center,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 32),
+                                      padding: const EdgeInsets.only(top: 32),
                                       child: Material(
                                         clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
@@ -159,7 +160,10 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                                   ? Align(
                                                       alignment:
                                                           Alignment.center,
-                                                      child: Text("Loading...",
+                                                      child: Text(
+                                                          "Loading...\nTunggu hingga gambar muncul",
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: teksStyle[
                                                               'Thin3']))
                                                   : controller.image.value !=
@@ -182,7 +186,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                                                       .grey
                                                                       .shade400,
                                                                   size: 24),
-                                                              SizedBox(
+                                                              const SizedBox(
                                                                   width: 8),
                                                               Text(
                                                                   'Pilih Photo Bukti Kejadian',
@@ -201,7 +205,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 24),
+                                      padding: const EdgeInsets.only(top: 24),
                                       child: Text(teks['namaBencana'],
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
@@ -211,10 +215,10 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 8),
+                                      padding: const EdgeInsets.only(top: 8),
                                       child: Container(
                                           width: double.infinity,
-                                          margin: EdgeInsets.all(2),
+                                          margin: const EdgeInsets.all(2),
                                           decoration: BoxDecoration(
                                               color: Colors.grey.shade100,
                                               borderRadius:
@@ -234,10 +238,11 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                                   decoration: InputDecoration(
                                                       hintText: teks[
                                                           'namaBencanaHint'],
-                                                      prefixIcon: Icon(
+                                                      prefixIcon: const Icon(
                                                           Icons.fire_truck),
                                                       contentPadding:
-                                                          EdgeInsets.fromLTRB(
+                                                          const EdgeInsets
+                                                              .fromLTRB(
                                                               10, 13, 10, 7),
                                                       border: InputBorder.none),
                                                 ),
@@ -254,7 +259,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 16),
+                                      padding: const EdgeInsets.only(top: 16),
                                       child: Text(teks['noTelp'],
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
@@ -264,10 +269,10 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 8),
+                                      padding: const EdgeInsets.only(top: 8),
                                       child: Container(
                                         width: double.infinity,
-                                        margin: EdgeInsets.all(2),
+                                        margin: const EdgeInsets.all(2),
                                         decoration: BoxDecoration(
                                             color: Colors.grey.shade100,
                                             borderRadius:
@@ -290,9 +295,10 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           style: teksStyle['SemiBold1'],
                                           decoration: InputDecoration(
                                               hintText: teks['noTelpHint'],
-                                              prefixIcon: Icon(Icons.phone),
+                                              prefixIcon:
+                                                  const Icon(Icons.phone),
                                               contentPadding:
-                                                  EdgeInsets.fromLTRB(
+                                                  const EdgeInsets.fromLTRB(
                                                       10, 13, 10, 7),
                                               border: InputBorder.none),
                                         ),
@@ -302,7 +308,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 16),
+                                      padding: const EdgeInsets.only(top: 16),
                                       child: Text(teks['deskripsi'],
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
@@ -312,10 +318,10 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: FractionalOffset.topLeft,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 8),
+                                      padding: const EdgeInsets.only(top: 8),
                                       child: Container(
                                         width: double.infinity,
-                                        margin: EdgeInsets.all(2),
+                                        margin: const EdgeInsets.all(2),
                                         decoration: BoxDecoration(
                                             color: Colors.grey.shade100,
                                             borderRadius:
@@ -341,7 +347,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           decoration: InputDecoration(
                                               hintText: teks['deskripsiHint'],
                                               contentPadding:
-                                                  EdgeInsets.fromLTRB(
+                                                  const EdgeInsets.fromLTRB(
                                                       10, 13, 10, 7),
                                               border: InputBorder.none),
                                         ),
@@ -351,7 +357,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                   Align(
                                     alignment: Alignment.center,
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 40),
+                                      padding: const EdgeInsets.only(top: 40),
                                       child: Material(
                                         color: Colors.red.shade400,
                                         clipBehavior:
@@ -362,7 +368,7 @@ class LaporanHewanBuas extends GetView<PelaporanController> {
                                           highlightColor: Colors.red.shade900,
                                           onTap: () =>
                                               controller.pushPelaporan(),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 50,
                                             child: Row(
                                               mainAxisAlignment:

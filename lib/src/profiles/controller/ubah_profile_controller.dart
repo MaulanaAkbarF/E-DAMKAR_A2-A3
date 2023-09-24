@@ -70,7 +70,7 @@ class EditProfileController extends GetxController {
       // Navigator.of(context).pop();
       // });
     } on PlatformException catch (e) {
-      print("eror gambar :: ${e}");
+      print("eror gambar :: $e");
       // Navigator.of(context).pop();
     }
   }
@@ -85,12 +85,12 @@ class EditProfileController extends GetxController {
   ImageProvider ChangeProfile() {
     if (imageShow.value == null) {
       if (UserPic == "") {
-        return AssetImage("semuaAset/gambar/user1.png") as ImageProvider;
+        return const AssetImage("semuaAset/gambar/user1.png");
       } else {
         return NetworkImage("${URLWEBAPI.urlHost}/img-user/$UserPic.jpg");
       }
     } else {
-      return FileImage(imageShow.value!) as ImageProvider;
+      return FileImage(imageShow.value!);
     }
   }
 

@@ -9,12 +9,12 @@ class Update {
   Update({this.kode, this.status});
 
   static Future<Update> ubahSandi(
-      String id, String password_lama, String password_baru) async {
+      String id, String passwordLama, String passwordBaru) async {
     Uri url = Uri.parse("http://10.20.8.184:8000/api/user/password");
     var HasilRespon = await http.post(url, body: {
       "id": id,
-      "password_lama": password_lama,
-      "password_baru": password_baru
+      "password_lama": passwordLama,
+      "password_baru": passwordBaru
     });
     var data = json.decode(HasilRespon.body);
     return Update(kode: data['kode'], status: data['status']);

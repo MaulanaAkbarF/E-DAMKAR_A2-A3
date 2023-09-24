@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ProfileAkunSetting extends StatefulWidget {
   const ProfileAkunSetting({super.key});
@@ -11,7 +10,7 @@ class ProfileAkunSetting extends StatefulWidget {
 class _ProfileAkunSettingState extends State<ProfileAkunSetting> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
         body: Column(
           children: <Widget> [

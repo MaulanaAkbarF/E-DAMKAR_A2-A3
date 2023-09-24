@@ -87,7 +87,7 @@ class _LaporanPageState extends State<LaporanPage> {
                 Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 20),
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
                     child: Text(teks['Header'],
                         overflow: TextOverflow.ellipsis,
                         maxLines: 4,
@@ -96,7 +96,7 @@ class _LaporanPageState extends State<LaporanPage> {
                 ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: GridView.count(
                   crossAxisCount: 2,
                   childAspectRatio: 0.80,
@@ -119,7 +119,7 @@ class _LaporanPageState extends State<LaporanPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color.fromRGBO(253, 232, 232, 1.000),
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(12),
@@ -129,7 +129,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.only(top: 24, bottom: 24),
+                                        const EdgeInsets.only(top: 24, bottom: 24),
                                     child: SvgPicture.asset(
                                       'semuaAset/gambar/bencana-alam-icon.svg',
                                       width: 50, // ukuran ikon yang diinginkan
@@ -139,7 +139,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    padding: const EdgeInsets.only(top: 16, left: 16),
                                     child: Text("Laporan Bencana Alam",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
@@ -149,7 +149,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 8, left: 16, right: 16),
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
@@ -181,7 +181,7 @@ class _LaporanPageState extends State<LaporanPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color.fromRGBO(253, 232, 232, 1.000),
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(12),
@@ -191,7 +191,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.only(top: 24, bottom: 24),
+                                        const EdgeInsets.only(top: 24, bottom: 24),
                                     child: SvgPicture.asset(
                                       'semuaAset/gambar/kebakaran-icon.svg',
                                       width: 50,
@@ -199,7 +199,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 16, left: 16, right: 16),
                                   child: Text(
                                     "Laporan Kebakaran",
@@ -210,7 +210,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 ),
                                 Flexible(
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 8, left: 16, right: 16),
                                     child: Text(
                                       teks['deskripsiLaporan'],
@@ -243,7 +243,7 @@ class _LaporanPageState extends State<LaporanPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color.fromRGBO(253, 232, 232, 1.000),
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(12),
@@ -253,7 +253,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.only(top: 24, bottom: 24),
+                                        const EdgeInsets.only(top: 24, bottom: 24),
                                     child: SvgPicture.asset(
                                       'semuaAset/gambar/hewan-buas-icon.svg',
                                       width: 50, // ukuran ikon yang diinginkan
@@ -263,7 +263,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    padding: const EdgeInsets.only(top: 16, left: 16),
                                     child: Text("Laporan Hewan Buas",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
@@ -273,7 +273,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 8, left: 16, right: 16),
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
@@ -315,7 +315,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                   alignment: Alignment.center,
                                   child: Padding(
                                     padding:
-                                        EdgeInsets.only(top: 28, bottom: 28),
+                                        const EdgeInsets.only(top: 28, bottom: 28),
                                     child: SvgPicture.asset(
                                       'semuaAset/gambar/penyelamatan-icon.svg',
                                       width: 70, // ukuran ikon yang diinginkan
@@ -325,7 +325,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 16, left: 16),
+                                    padding: const EdgeInsets.only(top: 16, left: 16),
                                     child: Text("Laporan Penyelamatan",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 4,
@@ -335,7 +335,7 @@ class _LaporanPageState extends State<LaporanPage> {
                                 Align(
                                   alignment: FractionalOffset.topLeft,
                                   child: Padding(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         top: 8, left: 16, right: 16),
                                     child: Text(teks['deskripsiLaporan'],
                                         overflow: TextOverflow.ellipsis,
@@ -360,7 +360,7 @@ class _LaporanPageState extends State<LaporanPage> {
                 Align(
                   alignment: FractionalOffset.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Text(teks['deskripsiBawah'],
                         overflow: TextOverflow.ellipsis,
                         maxLines: 4,
@@ -373,7 +373,7 @@ class _LaporanPageState extends State<LaporanPage> {
               alignment: Alignment.center,
               child: Padding(
                 padding:
-                    EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
+                    const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
                 child: Material(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   borderRadius: BorderRadius.circular(8),
@@ -385,12 +385,12 @@ class _LaporanPageState extends State<LaporanPage> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       elevation: 0,
-                      minimumSize: Size.fromHeight(50),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      minimumSize: const Size.fromHeight(50),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                     onPressed: () =>
                         Get.toNamed(Routes.mpLap, arguments: "custom"),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(

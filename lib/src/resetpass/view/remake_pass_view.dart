@@ -68,7 +68,7 @@ class RemakePassView extends GetView<RemakePassController> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Obx(()=>
             Column(
               children: [
@@ -81,7 +81,7 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 0),
+                                padding: const EdgeInsets.only(top: 0),
                                 child: Text(teks['SubHeader'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
@@ -91,7 +91,7 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 24),
+                                padding: const EdgeInsets.only(top: 24),
                                 child: Text(teks['Password1'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -101,10 +101,10 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -119,7 +119,7 @@ class RemakePassView extends GetView<RemakePassController> {
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         suffixIcon: IconButton(
                                           onPressed: () =>
                                               controller.passVisible(),
@@ -128,11 +128,11 @@ class RemakePassView extends GetView<RemakePassController> {
                                               ? Icons.visibility_off_outlined
                                               : Icons.visibility_outlined),
                                           color:
-                                              Color.fromARGB(255, 143, 143, 143),
+                                              const Color.fromARGB(255, 143, 143, 143),
                                         ),
                                         suffixIconColor: Colors.black,
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                            const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -141,7 +141,7 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 16),
+                                padding: const EdgeInsets.only(top: 16),
                                 child: Text(teks['Password2'],
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
@@ -151,10 +151,10 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: FractionalOffset.topLeft,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Container(
                                   width: double.infinity,
-                                  margin: EdgeInsets.all(2),
+                                  margin: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(8),
@@ -168,7 +168,7 @@ class RemakePassView extends GetView<RemakePassController> {
                                     cursorColor: Colors.black,
                                     style: teksStyle['SemiBold1'],
                                     decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         suffixIcon: IconButton(
                                           onPressed: () =>
                                               controller.passVisible2(),
@@ -177,11 +177,11 @@ class RemakePassView extends GetView<RemakePassController> {
                                               ? Icons.visibility_off_outlined
                                               : Icons.visibility_outlined),
                                           color:
-                                              Color.fromARGB(255, 143, 143, 143),
+                                              const Color.fromARGB(255, 143, 143, 143),
                                         ),
                                         suffixIconColor: Colors.black,
                                         contentPadding:
-                                            EdgeInsets.fromLTRB(10, 13, 10, 7),
+                                            const EdgeInsets.fromLTRB(10, 13, 10, 7),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -190,7 +190,7 @@ class RemakePassView extends GetView<RemakePassController> {
                             Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.only(top: 32),
+                                padding: const EdgeInsets.only(top: 32),
                                 child: Material(
                                   color: Colors.red.shade400,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -199,7 +199,7 @@ class RemakePassView extends GetView<RemakePassController> {
                                     splashColor: Colors.red.shade700,
                                     highlightColor: Colors.red.shade900,
                                     onTap: () => controller.checkPassword(),
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 50,
                                       child: Row(
                                         mainAxisAlignment:

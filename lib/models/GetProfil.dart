@@ -28,7 +28,7 @@ class ModelProfile {
         body: {'id': id});
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
-      print("data: ${jsonResponse}");
+      print("data: $jsonResponse");
       return ModelProfile.fromJson(jsonResponse);
     } else {
       throw Exception('Failed to load data from API');

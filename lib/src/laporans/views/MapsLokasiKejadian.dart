@@ -47,27 +47,27 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                       padding: const EdgeInsets.only(bottom: 24, right: 16),
                       child: FloatingActionButton(
                         onPressed: () => controller.userRePotition(),
+                        backgroundColor: Colors.red.shade400,
+                        elevation: 0,
+                        splashColor: Colors.red.shade800,
                         child: SvgPicture.asset(
                           'semuaAset/icon/Discovery.svg',
                           width: 24,
                           height: 24,
                           color: white,
                         ),
-                        backgroundColor: Colors.red.shade400,
-                        elevation: 0,
-                        splashColor: Colors.red.shade800,
                       ),
                     ),
                     Card(
                       margin: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20.0),
                           topRight: Radius.circular(20.0),
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24.0),
@@ -84,8 +84,8 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 20),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 16, top: 20),
                               child: Text(
                                 'Alamat Lokasi Kejadian',
                                 textAlign: TextAlign.start,
@@ -102,7 +102,7 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                                   left: 16, right: 16, top: 8),
                               child: Text(
                                 'Alamat: ${controller.address.value}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   height: 1.4,
                                   fontFamily: "font/inter_bold.ttf",
@@ -114,7 +114,7 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                             Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     top: 32, left: 16, right: 16),
                                 child: Material(
                                   color: Colors.red.shade400,
@@ -128,12 +128,12 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       elevation: 0,
-                                      minimumSize: Size.fromHeight(50),
+                                      minimumSize: const Size.fromHeight(50),
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
+                                          const EdgeInsets.symmetric(horizontal: 16),
                                     ),
                                     onPressed: () => controller.goToPelaporan(),
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -155,7 +155,7 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                             Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     top: 16, left: 16, right: 16, bottom: 24),
                                 child: Material(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -170,12 +170,12 @@ class MapsLokasiKejadian extends GetView<MapsLokasiKejadianController> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       elevation: 0,
-                                      minimumSize: Size.fromHeight(50),
+                                      minimumSize: const Size.fromHeight(50),
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 16),
+                                          const EdgeInsets.symmetric(horizontal: 16),
                                     ),
                                     onPressed: controller.goToLokasiKejadian,
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [

@@ -19,8 +19,8 @@ class UbahSandiController extends GetxController {
 
   @override
   void onInit() {
-    print("id : " + id.toString());
-    print("pw lama :" + pwOld.toString());
+    print("id : $id");
+    print("pw lama :$pwOld");
     getUser();
 
     super.onInit();
@@ -57,11 +57,11 @@ class UbahSandiController extends GetxController {
       }).catchError((err) {});
 
       if (result != null && result != false) {
-        print("nilai result" + result.toString());
+        print("nilai result$result");
         var data = changePwFromJson(result);
         if (data.status == "gagal" || data.kode != "200") {
           Get.snackbar("Gagal", "Password anda gagal diubah!. Coba cek kembali inputan anda!");
-          print("eror code : " + data.kode.toString());
+          print("eror code : ${data.kode}");
           // throw Exception('error' + data.status.toString());
         } else if (data.status == "berhasil" || data.kode == "200") {
           Get.snackbar("Berhasil",
@@ -79,8 +79,8 @@ class UbahSandiController extends GetxController {
   }
 
   showLoadingDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: new Row(
+    AlertDialog alert = const AlertDialog(
+      content: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
