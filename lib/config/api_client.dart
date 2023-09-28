@@ -43,8 +43,7 @@ class APIClient {
     );
     final response = await request.send();
     if (response.statusCode == 200) {
-    } else {
-    }
+    } else {}
   }
 
   Future<dynamic> putData(String api, dynamic object) async {

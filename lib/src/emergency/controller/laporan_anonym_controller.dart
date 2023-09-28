@@ -96,7 +96,7 @@ class LaporanAnonymController extends GetxController {
       showSpinner.value = false;
     } else {
       await APIClient().postMulti('addImage', rxImage, imagePath, title);
-      var result2 = await APIClient().postData('addPelaporan', {
+      var result2 = await APIClient().postData('addPelaporanEmergency', {
         'kategori_laporan_id': "1",
         'user_listdata_id': "1",
         'deskripsi_laporan': deskripsiCon.text,

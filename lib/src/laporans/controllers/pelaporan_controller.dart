@@ -154,7 +154,6 @@ class PelaporanController extends GetxController {
         "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat";
     img.drawString(decodeImg!, message, font: img.arial48, x: 40);
 
-    // Kompres gambar sebelum menyimpannya
     final compressedImage = await FlutterImageCompress.compressWithList(
         img.encodeJpg(decodeImg, quality: 100),
         quality: 20);
