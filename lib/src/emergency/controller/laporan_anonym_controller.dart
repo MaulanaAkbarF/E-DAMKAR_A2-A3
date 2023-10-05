@@ -140,26 +140,6 @@ class LaporanAnonymController extends GetxController {
     }
   }
 
-  // Future<File> drawTextOnImage(XFile xFile) async {
-  //   // var image = await ImagePicker.pickImage(source: ImageSource.camera);
-
-  //   var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
-  //   String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
-  //   String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
-  //   String day = DateFormat("EEEEE").format(DateTime.now());
-  //   String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
-  //   img.drawString(decodeImg!,
-  //       "Pelapor : ${namaAnymCon.text} \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
-  //       font: img.arial48, x: 40);
-
-  //   var encodeImage = img.encodeJpg(decodeImg, quality: 100);
-
-  //   var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
-
-  //   return finalImage;
-  // }
-
-  
 
   Future<File> drawTextOnImageInIsolate(XFile xFile) async {
     Completer<File> completer = Completer();
@@ -180,7 +160,7 @@ class LaporanAnonymController extends GetxController {
       if (message is File) {
         completer.complete(message);
       } else {
-        completer.completeError('Error occurred in isolate');
+        completer.completeError('Error occurred in isolate $message');
       }
       receivePort.close();
     });

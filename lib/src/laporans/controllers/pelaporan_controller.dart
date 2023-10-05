@@ -1,15 +1,18 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/service/SharedPreferences/dataUser.dart';
 // import 'package:edamkar_1/src/camera/camera.dart';
 import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/draw_text_image.dart';
 import 'package:edamkar_1/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+// import 'package:flutter_image_compress/flutter_image_compress.dart';e
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
+// import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
 
 class PelaporanController extends GetxController {
@@ -132,7 +135,7 @@ class PelaporanController extends GetxController {
     final imagePicked = await _picker.pickImage(source: ImageSource.camera);
 
     if (imagePicked != null) {
-      image.value = await drawTextOnImage(imagePicked);
+      image.value = await drawTextOnImageInIsolate(imagePicked);
       // image.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
@@ -145,22 +148,31 @@ class PelaporanController extends GetxController {
     onImageLoading.value = false;
   }
 
-  Future<File> drawTextOnImage(XFile xFile) async {
-    var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
-    String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
-    String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
-    String day = DateFormat("EEEEE").format(DateTime.now());
-    String message =
-        "Pelapor : $namaUser \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat";
-    img.drawString(decodeImg!, message, font: img.arial48, x: 40);
+  Future<File> drawTextOnImageInIsolate(XFile xFile) async {
+    Completer<File> completer = Completer();
 
-    final compressedImage = await FlutterImageCompress.compressWithList(
-        img.encodeJpg(decodeImg, quality: 100),
-        quality: 20);
+    ReceivePort receivePort = ReceivePort();
+    Isolate.spawn(drawTextOnImageInIsolateAll, {
+      'xFile': xFile,
+      'jalan': dataArgs["jalan"],
+      'desa': dataArgs["desa"],
+      'kecamatan': dataArgs["kecamatan"],
+      'kota': dataArgs["kota"],
+      'kodepos': dataArgs["kodepos"],
+      'namaAnymCon': namaUser,
+      'sendPort': receivePort.sendPort,
+    });
 
-    var finalImage = File(xFile.path)..writeAsBytesSync(compressedImage);
+    receivePort.listen((message) {
+      if (message is File) { 
+        completer.complete(message);
+      } else {
+        completer.completeError('Error occurred in isolate $message');
+      }
+      receivePort.close();
+    });
 
-    return finalImage;
+    return completer.future;
   }
 
   void pushPelaporan() {
