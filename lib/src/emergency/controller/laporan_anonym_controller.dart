@@ -1,13 +1,16 @@
+import 'dart:async';
 import 'dart:io';
+import "dart:isolate";
 
 import 'package:edamkar_1/config/api_client.dart';
 import 'package:edamkar_1/routes/app_pages.dart';
 import 'package:edamkar_1/utils/app_style.dart';
+import 'package:edamkar_1/utils/draw_text_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
 import 'package:intl/intl.dart';
+
 
 class LaporanAnonymController extends GetxController {
   final namaBencanaCon = TextEditingController();
@@ -103,7 +106,7 @@ class LaporanAnonymController extends GetxController {
         'nama_hewan': '-',
         'waktu_pelaporan': tdata,
         'tgl_pelaporan': date.toString().replaceAll("00:00:00.000", ""),
-        'urgensi': namaBencanaCon.text,
+        'urgensi': "Emergency_Kebakaran",
         'alamat': alamat,
         'latitude': latitude,
         'longitude': longitude,
@@ -123,44 +126,11 @@ class LaporanAnonymController extends GetxController {
     }
   }
 
-  // void _onConfirm(context) async {
-  //   if (_formKey.currentState?.validate() == true) {
-  //     var statusUpload = await _kirimLaporan();
-  //     if (statusUpload == true) {
-  //       await uploadImage();
-  //       _kirimNotifikasi();
-  //       final snackBar = SnackBar(
-  //         /// need to set following properties for best effect of awesome_snackbar_content
-  //         elevation: 0,
-  //         padding: EdgeInsets.all(16),
-  //         behavior: SnackBarBehavior.fixed,
-  //         backgroundColor: Colors.transparent,
-  //         content: AwesomeSnackbarContent(
-  //           title: 'Laporan berhasil terkirim!',
-  //           message:
-  //               'Laporan Anda akan segera kami tangani, lihat status untuk melihat kemajuan!',
-
-  //           /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-  //           contentType: ContentType.success,
-  //         ),
-  //       );
-
-  //       ScaffoldMessenger.of(context)
-  //         ..hideCurrentSnackBar()
-  //         ..showSnackBar(snackBar);
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => LaporanPage()),
-  //       );
-  //     }
-  //   }
-  // }
-
   Future getImage() async {
     final imagePicked = await _picker.pickImage(source: ImageSource.camera);
 
     if (imagePicked != null) {
-      rxImage.value = await drawTextOnImage(imagePicked);
+      rxImage.value = await drawTextOnImageInIsolate(imagePicked);
       // rxImage.value = File(imagePicked.path);
       imageName = imagePicked.name;
       imagePath = imagePicked.path;
@@ -170,24 +140,52 @@ class LaporanAnonymController extends GetxController {
     }
   }
 
-  Future<File> drawTextOnImage(XFile xFile) async {
-    // var image = await ImagePicker.pickImage(source: ImageSource.camera);
+  // Future<File> drawTextOnImage(XFile xFile) async {
+  //   // var image = await ImagePicker.pickImage(source: ImageSource.camera);
 
-    var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
-    String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
-    String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
-    String day = DateFormat("EEEEE").format(DateTime.now());
-    String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
-    img.drawString(decodeImg!,
-        "Pelapor : ${namaAnymCon.text} \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
-        font: img.arial48, x: 40);
-    // img.drawString(decodeImg!, arial24, 0, 0, DateTime.now().toString());
+  //   var decodeImg = img.decodeImage(File(xFile.path).readAsBytesSync());
+  //   String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
+  //   String cdate2 = DateFormat("dd-MMMM-yyyy").format(DateTime.now());
+  //   String day = DateFormat("EEEEE").format(DateTime.now());
+  //   String alamat = "${jalan!}, ${desa!}, ${kecamatan!}, ${kota!}, ${kodepos!}";
+  //   img.drawString(decodeImg!,
+  //       "Pelapor : ${namaAnymCon.text} \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
+  //       font: img.arial48, x: 40);
 
-    var encodeImage = img.encodeJpg(decodeImg, quality: 100);
+  //   var encodeImage = img.encodeJpg(decodeImg, quality: 100);
 
-    var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
+  //   var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
 
-    return finalImage;
+  //   return finalImage;
+  // }
+
+  
+
+  Future<File> drawTextOnImageInIsolate(XFile xFile) async {
+    Completer<File> completer = Completer();
+
+    ReceivePort receivePort = ReceivePort();
+    Isolate.spawn(drawTextOnImageInIsolateAll, {
+      'xFile': xFile,
+      'jalan': jalan, // Gantilah dengan nilai yang sesuai
+      'desa': desa, // Gantilah dengan nilai yang sesuai
+      'kecamatan': kecamatan, // Gantilah dengan nilai yang sesuai
+      'kota': kota, // Gantilah dengan nilai yang sesuai
+      'kodepos': kodepos, // Gantilah dengan nilai yang sesuai
+      'namaAnymCon': namaAnymCon.text, // Gantilah dengan nilai yang sesuai
+      'sendPort': receivePort.sendPort,
+    });
+
+    receivePort.listen((message) {
+      if (message is File) {
+        completer.complete(message);
+      } else {
+        completer.completeError('Error occurred in isolate');
+      }
+      receivePort.close();
+    });
+
+    return completer.future;
   }
 
   goToLaporanAnonymView() =>
@@ -200,7 +198,7 @@ class LaporanAnonymController extends GetxController {
           backgroundColor: white, colorText: black);
       return false;
     }
-    
+
     if (umurAnymCon.text.isEmpty || umurAnymCon.text.length > 2) {
       Get.snackbar("Gagal", "Digit umur tidak sesuai",
           backgroundColor: white, colorText: black);
@@ -236,3 +234,4 @@ class LaporanAnonymController extends GetxController {
   //   }
   // }
 }
+
