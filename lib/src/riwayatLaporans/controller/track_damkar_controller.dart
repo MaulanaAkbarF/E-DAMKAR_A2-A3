@@ -160,7 +160,7 @@ class TrackDamkarController extends GetxController {
         markerId: const MarkerId("origin"),
         position: LatLng(lat, lng),
         icon: BitmapDescriptor.fromBytes(await getBytesFromAsset(
-            'semuaAset/gambar/damkar_example.png', 100))));
+            'semuaAset/gambar/mobilDamkar.png', 100))));
     marker.add(Marker(
         markerId: const MarkerId("destination"),
         position: const LatLng(-7.5932817, 111.91509),

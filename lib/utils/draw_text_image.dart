@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' as date;
