@@ -167,12 +167,12 @@ class LaporanAnonymController extends GetxController {
     ReceivePort receivePort = ReceivePort();
     Isolate.spawn(drawTextOnImageInIsolateAll, {
       'xFile': xFile,
-      'jalan': jalan, // Gantilah dengan nilai yang sesuai
-      'desa': desa, // Gantilah dengan nilai yang sesuai
-      'kecamatan': kecamatan, // Gantilah dengan nilai yang sesuai
-      'kota': kota, // Gantilah dengan nilai yang sesuai
-      'kodepos': kodepos, // Gantilah dengan nilai yang sesuai
-      'namaAnymCon': namaAnymCon.text, // Gantilah dengan nilai yang sesuai
+      'jalan': jalan, 
+      'desa': desa,
+      'kecamatan': kecamatan,
+      'kota': kota,
+      'kodepos': kodepos, 
+      'namaAnymCon': namaAnymCon.text,
       'sendPort': receivePort.sendPort,
     });
 

@@ -27,7 +27,7 @@ void drawTextOnImage(Map<String, dynamic> params) {
           "Pelapor : ${params['namaAnymCon']} \n\nwaktu : $tdata \n\nhari : $day \n\ntanggal : $cdate2 \n\nalamat: $alamat",
           font: img.arial48, x: 40);
 
-      var encodeImage = img.encodeJpg(decodeImg, quality: 100);
+      var encodeImage = img.encodeJpg(decodeImg, quality: 20);
 
       var finalImage = File(xFile.path)..writeAsBytesSync(encodeImage);
 
