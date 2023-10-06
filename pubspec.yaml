@@ -62,6 +62,7 @@ dependencies:
   web_socket_channel: ^2.4.0
   image: ^4.0.17
   intl: ^0.18.1
+  flutter_expandable_fab: ^2.0.0
   # flutter_image_compress: ^2.0.4
 
 dev_dependencies:

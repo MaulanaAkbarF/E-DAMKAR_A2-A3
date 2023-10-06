@@ -18,10 +18,12 @@ class TrackDamkarController extends GetxController {
   final initialCamPosition =
       const CameraPosition(target: LatLng(-7.589149, 111.887575), zoom: 18);
   // var channel;
+  bool isTracking = true;
   RxBool isWsDone = false.obs;
   Set<Marker> marker = <Marker>{}.obs;
   var dataArg = Get.arguments;
-
+  double lat = 0.0;
+  double lng = 0.0;
   bool conditon = false;
   @override
   void onInit() {
@@ -159,6 +161,8 @@ class TrackDamkarController extends GetxController {
   }
 
   void setMarker(double lat, double lng) async {
+    this.lat = lat;
+    this.lng = lng;
     marker.add(Marker(
         markerId: const MarkerId("destination"),
         position: LatLng(lat, lng),
@@ -183,9 +187,12 @@ class TrackDamkarController extends GetxController {
 
   void updateMarker(double lat, double lng, double rotasi) async {
     marker.removeWhere((marker) => marker.markerId.value == "origin");
-    mapController.future.then((value) => value.animateCamera(
-        CameraUpdate.newCameraPosition(
-            CameraPosition(target: LatLng(lat, lng), zoom: 18))));
+    if (isTracking) {
+      mapController.future.then((value) => value.animateCamera(
+          CameraUpdate.newCameraPosition(
+              CameraPosition(target: LatLng(lat, lng), zoom: 18))));
+    }
+
     marker.add(Marker(
         markerId: const MarkerId("origin"),
         position: LatLng(lat, lng),
@@ -218,4 +225,15 @@ class TrackDamkarController extends GetxController {
     polylines.add(polyline);
     update();
   }
+
+  void setPosition() {
+    isTracking = false;
+    if (lat != 0.0 && lng != 0.0) {
+      mapController.future.then((value) => value.animateCamera(
+          CameraUpdate.newCameraPosition(
+              CameraPosition(target: LatLng(lat, lng), zoom: 18))));
+    }
+  }
+
+  void setToCurrentPosition() => isTracking = true;
 }
