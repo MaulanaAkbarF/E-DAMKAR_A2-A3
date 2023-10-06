@@ -57,7 +57,7 @@ class TrackDamkarController extends GetxController {
             onPositionReq(ws);
             break;
           case 'RQALoc':
-            setMarker(data['latitude'], data['longitude']);
+            setMarker(data['latitude'], data['longitude'], data["rotasi"]);
             break;
           case 'RQARot':
             setPolyLines(data['route']);
@@ -152,15 +152,16 @@ class TrackDamkarController extends GetxController {
     }
   }
 
-  void setMarker(double lat, double lng) async {
+  void setMarker(double lat, double lng, double rotasi) async {
     mapController.future.then((value) => value.animateCamera(
         CameraUpdate.newCameraPosition(
             CameraPosition(target: LatLng(lat, lng), zoom: 18))));
     marker.add(Marker(
         markerId: const MarkerId("origin"),
         position: LatLng(lat, lng),
-        icon: BitmapDescriptor.fromBytes(await getBytesFromAsset(
-            'semuaAset/gambar/mobilDamkar.png', 100))));
+        rotation: rotasi,
+        icon: BitmapDescriptor.fromBytes(
+            await getBytesFromAsset('semuaAset/gambar/mobilDamkar.png', 100))));
     marker.add(Marker(
         markerId: const MarkerId("destination"),
         position: const LatLng(-7.5932817, 111.91509),
