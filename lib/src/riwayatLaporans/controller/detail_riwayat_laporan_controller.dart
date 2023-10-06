@@ -55,5 +55,5 @@ class DetailRiwayatLaporanController extends GetxController {
     }
   }
 
-  goToMaps() => Get.toNamed(Routes.mapsTrack);
+  goToMaps() => Get.toNamed(Routes.mapsTrack, arguments: id);
 }

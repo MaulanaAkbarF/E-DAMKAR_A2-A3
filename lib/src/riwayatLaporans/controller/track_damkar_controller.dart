@@ -21,12 +21,13 @@ class TrackDamkarController extends GetxController {
   bool isTracking = true;
   RxBool isWsDone = false.obs;
   Set<Marker> marker = <Marker>{}.obs;
-  var dataArg = Get.arguments;
+  late int id;
   double lat = 0.0;
   double lng = 0.0;
   bool conditon = false;
   @override
   void onInit() {
+    id = Get.arguments;
     initWs();
     super.onInit();
   }
@@ -86,7 +87,7 @@ class TrackDamkarController extends GetxController {
   }
 
   void join(WebSocketChannel ws) {
-    const req = {"command": "Join", "id": 1};
+    final req = {"command": "Join", "id": id};
     ws.sink.add(jsonEncode(req));
   }
 
@@ -140,17 +141,17 @@ class TrackDamkarController extends GetxController {
   }
 
   leave(WebSocketChannel ws) {
-    const req = {"command": "Leave", "id": 1};
+    final req = {"command": "Leave", "id": id};
     ws.sink.add(jsonEncode(req));
   }
 
   void onRouteReq(WebSocketChannel ws) {
-    const req = {"command": "Message", "id": 1, "type": "RQURot"};
+    final req = {"command": "Message", "id": id, "type": "RQURot"};
     ws.sink.add(jsonEncode(req));
   }
 
   void onPositionReq(WebSocketChannel ws) {
-    const req = {"command": "Message", "id": 1, "type": "RQULoc"};
+    final req = {"command": "Message", "id": id, "type": "RQULoc"};
     ws.sink.add(jsonEncode(req));
   }
 
