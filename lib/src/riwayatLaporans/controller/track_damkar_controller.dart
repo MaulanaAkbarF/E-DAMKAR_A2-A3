@@ -57,10 +57,16 @@ class TrackDamkarController extends GetxController {
             onPositionReq(ws);
             break;
           case 'RQALoc':
-            setMarker(data['latitude'], data['longitude'], data["rotasi"]);
+            double rotasi = data['rotation'] is int
+                ? data['rotation'].toDouble()
+                : data['rotation'];
+            updateMarker(data['latitude'], data['longitude'], rotasi);
+
             break;
           case 'RQARot':
             setPolyLines(data['route']);
+            setMarker(data['destination']["latitude"],
+                data['destination']["longitude"]);
             break;
           case "RQADone":
             doneTracking();
@@ -152,7 +158,31 @@ class TrackDamkarController extends GetxController {
     }
   }
 
-  void setMarker(double lat, double lng, double rotasi) async {
+  void setMarker(double lat, double lng) async {
+    marker.add(Marker(
+        markerId: const MarkerId("destination"),
+        position: LatLng(lat, lng),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
+  }
+
+  // void setMarker(double lat, double lng, double rotasi) async {
+  //   mapController.future.then((value) => value.animateCamera(
+  //       CameraUpdate.newCameraPosition(
+  //           CameraPosition(target: LatLng(lat, lng), zoom: 18))));
+  //   marker.add(Marker(
+  //       markerId: const MarkerId("origin"),
+  //       position: LatLng(lat, lng),
+  //       rotation: rotasi,
+  //       icon: BitmapDescriptor.fromBytes(
+  //           await getBytesFromAsset('semuaAset/gambar/mobilDamkar.png', 100))));
+  //   marker.add(Marker(
+  //       markerId: const MarkerId("destination"),
+  //       position: const LatLng(-7.5932817, 111.91509),
+  //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
+  // }
+
+  void updateMarker(double lat, double lng, double rotasi) async {
+    marker.removeWhere((marker) => marker.markerId.value == "origin");
     mapController.future.then((value) => value.animateCamera(
         CameraUpdate.newCameraPosition(
             CameraPosition(target: LatLng(lat, lng), zoom: 18))));
@@ -162,10 +192,6 @@ class TrackDamkarController extends GetxController {
         rotation: rotasi,
         icon: BitmapDescriptor.fromBytes(
             await getBytesFromAsset('semuaAset/gambar/mobilDamkar.png', 100))));
-    marker.add(Marker(
-        markerId: const MarkerId("destination"),
-        position: const LatLng(-7.5932817, 111.91509),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
