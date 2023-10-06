@@ -22,10 +22,10 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
               onMapCreated: controller.onMapCreated,
               markers: controller.marker,
               polylines: controller.polylines,
+              zoomControlsEnabled: false,
             )
           : const Align(
               alignment: Alignment.center, child: CircularProgressIndicator())),
-      
     );
   }
 }
