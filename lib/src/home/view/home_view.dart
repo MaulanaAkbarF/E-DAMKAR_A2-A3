@@ -180,6 +180,55 @@ class HomePageView extends GetView<HomeController> {
                       child: const Text('Laporkan kendala anda',
                           textAlign: TextAlign.start, style: semibold),
                     )),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: paddingHorozontal1 * 1.3,
+                      vertical: paddingVertical1),
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(4, 8), // changes position of shadow
+                        )
+                      ],
+                    ),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          controller.emercall();
+                          // Navigator.pushNamed(context, '/laporan');
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: orange2,
+                            elevation: 0.0,
+                            shadowColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: paddingVertical3),
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  "semuaAset/gambar/kebakaran-icon.svg",
+                                  width: 40,
+                                ),
+                                SizedBox(height: paddingHorozontal1),
+                                Text(
+                                  'Laporan Kebakaran',
+                                  style: StyleTxt.sb(size: 16),
+                                ),
+                              ],
+                            ))),
+                  ),
+                ),
+
                 Align(
                     alignment: Alignment.center,
                     child: Padding(
@@ -193,119 +242,6 @@ class HomePageView extends GetView<HomeController> {
                             crossAxisCount: 2,
                             childAspectRatio: 0.8,
                             children: <Widget>[
-                              InkWell(
-                                onTap: () => Get.toNamed(Routes.mpLap,
-                                    arguments: "bencanaalam"),
-                                child: Container(
-                                  height: double.infinity,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 15),
-                                  decoration: BoxDecoration(
-                                      color: white,
-                                      border:
-                                          Border.all(width: 1.5, color: grey3),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3,
-                                          blurRadius: 4,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10))),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 80,
-                                        width: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: orange2,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 40),
-                                          child: SvgPicture.asset(
-                                            "semuaAset/gambar/bencana-alam-icon.svg",
-                                            width: 70,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                            padding: const EdgeInsets.only(top: 7),
-                                            child: Text("Laporan Bencana Alam",
-                                                style: StyleTxt.sb(size: 16))),
-                                      ),
-                                      const Expanded(
-                                          child: Text(
-                                              "Salah satu layanan dari E-Damkar"))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () => Get.toNamed(Routes.mpLap,
-                                    arguments: "kebakaran"),
-                                child: Container(
-                                  height: double.infinity,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 15),
-                                  decoration: BoxDecoration(
-                                      color: white,
-                                      border:
-                                          Border.all(width: 1.5, color: grey3),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3,
-                                          blurRadius: 4,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10))),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 80,
-                                        width: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: orange2,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 40),
-                                          child: SvgPicture.asset(
-                                            "semuaAset/gambar/kebakaran-icon.svg",
-                                            width: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                            padding: const EdgeInsets.only(top: 7),
-                                            child: Text("Laporan Kebakaran",
-                                                style: StyleTxt.sb(size: 16))),
-                                      ),
-                                      const Text(
-                                          "Salah satu layanan dari E-Damkar")
-                                    ],
-                                  ),
-                                ),
-                              ),
                               InkWell(
                                 onTap: () => Get.toNamed(Routes.mpLap,
                                     arguments: "hewanbuas"),
@@ -352,7 +288,8 @@ class HomePageView extends GetView<HomeController> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                            padding: const EdgeInsets.only(top: 7),
+                                            padding:
+                                                const EdgeInsets.only(top: 7),
                                             child: Text("Laporan Hewan Buas",
                                                 style: StyleTxt.sb(size: 16))),
                                       ),
@@ -409,7 +346,8 @@ class HomePageView extends GetView<HomeController> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                            padding: const EdgeInsets.only(top: 7),
+                                            padding:
+                                                const EdgeInsets.only(top: 7),
                                             child: Text("Laporan Penyelamatan",
                                                 style: StyleTxt.sb(size: 16))),
                                       ),
