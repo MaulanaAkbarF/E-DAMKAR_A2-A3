@@ -22,7 +22,7 @@ class TrackDamkarView extends GetView<TrackDamkarController> {
             ? GoogleMap(
                 initialCameraPosition: controller.initialCamPosition,
                 onMapCreated: controller.onMapCreated,
-                markers: controller.marker,
+                markers: controller.marker.value,
                 polylines: controller.polylines,
                 zoomControlsEnabled: false,
               )

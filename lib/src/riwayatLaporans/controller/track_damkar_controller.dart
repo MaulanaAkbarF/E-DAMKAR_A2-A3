@@ -20,7 +20,7 @@ class TrackDamkarController extends GetxController {
   // var channel;
   bool isTracking = true;
   RxBool isWsDone = false.obs;
-  Set<Marker> marker = <Marker>{}.obs;
+  RxSet<Marker> marker = <Marker>{}.obs;
   late int id;
   double lat = 0.0;
   double lng = 0.0;
@@ -97,7 +97,7 @@ class TrackDamkarController extends GetxController {
       child: SizedBox(
         child: Container(
           padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
+          decoration: BoxDecoration( 
               color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -117,7 +117,7 @@ class TrackDamkarController extends GetxController {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: paddingVertical1),
                 child: Center(
-                  child: Text(
+                  child: Text( 
                     "Kembali untuk melihat data penanganan",
                     textAlign: TextAlign.center,
                     style: StyleTxt.m(),
@@ -160,7 +160,7 @@ class TrackDamkarController extends GetxController {
       mapController.complete(gm);
     }
   }
-
+ 
   void setMarker(double lat, double lng) async {
     this.lat = lat;
     this.lng = lng;

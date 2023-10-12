@@ -200,10 +200,8 @@ class HomePageView extends GetView<HomeController> {
                       ],
                     ),
                     child: ElevatedButton(
-                        onPressed: () {
-                          controller.emercall();
-                          // Navigator.pushNamed(context, '/laporan');
-                        },
+                        onPressed: () =>
+                            Get.toNamed(Routes.mpLap, arguments: "kebakaran"),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: orange2,
                             elevation: 0.0,
