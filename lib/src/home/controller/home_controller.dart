@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     final Uri phoneUrl = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(phoneUrl);
     // Get.toNamed(Routes.laporan);
-    Get.toNamed(Routes.mpLap, arguments: "custom");
+    Get.toNamed(Routes.mpLap, arguments: "kebakaran");
 
     AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -51,7 +51,7 @@ class HomeController extends GetxController {
     if (await canLaunchUrlString(whatsappUrl)) {
       print("in Here");
       await launchUrlString(whatsappUrl);
-      Get.toNamed(Routes.mpLap, arguments: "custom");
+      Get.toNamed(Routes.mpLap, arguments: "kebakaran");
 
       AwesomeNotifications().createNotification(
       content: NotificationContent(
