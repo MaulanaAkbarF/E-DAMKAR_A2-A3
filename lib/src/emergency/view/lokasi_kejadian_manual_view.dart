@@ -163,7 +163,7 @@ class _LokasiKejadianState extends State<lokasiKejadianManualPage> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Tentukan Lokasi Kejadian$kategori",
+          "Tentukan Lokasi Kejadian $kategori",
           style: const TextStyle(
             fontSize: 20,
             fontFamily: "font/inter_bold.ttf",

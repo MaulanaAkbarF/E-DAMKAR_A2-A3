@@ -148,7 +148,7 @@ class _LaporanPageState extends State<LaporanPage> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 top: 8, left: 16, right: 16),
-                            child: Text("Salag satu layanan dari E-Damkar",
+                            child: Text("Salah satu layanan dari E-Damkar",
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 4,
                                 style: TextStyle(
