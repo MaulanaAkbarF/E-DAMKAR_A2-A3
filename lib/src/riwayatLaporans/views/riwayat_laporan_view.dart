@@ -241,10 +241,15 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
 
   Widget isRiwayatNull() {
     return Obx(() => controller.dataElement == null
-        ? const Align(
-            alignment: Alignment.center,
-            child: Text("Anda belum pernah melakukan pelaporan"),
-          )
+        ? RefreshIndicator(
+            onRefresh: controller.onRefresh,
+            child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: SizedBox(
+                    height: SizeConfig.screenHeightHalf,
+                    child: const Center(
+                      child: Text("Anda belum pernah mengajukan laporan"),
+                    ))))
         : RefreshIndicator(
             onRefresh: controller.onRefresh,
             child: ListView.builder(
@@ -357,10 +362,16 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget menunggu() {
     return Obx(() => controller.dataMenunggu != null
         ? controller.dataMenunggu!.value.data!.isEmpty
-            ? const Align(
-                alignment: Alignment.center,
-                child: Text("Belum ada laporan yang menunggu"),
-              )
+            ? RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                        height: SizeConfig.screenHeightHalf,
+                        child: const Center(
+                          child: Text(
+                              "Tidak ada pelaporan yang menunggu untuk di proses"),
+                        ))))
             : RefreshIndicator(
                 onRefresh: controller.onRefresh,
                 child: ListView.builder(
@@ -475,10 +486,15 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget proses() {
     return Obx(() => controller.dataProses != null
         ? controller.dataProses!.value.data!.isEmpty
-            ? const Align(
-                alignment: Alignment.center,
-                child: Text("Belum ada laporan yang di proses"),
-              )
+            ? RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                        height: SizeConfig.screenHeightHalf,
+                        child: const Center(
+                          child: Text("Tidak ada laporan yang diproses"),
+                        ))))
             : RefreshIndicator(
                 onRefresh: controller.onRefresh,
                 child: ListView.builder(
@@ -594,10 +610,15 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget ditangani() {
     return Obx(() => controller.dataDitangani != null
         ? controller.dataDitangani!.value.data!.isEmpty
-            ? const Align(
-                alignment: Alignment.center,
-                child: Text("Belum ada Laporan yang ditangani"),
-              )
+            ? RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                        height: SizeConfig.screenHeightHalf,
+                        child: const Center(
+                          child: Text("Tidak ada laporan yang ditangani"),
+                        ))))
             : RefreshIndicator(
                 onRefresh: controller.onRefresh,
                 child: ListView.builder(
@@ -713,13 +734,15 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget selesai() {
     return Obx(() => controller.dataSelesai != null
         ? controller.dataSelesai!.value.data!.isEmpty
-            ? const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "Laporan selesai masih kosong",
-                  textAlign: TextAlign.center,
-                ),
-              )
+            ? RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                        height: SizeConfig.screenHeightHalf,
+                        child: const Center(
+                          child: Text("Laporan selesai masih kosong"),
+                        ))))
             : RefreshIndicator(
                 onRefresh: controller.onRefresh,
                 child: ListView.builder(
@@ -835,10 +858,15 @@ class RiwayatLaporanView extends GetView<RiwayatLaporanController> {
   Widget ditolak() {
     return Obx(() => controller.dataDitolak != null
         ? controller.dataDitolak!.value.data!.isEmpty
-            ? const Align(
-                alignment: Alignment.center,
-                child: Text("Tidak ada pelaporan yang ditolak"),
-              )
+            ? RefreshIndicator(
+                onRefresh: controller.onRefresh,
+                child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: SizedBox(
+                        height: SizeConfig.screenHeightHalf,
+                        child: const Center(
+                          child: Text("Tidak ada pelaporan yang ditolak"),
+                        ))))
             : RefreshIndicator(
                 onRefresh: controller.onRefresh,
                 child: ListView.builder(
