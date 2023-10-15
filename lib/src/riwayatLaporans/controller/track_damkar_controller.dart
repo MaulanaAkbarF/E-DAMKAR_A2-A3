@@ -107,7 +107,7 @@ class TrackDamkarController extends GetxController {
                 padding: EdgeInsets.symmetric(vertical: paddingVertical1),
                 child: Center(
                   child: Text(
-                    "Pelaporan anda telah di selesaikan",
+                    "Petugas sudah sampai di lokasi",
                     textAlign: TextAlign.center,
                     style: StyleTxt.b(16, black),
                   ),
@@ -199,7 +199,7 @@ class TrackDamkarController extends GetxController {
         position: LatLng(lat, lng),
         rotation: rotasi,
         icon: BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('semuaAset/gambar/mobilDamkar.png', 100))));
+            await getBytesFromAsset('semuaAset/gambar/mobilDamkar.png', 40))));
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
